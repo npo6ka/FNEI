@@ -5,10 +5,6 @@ if not fnei.gui then fnei.gui = {} end
 if not fnei.main_gui then fnei.main_gui = {} end
 if not fnei.recipe_gui then fnei.recipe_gui = {} end
 
-function out(string)
-  game.players["npo6ka"].print(string)
-end
-
 require "controls/main_control"
 require "controls/recipe_control"
 
@@ -35,16 +31,12 @@ script.on_event(defines.events.on_gui_click, function(event)
   local player = game.players[event.player_index]
   local element = event.element
   if element.name == "fnei_prev_elemen_page" then
-    player.print("click prev button")
     fnei.mc.main_gui_prev_page(player)
   elseif element.name == "fnei_next_elemet_page" then
-    player.print("click next button")
     fnei.mc.main_gui_next_page(player)
   elseif element.name == "fnei_prev_recipe" then
-    player.print("click perv recipe button")
     fnei.rc.recipe_gui_prev(player)
   elseif element.name == "fnei_next_recipe" then
-    player.print("click next repipe button")
     fnei.rc.recipe_gui_next(player)
   elseif element.type == "sprite-button" then
     if element.name ~= nil and string.match(element.name, "fnei%_") then
@@ -54,7 +46,6 @@ script.on_event(defines.events.on_gui_click, function(event)
       elseif event.button == defines.mouse_button_type.right then
         fnei.rc.element_right_click(player, elem_name)
       end
-      out(elem_name)
     end
   end
 end)

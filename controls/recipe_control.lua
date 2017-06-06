@@ -52,7 +52,6 @@ end
 function fnei.rc.open_gui(player)
 	local cur_page = fnei.rc.recipe_page
 	local recipe = fnei.rc.recipe_list[cur_page]
-	out(cur_page)
 	fnei.gui.open_recipe_gui(player, recipe, cur_page, fnei.rc.get_recipe_amount())
   end
 
@@ -89,7 +88,6 @@ end
 -----------------------Recipe_List-------------------------
 function fnei.rc.set_recipe_list(list)
 	if not list or #list == 0 then
-		out("recipe not found")
 		return false
 	end
 	fnei.rc.recipe_list = list

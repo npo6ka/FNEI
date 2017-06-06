@@ -53,7 +53,6 @@ function empty_image()
 end
 
 function get_image(element, type)
-  --game.players["npo6ka"].print(element.." "..type)
   if     type == "empty" then
     return empty_image()
   elseif type == "itemName" then
