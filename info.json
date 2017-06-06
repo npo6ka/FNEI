@@ -4,8 +4,8 @@
   "factorio_version": "0.15",
   "title": "Factorio NEI",
   "author": "npo6ka",
-  "contact": "",
-  "homepage": "",
-  "description": "",
+  "contact": "https://github.com/npo6ka/FNEI",
+  "homepage": "https://github.com/npo6ka/FNEI",
+  "description": "Factorio NEI. All recipes for the item and usage this item",
   "dependencies": ["base >= 0.15.15"]
 }
