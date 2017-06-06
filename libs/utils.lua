@@ -80,7 +80,6 @@ function get_craft_recipe_list(player, element_name)
       end
     end
   end
-  out("grt:" .. #ret_recipe.. element_name)
   return ret_recipe
 end
 --utils
