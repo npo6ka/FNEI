@@ -10,9 +10,9 @@ function fnei.main_gui.open_main_gui(player)
 
   search_line.add({type = "label", caption = "Search:"})
   search_line.add({type = "textfield", name = "fnei_search_field", text = fnei.main_gui.search_text})
-  buttons.add({type = "button", name = "fnei_prev_elemen_page", caption = "<"})
+  buttons.add({type = "button", name = "fnei_prev_page", caption = "<"})
   buttons.add({type = "label", name = "fnei_page_number", caption = "empty_main_page"})
-  buttons.add({type = "button", name = "fnei_next_elemet_page", caption = ">"})
+  buttons.add({type = "button", name = "fnei_next_page", caption = ">"})
 end
 
 function fnei.main_gui.close_main_gui(player)

@@ -30,9 +30,9 @@ end)
 script.on_event(defines.events.on_gui_click, function(event)
   local player = game.players[event.player_index]
   local element = event.element
-  if element.name == "fnei_prev_elemen_page" then
+  if element.name == "fnei_prev_page" then
     fnei.mc.main_gui_prev_page(player)
-  elseif element.name == "fnei_next_elemet_page" then
+  elseif element.name == "fnei_next_page" then
     fnei.mc.main_gui_next_page(player)
   elseif element.name == "fnei_prev_recipe" then
     fnei.rc.recipe_gui_prev(player)
