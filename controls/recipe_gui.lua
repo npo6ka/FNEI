@@ -7,6 +7,10 @@ function fnei.recipe_gui.open_recipe_gui(player)
   local label_recipe = gui_table.add({type = "frame", name = "fnei_label_recipe_frame", direction = "horizontal"})
   label_recipe.add({type = "label", name = "fnei_recipe_label", caption = "recipe_name"})
 
+  local paging = gui_table.add({type = "flow", name = "fnei_recipe_paging", direction = "horizontal"})
+  paging.add({type = "button", name = "fnei_prev_recipe", caption = "<"})
+  paging.add({type = "frame", name = "fnei_recipe_pagenum", direction = "horizontal"})
+  paging.add({type = "button", name = "fnei_next_recipe", caption = ">"})
   local prod_table = gui_table.add({type = "table", name = "fnei_prod_table", colspan = 2})
   local label_ingridients = prod_table.add({type = "frame", direction = "horizontal"})
   label_ingridients.add({type = "label", caption = "ingredients:"})
@@ -23,11 +27,6 @@ function fnei.recipe_gui.open_recipe_gui(player)
   madein_gui.add({type = "table", name = "fnei_madein_table", colspan = 5})
 
   local tech_gui = gui_table.add({type = "flow", name = "fnei_tech_flow", direction = "horizontal"})
- 
-  local paging = gui_table.add({type = "flow", name = "fnei_recipe_paging", direction = "horizontal"})
-  paging.add({type = "button", name = "fnei_prev_recipe", caption = "<"})
-  paging.add({type = "frame", name = "fnei_recipe_pagenum", direction = "horizontal"})
-  paging.add({type = "button", name = "fnei_next_recipe", caption = ">"})
 end
 
 function fnei.recipe_gui.close_recipe_gui(player)

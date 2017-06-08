@@ -5,8 +5,8 @@ function fnei.main_gui.open_main_gui(player)
 
   local ui  = player.gui.left.add({type = "frame", name = "fnei_main_gui",direction = "vertical"})
   local search_line = ui.add({type = "frame", name = "fnei_search_line", direction = "horizontal"})
-  ui.add({type = "flow", name = "fnei_element_list", direction = "horizontal"})
   local buttons = ui.add({type = "flow", name = "fnei_page_line", direction = "horizontal"})
+  ui.add({type = "flow", name = "fnei_element_list", direction = "horizontal"})
 
   search_line.add({type = "label", caption = "Search:"})
   search_line.add({type = "textfield", name = "fnei_search_field", text = fnei.main_gui.search_text})
