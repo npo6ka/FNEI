@@ -8,6 +8,7 @@ function fnei.recipe_gui.open_recipe_gui(player)
   label_recipe.add({type = "label", name = "fnei_recipe_label", caption = "recipe_name"})
 
   local paging = gui_table.add({type = "flow", name = "fnei_recipe_paging", direction = "horizontal"})
+  paging.add({type = "button", name = "fnei_back_recipe", caption = "<<"})
   paging.add({type = "button", name = "fnei_prev_recipe", caption = "<"})
   paging.add({type = "frame", name = "fnei_recipe_pagenum", direction = "horizontal"})
   paging.add({type = "button", name = "fnei_next_recipe", caption = ">"})

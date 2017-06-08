@@ -38,6 +38,8 @@ script.on_event(defines.events.on_gui_click, function(event)
     fnei.rc.recipe_gui_prev(player)
   elseif element.name == "fnei_next_recipe" then
     fnei.rc.recipe_gui_next(player)
+  elseif element.name == "fnei_back_recipe" then
+    fnei.rc.back_key(player)
   elseif element.type == "sprite-button" then
     if element.name ~= nil and string.match(element.name, "fnei%_") then
       local elem_name = string.sub(element.name, 6)
