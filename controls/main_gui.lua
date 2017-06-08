@@ -3,7 +3,7 @@ if not fnei.main_gui.search_text then fnei.main_gui.search_text = "" end
 function fnei.main_gui.open_main_gui(player)
   fnei.main_gui.close_main_gui(player)
 
-  local ui  = player.gui.center.add({type = "frame", name = "fnei_main_gui",direction = "vertical"})
+  local ui  = player.gui.left.add({type = "frame", name = "fnei_main_gui",direction = "vertical"})
   local search_line = ui.add({type = "frame", name = "fnei_search_line", direction = "horizontal"})
   ui.add({type = "flow", name = "fnei_element_list", direction = "horizontal"})
   local buttons = ui.add({type = "flow", name = "fnei_page_line", direction = "horizontal"})
@@ -17,14 +17,14 @@ end
 
 function fnei.main_gui.close_main_gui(player)
   if fnei.main_gui.is_main_gui_open(player) then
-    local text = fnei:get_gui(player.gui.center, "fnei_search_field").text --problem
+    local text = fnei:get_gui(player.gui.left, "fnei_search_field").text --problem
     if text ~= nil then fnei.main_gui.search_text = text end
-    player.gui.center.fnei_main_gui.destroy()
+    player.gui.left.fnei_main_gui.destroy()
   end
 end
 
 function fnei.main_gui.is_main_gui_open(player)
-  if player.gui.center.fnei_main_gui then
+  if player.gui.left.fnei_main_gui then
     return true
   else
     return false
@@ -32,10 +32,10 @@ function fnei.main_gui.is_main_gui_open(player)
 end
 
 function fnei.main_gui.set_main_gui(player, tb_width, elements, cnt_page, cur_page)
-  local page_number = fnei:get_gui(player.gui.center, "fnei_page_number")
+  local page_number = fnei:get_gui(player.gui.left, "fnei_page_number")
   page_number.caption = "page: " .. cur_page .. "/" .. cnt_page
 
-  local elem_list = fnei:get_gui(player.gui.center, "fnei_element_list")
+  local elem_list = fnei:get_gui(player.gui.left, "fnei_element_list")
   if elem_list.fnei_table then
     elem_list.fnei_table.destroy()
   end
