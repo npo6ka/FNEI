@@ -75,8 +75,14 @@ function fnei.rc.insert_recipe_name(player, element_name, element_type)
 	if element_exist(element_name) then
 		if (element_type == "craft" and #get_craft_recipe_list(player, element_name) > 0) or
 		   (element_type == "usage" and #get_usage_recipe_list(player, element_name) > 0) then
-			table.insert(fnei.rc.search_stack, {name = element_name, type = element_type})
-			return true
+		   	local prev_elem = nil
+		   	if #fnei.rc.search_stack > 0 then
+		   		prev_elem = fnei.rc.search_stack[#fnei.rc.search_stack]
+		   	end
+		   	if prev_elem == nil or prev_elem.name ~= element_name or prev_elem.type ~= element_type then 
+				table.insert(fnei.rc.search_stack, {name = element_name, type = element_type})
+				return true
+			end
 		end
 	end
 	return false
