@@ -116,13 +116,14 @@ function fnei.rc.recipe_gui_prev(player)
 end
 
 function fnei.rc.set_recipe_page(value)
+  local max_page =  fnei.rc.get_recipe_amount()
   if value < 1 then 
-    fnei.rc.recipe_page = 1
+    fnei.rc.recipe_page = max_page
     return
   end
-  local max_page =  fnei.rc.get_recipe_amount()
+ 
   if value > max_page then
-    fnei.rc.recipe_page = max_page
+    fnei.rc.recipe_page = 1
     return
   end
   fnei.rc.recipe_page = value

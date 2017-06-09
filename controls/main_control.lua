@@ -66,13 +66,14 @@ function fnei.mc.set_elem_list(list)
 end
 ------------------------Page-------------------------
 function fnei.mc.set_page(value)
+  local max_page =  fnei.mc.amount_page()
   if value < 1 then 
-    fnei.mc.page = 1
+    fnei.mc.page = max_page
     return
   end
-  local max_page =  fnei.mc.amount_page()
+  
   if value > max_page then
-    fnei.mc.page = max_page
+    fnei.mc.page = 1
     return
   end
   fnei.mc.page = value
