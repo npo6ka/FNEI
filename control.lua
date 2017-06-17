@@ -5,6 +5,10 @@ if not fnei.gui then fnei.gui = {} end
 if not fnei.main_gui then fnei.main_gui = {} end
 if not fnei.recipe_gui then fnei.recipe_gui = {} end
 
+function out(string)
+  game.players["npo6ka"].print(string)
+end
+
 require "controls/main_control"
 require "controls/recipe_control"
 
@@ -30,7 +34,9 @@ end)
 script.on_event(defines.events.on_gui_click, function(event)
   local player = game.players[event.player_index]
   local element = event.element
-  if element.name == "fnei_prev_main_page" then
+  if element.name == "fnei_search_field" and event.button == defines.mouse_button_type.right then
+    fnei.mc.clear_search_text(player)
+  elseif element.name == "fnei_prev_main_page" then
     fnei.mc.main_gui_prev_page(player)
   elseif element.name == "fnei_next_main_page" then
     fnei.mc.main_gui_next_page(player)

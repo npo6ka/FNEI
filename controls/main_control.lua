@@ -23,7 +23,6 @@ end
 function fnei.mc.search_text_cheged(player)
   local text = fnei:get_gui(player.gui.left, "fnei_search_field").text
   fnei.main_gui.search_text = text:gsub(" ", "-"):lower()
-  player.print(fnei.main_gui.search_text)
   fnei.mc.set_new_list(player)
 end
 
@@ -49,11 +48,17 @@ function fnei.mc.open_gui(player)
 end
 
 function fnei.mc.set_new_list(player)
-  local search_field = fnei:get_gui(player.gui.left, "fnei_search_field")
+  --local search_field = fnei:get_gui(player.gui.left, "fnei_search_field")
   local search_text = fnei.main_gui.search_text
   
   fnei.mc.get_new_list_elems(search_text)
   fnei.mc.open_gui(player)
+end
+
+function fnei.mc.clear_search_text(player)
+  local search_field = fnei:get_gui(player.gui.left, "fnei_search_field")
+  search_field.text = ""
+  fnei.mc.search_text_cheged(player)
 end
 
 ------------------------List-------------------------
