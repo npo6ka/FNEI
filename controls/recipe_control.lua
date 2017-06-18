@@ -2,7 +2,6 @@ if not fnei.rc.recipe_page then fnei.rc.recipe_page = 1 end
 if not fnei.rc.search_stack then fnei.rc.search_stack = {} end
 if not fnei.rc.recipe_list then fnei.rc.recipe_list = {} end
 
-require "libs/utils"
 require "controls/gui"
 
 function fnei.rc.back_key(player)

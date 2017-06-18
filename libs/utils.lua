@@ -22,7 +22,7 @@ function find_prototypes(mas, search_text, prot_type)
   search_text = normalize_string(search_text)
   local ret_mas = {}
   for _,prot in pairs(mas) do
-    if string.match(prot.name, search_text)  then
+    if string.match(prot.name:lower(), search_text)  then
       table.insert(ret_mas, {name = prot.name, type = prot_type})
     end
   end 

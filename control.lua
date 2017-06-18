@@ -9,6 +9,8 @@ function out(string)
   game.players["npo6ka"].print(string)
 end
 
+require "libs/utils"
+require "libs/utils_style"
 require "controls/main_control"
 require "controls/recipe_control"
 
@@ -47,8 +49,8 @@ script.on_event(defines.events.on_gui_click, function(event)
   elseif element.name == "fnei_back_recipe" then
     fnei.rc.back_key(player)
   elseif element.type == "sprite-button" then
-    if element.name ~= nil and string.match(element.name, "fnei%_") then
-      local elem_name = string.sub(element.name, 6)
+    if element.name ~= nil and (string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_")) then
+      local elem_name = string.sub(element.name, 11)
       if event.button == defines.mouse_button_type.left then
         fnei.rc.element_left_click(player, elem_name)
       elseif event.button == defines.mouse_button_type.right then

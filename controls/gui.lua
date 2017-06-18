@@ -1,5 +1,3 @@
-require "libs/utils"
-
 function fnei:get_gui(gui, name)
   if not self.result then self.result = {} end
   if not gui then return end
@@ -15,58 +13,60 @@ function fnei:get_gui(gui, name)
   return self.result
 end
 
-function create_image(element, path)
-  local name = ""
-  local tip = {"", ""}
-  local img_name = ""
+function create_image(element, type, st)
   if element == nil then
-    path = ""
-  else
-    name = element.name
-    tip = {"", element.localised_name}
-    img_name = "fnei_"..name
+    return empty_image()
   end
+
+  local name = element.name
+  local tip = {"", element.localised_name}
+  local img_name = "fnei_"..type.."_"..name
 
   return {
     type = "sprite-button",
     name = img_name,
-    style = "slot_button_style",
+    style = st,
     tooltip = tip,
-    sprite = path..name
+    sprite = type.."/"..name
   }
 end
 
-function tech_image(tech)
-  return create_image(tech, "technology/")
+function tech_image(tech, style)
+  return create_image(tech, "technology", style)
 end
 
-function item_image(item)
-  return create_image(item, "item/")
+function item_image(item, style)
+  return create_image(item, "item", style)
 end
 
-function fluid_image(fluid)
-  return create_image(fluid, "fluid/")
+function fluid_image(fluid, style)
+  return create_image(fluid, "fluid", style)
 end
 
 function empty_image()
-  return create_image(nil, "")
+  return {
+    type = "sprite-button",
+    name = "",
+    style = "fnei_empty_slot_button_style",
+    tooltip = {"", ""}
+  }
 end
 
-function get_image(element, type)
+function get_image(element, type, style)
   if     type == "empty" then
     return empty_image()
   elseif type == "itemName" then
     element = game.item_prototypes[element]
-    return item_image(element)
+    return item_image(element, style)
   elseif type == "item" then
-    return item_image(element)
+    return item_image(element, style)
   elseif type == "fluidName" then
     element = game.fluid_prototypes[element]
-    return fluid_image(element)
+    return fluid_image(element, style)
   elseif type == "fluid" then
-    return fluid_image(element)
+    return fluid_image(element, style)
   elseif type == "tech" then
-    return tech_image(element)
+    return tech_image(element, style)
   end
   return empty_image()
 end

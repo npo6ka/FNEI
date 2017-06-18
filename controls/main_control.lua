@@ -3,7 +3,6 @@ if not fnei.mc.elem_list then fnei.mc.elem_list = {} end
 if not fnei.mc.width then fnei.mc.width = 10 end
 if not fnei.mc.height then fnei.mc.height = 10 end
 
-require "libs/utils"
 require "controls/gui"
 
 function fnei.mc.back_key(player)
@@ -38,6 +37,7 @@ function fnei.mc.open_gui(player)
 
   send_table = {}
   for i = bgn_elem, end_elem do
+    fnei.mc.elem_list[i] = fnei.mc.set_style(fnei.mc.elem_list[i])
     table.insert(send_table, fnei.mc.elem_list[i])
   end
   for i = 1, other do

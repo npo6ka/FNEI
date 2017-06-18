@@ -42,6 +42,6 @@ function fnei.main_gui.set_main_gui(player, tb_width, elements, cnt_page, cur_pa
   tb = elem_list.add({type = "table", name = "fnei_table", colspan = tb_width})
 
   for _,element in pairs(elements) do
-    tb.add(get_image(element.name, element.type))
+    tb.add(get_image(element.name, element.type, element.style))
   end
 end
