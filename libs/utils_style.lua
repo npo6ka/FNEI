@@ -15,12 +15,20 @@ function get_tech_style(tech)
   end
 end
 
-function fnei.mc.set_style(element)
+function set_style(element)
   local item = game.item_prototypes[element.name]
   if item and item.flags["hidden"] == true then
-    element.style = "fnei_red_slot_button_style"
+    element.style = "red_slot_button_style"
   else
-    element.style = "fnei_slot_button_style"
+    element.style = "slot_button_style"
   end
   return element
+end
+
+function get_recipe_style(enabled)
+  if enabled then 
+    return "fnei_recipe_title_label"
+  else
+    return"fnei_red_recipe_title_label"
+  end
 end

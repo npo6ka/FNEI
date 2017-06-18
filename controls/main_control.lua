@@ -37,7 +37,7 @@ function fnei.mc.open_gui(player)
 
   send_table = {}
   for i = bgn_elem, end_elem do
-    fnei.mc.elem_list[i] = fnei.mc.set_style(fnei.mc.elem_list[i])
+    fnei.mc.elem_list[i] = set_style(fnei.mc.elem_list[i])
     table.insert(send_table, fnei.mc.elem_list[i])
   end
   for i = 1, other do

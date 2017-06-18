@@ -102,7 +102,7 @@ function fnei.rc.set_recipe_list(list, page)
   if not list or #list == 0 then
     return false
   end
-  fnei.rc.recipe_list = list
+  fnei.rc.recipe_list = sort_enable_recipe_list(list)
   fnei.rc.set_recipe_page(page)
   return true
 end

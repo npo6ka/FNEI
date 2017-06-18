@@ -41,7 +41,6 @@ function normalize_string(str)
   if not str then str = "" end
   return string.gsub(str, "%p", "%%%0")
 end
-
 --utils
 function get_crafting_category_table()
   local category_tb = {}
@@ -98,6 +97,21 @@ function get_usage_recipe_list(player, element_name)
     end
   end
   return ret_recipe
+end
+--utils
+function sort_enable_recipe_list(list)
+  local ret_list = {}
+  for _,recipe in pairs(list) do
+    if recipe and recipe.enabled then
+      table.insert(ret_list, recipe)
+    end
+  end
+  for _,recipe in pairs(list) do
+    if recipe and not recipe.enabled then
+      table.insert(ret_list, recipe)
+    end
+  end
+  return ret_list
 end
 --utils
 function element_exist(element_name)

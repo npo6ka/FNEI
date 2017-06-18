@@ -97,7 +97,7 @@ function fnei.gui.open_recipe_gui(player, recipe, cur_page, cnt_page)
   local madein_list = get_madein_list(recipe)
   local tech = get_technologies(player, recipe.name)
   fnei.recipe_gui.set_recipe_gui(player, recipe.name, recipe.energy, recipe.ingredients, recipe.products, 
-                                 madein_list, tech, cur_page, cnt_page)
+                                 madein_list, tech, cur_page, cnt_page, recipe.enabled)
 end
 
 function fnei.gui.is_main_open(player)

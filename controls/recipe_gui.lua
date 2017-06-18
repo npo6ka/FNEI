@@ -46,8 +46,9 @@ function fnei.recipe_gui.is_recipe_gui_open(player)
   end
 end
 
-function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, prod_list, madein_list, tech, cur_page, cnt_page)
+function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, prod_list, madein_list, tech, cur_page, cnt_page, enabled)
   local recipe_label = fnei:get_gui(player.gui.left, "fnei_recipe_label")
+  recipe_label.style = get_recipe_style(enabled)
   recipe_label.caption = recipe_name
 
   local gui_ingr_list = fnei:get_gui(player.gui.left, "fnei_list_ingr")
@@ -55,7 +56,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   local time_slot = gui_ingr_list.add({type = "flow", direction = "horizontal"})
   time_slot.add({
     type = "sprite-button",
-    name = "fnei-time",
+    name = "fnei_time",
     style = "slot_button_style",
     tooltip = {"", "time"},
     sprite = "fnei_time_icon"
@@ -64,14 +65,14 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
 
   for _,ingr in pairs(ingr_list) do
     local ing_str = gui_ingr_list.add({type = "flow", direction = "horizontal"})
-    ing_str.add(get_image(ingr.name, ingr.type .. "Name", "fnei_slot_button_style"))
+    ing_str.add(get_image(ingr.name, ingr.type .. "Name", "slot_button_style"))
     ing_str.add({type = "label", caption = ingr.amount .. " * " .. ingr.name})
   end
 
   local gui_res_list = fnei:get_gui(player.gui.left, "fnei_list_res")
   for _,res in pairs(prod_list) do
     local res_str = gui_res_list.add({type = "flow", direction = "horizontal"})
-    res_str.add(get_image(res.name, res.type  .. "Name", "fnei_slot_button_style"))
+    res_str.add(get_image(res.name, res.type  .. "Name", "slot_button_style"))
     local amt = res.amount
     if amt == nil then amt = 0 end
     res_str.add({type = "label", caption = amt .. " * " .. res.name})
@@ -79,7 +80,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
 
   local gui_madein = fnei:get_gui(player.gui.left, "fnei_madein_table")
   for _,item in pairs(madein_list) do
-    gui_madein.add(get_image(item.name, item.type, "fnei_slot_button_style"))
+    gui_madein.add(get_image(item.name, item.type, "slot_button_style"))
   end
 
   if tech ~= nil then
