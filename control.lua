@@ -50,7 +50,12 @@ script.on_event(defines.events.on_gui_click, function(event)
     fnei.rc.back_key(player)
   elseif element.type == "sprite-button" then
     if element.name ~= nil and (string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_")) then
-      local elem_name = string.sub(element.name, 11)
+      local elem_name = ""
+      if string.match(element.name, "fnei%_item%_") then 
+        elem_name = string.sub(element.name, 11)
+      else
+        elem_name = string.sub(element.name, 12)
+      end
       if event.button == defines.mouse_button_type.left then
         fnei.rc.element_left_click(player, elem_name)
       elseif event.button == defines.mouse_button_type.right then
