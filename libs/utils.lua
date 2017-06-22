@@ -146,3 +146,26 @@ function get_technologies(player, recipe_name)
 
   return ret_tech
 end
+
+function get_localised_name(ingr)
+  local elem = nil
+  if ingr.type == "fluid" then
+    elem = game.fluid_prototypes[ingr.name]
+  elseif ingr.type == "item" then
+    elem = game.item_prototypes[ingr.name]
+  end
+  if elem == nil then
+    return "unknown element"
+  else
+    return elem.localised_name
+  end
+end
+
+function get_elem_amount(elem)
+  local amt = elem.amount
+  if amt == nil then 
+    return 0
+  else
+    return amt
+  end
+end

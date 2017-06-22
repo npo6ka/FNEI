@@ -278,3 +278,21 @@ data.raw["gui-style"].default["fnei_green_tech_button_style"] =
     },
   },
 }
+
+data.raw["gui-style"].default["fnei_scroll_recipe_style"] =
+{
+  type = "scroll_pane_style",
+  maximal_width = 220,
+  minimal_width = 220,
+
+}
+
+data.raw["gui-style"].default["fnei_empty_flow"] =
+{
+
+  type = "flow_style",
+  maximal_width = 36 + 2,
+  minimal_width = 36 + 2,
+  maximal_height = 36 + 2,
+  minimal_height = 36 + 2,
+}
