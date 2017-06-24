@@ -58,14 +58,15 @@ end
 function get_madein_list(recipe)
   local ret_tb = {}
   local cat_tb = get_crafting_category_table()
-  local rec_cat = recipe.category
-  
-  for _,elem in pairs(cat_tb) do
-    if (rec_cat == elem.name) then
-      table.insert(ret_tb, {name = elem.entity, type = "itemName"})
+  if recipe then
+    local rec_cat = recipe.category
+    
+    for _,elem in pairs(cat_tb) do
+      if (rec_cat == elem.name) then
+        table.insert(ret_tb, {name = elem.entity, type = "itemName"})
+      end
     end
   end
-
   return ret_tb
 end
 --utils

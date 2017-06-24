@@ -93,11 +93,15 @@ function fnei.gui.open_main_gui(player, tb_width, elements, cnt_page, cur_page)
 end
 
 function fnei.gui.open_recipe_gui(player, recipe, cur_page, cnt_page)
-  fnei.recipe_gui.open_recipe_gui(player)
-  local madein_list = get_madein_list(recipe)
-  local tech = get_technologies(player, recipe.name)
-  fnei.recipe_gui.set_recipe_gui(player, recipe.name, recipe.energy, recipe.ingredients, recipe.products, 
-                                 madein_list, tech, cur_page, cnt_page, recipe.enabled, recipe.localised_name)
+  if recipe then
+    fnei.recipe_gui.open_recipe_gui(player)
+    local madein_list = get_madein_list(recipe)
+    local tech = get_technologies(player, recipe.name)
+    fnei.recipe_gui.set_recipe_gui(player, recipe.name, recipe.energy, recipe.ingredients, recipe.products, 
+                                   madein_list, tech, cur_page, cnt_page, recipe.enabled, recipe.localised_name)
+  else
+    fnei.gui.exit_from_gui(player)
+  end
 end
 
 function fnei.gui.is_main_open(player)
