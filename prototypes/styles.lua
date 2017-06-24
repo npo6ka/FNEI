@@ -289,7 +289,6 @@ data.raw["gui-style"].default["fnei_scroll_recipe_style"] =
 
 data.raw["gui-style"].default["fnei_empty_flow"] =
 {
-
   type = "flow_style",
   maximal_width = 36 + 2,
   minimal_width = 36 + 2,

@@ -86,12 +86,23 @@ function fnei.mc.set_page(value)
   fnei.mc.page = value
 end
 
+function fnei.mc.reload_list_elems(player)
+  if #fnei.mc.elem_list == 0 then
+    local search_field = fnei:get_gui(player.gui.left, "fnei_search_field")
+    if search_field then
+      fnei.mc.get_new_list_elems(search_field.text)
+    end
+  end
+end
+
 function fnei.mc.main_gui_next_page(player)
+  fnei.mc.reload_list_elems(player)
   fnei.mc.set_page(fnei.mc.page + 1)
   fnei.mc.open_gui(player)
 end
 
 function fnei.mc.main_gui_prev_page(player)
+  fnei.mc.reload_list_elems(player)
   fnei.mc.set_page(fnei.mc.page - 1)
   fnei.mc.open_gui(player)
 end
