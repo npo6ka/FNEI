@@ -68,7 +68,14 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     font = "font-mb",
     scalable = false,
 }
-
+data.raw["gui-style"].default["fnei_recipe_element"] =
+{
+    type = "label_style",
+    parent = "label_style",
+    align = "center",
+    scalable = false,
+    height = 36,
+}
 
 ------------------------button_style-------------------------
 data.raw["gui-style"].default["fnei_empty_slot_button_style"] = 
@@ -296,8 +303,8 @@ data.raw["gui-style"].default["fnei_recipe_flow"] =
   type = "frame_style",
   minimal_width = 526,
   maximal_width = 526,
-  minimal_height = 787,
-  maximal_height = 787,
+  minimal_height = 700,
+  maximal_height = 700,
 }
 
 

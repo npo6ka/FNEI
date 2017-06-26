@@ -69,12 +69,12 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
     tooltip = {"", "time"},
     sprite = "fnei_time_icon"
   })
-  time_slot.add({type = "label", caption = time})
+  time_slot.add(get_element_lable(time))
 
   for _,ingr in pairs(ingr_list) do
     local ing_str = gui_ingr_list.add({type = "flow", direction = "horizontal", style = "fnei_list_elements_flow"})
     ing_str.add(get_image(ingr.name, ingr.type .. "Name", "slot_button_style"))
-    ing_str.add({type = "label", caption = get_recipe_caption(ingr)})
+    ing_str.add(get_element_lable(get_recipe_caption(ingr)))
   end
   if #ingr_list < 8 then
     local gui_ingr_scroll = fnei:get_gui(get_gui(player, fnei.gui.location), "fnei_list_ingr_scroll")
@@ -88,7 +88,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   for _,res in pairs(prod_list) do
     local res_str = gui_res_list.add({type = "flow", direction = "horizontal", style = "fnei_list_elements_flow"})
     res_str.add(get_image(res.name, res.type  .. "Name", "slot_button_style"))
-    res_str.add({type = "label", caption = get_recipe_caption(res)})
+    res_str.add(get_element_lable(get_recipe_caption(res)))
   end
   if #prod_list < 9 then
     local gui_res_scroll = fnei:get_gui(get_gui(player, fnei.gui.location), "fnei_list_res_scroll")

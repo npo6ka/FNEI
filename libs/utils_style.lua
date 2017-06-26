@@ -40,3 +40,11 @@ function get_recipe_caption(element)
     return {"fnei.recipe-item-name-prb", get_elem_prob(element), get_localised_name(element)}
   end
 end
+
+function get_element_lable(caption)
+  return {
+    type = "label", 
+    caption = caption, 
+    style = "fnei_recipe_element"
+  }
+end
