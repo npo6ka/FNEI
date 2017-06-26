@@ -32,3 +32,11 @@ function get_recipe_style(enabled)
     return"fnei_red_recipe_title_label"
   end
 end
+
+function get_recipe_caption(element)
+  if element.amount then
+    return {"fnei.recipe-item-name-amt", get_elem_amount(element), get_localised_name(element)}
+  else
+    return {"fnei.recipe-item-name-prb", get_elem_prob(element), get_localised_name(element)}
+  end
+end

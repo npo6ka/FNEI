@@ -1,3 +1,5 @@
+if not fnei.gui.location then fnei.gui.location = "center" end
+
 function fnei:get_gui(gui, name)
   if not self.result then self.result = {} end
   if not gui then return end

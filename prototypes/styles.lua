@@ -48,13 +48,7 @@ data:extend({
   }
 })
 
--- green_slot_button_style
--- red_slot_button_style
--- selected_slot_button_style
--- technology_slot_button_style
--- not_available_slot_button_style
-
-
+-------------------------Font style-----------------------
 data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
 {
     type = "label_style",
@@ -65,7 +59,6 @@ data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
     scalable = false,
     font_color = {r=1, g=0.2537254, b=0.25980392}
 }
-
 data.raw["gui-style"].default["fnei_recipe_title_label"] =
 {
     type = "label_style",
@@ -77,6 +70,7 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
 }
 
 
+------------------------button_style-------------------------
 data.raw["gui-style"].default["fnei_empty_slot_button_style"] = 
 {
   type = "button_style",
@@ -116,7 +110,6 @@ data.raw["gui-style"].default["fnei_empty_slot_button_style"] =
     },
   }
 }
-
 data.raw["gui-style"].default["fnei_red_tech_button_style"] = 
 {
   type = "button_style",
@@ -170,7 +163,6 @@ data.raw["gui-style"].default["fnei_red_tech_button_style"] =
     },
   },
 }
-
 data.raw["gui-style"].default["fnei_yellow_tech_button_style"] = 
 {
   type = "button_style",
@@ -224,7 +216,6 @@ data.raw["gui-style"].default["fnei_yellow_tech_button_style"] =
     },
   },
 }
-
 data.raw["gui-style"].default["fnei_green_tech_button_style"] = 
 {
   type = "button_style",
@@ -279,19 +270,41 @@ data.raw["gui-style"].default["fnei_green_tech_button_style"] =
   },
 }
 
+
+----------------------scroll_pane_style-----------------------
 data.raw["gui-style"].default["fnei_scroll_recipe_style"] =
 {
   type = "scroll_pane_style",
   maximal_width = 220,
   minimal_width = 220,
-
+  maximal_height = 330,
 }
 
-data.raw["gui-style"].default["fnei_empty_flow"] =
+
+-------------------------flow_style--------------------------
+data.raw["gui-style"].default["fnei_list_elements_flow"] =
 {
   type = "flow_style",
-  maximal_width = 36 + 2,
-  minimal_width = 36 + 2,
-  maximal_height = 36 + 2,
-  minimal_height = 36 + 2,
+  minimal_height = 38,
+  maximal_height = 38,
+}
+
+
+-------------------------frame_style--------------------------
+data.raw["gui-style"].default["fnei_recipe_flow"] =
+{
+  type = "frame_style",
+  minimal_width = 526,
+  maximal_width = 526,
+  minimal_height = 787,
+  maximal_height = 787,
+}
+
+
+-------------------------table_style--------------------------
+data.raw["gui-style"].default["fnei_list_elements"] =
+{
+  type = "table_style",
+  parent = "table_style",
+  vertical_spacing = 2,
 }

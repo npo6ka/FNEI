@@ -170,3 +170,24 @@ function get_elem_amount(elem)
     return amt
   end
 end
+
+function get_elem_prob(elem)
+  local prob = elem.probability
+  if prob == nil then 
+    return 0
+  else
+    return prob * 100
+  end
+end
+
+function get_gui(player, dir)
+  if dir == "center" then
+    return player.gui.center
+  elseif dir == "left"then
+    return player.gui.left
+  elseif dir == "top" then
+    return player.gui.top
+  else
+    player.print("utils: get_gui: invalid direction: "..dir)
+  end
+end
