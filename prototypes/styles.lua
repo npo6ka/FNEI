@@ -295,17 +295,18 @@ data.raw["gui-style"].default["fnei_list_elements_flow"] =
   minimal_height = 38,
   maximal_height = 38,
 }
+data.raw["gui-style"].default["fnei_recipe_flow"] =
+{
+  type = "flow_style",
+  minimal_width = 526,
+  maximal_width = 526,
+  minimal_height = 710,
+  maximal_height = 710,
+}
 
 
 -------------------------frame_style--------------------------
-data.raw["gui-style"].default["fnei_recipe_flow"] =
-{
-  type = "frame_style",
-  minimal_width = 526,
-  maximal_width = 526,
-  minimal_height = 700,
-  maximal_height = 700,
-}
+
 
 
 -------------------------table_style--------------------------

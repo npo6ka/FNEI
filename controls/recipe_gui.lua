@@ -3,7 +3,7 @@
 function fnei.recipe_gui.open_recipe_gui(player)
   fnei.recipe_gui.close_recipe_gui(player)
 
-  local test = get_gui(player, fnei.gui.location).add({type = "frame", name = "fnei_recipe_flow", direction = "vertical", style = "fnei_recipe_flow"})
+  local test = get_gui(player, fnei.gui.location).add({type = "flow", name = "fnei_recipe_flow", direction = "vertical", style = "fnei_recipe_flow"})
   local ui = test.add({type = "frame", name = "fnei_recipe_gui", direction = "vertical"})
   
   local gui_table = ui.add({type = "table", name = "fnei_main_table", colspan = 1})
