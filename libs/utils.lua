@@ -70,14 +70,17 @@ function get_madein_list(recipe)
   return ret_tb
 end
 --utils
-function get_craft_recipe_list(player, element_name)
+function get_craft_recipe_list(player, element)
   local recipes = player.force.recipes
   local ret_recipe = {}
   for _,recipe in pairs(recipes) do
     if not (recipe.name:find("-flaring") or recipe.name:find("-barrel") or recipe.name:find("-incineration")) then
       for _,product in pairs(recipe.products) do
-        if (product.name == element_name) then
-          table.insert(ret_recipe, recipe)
+        
+        if product.name == element.name then
+          if product.type == element.type then
+            table.insert(ret_recipe, recipe)
+          end
         end
       end
     end
@@ -85,13 +88,13 @@ function get_craft_recipe_list(player, element_name)
   return ret_recipe
 end
 --utils
-function get_usage_recipe_list(player, element_name)
+function get_usage_recipe_list(player, element)
   local recipes = player.force.recipes
   local ret_recipe = {}
   for _,recipe in pairs(recipes) do
     if not (recipe.name:find("-flaring") or recipe.name:find("-barrel") or recipe.name:find("-incineration")) then
       for _,ingredient in pairs(recipe.ingredients) do
-        if (ingredient.name == element_name) then
+        if ingredient.name == element.name and ingredient.type == element.type then
           table.insert(ret_recipe, recipe)
         end
       end
@@ -115,20 +118,23 @@ function sort_enable_recipe_list(list)
   return ret_list
 end
 --utils
-function element_exist(element_name)
-  local items = find_items(search_text)
-  local fluids = find_fluids(search_text)
-  for _,prot in pairs(items) do
-    if prot.name == element_name then
-      return true
+function element_exist(element)
+  if element.type == "item" then
+    local items = game.item_prototypes
+    for _,prot in pairs(items) do
+      if prot.name == element.name then
+        return true
+      end
     end
-  end 
-  for _,prot in pairs(fluids) do
-    if prot.name == element_name then
-      return true
+  end
+  if element.type == "fluid" then
+    local fluids = game.fluid_prototypes
+    for _,prot in pairs(fluids) do
+      if prot.name == element.name then
+        return true
+      end
     end
-  end 
-
+  end
   return false
 end
 --utils

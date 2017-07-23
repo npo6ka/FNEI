@@ -5,7 +5,7 @@ data:extend({
   {
     type = "custom-input",
     name = "pressed-fnei-gui-key",
-    key_sequence = "SHIFT + E",
+    key_sequence = "CONTROL + E",
     consuming = "script-only"
   }
 })

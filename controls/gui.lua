@@ -45,6 +45,10 @@ function fluid_image(fluid, style)
   return create_image(fluid, "fluid", style)
 end
 
+function recipe_image(recipe, style)
+  return create_image(recipe, "recipe", style)
+end
+
 function empty_image()
   return {
     type = "sprite-button",
@@ -69,6 +73,10 @@ function get_image(element, type, style)
     return fluid_image(element, style)
   elseif type == "tech" then
     return tech_image(element, style)
+  elseif type == "recipe" then
+    if element then
+      return recipe_image(element, style)
+    end
   end
   return empty_image()
 end
@@ -99,8 +107,17 @@ function fnei.gui.open_recipe_gui(player, recipe, cur_page, cnt_page)
     fnei.recipe_gui.open_recipe_gui(player)
     local madein_list = get_madein_list(recipe)
     local tech = get_technologies(player, recipe.name)
-    fnei.recipe_gui.set_recipe_gui(player, recipe.name, recipe.energy, recipe.ingredients, recipe.products, 
-                                   madein_list, tech, cur_page, cnt_page, recipe.enabled, recipe.localised_name)
+
+    local cur_elem
+    if #fnei.rc.search_stack > 0 then
+      cur_elem = fnei.rc.search_stack[#fnei.rc.search_stack]
+    end
+    if cur_elem then
+      fnei.recipe_gui.set_recipe_gui(player, recipe.name, recipe.energy, recipe.ingredients, recipe.products, 
+                                     madein_list, tech, cur_page, cnt_page, recipe.enabled, recipe.localised_name, cur_elem)
+    else 
+      player.print("current element = nil")
+    end
   else
     fnei.gui.exit_from_gui(player)
   end

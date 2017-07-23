@@ -33,17 +33,18 @@ function fnei.rc.main_key(player)
   end
 end
 
-function fnei.rc.element_left_click(player, element_name)
-  if fnei.rc.insert_recipe_name(player, element_name, "craft") then
+function fnei.rc.element_left_click(player, element)
+  if fnei.rc.insert_recipe_name(player, element, "craft") then
     if fnei.gui.is_main_open(player) then
       fnei.gui.close_main(player)
     end
+
     fnei.rc.set_new_recipe_list(player)
   end
 end
 
-function fnei.rc.element_right_click(player, element_name)
-  if fnei.rc.insert_recipe_name(player, element_name, "usage") then
+function fnei.rc.element_right_click(player, element)
+  if fnei.rc.insert_recipe_name(player, element, "usage") then
     if fnei.gui.is_main_open(player) then
       fnei.gui.close_main(player)
     end
@@ -64,8 +65,8 @@ function fnei.rc.set_new_recipe_list(player)
   end
   local element = fnei.rc.search_stack[elem_num]
 
-  if (element.type == "craft" and not fnei.rc.set_recipe_list(get_craft_recipe_list(player, element.name), element.page)) or
-     (element.type == "usage" and not fnei.rc.set_recipe_list(get_usage_recipe_list(player, element.name), element.page)) then
+  if (element.property == "craft" and not fnei.rc.set_recipe_list(get_craft_recipe_list(player, element), element.page)) or
+     (element.property == "usage" and not fnei.rc.set_recipe_list(get_usage_recipe_list(player, element), element.page)) then
     return
   end
   fnei.rc.open_gui(player)
@@ -73,16 +74,16 @@ end
 
 
 ------------------------Name_List--------------------------
-function fnei.rc.insert_recipe_name(player, element_name, element_type)
-  if element_exist(element_name) then
-    if (element_type == "craft" and #get_craft_recipe_list(player, element_name) > 0) or
-       (element_type == "usage" and #get_usage_recipe_list(player, element_name) > 0) then
+function fnei.rc.insert_recipe_name(player, element, element_property)
+  if element_exist(element) then
+    if (element_property == "craft" and #get_craft_recipe_list(player, element) > 0) or
+       (element_property == "usage" and #get_usage_recipe_list(player, element) > 0) then
         local prev_elem = nil
         if #fnei.rc.search_stack > 0 then
           prev_elem = fnei.rc.search_stack[#fnei.rc.search_stack]
         end
-        if prev_elem == nil or prev_elem.name ~= element_name or prev_elem.type ~= element_type then 
-        table.insert(fnei.rc.search_stack, {name = element_name, type = element_type, page = 1})
+        if prev_elem == nil or prev_elem.name ~= element.name or prev_elem.property ~= element_property then 
+        table.insert(fnei.rc.search_stack, {name = element.name, type = element.type, property = element_property, page = 1})
         return true
       end
     end

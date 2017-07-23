@@ -42,19 +42,23 @@ script.on_event(defines.events.on_gui_click, function(event)
     fnei.mc.main_gui_prev_page(player)
   elseif element.name == "fnei_next_main_page" then
     fnei.mc.main_gui_next_page(player)
-  elseif element.name == "fnei_prev_recipe" then
+  elseif element.name == "fnei_recipe_left_key" then
     fnei.rc.recipe_gui_prev(player)
-  elseif element.name == "fnei_next_recipe" then
+  elseif element.name == "fnei_recipe_right_key" then
     fnei.rc.recipe_gui_next(player)
-  elseif element.name == "fnei_back_recipe" then
+  elseif element.name == "fnei_recipe_back_key" then
     fnei.rc.back_key(player)
+  elseif element.name == "fnei_recipe_exit_key" then
+    fnei.rc.main_key(player)
+  elseif element.name == "fnei_recipe_settings_key" then
+    player.print("The options window is under construction")
   elseif element.type == "sprite-button" then
     if element.name ~= nil and (string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_")) then
       local elem_name = ""
       if string.match(element.name, "fnei%_item%_") then 
-        elem_name = string.sub(element.name, 11)
+        elem_name = {name = string.sub(element.name, 11), type = "item"}
       else
-        elem_name = string.sub(element.name, 12)
+        elem_name = {name = string.sub(element.name, 12), type = "fluid"}
       end
       if event.button == defines.mouse_button_type.left then
         fnei.rc.element_left_click(player, elem_name)
