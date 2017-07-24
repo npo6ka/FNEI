@@ -18,3 +18,12 @@ data:extend({
     consuming = "all"
   }
 })
+
+data:extend({
+  {
+    type = "custom-input",
+    name = "pressed-fnei-gui2-key",
+    key_sequence = "SHIFT + E",
+    consuming = "script-only"
+  }
+})

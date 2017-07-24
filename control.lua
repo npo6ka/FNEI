@@ -33,6 +33,21 @@ script.on_event("pressed-fnei-back-key", function(event)
   fnei.back_key(player)
 end)
 
+script.on_event("pressed-fnei-gui2-key", function(event)
+  local player = game.players[event.player_index]
+  if not global.fnei then
+    global.fnei = {}
+  end
+  if not global.fnei[player.name] then
+    global.fnei[player.name] = {}
+  end
+  if not global.fnei[player.name].is_massage then
+    player.print({"fnei.warning-message-1"})
+    player.print({"fnei.warning-message-2"})
+    global.fnei[player.name].is_massage = true
+  end
+end)
+
 script.on_event(defines.events.on_gui_click, function(event)
   local player = game.players[event.player_index]
   local element = event.element
@@ -51,6 +66,7 @@ script.on_event(defines.events.on_gui_click, function(event)
   elseif element.name == "fnei_recipe_exit_key" then
     fnei.rc.main_key(player)
   elseif element.name == "fnei_recipe_settings_key" then
+    player.print("This function is not available in this version of the mod")
     player.print("The options window is under construction")
   elseif element.type == "sprite-button" then
     if element.name ~= nil and (string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_")) then

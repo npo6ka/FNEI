@@ -9,13 +9,31 @@ function get_prototypes_list(search_text)
   local fluids = find_fluids(search_text)
   local ret_mas = {}
   for _,prot in pairs(items) do
-    table.insert(ret_mas, prot)
+    if check_item_setting(prot) then
+      table.insert(ret_mas, prot)
+    end
   end 
   for _,prot in pairs(fluids) do
-    table.insert(ret_mas, prot)
+    if check_fluid_setting(prot) then
+      table.insert(ret_mas, prot)
+    end
   end 
 
   return ret_mas
+end
+--utils
+function check_item_setting(element)
+  local item = game.item_prototypes[element.name]
+  if item then
+    if true and item.has_flag("hidden") and item.flags["hidden"] == true then
+      return false
+    end
+  end
+  return true
+end
+--utils
+function check_fluid_setting(element)
+  return true
 end
 --utils
 function find_prototypes(mas, search_text, prot_type)
