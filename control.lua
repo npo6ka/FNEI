@@ -1,9 +1,15 @@
 if not fnei then fnei = {} end
 if not fnei.rc then fnei.rc = {} end
 if not fnei.mc then fnei.mc = {} end
+if not fnei.oc then fnei.oc = {} end
 if not fnei.gui then fnei.gui = {} end
 if not fnei.main_gui then fnei.main_gui = {} end
 if not fnei.recipe_gui then fnei.recipe_gui = {} end
+if not fnei.option_gui then fnei.option_gui = {} end
+if not global.fnei then global.fnei = {} end
+if not global.fnei.settings then 
+  global.fnei.settings = {} 
+end
 
 function out(string)
   game.players["npo6ka"].print(string)
@@ -13,6 +19,7 @@ require "libs/utils"
 require "libs/utils_style"
 require "controls/main_control"
 require "controls/recipe_control"
+require "controls/option_control"
 
 script.on_event(defines.events.on_tick, function(event)
   for _,player in pairs(game.players) do
@@ -33,44 +40,8 @@ script.on_event("pressed-fnei-back-key", function(event)
   fnei.back_key(player)
 end)
 
-function open_tech(player, name, list)
-  local tech = player.force.technologies[name]
-  if tech then
-    for _,tech in pairs(tech.prerequisites) do
-      if tech.researched == false then
-        list = open_tech(player, tech.name, list)
-        tech.researched = true
-        table.insert( list, tech.name )
-      end
-    end
-  end
-  return list
-end
-
-function reload_tech_tech(player, list)
-  for i=1,#list do
-    local tech = player.force.technologies[list[i]]
-    if tech then
-      tech.researched = false
-    end
-  end
-end
-
-function show_tech(player, name)
-  if player.force.technologies[name] then
-    local list = {}
-    list = open_tech(player, name, list)
-    player.force.current_research = name
-    reload_tech_tech(player, list)
-    fnei.gui.exit_from_gui(player)
-    player.opened = 2
-    player.force.current_research = nil
-  end
-end
-
 script.on_event("pressed-fnei-gui2-key", function(event)
   local player = game.players[event.player_index]  
-
   if not global.fnei then
     global.fnei = {}
   end
@@ -81,6 +52,35 @@ script.on_event("pressed-fnei-gui2-key", function(event)
     player.print({"fnei.warning-message-1"})
     player.print({"fnei.warning-message-2"})
     global.fnei[player.name].is_massage = true
+  end
+end)
+
+script.on_event(defines.events.on_gui_checked_state_changed, function(event)
+  local player = game.players[event.player_index]
+  local element = event.element
+  if element.name == "fnei_option_admin_param_0" then
+    if player.admin then
+      if global.fnei.settings.admin_function == nil then
+        player.print({"fnei.admin-option-warning"})
+        element.state = false
+        global.fnei.settings.admin_function = false
+      else
+        fnei.oc.change_adm_par0(player, element.state)
+      end
+    else
+      player.print({"fnei.non-admin-permission"})
+      element.state = global.fnei.settings.admin_function
+    end
+  elseif element.name == "fnei_option_admin_param_1" then
+    fnei.oc.change_adm_par1(player, element.state)
+  end
+end)
+
+script.on_event(defines.events.on_gui_selection_state_changed, function(event)
+  local player = game.players[event.player_index]
+  local element = event.element
+  if element.name == "fnei_option_param_0" then
+    fnei.oc.change_par0(player, element.selected_index)
   end
 end)
 
@@ -101,9 +101,14 @@ script.on_event(defines.events.on_gui_click, function(event)
     fnei.rc.back_key(player)
   elseif element.name == "fnei_recipe_exit_key" then
     fnei.rc.main_key(player)
+  elseif element.name == "fnei_option_back_key" then
+    fnei.oc.back_key(player)
+  elseif element.name == "fnei_option_exit_key" then
+    fnei.oc.main_key(player)
   elseif element.name == "fnei_recipe_settings_key" then
-    player.print("This function is not available in this version of the mod")
-    player.print("The options window is under construction")
+    fnei.oc.open_gui(player)
+    --[[player.print("This function is not available in this version of the mod")
+    player.print("The options window is under construction")]]
   elseif element.type == "sprite-button" then
     if element.name ~= nil then
       if string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_") then
@@ -119,7 +124,11 @@ script.on_event(defines.events.on_gui_click, function(event)
           fnei.rc.element_right_click(player, elem_name)
         end
       elseif string.match(element.name, "fnei%_technology%_") then
-        show_tech(player, string.sub(element.name, 17))
+        if fnei.oc.can_show_tech( player ) then
+          show_tech(player, string.sub(element.name, 17))
+        else
+          player.print({"fnei.info-admin-command-warning"})
+        end
       end
     end
   end
@@ -134,9 +143,23 @@ script.on_event(defines.events.on_gui_text_changed, function(event)
 end)
 
 function fnei.back_key(player)
-  fnei.rc.back_key(player)
+  if fnei.gui.is_recipe_open(player) then
+    fnei.rc.back_key(player)
+  elseif fnei.gui.is_main_open(player) then
+    fnei.mc.back_key(player)
+  elseif fnei.gui.is_option_open(player) then
+    fnei.oc.back_key(player)
+  end
 end
 
 function fnei.main_key(player)
-  fnei.rc.main_key(player)
+  if fnei.gui.is_recipe_open(player) then
+    fnei.rc.main_key(player)
+  elseif fnei.gui.is_main_open(player) then
+    fnei.mc.main_key(player)
+  elseif fnei.gui.is_option_open(player) then
+    fnei.oc.main_key(player)
+  else
+    fnei.mc.main_key(player)
+  end
 end

@@ -3,7 +3,7 @@ if not fnei.main_gui.search_text then fnei.main_gui.search_text = "" end
 function fnei.main_gui.open_main_gui(player)
   fnei.main_gui.close_main_gui(player)
 
-  local ui  = player.gui.left.add({type = "frame", name = "fnei_main_gui",direction = "vertical"})
+  local ui  = get_gui_pos(player, fnei.gui.location).add({type = "frame", name = "fnei_main_gui",direction = "vertical"})
   local search_line = ui.add({type = "frame", name = "fnei_search_line", direction = "horizontal"})
   local buttons = ui.add({type = "flow", name = "fnei_page_line", direction = "horizontal"})
   ui.add({type = "flow", name = "fnei_element_list", direction = "horizontal"})
@@ -19,12 +19,12 @@ function fnei.main_gui.close_main_gui(player)
   if fnei.main_gui.is_main_gui_open(player) then
     local text = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_search_field").text --problem
     if text ~= nil then fnei.main_gui.search_text = text end
-    player.gui.left.fnei_main_gui.destroy()
+    get_gui_pos(player, fnei.gui.location).fnei_main_gui.destroy()
   end
 end
 
 function fnei.main_gui.is_main_gui_open(player)
-  if player.gui.left.fnei_main_gui then
+  if get_gui_pos(player, fnei.gui.location).fnei_main_gui then
     return true
   else
     return false

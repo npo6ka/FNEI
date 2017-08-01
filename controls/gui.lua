@@ -83,16 +83,19 @@ end
 
 require "controls.recipe_gui"
 require "controls.main_gui"
+require "controls.option_gui"
 
 function fnei.gui.exit_from_gui(player)
   fnei.gui.close_main(player)
   fnei.gui.close_recipe(player)
   clear_list(fnei.rc.search_stack)
+  fnei.gui.close_option(player)
 end
 
 function fnei.gui.is_gui_open(player)
-  return fnei.recipe_gui.is_recipe_gui_open(player) or 
-         fnei.main_gui.is_main_gui_open(player)
+  return fnei.gui.is_main_open(player) or
+         fnei.gui.is_recipe_open(player) or
+         fnei.gui.is_option_open(player)
 end
 
 function fnei.gui.open_main_gui(player, tb_width, elements, cnt_page, cur_page)
@@ -123,6 +126,11 @@ function fnei.gui.open_recipe_gui(player, recipe, cur_page, cnt_page)
   end
 end
 
+function fnei.gui.open_option_gui(player)
+  fnei.option_gui.open_option_gui(player)
+  fnei.option_gui.set_option_gui(player)
+end
+
 function fnei.gui.is_main_open(player)
   return fnei.main_gui.is_main_gui_open(player)
 end
@@ -131,10 +139,18 @@ function fnei.gui.is_recipe_open(player)
   return fnei.recipe_gui.is_recipe_gui_open(player)
 end
 
+function fnei.gui.is_option_open(player)
+  return fnei.option_gui.is_option_gui_open(player)
+end
+
 function fnei.gui.close_main(player)
   fnei.main_gui.close_main_gui(player)
 end
 
 function fnei.gui.close_recipe(player)
   fnei.recipe_gui.close_recipe_gui(player)
+end
+
+function fnei.gui.close_option(player)
+  fnei.option_gui.close_option_gui(player)
 end

@@ -5,32 +5,24 @@ if not fnei.rc.recipe_list then fnei.rc.recipe_list = {} end
 require "controls/gui"
 
 function fnei.rc.back_key(player)
-  if fnei.gui.is_recipe_open(player) then
-    local stack_size = #fnei.rc.search_stack
-    if stack_size == 1 then
-      fnei.gui.close_recipe(player)
-      fnei.rc.delete_recipe_name()
-      fnei.mc.set_new_list(player)
-    elseif stack_size > 1 then
-      fnei.rc.delete_recipe_name()
-      fnei.rc.set_new_recipe_list(player)
-    elseif stack_size == 0 then
-      fnei.gui.close_recipe(player)
-      fnei.mc.set_new_list(player)
-    else
-      player.print("fnei.rc.back_key: stack_size value = "..stack_size)
-    end
+  local stack_size = #fnei.rc.search_stack
+  if stack_size == 1 then
+    fnei.gui.close_recipe(player)
+    fnei.rc.delete_recipe_name()
+    fnei.mc.set_new_list(player)
+  elseif stack_size > 1 then
+    fnei.rc.delete_recipe_name()
+    fnei.rc.set_new_recipe_list(player)
+  elseif stack_size == 0 then
+    fnei.gui.close_recipe(player)
+    fnei.mc.set_new_list(player)
   else
-    fnei.mc.back_key(player)
+    player.print("fnei.rc.back_key: stack_size value = " .. stack_size)
   end
 end
 
 function fnei.rc.main_key(player)
-  if fnei.gui.is_recipe_open(player) then
-    fnei.gui.exit_from_gui(player)
-  else
-    fnei.mc.main_key(player)
-  end
+  fnei.gui.exit_from_gui(player)
 end
 
 function fnei.rc.element_left_click(player, element)

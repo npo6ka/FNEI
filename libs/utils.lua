@@ -205,13 +205,49 @@ function get_elem_prob(elem)
 end
 
 function get_gui_pos(player, dir)
-  if dir == "center" then
-    return player.gui.center
-  elseif dir == "left"then
+  local index = fnei.oc.get_gui_position( player )
+  if index == 1 then
     return player.gui.left
-  elseif dir == "top" then
+  elseif index == 2 then
     return player.gui.top
+  elseif index == 3 then
+    return player.gui.center
   else
     player.print("utils: get_gui: invalid direction: "..dir)
+  end
+end
+
+function open_tech(player, name, list)
+  local tech = player.force.technologies[name]
+  if tech then
+    for _,tech in pairs(tech.prerequisites) do
+      if tech.researched == false then
+        list = open_tech(player, tech.name, list)
+        tech.researched = true
+        table.insert( list, tech.name )
+      end
+    end
+  end
+  return list
+end
+
+function reload_tech(player, list)
+  for i=1,#list do
+    local tech = player.force.technologies[list[i]]
+    if tech then
+      tech.researched = false
+    end
+  end
+end
+
+function show_tech(player, name)
+  if player.force.technologies[name] then
+    local list = {}
+    list = open_tech(player, name, list)
+    player.force.current_research = name
+    reload_tech(player, list)
+    fnei.gui.exit_from_gui(player)
+    player.opened = 2
+    player.force.current_research = nil
   end
 end
