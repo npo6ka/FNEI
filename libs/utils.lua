@@ -204,7 +204,7 @@ function get_elem_prob(elem)
   end
 end
 
-function get_gui(player, dir)
+function get_gui_pos(player, dir)
   if dir == "center" then
     return player.gui.center
   elseif dir == "left"then

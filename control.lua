@@ -33,8 +33,44 @@ script.on_event("pressed-fnei-back-key", function(event)
   fnei.back_key(player)
 end)
 
+function open_tech(player, name, list)
+  local tech = player.force.technologies[name]
+  if tech then
+    for _,tech in pairs(tech.prerequisites) do
+      if tech.researched == false then
+        list = open_tech(player, tech.name, list)
+        tech.researched = true
+        table.insert( list, tech.name )
+      end
+    end
+  end
+  return list
+end
+
+function reload_tech_tech(player, list)
+  for i=1,#list do
+    local tech = player.force.technologies[list[i]]
+    if tech then
+      tech.researched = false
+    end
+  end
+end
+
+function show_tech(player, name)
+  if player.force.technologies[name] then
+    local list = {}
+    list = open_tech(player, name, list)
+    player.force.current_research = name
+    reload_tech_tech(player, list)
+    fnei.gui.exit_from_gui(player)
+    player.opened = 2
+    player.force.current_research = nil
+  end
+end
+
 script.on_event("pressed-fnei-gui2-key", function(event)
-  local player = game.players[event.player_index]
+  local player = game.players[event.player_index]  
+
   if not global.fnei then
     global.fnei = {}
   end
@@ -69,17 +105,21 @@ script.on_event(defines.events.on_gui_click, function(event)
     player.print("This function is not available in this version of the mod")
     player.print("The options window is under construction")
   elseif element.type == "sprite-button" then
-    if element.name ~= nil and (string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_")) then
-      local elem_name = ""
-      if string.match(element.name, "fnei%_item%_") then 
-        elem_name = {name = string.sub(element.name, 11), type = "item"}
-      else
-        elem_name = {name = string.sub(element.name, 12), type = "fluid"}
-      end
-      if event.button == defines.mouse_button_type.left then
-        fnei.rc.element_left_click(player, elem_name)
-      elseif event.button == defines.mouse_button_type.right then
-        fnei.rc.element_right_click(player, elem_name)
+    if element.name ~= nil then
+      if string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_") then
+        local elem_name = ""
+        if string.match(element.name, "fnei%_item%_") then 
+          elem_name = {name = string.sub(element.name, 11), type = "item"}
+        else
+          elem_name = {name = string.sub(element.name, 12), type = "fluid"}
+        end
+        if event.button == defines.mouse_button_type.left then
+          fnei.rc.element_left_click(player, elem_name)
+        elseif event.button == defines.mouse_button_type.right then
+          fnei.rc.element_right_click(player, elem_name)
+        end
+      elseif string.match(element.name, "fnei%_technology%_") then
+        show_tech(player, string.sub(element.name, 17))
       end
     end
   end
