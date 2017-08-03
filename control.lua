@@ -7,9 +7,7 @@ if not fnei.main_gui then fnei.main_gui = {} end
 if not fnei.recipe_gui then fnei.recipe_gui = {} end
 if not fnei.option_gui then fnei.option_gui = {} end
 if not global.fnei then global.fnei = {} end
-if not global.fnei.settings then 
-  global.fnei.settings = {} 
-end
+if not global.fnei.settings then global.fnei.settings = {} end
 
 function out(string)
   game.players["npo6ka"].print(string)
@@ -27,6 +25,9 @@ script.on_event(defines.events.on_tick, function(event)
       fnei.gui.exit_from_gui(player)
       player.opened = nil
     end
+  end
+  if global.fnei.cur_tech then
+    return_prev_tech()
   end
 end)
 

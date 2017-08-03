@@ -243,6 +243,14 @@ end
 function show_tech(player, name)
   if player.force.technologies[name] then
     local list = {}
+    if player and  player.force.current_research then
+      global.fnei.cur_tech = {
+        name = player.name, 
+        tech = player.force.current_research.name, 
+        time = 0,
+        progress = player.force.research_progress,
+      }
+    end
     list = open_tech(player, name, list)
     player.force.current_research = name
     reload_tech(player, list)
@@ -250,4 +258,15 @@ function show_tech(player, name)
     player.opened = 2
     player.force.current_research = nil
   end
+end
+
+function return_prev_tech()
+  local prev_data = global.fnei.cur_tech
+    if prev_data.time > 0 then
+      game.players[prev_data.name].force.current_research = prev_data.tech
+      game.players[prev_data.name].force.research_progress = prev_data.progress
+      global.fnei.cur_tech = nil
+    else
+      global.fnei.cur_tech.time = global.fnei.cur_tech.time + 1
+    end
 end
