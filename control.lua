@@ -19,6 +19,11 @@ require "controls/main_control"
 require "controls/recipe_control"
 require "controls/option_control"
 
+script.on_configuration_changed(function()
+  if not global.fnei then global.fnei = {} end
+  if not global.fnei.settings then global.fnei.settings = {} end
+end)
+
 script.on_event(defines.events.on_tick, function(event)
   for _,player in pairs(game.players) do
     if player ~= nil and player.opened_gui_type ~= 0 and fnei.gui.is_gui_open(player) then
