@@ -4,6 +4,11 @@ function clear_list(list)
   for i=0, count do list[i]=nil end
 end
 --utils
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
+end
+--utils
 function get_prototypes_list(search_text)
   local items = find_items(search_text)
   local fluids = find_fluids(search_text)

@@ -1,8 +1,25 @@
 function fnei.recipe_gui.get_recipe_caption(element)
+  if not element then
+    return "unknown name"
+  end
   if element.amount then
-    return {"fnei.recipe-item-name-amt", get_elem_amount(element), get_localised_name(element)}
+    return {"fnei.recipe-amnt", element.amount, get_localised_name(element)}
   else
-    return {"fnei.recipe-item-name-prb", get_elem_prob(element), get_localised_name(element)}
+    local min = element.amount_min or 0
+    local max = element.amount_max or 0
+    local prob = element.probability or 0
+
+    local ret_val
+    if min ~= max then
+      ret_val = {"fnei.recipe-amnt-range", min, max}
+    else
+      ret_val = max
+    end
+    if prob == 1 then
+      return {"fnei.recipe-amnt", ret_val, get_localised_name(element)}
+    else
+      return {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob, 3)}, get_localised_name(element)}
+    end
   end
 end
 

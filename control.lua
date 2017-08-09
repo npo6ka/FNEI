@@ -48,16 +48,14 @@ end)
 
 script.on_event("pressed-fnei-gui2-key", function(event)
   local player = game.players[event.player_index]  
-  if not global.fnei then
-    global.fnei = {}
+  if player.force.current_research then
+    player.force.research_progress = 1
   end
-  if not global.fnei[player.name] then
-    global.fnei[player.name] = {}
-  end
-  if not global.fnei[player.name].is_massage then
+
+  if not fnei.oc.get_settings(player).is_massage then
     player.print({"fnei.warning-message-1"})
     player.print({"fnei.warning-message-2"})
-    global.fnei[player.name].is_massage = true
+    fnei.oc.get_settings(player).is_massage = true
   end
 end)
 
