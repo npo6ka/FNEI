@@ -46,7 +46,7 @@ function fnei.oc.get_settings( player )
 end
 
 --par0
-function fnei.oc.change_par0( player, index)
+function fnei.oc.change_par0( player, index )
   local settings = fnei.oc.get_settings( player )
   close_all_gui( player )
   settings.gui_location = index
@@ -62,8 +62,23 @@ function fnei.oc.get_gui_position( player )
   end
 end
 
+--par1
+function fnei.oc.change_par1( player, value )
+  local settings = fnei.oc.get_settings( player )
+  settings.close = value
+end
+
+function fnei.oc.need_to_close_gui( player )
+  local settings = fnei.oc.get_settings( player )
+  if settings.close == nil then
+    return true
+  else
+    return settings.close
+  end
+end
+
 --admin_par0
-function fnei.oc.change_adm_par0( player, value)
+function fnei.oc.change_adm_par0( player, value )
   fnei.gui.close_option(player)
   global.fnei.settings.admin_function = value
   fnei.gui.open_option_gui(player)
@@ -78,7 +93,7 @@ function fnei.oc.get_admin_permission()
 end
 
 --admin_par1
-function fnei.oc.change_adm_par1( player, value)
+function fnei.oc.change_adm_par1( player, value )
   local settings = fnei.oc.get_settings( player )
   settings.can_tech = value
 end

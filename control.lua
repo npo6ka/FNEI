@@ -26,7 +26,7 @@ end)
 
 script.on_event(defines.events.on_tick, function(event)
   for _,player in pairs(game.players) do
-    if player ~= nil and player.opened_gui_type ~= 0 and fnei.gui.is_gui_open(player) then
+    if player ~= nil and fnei.oc.need_to_close_gui(player) and player.opened_gui_type ~= 0 and fnei.gui.is_gui_open(player) then
       fnei.gui.exit_from_gui(player)
       player.opened = nil
     end
@@ -48,9 +48,6 @@ end)
 
 script.on_event("pressed-fnei-gui2-key", function(event)
   local player = game.players[event.player_index]  
-  if player.force.current_research then
-    player.force.research_progress = 1
-  end
 
   if not fnei.oc.get_settings(player).is_massage then
     player.print({"fnei.warning-message-1"})
@@ -77,6 +74,8 @@ script.on_event(defines.events.on_gui_checked_state_changed, function(event)
     end
   elseif element.name == "fnei_option_admin_param_1" then
     fnei.oc.change_adm_par1(player, element.state)
+  elseif element.name == "fnei_option_param_1" then
+    fnei.oc.change_par1(player, element.state)
   end
 end)
 

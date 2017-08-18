@@ -10,6 +10,7 @@ function round(num, idp)
 end
 --utils
 function get_prototypes_list(search_text)
+  search_text = search_text:gsub(" ", "-"):lower()
   local items = find_items(search_text)
   local fluids = find_fluids(search_text)
   local ret_mas = {}

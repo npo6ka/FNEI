@@ -21,7 +21,7 @@ end
 
 function fnei.mc.search_text_cheged(player)
   local text = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_search_field").text
-  fnei.main_gui.search_text = text:gsub(" ", "-"):lower()
+  fnei.main_gui.search_text = text
   fnei.mc.set_new_list(player)
 end
 

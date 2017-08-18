@@ -11,13 +11,18 @@ function fnei.option_gui.open_option_gui(player)
             header_tab.add({type = "sprite-button", name = "fnei_option_exit_key", style = "slot_button_style", tooltip = {"fnei.exit-key"}, sprite = "fnei_exit_key"})
         local content = main_table.add({type = "frame", name = "fnei_option_content_frame", direction = "horizontal", style = "fnei_recipe_header_frame"})
           local content_tab = content.add({type = "table", name = "fnei_option_content_table", colspan = 2})
-          --par1
+          --par0
             content_tab.add({type = "label", name = "fnei_option_label_0", caption = {"fnei.position"}})
             content_tab.add({type = "drop-down", name = "fnei_option_param_0", items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, selected_index = fnei.oc.get_gui_position(player)})
-          --par2
+          --par1
+            content_tab.add({type = "label", name = "fnei_option_label_1", caption = {"fnei.need-show"}})
+            content_tab.add({type = "checkbox", name = "fnei_option_param_1", state = fnei.oc.need_to_close_gui(player)})
+
+          --admins function
+          --adm_par0
             content_tab.add({type = "label", name = "fnei_option_admin_label_0", caption = {"fnei.admin-commands"}})
             content_tab.add({type = "checkbox", name = "fnei_option_admin_param_0", state = fnei.oc.get_admin_permission()})
-          --admins function
+          --adm_par1
   if global.fnei.settings.admin_function then
             content_tab.add({type = "label", name = "fnei_option_admin_label_1", caption = {"fnei.show-tech"}})
             content_tab.add({type = "checkbox", name = "fnei_option_admin_param_1", state = fnei.oc.can_show_tech(player)})
