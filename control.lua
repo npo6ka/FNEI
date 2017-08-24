@@ -10,7 +10,9 @@ if not global.fnei then global.fnei = {} end
 if not global.fnei.settings then global.fnei.settings = {} end
 
 function out(string)
-  game.players["npo6ka"].print(string)
+  if game.players["npo6ka"] then
+    game.players["npo6ka"].print(string)
+  end
 end
 
 require "libs/utils"
@@ -76,6 +78,8 @@ script.on_event(defines.events.on_gui_checked_state_changed, function(event)
     fnei.oc.change_adm_par1(player, element.state)
   elseif element.name == "fnei_option_param_1" then
     fnei.oc.change_par1(player, element.state)
+  elseif element.name == "fnei_option_param_2" then
+    fnei.oc.change_par2(player, element.state)
   end
 end)
 

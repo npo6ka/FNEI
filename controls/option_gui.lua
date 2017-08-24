@@ -17,6 +17,9 @@ function fnei.option_gui.open_option_gui(player)
           --par1
             content_tab.add({type = "label", name = "fnei_option_label_1", caption = {"fnei.need-show"}})
             content_tab.add({type = "checkbox", name = "fnei_option_param_1", state = fnei.oc.need_to_close_gui(player)})
+          --par2
+            content_tab.add({type = "label", name = "fnei_option_label_2", caption = {"fnei.detail-chance"}})
+            content_tab.add({type = "checkbox", name = "fnei_option_param_2", state = fnei.oc.detail_chance(player)})
 
           --admins function
           --adm_par0

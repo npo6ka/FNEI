@@ -39,10 +39,13 @@ function fnei.oc.set_last_gui(player)
 end
 
 function fnei.oc.get_settings( player )
-  if not global.fnei.settings[player.name] then
-    global.fnei.settings[player.name] = {}
+  if not player then out("ERROR option_control:43") end
+  
+  local name = (player and player.name) or "nil"
+  if not global.fnei.settings[name] then
+    global.fnei.settings[name] = {}
   end
-  return global.fnei.settings[player.name]
+  return global.fnei.settings[name]
 end
 
 --par0
@@ -74,6 +77,21 @@ function fnei.oc.need_to_close_gui( player )
     return true
   else
     return settings.close
+  end
+end
+
+--par2
+function fnei.oc.change_par2( player, value )
+  local settings = fnei.oc.get_settings( player )
+  settings.detail_chance = value
+end
+
+function fnei.oc.detail_chance( player )
+  local settings = fnei.oc.get_settings( player )
+  if settings.detail_chance == nil then
+    return false
+  else
+    return settings.detail_chance
   end
 end
 

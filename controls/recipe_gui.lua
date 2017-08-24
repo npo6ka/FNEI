@@ -1,4 +1,4 @@
-function fnei.recipe_gui.get_recipe_caption(element)
+function fnei.recipe_gui.get_recipe_caption(element, player)
   if not element then
     return "unknown name"
   end
@@ -8,8 +8,13 @@ function fnei.recipe_gui.get_recipe_caption(element)
     local min = element.amount_min or 0
     local max = element.amount_max or 0
     local prob = element.probability or 0
-
     local ret_val
+
+    if not fnei.oc.detail_chance( player ) then
+      ret_val = (min + max) / 2 * prob
+      return {"fnei.recipe-amnt", round(ret_val, 3), get_localised_name(element)}
+    end
+
     if min ~= max then
       ret_val = {"fnei.recipe-amnt-range", min, max}
     else
@@ -154,7 +159,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   for _,ingr in pairs(ingr_list) do
     local ing_str = gui_ingr_list.add({type = "flow", direction = "horizontal", style = "fnei_list_elements_flow"})
     ing_str.add(get_image(ingr.name, ingr.type .. "Name", "slot_button_style"))
-    ing_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(ingr)))
+    ing_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(ingr, player)))
   end
   if #ingr_list < 8 then
     local gui_ingr_scroll = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_list_ingr_scroll")
@@ -168,7 +173,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   for _,res in pairs(prod_list) do
     local res_str = gui_res_list.add({type = "flow", direction = "horizontal", style = "fnei_list_elements_flow"})
     res_str.add(get_image(res.name, res.type  .. "Name", "slot_button_style"))
-    res_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(res)))
+    res_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(res, player)))
   end
   if #prod_list < 9 then
     local gui_res_scroll = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_list_res_scroll")
