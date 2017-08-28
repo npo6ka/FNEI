@@ -110,6 +110,10 @@ script.on_event(defines.events.on_gui_click, function(event)
     fnei.rc.main_key(player)
   elseif element.name == "fnei_option_back_key" then
     fnei.oc.back_key(player)
+  elseif element.name == "fnei_main_exit_key" then
+    fnei.main_key(player)
+  elseif element.name == "fnei_main_settings_key" then
+    fnei.oc.open_gui(player)
   elseif element.name == "fnei_option_exit_key" then
     fnei.oc.main_key(player)
   elseif element.name == "fnei_recipe_settings_key" then
@@ -135,6 +139,13 @@ script.on_event(defines.events.on_gui_click, function(event)
           show_tech(player, string.sub(element.name, 17))
         else
           player.print({"fnei.info-admin-command-warning"})
+        end
+      elseif string.match(element.name, "fnei%_building%_") then
+        local elem_name = string.sub(element.name, 15)
+        if event.button == defines.mouse_button_type.left then
+          fnei.oc.change_par3(player, elem_name, true)
+        else
+          fnei.oc.change_par3(player, elem_name, false)
         end
       end
     end

@@ -95,6 +95,25 @@ function fnei.oc.detail_chance( player )
   end
 end
 
+--par3
+function fnei.oc.change_par3( player, item_name, value )
+  local settings = fnei.oc.get_settings( player )
+  if settings.buildings == nil then
+    settings.buildings = {}
+  end
+  settings.buildings[item_name] = value
+  fnei.option_gui.change_buildings_state( player, item_name )
+end
+
+function fnei.oc.get_craft_state_for_building( player, item_name)
+  local settings = fnei.oc.get_settings( player )
+  if not settings.buildings or settings.buildings[item_name] == nil then
+    return true
+  else
+    return settings.buildings[item_name]
+  end
+end
+
 --admin_par0
 function fnei.oc.change_adm_par0( player, value )
   fnei.gui.close_option(player)

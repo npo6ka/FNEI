@@ -2,6 +2,7 @@ require "libs.utils"
 require "prototypes.styles"
 require "prototypes.main_styles"
 require "prototypes.recipe_styles"
+require "prototypes.option_styles"
 
 data:extend({
   {

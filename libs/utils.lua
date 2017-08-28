@@ -72,59 +72,98 @@ function get_crafting_category_table()
     local entity = item.place_result
     if entity ~= nil and entity.crafting_categories then
       for category,v in pairs(entity.crafting_categories) do
-        table.insert(category_tb, {name = category, entity = entity.name})
+        table.insert(category_tb, {cat_name = category, item_name = item.name})
       end
     end 
   end 
   return category_tb
 end
 --utils
-function get_madein_list(recipe)
-  local ret_tb = {}
+function item_exists( list, item_name )
+  for _,elem in pairs(list) do
+    if elem.name == item_name then
+      return true
+    end
+  end
+  return false
+end
+--utils
+function get_item_list_from_cat_tb( category )
   local cat_tb = get_crafting_category_table()
+  local items = {}
+  for _,elem in pairs(cat_tb) do
+    if category == nil or category == elem.cat_name then
+      if not item_exists(items, elem.item_name) then
+        table.insert(items, {name = elem.item_name, type = "itemName"})
+      end
+    end
+  end
+  return items
+end
+--utils
+function get_filtred_items( player, category )
+  local ret_list = {}
+  local items = get_item_list_from_cat_tb(category)
+  for _,item in pairs(items) do
+    if fnei.oc.get_craft_state_for_building( player, item.name) then
+      table.insert(ret_list, item)
+    end
+  end
+
+  return ret_list
+end
+--utils
+function get_madein_list( player, recipe )
   if recipe then
-    local rec_cat = recipe.category
-    
-    for _,elem in pairs(cat_tb) do
-      if (rec_cat == elem.name) then
-        table.insert(ret_tb, {name = elem.entity, type = "itemName"})
-      end
-    end
+    return get_filtred_items(player, recipe.category)
+  else 
+    return {}
   end
-  return ret_tb
 end
 --utils
-function get_craft_recipe_list(player, element)
+function get_craft_recipe_list( player, element )
   local recipes = player.force.recipes
   local ret_recipe = {}
   for _,recipe in pairs(recipes) do
-    if not (recipe.name:find("-flaring") or recipe.name:find("-barrel") or recipe.name:find("-incineration")) then
-      for _,product in pairs(recipe.products) do
-        
-        if product.name == element.name then
-          if product.type == element.type then
-            table.insert(ret_recipe, recipe)
-          end
-        end
-      end
-    end
-  end
-  return ret_recipe
-end
---utils
-function get_usage_recipe_list(player, element)
-  local recipes = player.force.recipes
-  local ret_recipe = {}
-  for _,recipe in pairs(recipes) do
-    if not (recipe.name:find("-flaring") or recipe.name:find("-barrel") or recipe.name:find("-incineration")) then
-      for _,ingredient in pairs(recipe.ingredients) do
-        if ingredient.name == element.name and ingredient.type == element.type then
+    for _,product in pairs(recipe.products) do
+      if product.name == element.name then
+        if product.type == element.type then
           table.insert(ret_recipe, recipe)
         end
       end
     end
   end
-  return ret_recipe
+  return get_filtered_recipe_list(player, ret_recipe)
+end
+--utils
+function get_usage_recipe_list( player, element )
+  local recipes = player.force.recipes
+  local ret_recipe = {}
+  for _,recipe in pairs(recipes) do
+    for _,ingredient in pairs(recipe.ingredients) do
+      if ingredient.name == element.name and ingredient.type == element.type then
+        table.insert(ret_recipe, recipe)
+      end
+    end
+  end
+  return get_filtered_recipe_list(player, ret_recipe)
+end
+--utils
+function get_filtered_recipe_list( player, recipes )
+  local filer_buf = {}
+  local ret_list = {}
+  for _,rec in pairs(recipes) do
+    local cat = rec.category
+    if cat then
+      if filer_buf[cat] == nil then
+        filer_buf[cat] = get_filtred_items(player, cat)
+      end
+      if #filer_buf[cat] > 0 then
+        table.insert(ret_list, rec)
+      end
+    end
+  end
+  return ret_list
 end
 --utils
 function sort_enable_recipe_list(list)

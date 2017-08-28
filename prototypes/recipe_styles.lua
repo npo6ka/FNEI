@@ -1,60 +1,3 @@
-data:extend({
-  {
-    type = "sprite",
-    name = "fnei_time_icon",
-    filename = "__core__/graphics/clock-icon.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
-  {
-    type = "sprite",
-    name = "fnei_back_key",
-    filename = "__FNEI__/graphics/back_32.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
-  {
-    type = "sprite",
-    name = "fnei_settings_key",
-    filename = "__FNEI__/graphics/settings_32.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
-  {
-    type = "sprite",
-    name = "fnei_exit_key",
-    filename = "__FNEI__/graphics/quit_32.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
-  {
-    type = "sprite",
-    name = "fnei_left_key",
-    filename = "__FNEI__/graphics/prev_32.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
-  {
-    type = "sprite",
-    name = "fnei_right_key",
-    filename = "__FNEI__/graphics/next_32.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
-})
-
 -------------------------Font style-----------------------
 
 data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
@@ -66,6 +9,7 @@ data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
     scalable = false,
     height = 36,
     width = 348,
+    want_ellipsis = true,
     font_color = {r=1, g=0.2537254, b=0.25980392}
 }
 
@@ -79,6 +23,7 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     height = 36,
     width = 348,
     scale = 1,
+    want_ellipsis = true,
     scalable = false,
 }
 
@@ -105,6 +50,41 @@ data.raw["gui-style"].default["fnei_recipe_technologies"] =
     scale = 1,
     scalable = false,
 }
+
+data.raw["gui-style"].default["fnei_recipe_element"] =
+{
+    type = "label_style",
+    parent = "label_style",
+    align = "center",
+    scalable = false,
+    height = 36,
+    scale = 1,
+}
+
+data.raw["gui-style"].default["fnei_recipe_type_lable"] =
+{
+    type = "label_style",
+    parent = "label_style",
+    align = "right",
+    scalable = false,
+    height = 36,
+    width = 190,
+    scale = 1,
+    scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_recipe_paging_label"] =
+{
+    type = "label_style",
+    parent = "label_style",
+    align = "left",
+    scalable = false,
+    height = 36,
+    width = 190,
+    scale = 1,
+    scalable = false,
+}
+
 -------------------------flow_style--------------------------
 
 data.raw["gui-style"].default["fnei_recipe_flow"] =
@@ -136,16 +116,6 @@ data.raw["gui-style"].default["fnei_list_elements_flow"] =
   type = "flow_style",
   minimal_height = 38,
   maximal_height = 38,
-}
-
-data.raw["gui-style"].default["fnei_recipe_element"] =
-{
-    type = "label_style",
-    parent = "label_style",
-    align = "center",
-    scalable = false,
-    height = 36,
-    scale = 1,
 }
 
 -------------------------frame_style--------------------------
@@ -232,30 +202,6 @@ data.raw["gui-style"].default["fnei_recipe_paging_table"] =
   type = "table_style",
   parent = "fnei_default_table",
   scalable = false,
-}
-
-data.raw["gui-style"].default["fnei_recipe_type_lable"] =
-{
-    type = "label_style",
-    parent = "label_style",
-    align = "right",
-    scalable = false,
-    height = 36,
-    width = 190,
-    scale = 1,
-    scalable = false,
-}
-
-data.raw["gui-style"].default["fnei_recipe_paging_label"] =
-{
-    type = "label_style",
-    parent = "label_style",
-    align = "left",
-    scalable = false,
-    height = 36,
-    width = 190,
-    scale = 1,
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_prod_table"] =

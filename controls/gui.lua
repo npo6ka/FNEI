@@ -108,7 +108,7 @@ end
 function fnei.gui.open_recipe_gui(player, recipe, cur_page, cnt_page)
   if recipe then
     fnei.recipe_gui.open_recipe_gui(player)
-    local madein_list = get_madein_list(recipe)
+    local madein_list = get_madein_list(player, recipe)
     local tech = get_technologies(player, recipe.name)
 
     local cur_elem
