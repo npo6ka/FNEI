@@ -80,6 +80,10 @@ script.on_event(defines.events.on_gui_checked_state_changed, function(event)
     fnei.oc.change_par1(player, element.state)
   elseif element.name == "fnei_option_param_2" then
     fnei.oc.change_par2(player, element.state)
+  elseif element.name == "fnei_option_param_4" then
+    fnei.oc.change_par4(player, element.state)
+  elseif element.name == "fnei_option_param_5" then
+    fnei.oc.change_par5(player, element.state)
   end
 end)
 

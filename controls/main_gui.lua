@@ -12,9 +12,9 @@ function fnei.main_gui.open_main_gui(player)
     search_line.add({type = "textfield", name = "fnei_search_field", text = fnei.main_gui.search_text})
     search_line.add({type = "sprite-button", name = "fnei_main_settings_key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"}})
     search_line.add({type = "sprite-button", name = "fnei_main_exit_key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"}})
-  buttons.add({type = "button", name = "fnei_prev_main_page", caption = "<"})
+  buttons.add({type = "sprite-button", name = "fnei_prev_main_page", style = "fnei_left_arrow_button_style"})
   buttons.add({type = "label", name = "fnei_page_number", caption = "empty_main_page"})
-  buttons.add({type = "button", name = "fnei_next_main_page", caption = ">"})
+  buttons.add({type = "sprite-button", name = "fnei_next_main_page", style = "fnei_right_arrow_button_style"})
 end
 
 function fnei.main_gui.close_main_gui(player)

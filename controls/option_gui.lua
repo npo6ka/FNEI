@@ -57,6 +57,12 @@ function fnei.option_gui.open_option_gui(player)
             content_tab.add({type = "label", name = "fnei_option_label_3", caption = {"fnei.show-recipes"}, style = "fnei_option_param_label"})
             local param3 = content_tab.add({type = "scroll-pane", name = "fnei_option_param_3_scroll", style = "fnei_option_param_3_scroll"})
               param3.add({type = "table", name = "fnei_param_3_table", colspan = 5})
+          --par4
+            content_tab.add({type = "label", name = "fnei_option_label_4", caption = {"fnei.hidden-items"}, style = "fnei_option_param_label"})
+            content_tab.add({type = "checkbox", name = "fnei_option_param_4", state = fnei.oc.show_hidden_item(player)})
+          --par5
+            content_tab.add({type = "label", name = "fnei_option_label_5", caption = {"fnei.non-destination"}, style = "fnei_option_param_label"})
+            content_tab.add({type = "checkbox", name = "fnei_option_param_5", state = fnei.oc.show_non_destination(player)})
           --admins function
           --adm_par0
             content_tab.add({type = "label", name = "fnei_option_admin_label_0", caption = {"fnei.admin-commands"}})

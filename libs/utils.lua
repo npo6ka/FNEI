@@ -9,18 +9,18 @@ function round(num, idp)
   return math.floor(num * mult + 0.5) / mult
 end
 --utils
-function get_prototypes_list(search_text)
+function get_prototypes_list(player, search_text)
   search_text = search_text:gsub(" ", "-"):lower()
   local items = find_items(search_text)
   local fluids = find_fluids(search_text)
   local ret_mas = {}
   for _,prot in pairs(items) do
-    if check_item_setting(prot) then
+    if check_item_setting(player, prot) then
       table.insert(ret_mas, prot)
     end
   end 
   for _,prot in pairs(fluids) do
-    if check_fluid_setting(prot) then
+    if check_fluid_setting(player, prot) then
       table.insert(ret_mas, prot)
     end
   end 
@@ -28,17 +28,18 @@ function get_prototypes_list(search_text)
   return ret_mas
 end
 --utils
-function check_item_setting(element)
+function check_item_setting(player, element)
   local item = game.item_prototypes[element.name]
   if item then
-    if true and item.has_flag("hidden") and item.flags["hidden"] == true then
+    if not fnei.oc.show_hidden_item(player) and item.has_flag("hidden") and item.flags["hidden"] == true then
       return false
     end
+    return true
   end
-  return true
+  return false
 end
 --utils
-function check_fluid_setting(element)
+function check_fluid_setting(player, element)
   return true
 end
 --utils
@@ -121,6 +122,30 @@ function get_madein_list( player, recipe )
   end
 end
 --utils
+function check_non_destination( player, recipe )
+  if not fnei.oc.show_non_destination(player) and not recipe.enabled and get_technologies(player, recipe.name) == nil then
+    return false
+  end
+  return true
+end
+--utils
+function get_filtered_recipe_list( player, recipes )
+  local filer_buf = {}
+  local ret_list = {}
+  for _,rec in pairs(recipes) do
+    local cat = rec.category
+    if cat then
+      if filer_buf[cat] == nil then
+        filer_buf[cat] = get_filtred_items(player, cat)
+      end
+      if #filer_buf[cat] > 0 and check_non_destination(player, rec) then
+        table.insert(ret_list, rec)
+      end
+    end
+  end
+  return ret_list
+end
+--utils
 function get_craft_recipe_list( player, element )
   local recipes = player.force.recipes
   local ret_recipe = {}
@@ -147,23 +172,6 @@ function get_usage_recipe_list( player, element )
     end
   end
   return get_filtered_recipe_list(player, ret_recipe)
-end
---utils
-function get_filtered_recipe_list( player, recipes )
-  local filer_buf = {}
-  local ret_list = {}
-  for _,rec in pairs(recipes) do
-    local cat = rec.category
-    if cat then
-      if filer_buf[cat] == nil then
-        filer_buf[cat] = get_filtred_items(player, cat)
-      end
-      if #filer_buf[cat] > 0 then
-        table.insert(ret_list, rec)
-      end
-    end
-  end
-  return ret_list
 end
 --utils
 function sort_enable_recipe_list(list)

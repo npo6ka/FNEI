@@ -39,7 +39,7 @@ function fnei.oc.set_last_gui(player)
 end
 
 function fnei.oc.get_settings( player )
-  if not player then out("ERROR option_control:43") end
+  if not player then out("ERROR option_control:get_settings") end
   
   local name = (player and player.name) or "nil"
   if not global.fnei.settings[name] then
@@ -111,6 +111,39 @@ function fnei.oc.get_craft_state_for_building( player, item_name)
     return true
   else
     return settings.buildings[item_name]
+  end
+end
+
+--par4
+function fnei.oc.change_par4( player, value )
+  local settings = fnei.oc.get_settings( player )
+  settings.hidden_recipe = value
+  if #fnei.mc.elem_list > 0 then
+    fnei.mc.set_new_list(player)
+  end
+end
+
+function fnei.oc.show_hidden_item( player )
+  local settings = fnei.oc.get_settings( player )
+  if settings.hidden_recipe == nil then
+    return false
+  else
+    return settings.hidden_recipe
+  end
+end
+
+--par5
+function fnei.oc.change_par5( player, value )
+  local settings = fnei.oc.get_settings( player )
+  settings.non_destination = value
+end
+
+function fnei.oc.show_non_destination( player )
+  local settings = fnei.oc.get_settings( player )
+  if settings.non_destination == nil then
+    return false
+  else
+    return settings.non_destination
   end
 end
 

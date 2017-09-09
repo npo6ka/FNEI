@@ -10,12 +10,14 @@ function fnei.rc.back_key(player)
     fnei.gui.close_recipe(player)
     fnei.rc.delete_recipe_name()
     fnei.mc.set_new_list(player)
+    fnei.mc.open_gui(player)
   elseif stack_size > 1 then
     fnei.rc.delete_recipe_name()
     fnei.rc.set_new_recipe_list(player)
   elseif stack_size == 0 then
     fnei.gui.close_recipe(player)
     fnei.mc.set_new_list(player)
+    fnei.mc.open_gui(player)
   else
     player.print("fnei.rc.back_key: stack_size value = " .. stack_size)
   end
