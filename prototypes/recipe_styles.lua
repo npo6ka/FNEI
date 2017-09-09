@@ -242,28 +242,28 @@ data.raw["gui-style"].default["fnei_left_arrow_button_style"] =
   clicked_graphical_set = {
     type = "monolith",
     monolith_image = {
-      filename = "__FNEI__/graphics/prev_click_32.png",
-      height = 32,
+      filename = "__FNEI__/graphics/prev_3.png",
+      height = 64,
       priority = "extra-high-no-scale",
-      width = 32,
+      width = 64,
     },
   },
   default_graphical_set = {
     type = "monolith",
     monolith_image = {
-      filename = "__FNEI__/graphics/prev_32.png",
-      height = 32,
+      filename = "__FNEI__/graphics/prev_1.png",
+      height = 64,
       priority = "extra-high-no-scale",
-      width = 32,
+      width = 64,
     },
   },
   hovered_graphical_set = {
     type = "monolith",
     monolith_image = {
-      filename = "__FNEI__/graphics/prev_sel_32.png",
-      height = 32,
+      filename = "__FNEI__/graphics/prev_2.png",
+      height = 64,
       priority = "extra-high-no-scale",
-      width = 32,
+      width = 64,
     },
   }
 }
@@ -278,28 +278,28 @@ data.raw["gui-style"].default["fnei_right_arrow_button_style"] =
   clicked_graphical_set = {
     type = "monolith",
     monolith_image = {
-      filename = "__FNEI__/graphics/next_click_32.png",
-      height = 32,
+      filename = "__FNEI__/graphics/next_3.png",
+      height = 64,
       priority = "extra-high-no-scale",
-      width = 32,
+      width = 64,
     },
   },
   default_graphical_set = {
     type = "monolith",
     monolith_image = {
-      filename = "__FNEI__/graphics/next_32.png",
-      height = 32,
+      filename = "__FNEI__/graphics/next_1.png",
+      height = 64,
       priority = "extra-high-no-scale",
-      width = 32,
+      width = 64,
     },
   },
   hovered_graphical_set = {
     type = "monolith",
     monolith_image = {
-      filename = "__FNEI__/graphics/next_sel_32.png",
-      height = 32,
+      filename = "__FNEI__/graphics/next_2.png",
+      height = 64,
       priority = "extra-high-no-scale",
-      width = 32,
+      width = 64,
     },
   }
 }

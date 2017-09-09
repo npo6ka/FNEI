@@ -4,6 +4,15 @@
 
 -------------------------frame_style--------------------------
 
+data.raw["gui-style"].default["fnei_option_text_frame"] =
+{
+  type = "frame_style",
+  maximal_width = 270,
+  minimal_width = 270,
+
+  scalable = false,
+}
+
 -------------------------table_style--------------------------
 
 ----------------------scroll_pane_style-----------------------
@@ -132,8 +141,20 @@ data.raw["gui-style"].default["fnei_green_building_button_style"] =
 data.raw["gui-style"].default["fnei_option_param_label"] =
 {
   type = "label_style",
-  maximal_width = 270,
-  minimal_width = 270,
+  width = 260,
   single_line = false,
+  left_padding = 1,
+  right_padding = 1,
+  top_padding = 1,
+  bottom_padding = 1,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_option_label"] =
+{
+  type = "label_style",
+  font = "font-mb",
+  width = 400,
+  align = "center",
   scalable = false,
 }

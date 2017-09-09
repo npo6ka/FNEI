@@ -224,3 +224,111 @@ data.raw["gui-style"].default["fnei_empty_button_style"] =
     },
   }
 }
+
+data.raw["gui-style"].default["fnei_settings_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button_style",
+  height = 36,
+  width = 36,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Settings_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Settings_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Settings_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_exit_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button_style",
+  height = 36,
+  width = 36,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Exit_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Exit_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Exit_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_back_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button_style",
+  height = 36,
+  width = 36,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Back_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Back_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/Back_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
