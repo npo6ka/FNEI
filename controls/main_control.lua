@@ -21,7 +21,7 @@ function fnei.mc.main_key(player)
 end
 
 function fnei.mc.search_text_cheged(player)
-  local text = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_search_field").text
+  local text = fnei:get_gui(get_gui_pos(player), "fnei_search_field").text
   fnei.main_gui.search_text = text
   fnei.mc.set_new_list(player)
   fnei.mc.open_gui(player)
@@ -50,14 +50,14 @@ function fnei.mc.open_gui(player)
 end
 
 function fnei.mc.set_new_list(player)
-  --local search_field = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_search_field")
+  --local search_field = fnei:get_gui(get_gui_pos(player), "fnei_search_field")
   local search_text = fnei.main_gui.search_text
   
   fnei.mc.get_new_list_elems(player, search_text)
 end
 
 function fnei.mc.clear_search_text(player)
-  local search_field = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_search_field")
+  local search_field = fnei:get_gui(get_gui_pos(player), "fnei_search_field")
   search_field.text = ""
   fnei.mc.search_text_cheged(player)
 end
@@ -89,7 +89,7 @@ end
 
 function fnei.mc.reload_list_elems(player)
   if #fnei.mc.elem_list == 0 then
-    local search_field = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_search_field")
+    local search_field = fnei:get_gui(get_gui_pos(player), "fnei_search_field")
     if search_field then
       fnei.mc.get_new_list_elems(player, search_field.text)
     end

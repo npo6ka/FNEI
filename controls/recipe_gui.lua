@@ -66,7 +66,7 @@ function fnei.recipe_gui.open_recipe_gui(player)
 
 --7 space 10 pading --7/4
 
-  local main_flow = get_gui_pos(player, fnei.gui.location).add({type = "flow", name = "fnei_recipe_main_flow", style = "fnei_recipe_flow"})
+  local main_flow = get_gui_pos(player).add({type = "flow", name = "fnei_recipe_main_flow", style = "fnei_recipe_flow"})
     local main_frame = main_flow.add({type = "frame", name = "fnei_recipe_main_frame", style = "fnei_recipe_main_frame"})
       local main_table = main_frame.add({type = "table", name = "fnei_recipe_main_table", colspan = 1, style = "fnei_recipe_main_table"})
         local header = main_table.add({type = "frame", name = "fnei_recipe_header_frame", direction = "horizontal", style = "fnei_recipe_header_frame"})
@@ -103,12 +103,12 @@ end
 
 function fnei.recipe_gui.close_recipe_gui(player)
   if fnei.recipe_gui.is_recipe_gui_open(player) then
-    get_gui_pos(player, fnei.gui.location).fnei_recipe_main_flow.destroy()
+    get_gui_pos(player).fnei_recipe_main_flow.destroy()
   end
 end
 
 function fnei.recipe_gui.is_recipe_gui_open(player)
-  if get_gui_pos(player, fnei.gui.location).fnei_recipe_main_flow then
+  if get_gui_pos(player).fnei_recipe_main_flow then
     return true
   else
     return false
@@ -117,17 +117,17 @@ end
 
 function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, prod_list, madein_list, tech, cur_page, cnt_page, enabled, localised_name, cur_elem)
   --header
-  local recipe_label = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_recipe_header_label")
+  local recipe_label = fnei:get_gui(get_gui_pos(player), "fnei_recipe_header_label")
   recipe_label.style = fnei.recipe_gui.get_recipe_style(enabled)
   recipe_label.caption = {"", localised_name}
 
-  local recipe_icon = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_recipe_header_icon")
+  local recipe_icon = fnei:get_gui(get_gui_pos(player), "fnei_recipe_header_icon")
   recipe_icon.add(get_image(player.force.recipes[recipe_name], "recipe", "fnei_empty_button_style"))
 
   --current elem
-  local type_lable = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_recipe_type_lable")
-  local item_icon = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_recipe_item_icon")
-  local paging_label = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_recipe_paging_label")
+  local type_lable = fnei:get_gui(get_gui_pos(player), "fnei_recipe_type_lable")
+  local item_icon = fnei:get_gui(get_gui_pos(player), "fnei_recipe_item_icon")
+  local paging_label = fnei:get_gui(get_gui_pos(player), "fnei_recipe_paging_label")
 
   if cur_elem.property == "usage" then
     type_lable.caption = {"fnei.usage-for"}
@@ -140,8 +140,8 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   item_icon.add(get_image(cur_elem.name, cur_elem.type .. "Name", "slot_button_style"))
   paging_label.caption = cur_page .. "/" .. cnt_page
 
-  local gui_ingr_list = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_list_ingr")
-  local gui_res_list = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_list_res")
+  local gui_ingr_list = fnei:get_gui(get_gui_pos(player), "fnei_list_ingr")
+  local gui_res_list = fnei:get_gui(get_gui_pos(player), "fnei_list_res")
   local list_diff = #ingr_list + 1 - #prod_list
 
 
@@ -162,7 +162,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
     ing_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(ingr, player)))
   end
   if #ingr_list < 8 then
-    local gui_ingr_scroll = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_list_ingr_scroll")
+    local gui_ingr_scroll = fnei:get_gui(get_gui_pos(player), "fnei_list_ingr_scroll")
     gui_ingr_scroll.vertical_scroll_policy = "never"
   end
   for i=1, -list_diff do
@@ -176,7 +176,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
     res_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(res, player)))
   end
   if #prod_list < 9 then
-    local gui_res_scroll = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_list_res_scroll")
+    local gui_res_scroll = fnei:get_gui(get_gui_pos(player), "fnei_list_res_scroll")
     gui_res_scroll.vertical_scroll_policy = "never"
   end
   for i=1, list_diff do
@@ -184,13 +184,13 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   end
 
 --made in
-  local gui_madein = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_madein_table")
+  local gui_madein = fnei:get_gui(get_gui_pos(player), "fnei_madein_table")
   for _,item in pairs(madein_list) do
     gui_madein.add(get_image(item.name, item.type, "slot_button_style"))
   end
 --tech
   if tech ~= nil then
-    local tech_flow = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_recipe_main_table")
+    local tech_flow = fnei:get_gui(get_gui_pos(player), "fnei_recipe_main_table")
     local gui_tech = tech_flow.add({type = "frame", name = "fnei_tech_frame", direction = "horizontal"})
     gui_tech.add({type = "label", caption = {"fnei.technology"}, style = "fnei_recipe_technologies"})
     gui_tech.add(get_image(tech, "tech", fnei.recipe_gui.get_tech_style(tech)))

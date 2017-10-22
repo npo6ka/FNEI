@@ -22,7 +22,7 @@ end
 
 function fnei.option_gui.change_buildings_state( player, elem_name )
   if fnei.gui.is_option_open(player) then
-    local item = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_building_"..elem_name)
+    local item = fnei:get_gui(get_gui_pos(player), "fnei_building_"..elem_name)
     if item then
       item.style = fnei.option_gui.get_item_style(player, elem_name)
     end
@@ -32,7 +32,7 @@ end
 function fnei.option_gui.open_option_gui(player)
   fnei.option_gui.close_option_gui(player)
 
-  local main_flow = get_gui_pos(player, fnei.gui.location).add({type = "flow", name = "fnei_option_main_flow", style = "fnei_recipe_flow"})
+  local main_flow = get_gui_pos(player).add({type = "flow", name = "fnei_option_main_flow", style = "fnei_recipe_flow"})
     local main_frame = main_flow.add({type = "frame", name = "fnei_option_main_frame", style = "fnei_recipe_main_frame"})
        local main_table = main_frame.add({type = "table", name = "fnei_option_main_table", colspan = 1, style = "fnei_recipe_main_table"})
         local header = main_table.add({type = "frame", name = "fnei_option_header_frame", direction = "horizontal", style = "fnei_recipe_header_frame"})
@@ -51,7 +51,7 @@ function fnei.option_gui.open_option_gui(player)
             content_tab.add({type = "checkbox", name = "fnei_option_param_1", state = fnei.oc.need_to_close_gui(player)})
           --par2
             --label = content_tab.add({type = "frame", name = "fnei_option_frame_label_2", style = "fnei_option_text_frame"})
-              content_tab.add({type = "label", name = "fnei_option_label_2", caption = {"fnei.detail-chance"}, style = "fnei_option_param_label"})
+              content_tab.add({type = "label", name = "fnei_option_label_2", caption = {"fnei.detail-chance"}, style = "fnei_option_param_label", single_line = false})
             content_tab.add({type = "checkbox", name = "fnei_option_param_2", state = fnei.oc.detail_chance(player)})
           --par3
             content_tab.add({type = "label", name = "fnei_option_label_3", caption = {"fnei.show-recipes"}, style = "fnei_option_param_label"})
@@ -76,12 +76,12 @@ end
 
 function fnei.option_gui.close_option_gui(player)
   if fnei.option_gui.is_option_gui_open(player) then
-    get_gui_pos(player, fnei.gui.location).fnei_option_main_flow.destroy()
+    get_gui_pos(player).fnei_option_main_flow.destroy()
   end
 end
 
 function fnei.option_gui.is_option_gui_open(player)
-  if get_gui_pos(player, fnei.gui.location).fnei_option_main_flow then
+  if get_gui_pos(player).fnei_option_main_flow then
     return true
   else
     return false
@@ -89,7 +89,7 @@ function fnei.option_gui.is_option_gui_open(player)
 end
 
 function fnei.option_gui.set_option_gui(player)
-  local item_table = fnei:get_gui(get_gui_pos(player, fnei.gui.location), "fnei_param_3_table")
+  local item_table = fnei:get_gui(get_gui_pos(player), "fnei_param_3_table")
 
   local cat_tb = get_item_list_from_cat_tb()
   for _,elem in pairs(cat_tb) do

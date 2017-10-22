@@ -1,5 +1,3 @@
-if not fnei.gui.location then fnei.gui.location = "left" end
-
 function fnei:get_gui(gui, name)
   if not self.result then self.result = {} end
   if not gui then return end
@@ -88,7 +86,7 @@ require "controls.option_gui"
 function fnei.gui.exit_from_gui(player)
   fnei.gui.close_main(player)
   fnei.gui.close_recipe(player)
-  clear_list(fnei.rc.search_stack)
+  clear_list(fnei.rc.get_search_stack(player))
   fnei.gui.close_option(player)
 end
 
@@ -112,8 +110,9 @@ function fnei.gui.open_recipe_gui(player, recipe, cur_page, cnt_page)
     local tech = get_technologies(player, recipe.name)
 
     local cur_elem
-    if #fnei.rc.search_stack > 0 then
-      cur_elem = fnei.rc.search_stack[#fnei.rc.search_stack]
+    local src_stck = fnei.rc.get_search_stack(player)
+    if #src_stck > 0 then
+      cur_elem = src_stck[#src_stck]
     end
     if cur_elem then
       fnei.recipe_gui.set_recipe_gui(player, recipe.name, recipe.energy, recipe.ingredients, recipe.products, 

@@ -1,18 +1,75 @@
-if not fnei.rc.recipe_page then fnei.rc.recipe_page = 1 end
-if not fnei.rc.search_stack then fnei.rc.search_stack = {} end
 if not fnei.rc.recipe_list then fnei.rc.recipe_list = {} end
 
 require "controls/gui"
 
+-------------------- getters and setters ---------------------
+
+function get_player_data( player )
+  local name = (player and player.name) or "nil"
+  if name == "nil" then out("player_data == nil") end
+
+  if not fnei.rc[name] then
+    fnei.rc[name] = {}
+  end
+  return fnei.rc[name]
+end
+
+function fnei.rc.get_recipe_page( player )
+  local data = get_player_data(player)
+  if not data.recipe_page then
+    data.recipe_page = 1
+  end
+  return data.recipe_page
+end
+
+function fnei.rc.set_recipe_page( player, value )
+  local max_page = #fnei.rc.get_recipe_list(player)
+  if value < 1 then
+    get_player_data(player).recipe_page = max_page
+  elseif value > max_page then
+    get_player_data(player).recipe_page = 1
+  else
+    get_player_data(player).recipe_page = value
+  end
+  fnei.rc.set_cur_recipe_page(player)
+end
+
+function fnei.rc.get_search_stack( player )
+  local data = get_player_data(player)
+  if not data.search_stack then
+    data.search_stack = {}
+  end
+  return data.search_stack
+end
+
+function fnei.rc.get_recipe_list( player )
+  local data = get_player_data(player)
+  if not data.recipe_list then
+    data.recipe_list = {}
+  end
+  return data.recipe_list
+end
+
+function fnei.rc.set_recipe_list(player, list, page)
+  if not list or #list == 0 then
+    return false
+  end
+  get_player_data(player).recipe_list = sort_enable_recipe_list(list)
+  fnei.rc.set_recipe_page(player, page)
+  return true
+end
+
+----------------------- Controls -----------------------------------
+
 function fnei.rc.back_key(player)
-  local stack_size = #fnei.rc.search_stack
+  local stack_size = #fnei.rc.get_search_stack(player)
   if stack_size == 1 then
     fnei.gui.close_recipe(player)
-    fnei.rc.delete_recipe_name()
+    fnei.rc.delete_recipe_name(player)
     fnei.mc.set_new_list(player)
     fnei.mc.open_gui(player)
   elseif stack_size > 1 then
-    fnei.rc.delete_recipe_name()
+    fnei.rc.delete_recipe_name(player)
     fnei.rc.set_new_recipe_list(player)
   elseif stack_size == 0 then
     fnei.gui.close_recipe(player)
@@ -47,20 +104,20 @@ function fnei.rc.element_right_click(player, element)
 end
 
 function fnei.rc.open_gui(player)
-  local cur_page = fnei.rc.recipe_page
-  local recipe = fnei.rc.recipe_list[cur_page]
-  fnei.gui.open_recipe_gui(player, recipe, cur_page, fnei.rc.get_recipe_amount())
+  local cur_page = fnei.rc.get_recipe_page(player)
+  local recipe = fnei.rc.get_recipe_list(player)[cur_page]
+  fnei.gui.open_recipe_gui(player, recipe, cur_page, #fnei.rc.get_recipe_list(player))
 end
 
 function fnei.rc.set_new_recipe_list(player)
-  local elem_num = #fnei.rc.search_stack
+  local elem_num = #fnei.rc.get_search_stack(player)
   if elem_num < 1 then
     return
   end
-  local element = fnei.rc.search_stack[elem_num]
+  local element = fnei.rc.get_search_stack(player)[elem_num]
 
-  if (element.property == "craft" and not fnei.rc.set_recipe_list(get_craft_recipe_list(player, element), element.page)) or
-     (element.property == "usage" and not fnei.rc.set_recipe_list(get_usage_recipe_list(player, element), element.page)) then
+  if (element.property == "craft" and not fnei.rc.set_recipe_list(player, get_craft_recipe_list(player, element), element.page)) or
+     (element.property == "usage" and not fnei.rc.set_recipe_list(player, get_usage_recipe_list(player, element), element.page)) then
     return
   end
   fnei.rc.open_gui(player)
@@ -73,11 +130,12 @@ function fnei.rc.insert_recipe_name(player, element, element_property)
     if (element_property == "craft" and #get_craft_recipe_list(player, element) > 0) or
        (element_property == "usage" and #get_usage_recipe_list(player, element) > 0) then
         local prev_elem = nil
-        if #fnei.rc.search_stack > 0 then
-          prev_elem = fnei.rc.search_stack[#fnei.rc.search_stack]
+        local src_stck = fnei.rc.get_search_stack(player)
+        if #src_stck > 0 then
+          prev_elem = src_stck[#src_stck]
         end
         if prev_elem == nil or prev_elem.name ~= element.name or prev_elem.property ~= element_property then 
-        table.insert(fnei.rc.search_stack, {name = element.name, type = element.type, property = element_property, page = 1})
+        table.insert(src_stck, {name = element.name, type = element.type, property = element_property, page = 1})
         return true
       end
     end
@@ -85,48 +143,25 @@ function fnei.rc.insert_recipe_name(player, element, element_property)
   return false
 end
 
-function fnei.rc.set_cur_recipe_page()
-  local cur_recipe = fnei.rc.search_stack[#fnei.rc.search_stack]
+function fnei.rc.set_cur_recipe_page( player )
+  local src_stck = fnei.rc.get_search_stack(player)
+  local cur_recipe = src_stck[#src_stck]
   if cur_recipe then 
-    cur_recipe.page = fnei.rc.recipe_page
+    cur_recipe.page = fnei.rc.get_recipe_page(player)
   end
 end
 
-function fnei.rc.delete_recipe_name()
-  table.remove(fnei.rc.search_stack)
-end
------------------------Recipe_List-------------------------
-function fnei.rc.set_recipe_list(list, page)
-  if not list or #list == 0 then
-    return false
-  end
-  fnei.rc.recipe_list = sort_enable_recipe_list(list)
-  fnei.rc.set_recipe_page(page)
-  return true
+function fnei.rc.delete_recipe_name(player)
+  table.remove(fnei.rc.get_search_stack(player))
 end
 
-function fnei.rc.get_recipe_amount()
-  return #fnei.rc.recipe_list
-end
 ------------------------Page-------------------------
 function fnei.rc.recipe_gui_next(player)
-  fnei.rc.set_recipe_page(fnei.rc.recipe_page + 1)
+  fnei.rc.set_recipe_page(player, fnei.rc.get_recipe_page(player) + 1)
   fnei.rc.open_gui(player)
 end
 
 function fnei.rc.recipe_gui_prev(player)
-  fnei.rc.set_recipe_page(fnei.rc.recipe_page - 1)
+  fnei.rc.set_recipe_page(player, fnei.rc.get_recipe_page(player) - 1)
   fnei.rc.open_gui(player)
-end
-
-function fnei.rc.set_recipe_page(value)
-  local max_page =  fnei.rc.get_recipe_amount()
-  if value < 1 then 
-    fnei.rc.recipe_page = max_page
-  elseif value > max_page then
-    fnei.rc.recipe_page = 1
-  else
-    fnei.rc.recipe_page = value
-  end
-  fnei.rc.set_cur_recipe_page()
 end

@@ -20,8 +20,8 @@ data.raw["gui-style"].default["fnei_option_text_frame"] =
 data.raw["gui-style"].default["fnei_option_param_3_scroll"] =
 {
   type = "scroll_pane_style",
-  maximal_width = 222,
-  minimal_width = 222,
+  maximal_width = 232,
+  minimal_width = 232,
   maximal_height = 120,
   scalable = false,
 }
@@ -141,8 +141,7 @@ data.raw["gui-style"].default["fnei_green_building_button_style"] =
 data.raw["gui-style"].default["fnei_option_param_label"] =
 {
   type = "label_style",
-  width = 260,
-  single_line = false,
+  maximal_width = 260,
   left_padding = 1,
   right_padding = 1,
   top_padding = 1,

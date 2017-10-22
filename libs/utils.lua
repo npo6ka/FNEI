@@ -257,7 +257,7 @@ function get_elem_prob(elem)
   end
 end
 
-function get_gui_pos(player, dir)
+function get_gui_pos(player)
   local index = fnei.oc.get_gui_position( player )
   if index == 1 then
     return player.gui.left
@@ -266,7 +266,7 @@ function get_gui_pos(player, dir)
   elseif index == 3 then
     return player.gui.center
   else
-    player.print("utils: get_gui: invalid direction: "..dir)
+    player.print("utils: get_gui: invalid direction: " .. index)
   end
 end
 
