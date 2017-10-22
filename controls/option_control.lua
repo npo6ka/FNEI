@@ -74,7 +74,7 @@ end
 function fnei.oc.need_to_close_gui( player )
   local settings = fnei.oc.get_settings( player )
   if settings.close == nil then
-    return true
+    return false
   else
     return settings.close
   end

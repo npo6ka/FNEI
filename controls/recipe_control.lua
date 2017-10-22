@@ -4,7 +4,7 @@ require "controls/gui"
 
 -------------------- getters and setters ---------------------
 
-function get_player_data( player )
+function fnei.rc.get_player_data( player )
   local name = (player and player.name) or "nil"
   if name == "nil" then out("player_data == nil") end
 
@@ -15,7 +15,7 @@ function get_player_data( player )
 end
 
 function fnei.rc.get_recipe_page( player )
-  local data = get_player_data(player)
+  local data = fnei.rc.get_player_data(player)
   if not data.recipe_page then
     data.recipe_page = 1
   end
@@ -25,17 +25,17 @@ end
 function fnei.rc.set_recipe_page( player, value )
   local max_page = #fnei.rc.get_recipe_list(player)
   if value < 1 then
-    get_player_data(player).recipe_page = max_page
+    fnei.rc.get_player_data(player).recipe_page = max_page
   elseif value > max_page then
-    get_player_data(player).recipe_page = 1
+    fnei.rc.get_player_data(player).recipe_page = 1
   else
-    get_player_data(player).recipe_page = value
+    fnei.rc.get_player_data(player).recipe_page = value
   end
   fnei.rc.set_cur_recipe_page(player)
 end
 
 function fnei.rc.get_search_stack( player )
-  local data = get_player_data(player)
+  local data = fnei.rc.get_player_data(player)
   if not data.search_stack then
     data.search_stack = {}
   end
@@ -43,7 +43,7 @@ function fnei.rc.get_search_stack( player )
 end
 
 function fnei.rc.get_recipe_list( player )
-  local data = get_player_data(player)
+  local data = fnei.rc.get_player_data(player)
   if not data.recipe_list then
     data.recipe_list = {}
   end
@@ -54,7 +54,7 @@ function fnei.rc.set_recipe_list(player, list, page)
   if not list or #list == 0 then
     return false
   end
-  get_player_data(player).recipe_list = sort_enable_recipe_list(list)
+  fnei.rc.get_player_data(player).recipe_list = sort_enable_recipe_list(list)
   fnei.rc.set_recipe_page(player, page)
   return true
 end

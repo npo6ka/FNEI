@@ -149,8 +149,9 @@ end)
 script.on_event(defines.events.on_gui_text_changed, function(event)
   local player = game.players[event.player_index]
   local element = event.element
+  local text = element.text
   if element.name == "fnei_search_field" then
-    fnei.mc.search_text_cheged(player)
+    fnei.mc.search_text_cheged(player, text)
   end
 end)
 
