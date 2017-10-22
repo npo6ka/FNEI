@@ -48,16 +48,6 @@ script.on_event("pressed-fnei-back-key", function(event)
   fnei.back_key(player)
 end)
 
-script.on_event("pressed-fnei-gui2-key", function(event)
-  local player = game.players[event.player_index]  
-
-  if not fnei.oc.get_settings(player).is_massage then
-    player.print({"fnei.warning-message-1"})
-    player.print({"fnei.warning-message-2"})
-    fnei.oc.get_settings(player).is_massage = true
-  end
-end)
-
 script.on_event(defines.events.on_gui_checked_state_changed, function(event)
   local player = game.players[event.player_index]
   local element = event.element
