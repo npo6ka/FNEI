@@ -276,8 +276,17 @@ function open_tech(player, name, list)
     for _,tech in pairs(tech.prerequisites) do
       if tech.researched == false then
         list = open_tech(player, tech.name, list)
+        for _,effect in pairs(tech.effects) do
+          if effect.type == "unlock-recipe" then
+            local recipe = player.force.recipes[effect.recipe]
+            if recipe and recipe.enabled == true then
+              table.insert(list.recipe, recipe.name)
+              out(recipe.name)
+            end
+          end
+        end
         tech.researched = true
-        table.insert( list, tech.name )
+        table.insert(list.tech, tech.name)
       end
     end
   end
@@ -285,10 +294,19 @@ function open_tech(player, name, list)
 end
 
 function reload_tech(player, list)
-  for i=1,#list do
-    local tech = player.force.technologies[list[i]]
+  local tech_list = list.tech
+  for i=1,#tech_list do
+    local tech = player.force.technologies[tech_list[i]]
     if tech then
       tech.researched = false
+    end
+  end
+  local recipe_list = list.recipe
+  for i=1,#recipe_list do
+    local recipe = player.force.recipes[recipe_list[i]]
+    if recipe then
+      out("load: "..recipe.name)
+      recipe.enabled = true
     end
   end
 end
@@ -296,6 +314,8 @@ end
 function show_tech(player, name)
   if player.force.technologies[name] then
     local list = {}
+    list.tech = {}
+    list.recipe = {}
     if player and  player.force.current_research then
       global.fnei.cur_tech = {
         name = player.name, 
