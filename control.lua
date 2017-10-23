@@ -8,6 +8,8 @@ if not fnei.recipe_gui then fnei.recipe_gui = {} end
 if not fnei.option_gui then fnei.option_gui = {} end
 if not global.fnei then global.fnei = {} end
 if not global.fnei.settings then global.fnei.settings = {} end
+if not global.fnei.rc then global.fnei.rc = {} end
+if not global.fnei.mc then global.fnei.mc = {} end
 
 function out(string)
   if game.players["npo6ka"] then
@@ -24,6 +26,8 @@ require "controls/option_control"
 script.on_configuration_changed(function()
   if not global.fnei then global.fnei = {} end
   if not global.fnei.settings then global.fnei.settings = {} end
+  if not global.fnei.rc then global.fnei.rc = {} end
+  if not global.fnei.mc then global.fnei.mc = {} end
 end)
 
 script.on_event(defines.events.on_tick, function(event)

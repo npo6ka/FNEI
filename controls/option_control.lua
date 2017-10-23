@@ -118,7 +118,7 @@ end
 function fnei.oc.change_par4( player, value )
   local settings = fnei.oc.get_settings( player )
   settings.hidden_recipe = value
-  if #fnei.mc.elem_list > 0 then
+  if #fnei.mc.get_elem_list(player) > 0 then
     fnei.mc.set_new_list(player)
   end
 end

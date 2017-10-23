@@ -1,5 +1,3 @@
-if not fnei.rc.recipe_list then fnei.rc.recipe_list = {} end
-
 require "controls/gui"
 
 -------------------- getters and setters ---------------------
@@ -8,10 +6,10 @@ function fnei.rc.get_player_data( player )
   local name = (player and player.name) or "nil"
   if name == "nil" then out("player_data == nil") end
 
-  if not fnei.rc[name] then
-    fnei.rc[name] = {}
+  if not global.fnei.rc[name] then
+    global.fnei.rc[name] = {}
   end
-  return fnei.rc[name]
+  return global.fnei.rc[name]
 end
 
 function fnei.rc.get_recipe_page( player )

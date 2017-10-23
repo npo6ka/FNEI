@@ -9,10 +9,10 @@ function fnei.mc.get_player_data( player )
   local name = (player and player.name) or "nil"
   if name == "nil" then out("player_data == nil") end
 
-  if not fnei.mc[name] then
-    fnei.mc[name] = {}
+  if not global.fnei.mc[name] then
+    global.fnei.mc[name] = {}
   end
-  return fnei.mc[name]
+  return global.fnei.mc[name]
 end
 
 function fnei.mc.get_elem_list( player )
