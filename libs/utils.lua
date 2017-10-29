@@ -72,6 +72,7 @@ function get_crafting_category_table()
   for _,item in pairs(game.item_prototypes) do
     local entity = item.place_result
     if entity ~= nil and entity.crafting_categories then
+      --out(entity.name.." "..entity.ingredient_count)
       for category,v in pairs(entity.crafting_categories) do
         table.insert(category_tb, {cat_name = category, item_name = item.name})
       end
@@ -110,12 +111,19 @@ function get_filtred_items( player, category )
       table.insert(ret_list, item)
     end
   end
-
   return ret_list
 end
 --utils
 function get_madein_list( player, recipe )
   if recipe then
+    --[[if player.character then
+      local cr_cat = player.character.prototype.crafting_categories
+      if cr_cat then
+        for category,v in pairs(cr_cat) do
+          out(category)
+        end
+      end
+    end]]
     return get_filtred_items(player, recipe.category)
   else 
     return {}
@@ -281,7 +289,6 @@ function open_tech(player, name, list)
             local recipe = player.force.recipes[effect.recipe]
             if recipe and recipe.enabled == true then
               table.insert(list.recipe, recipe.name)
-              out(recipe.name)
             end
           end
         end
@@ -305,7 +312,6 @@ function reload_tech(player, list)
   for i=1,#recipe_list do
     local recipe = player.force.recipes[recipe_list[i]]
     if recipe then
-      out("load: "..recipe.name)
       recipe.enabled = true
     end
   end
