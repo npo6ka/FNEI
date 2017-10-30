@@ -103,12 +103,12 @@ function get_item_list_from_cat_tb( category )
   return items
 end
 --utils
-function get_filtred_items( player, category )
+function get_filtred_items( player, recipe )
   local ret_list = {}
-  local items = get_item_list_from_cat_tb(category)
+  local items = get_craft_cat_whis_amount(player, recipe.category, #recipe.ingredients)
   for _,item in pairs(items) do
     if fnei.oc.get_craft_state_for_building( player, item.name) then
-      table.insert(ret_list, item)
+      table.insert(ret_list, {type = "item", name = item})
     end
   end
   return ret_list
@@ -124,11 +124,27 @@ function get_madein_list( player, recipe )
         end
       end
     end]]
-    return get_filtred_items(player, recipe.category)
+    return get_filtred_items(player, recipe)
   else 
     return {}
   end
 end
+
+--utils
+function can_player_craft_this_recipe( player, recipe )
+  if player and player.character then
+    local cr_cat = player.character.prototype.crafting_categories
+    if cr_cat then
+      for category,v in pairs(cr_cat) do
+        if category == recipe.category then
+          return true
+        end
+      end
+    end
+  end
+  return false
+end
+
 --utils
 function check_non_destination( player, recipe )
   if not fnei.oc.show_non_destination(player) and not recipe.enabled and get_technologies(player, recipe.name) == nil then
@@ -144,7 +160,7 @@ function get_filtered_recipe_list( player, recipes )
     local cat = rec.category
     if cat then
       if filer_buf[cat] == nil then
-        filer_buf[cat] = get_filtred_items(player, cat)
+        filer_buf[cat] = get_filtred_items(player, rec)
       end
       if #filer_buf[cat] > 0 and check_non_destination(player, rec) then
         table.insert(ret_list, rec)

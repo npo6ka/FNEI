@@ -185,6 +185,17 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
 
 --made in
   local gui_madein = fnei:get_gui(get_gui_pos(player), "fnei_madein_table")
+
+  if can_player_craft_this_recipe(player, get_recipe_list(player)[recipe_name]) then
+    gui_madein.add({
+      type = "sprite-button",
+      name = "fnei_hand",
+      style = "slot_button_style",
+      tooltip = {"", "handcraft"},
+      sprite = "fnei_hand_icon"
+    })
+  end
+
   for _,item in pairs(madein_list) do
     gui_madein.add(get_image(item.name, item.type, "slot_button_style"))
   end

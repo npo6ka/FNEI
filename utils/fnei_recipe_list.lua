@@ -28,7 +28,7 @@ function get_technology_for_recipe(player, pecipe_name)
   return {}
 end
 
------------------------ supported function --------------------------
+----------------------- secondary function --------------------------
 
 function get_attainable_recipes(force)
   local data = get_force_data(force)

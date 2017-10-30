@@ -22,6 +22,7 @@ end
 require "libs/utils"
 require "libs/utils_style"
 require "utils/fnei_recipe_list"
+require "utils/fnei_crafting_category_list"
 require "controls/main_control"
 require "controls/recipe_control"
 require "controls/option_control"

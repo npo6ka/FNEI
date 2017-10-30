@@ -1,13 +1,14 @@
 
 --return a list of attainable technologies or empty list
 function get_tech_list(player)
-  if not player.force then
+  if player.force then
     return get_attainable_tech(player.force)
   end
+  player.print("nil force in get_tech_list")
   return {}
 end
 
------------------------ supported function --------------------------
+----------------------- secondary function --------------------------
 
 function get_attainable_tech(force)
   local data = get_force_data(force)
