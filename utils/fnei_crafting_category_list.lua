@@ -1,3 +1,12 @@
+---
+-- Description of the module.
+-- @module Force
+--
+local Forceq = {
+  -- single-line comment
+  classname = "FNForceq"
+}
+
 
 --return a list of attainable technologies or empty list
 function get_crafting_categories(player)

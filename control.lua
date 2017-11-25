@@ -11,14 +11,18 @@ if not global.fnei.settings then global.fnei.settings = {} end
 if not global.fnei.rc then global.fnei.rc = {} end
 if not global.fnei.mc then global.fnei.mc = {} end
 if not fnei.force then fnei.force = {} end
---if not global.fnei.force then global.fnei.force = {} end
 
-function out(string)
-  if game.players["npo6ka"] then
-    game.players["npo6ka"].print(string)
-  end
+-------------- include Class libs ----------------
+require "core/Class"
+-------------- include Debug libs ----------------
+require "core/Debug"
+function out(...)
+  local arg = {...}
+  Debug:info("debug.info", unpack(arg))
 end
-
+-------------- include DefaultLibs ---------------
+Force = require "utils/fnei_force"
+-------------- include other libs ----------------
 require "libs/utils"
 require "libs/utils_style"
 require "utils/fnei_recipe_list"
@@ -32,7 +36,6 @@ script.on_configuration_changed(function()
   if not global.fnei.settings then global.fnei.settings = {} end
   if not global.fnei.rc then global.fnei.rc = {} end
   if not global.fnei.mc then global.fnei.mc = {} end
-  --if not global.fnei.force then global.fnei.force = {} end
 end)
 
 script.on_event(defines.events.on_tick, function(event)
@@ -121,8 +124,6 @@ script.on_event(defines.events.on_gui_click, function(event)
     fnei.oc.main_key(player)
   elseif element.name == "fnei_recipe_settings_key" then
     fnei.oc.open_gui(player)
-    --[[player.print("This function is not available in this version of the mod")
-    player.print("The options window is under construction")]]
   elseif element.type == "sprite-button" then
     if element.name ~= nil then
       if string.match(element.name, "fnei%_item%_") or string.match(element.name, "fnei%_fluid%_") then
@@ -164,7 +165,16 @@ script.on_event(defines.events.on_gui_text_changed, function(event)
   end
 end)
 
+val = require "utils/fnei_technologies_cache"
+local techs = require "utils/fnei_raw_technologies"
+
+
+
 function fnei.back_key(player)
+  --techs.get_atech_list_p(player)
+  out(1, 2, 3, true, {1, 2, 3}, "asdasd", nil, 1, function(a) return a end)
+  out(Force.get(player))
+
   if fnei.gui.is_recipe_open(player) then
     fnei.rc.back_key(player)
   elseif fnei.gui.is_main_open(player) then

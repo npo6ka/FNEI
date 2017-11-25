@@ -8,7 +8,8 @@ function get_force_data(force)
   return fnei.force[name]
 end
 
-require "utils/fnei_technologies_list"
+local force = require "utils/fnei_force"
+local techs = require "utils/fnei_raw_technologies"
 
 --return a list of attainable recipies or empty list
 function get_recipe_list(player)
@@ -62,9 +63,9 @@ function get_tech_dependencies(force)
 end
 
 function create_tech_dependencies(force)
-  local techs = get_attainable_tech(force)
+  local techn = techs.get_atech_list_f(force)
   local ret_tb = {}
-  for _,tech in pairs(techs) do
+  for _,tech in pairs(techn) do
     for _,modifier in pairs(tech.effects) do
       if modifier.type == "unlock-recipe" then
         if not ret_tb[modifier.recipe] then
