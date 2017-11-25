@@ -6,9 +6,9 @@ Debug.append = false
 
 Debug.print_tb = {
 --         chat  log   file  
-  info =  {true, true, true},
-  error = {true, true, true},
-  debug = {true, true, true},
+  info =  {true,  true,  true},
+  error = {true,  true,  true},
+  debug = {false, false, true},
 }
 
 function Debug:info(...)

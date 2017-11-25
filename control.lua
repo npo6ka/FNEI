@@ -20,8 +20,10 @@ function out(...)
   local arg = {...}
   Debug:info("debug.info", unpack(arg))
 end
+
 -------------- include DefaultLibs ---------------
 Force = require "utils/fnei_force"
+RawTech = require "utils/fnei_raw_technologies"
 -------------- include other libs ----------------
 require "libs/utils"
 require "libs/utils_style"
@@ -165,16 +167,8 @@ script.on_event(defines.events.on_gui_text_changed, function(event)
   end
 end)
 
-val = require "utils/fnei_technologies_cache"
-local techs = require "utils/fnei_raw_technologies"
-
-
 
 function fnei.back_key(player)
-  --techs.get_atech_list_p(player)
-  out(1, 2, 3, true, {1, 2, 3}, "asdasd", nil, 1, function(a) return a end)
-  out(Force.get(player))
-
   if fnei.gui.is_recipe_open(player) then
     fnei.rc.back_key(player)
   elseif fnei.gui.is_main_open(player) then
