@@ -1,51 +1,52 @@
-function get_force_data(force)
-  local name = (force and force.name) or "nil"
-  if name == "nil" then out("force_data == nil") end
+if not Force then Force = require "utils/fnei_force" end
+if not RawTech then RawTech = require "utils/fnei_raw_technologies" end
+---
+-- Description of the module.
+-- @module Recipe
+--
+local Recipe = {
+  classname = "FNRecipe"
+}
 
-  if not fnei.force[name] then
-    fnei.force[name] = {}
-  end
-  return fnei.force[name]
+function Recipe:get_recipe_list_p(player)
+  Debug:debug(Recipe.classname, "get_recipe_list_p(", player, ")")
+  return self:get_recipe_list_f(Force.get(player))
 end
 
-local force = require "utils/fnei_force"
-local techs = require "utils/fnei_raw_technologies"
-
---return a list of attainable recipies or empty list
-function get_recipe_list(player)
-  if player.force then
-    return get_attainable_recipes(player.force)
-  end
-  player.print("nil force in get_recipe_list")
-  return {}
+function Recipe:get_recipe_list_f(force)
+  Debug:debug(Recipe.classname, "get_recipe_list_f(", force, ")")
+  if not force then return {} end
+  return force.recipes or {}
 end
 
---return a list of technologies that can open this pecipe_name or nil
-function get_technology_for_recipe(player, pecipe_name)
-  if player.force then
-    return get_tech_dependencies(player.force)[pecipe_name]
-  end
-  player.print("nil force in get_technology_for_recipe")
-  return {}
+function Recipe:get_aRecipe_list(recipe_list, tech_list)
+  Debug:debug(Recipe.classname, "get_aRecipe_list(", recipe_list and "recipe_list", tech_list and "tech_list", ")")
+  return self:create_attainable_recipes(recipe_list, tech_list)
+end
+
+function Recipe:get_enRecipe_list(recipe_list)
+  Debug:debug(Recipe.classname, "get_enRecipe_list(", recipe_list and "recipe_list", ")")
+  return self:create_enable_recipes(recipe_list)
+end
+
+--return a list of technologies that can open this recipe_name or {}
+function Recipe:get_technology_for_recipe(recipe_name, tech_list)
+  Debug:debug(Recipe.classname, "get_technology_for_recipe(", recipe_name, tech_list and "tech_list", ")")
+  return RawTech:get_recipe_list_in_tech_dependencies(tech_list)[recipe_name] or {}
+end
+
+function Recipe:get_vRecipe_list(recipe_list)
+  Debug:debug(Recipe.classname, "get_technology_for_recipe(", recipe_list and "recipe_list", item_list and "item_list", ")")
+  return self:create_visible_recipes(recipe_list)
 end
 
 ----------------------- secondary function --------------------------
 
-function get_attainable_recipes(force)
-  local data = get_force_data(force)
-  if not data.recipes then
-    data.recipes = create_attainable_recipes(force)
-  end
-  return data.recipes
-end
-
-function create_attainable_recipes(force)
+function Recipe:create_enable_recipes(recipe_list)
   local ret_tb = {}
-  local rec_dep = get_tech_dependencies(force)
 
-  for _,recipe in pairs(force.recipes) do
-    local dep = rec_dep[recipe.name]
-    if recipe.enabled or (dep and #dep > 0) then
+  for _,recipe in pairs(recipe_list) do
+    if recipe.enabled then
       ret_tb[recipe.name] = recipe
     end
   end
@@ -53,27 +54,30 @@ function create_attainable_recipes(force)
   return ret_tb
 end
 
-function get_tech_dependencies(force)
-  local data = get_force_data(force)
-
-  if not data.rec_dep then
-    data.rec_dep = create_tech_dependencies(force)
-  end
-  return data.rec_dep
-end
-
-function create_tech_dependencies(force)
-  local techn = techs.get_atech_list_f(force)
+function Recipe:create_attainable_recipes(recipe_list, tech_list)
   local ret_tb = {}
-  for _,tech in pairs(techn) do
-    for _,modifier in pairs(tech.effects) do
-      if modifier.type == "unlock-recipe" then
-        if not ret_tb[modifier.recipe] then
-          ret_tb[modifier.recipe] = {}
-        end
-        table.insert(ret_tb[modifier.recipe], tech)
-      end
+  local rec_dep = RawTech:create_tech_dependencies(tech_list)
+
+  for _,recipe in pairs(recipe_list) do
+    local dep = rec_dep[recipe.name]
+    if dep and #dep > 0 then
+      ret_tb[recipe.name] = recipe
     end
   end
+
   return ret_tb
 end
+
+function Recipe:create_visible_recipes(recipe_list)
+  local ret_tb = {}
+
+  for _,recipe in pairs(recipe_list) do
+    if not recipe.hidden then
+      ret_tb[recipe.name] = recipe
+    end
+  end
+
+  return ret_tb
+end
+
+return Recipe

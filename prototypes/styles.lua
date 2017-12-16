@@ -118,17 +118,6 @@ data.raw["gui-style"].default["fnei_default_frame"] =
   title_bottom_padding = 0,
   title_left_padding = 0,
   font_color = { r = 1, g = 0, b = 0, a = 1 },
-  flow_style = {
-    top_padding = 0,
-    right_padding = 0,
-    bottom_padding = 0,
-    left_padding = 0,
-    horizontal_spacing = 0,
-    vertical_spacing = 0,
-    resize_row_to_width = true,
-    resize_to_row_height = true,
-    max_on_row = 0,
-  },
   scalable = false,
 }
 

@@ -24,11 +24,13 @@ end
 -------------- include DefaultLibs ---------------
 Force = require "utils/fnei_force"
 RawTech = require "utils/fnei_raw_technologies"
+Recipe = require "utils/fnei_recipe_list"
+Item = require "utils/fnei_items"
 -------------- include other libs ----------------
 require "libs/utils"
 require "libs/utils_style"
 require "utils/fnei_recipe_list"
-require "utils/fnei_crafting_category_list"
+--require "utils/__fnei_crafting_category_list"
 require "controls/main_control"
 require "controls/recipe_control"
 require "controls/option_control"
@@ -169,6 +171,21 @@ end)
 
 
 function fnei.back_key(player)
+
+  local cl_rec = Recipe:get_recipe_list_p(player)
+  local recipes = Recipe:get_vRecipe_list(cl_rec)
+
+  local recs = Recipe:get_aRecipe_list(recipes, RawTech:get_aTech_list(RawTech:get_tech_list_p(player)))
+
+  local item = Item:get_item_list()
+  local sort_item = Item:get_vItem_list(item)
+
+  for i, j in pairs(item) do
+    if sort_item[i] then
+      out(i, j.name)
+    end
+  end
+  
   if fnei.gui.is_recipe_open(player) then
     fnei.rc.back_key(player)
   elseif fnei.gui.is_main_open(player) then

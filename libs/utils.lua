@@ -105,7 +105,7 @@ end
 --utils
 function get_filtred_items( player, recipe )
   local ret_list = {}
-  local items = get_craft_cat_whis_amount(player, recipe.category, #recipe.ingredients)
+  local items = {}--get_craft_cat_whis_amount(player, recipe.category, #recipe.ingredients)
   for _,item in pairs(items) do
     if fnei.oc.get_craft_state_for_building( player, item.name) then
       table.insert(ret_list, {type = "item", name = item})

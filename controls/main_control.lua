@@ -69,15 +69,6 @@ function fnei.mc.back_key(player)
   if fnei.gui.is_main_open(player) then
     fnei.gui.exit_from_gui(player)
   end
-
-  local list = get_attainable_tech(player.force)
-  if list then
-    for i = 0 , #list do
-      out(list[i])
-    end
-  else
-    out("list == nil")
-  end
 end
 
 function fnei.mc.main_key(player)
