@@ -34,7 +34,7 @@ function Gui.addSpriteButton(parent, cont_name, gui_name, tooltip, style, event_
 
   parent.add(gui_elem)
 
-  DefaultEvents.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
+  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
 end
 
 return Gui

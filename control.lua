@@ -19,6 +19,6 @@ Recipe = require "utils/fnei_recipe_list"
 Item = require "utils/fnei_items"
 CraftCategoty = require "utils/fnei_crafting_category_list"]]
 
-DefaultEvents = require "unsort/default_events"
+Events = require "unsort/events"
 
-DefaultEvents:init()
+Events:init()
