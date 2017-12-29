@@ -4,7 +4,7 @@ local DefaultEvents = {
 
 local gui_key_name = "pressed-fnei-gui-key"
 local back_key_name = "pressed-fnei-back-key"
-local CustomEvent = require "unsort/custom_events"
+local CustomEvents = require "unsort/custom_events"
 local Gui = require "unsort/gui"
 local supported_gui_event = {
   defines.events.on_gui_checked_state_changed,
@@ -14,17 +14,32 @@ local supported_gui_event = {
   defines.events.on_gui_elem_changed,
 }
 
+function DefaultEvents.add_custom_event(gui_name, gui_type, event_name, func)
+  CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
+end
+
+function DefaultEvents.del_custom_event(gui_name, gui_type, event_name)
+  CustomEvents.del_custom_event(gui_name, gui_type, event_name)
+end
+
 function DefaultEvents.on_configuration_changed(event)
   --if not global.fnei then global.fnei = {} end
 end
 
 function DefaultEvents.back_key(event)
+  Player.load(event)
 
 end
 
+function DefaultEvents.but_click(event)
+  out("but_click")
+end
+
 function DefaultEvents.gui_key(event)
+  Player.load(event)
+
   local gui = game.players[event.player_index].gui.center.add({type = "flow", name = "fnei_element_list", direction = "horizontal"})
-  gui.add({type = "sprite-button", name = "fnei_main_settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"}})
+  Gui.addSpriteButton(gui, "main", "settings-key", {"fnei.settings-key"}, "fnei_settings_button_style", DefaultEvents.but_click)
   gui.add({type = "choose-elem-button", name = "fnei_main_sdf", elem_type = "fluid"})
   gui.add({type = "choose-elem-button", name = "fnei_main_sd1f", elem_type = "item"})
   gui.add({type = "choose-elem-button", name = "fnei_main_sdf2", elem_type = "recipe"})
@@ -36,12 +51,14 @@ function DefaultEvents.on_tick(event)
 end
 
 function DefaultEvents.on_gui_closed(event)
+  Player.load(event)
   out(event)
 end
 
 function DefaultEvents.on_event_invoke(event)
+  Player.load(event)
   local gui_name, gui_type, event_name  = DefaultEvents.parse_name(event)
-  CustomEvent.invoke(gui_name, gui_type, event_name, event)
+  CustomEvents.invoke(gui_name, gui_type, event_name, event)
 end
 
 function DefaultEvents.parse_name(event)

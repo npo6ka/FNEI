@@ -1,7 +1,7 @@
 
 
 local Player = {
-  classname = "HMPlayer"
+  classname = "FNPlayer"
 }
 
 local cur_player = nil;
@@ -27,3 +27,5 @@ function Player.isAdmin()
   end
   return Lua_player.admin
 end
+
+return Player

@@ -42,7 +42,7 @@ function CustomEvents.event_exists(gui_name, gui_type, event_name)
   return false
 end
 
-function CustomEvents.invoke(gui_name, event_name, gui_type, event)
+function CustomEvents.invoke(gui_name, gui_type, event_name, event)
   if not gui_name or not event_name or not event then
     out("Error in CustomEvents.invoke: input == nil")
     return
