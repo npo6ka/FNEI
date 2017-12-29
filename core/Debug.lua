@@ -76,7 +76,7 @@ function Debug:get_message(tag, level, logClass, ...)
 end
 
 function Debug:print_to_chat(message)
-  if game.players["npo6ka"] then 
+  if game.players["npo6ka"] then
     game.players["npo6ka"].print(message)
   end
 end

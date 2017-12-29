@@ -1,11 +1,11 @@
 {
   "name": "FNEI",
-  "version": "0.0.14",
-  "factorio_version": "0.15",
+  "version": "0.1.0",
+  "factorio_version": "0.16",
   "title": "Factorio NEI",
   "author": "npo6ka",
   "contact": "https://forums.factorio.com/viewtopic.php?f=97&t=49461",
   "homepage": "https://github.com/npo6ka/FNEI",
   "description": "Factorio NEI. All recipes for the item and usage this item",
-  "dependencies": ["base >= 0.15.15"]
+  "dependencies": ["base >= 0.16.0"]
 }
