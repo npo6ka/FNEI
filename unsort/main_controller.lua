@@ -1,7 +1,8 @@
 local MainController = {
   classname = "FNMainController",
-  name = "Main"
 }
+
+local MainGui = require "unsort/main_gui"
 
 function MainController.exit()
   out("Main exit")
@@ -14,6 +15,10 @@ end
 function MainController.back_key()
   out("Main back")
   return true
+end
+
+function MainController.get_name()
+  return MainGui.name
 end
 
 return MainController

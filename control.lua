@@ -19,6 +19,7 @@ Recipe = require "utils/fnei_recipe_list"
 Item = require "utils/fnei_items"
 CraftCategoty = require "utils/fnei_crafting_category_list"]]
 
+Controller = require "unsort/controller"
 Events = require "unsort/events"
 
 Events:init()

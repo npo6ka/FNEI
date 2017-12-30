@@ -3,9 +3,9 @@ local Controller = {
 }
 
 local controllers = {
-  Main = require "unsort/main_controller",
-  Recipe = require "unsort/recipe_controller",
-  Settings = require "unsort/settings_controller",
+  main = require "unsort/main_controller",
+  recipe = require "unsort/recipe_controller",
+  settings = require "unsort/settings_controller",
 }
 local prev_cont = nil
 local cur_cont = nil
@@ -43,7 +43,7 @@ function Controller.main_key_event()
     Controller.exit_event()
     prev_cont = nil
   else
-    Controller.open_event(controllers.Main.name)
+    Controller.open_event(controllers.settings.get_name())
   end
 end
 

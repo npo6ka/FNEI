@@ -1,7 +1,8 @@
 local RecipeController = {
   classname = "FNRecipeController",
-  name = "Recipe"
 }
+
+local RecipeGui = require "unsort/recipe_gui"
 
 function RecipeController.exit()
   out("Recipe exit")
@@ -14,6 +15,10 @@ end
 function RecipeController.back_key()
   out("Recipe back")
   return true
+end
+
+function RecipeController.get_name()
+  return RecipeGui.name
 end
 
 return RecipeController
