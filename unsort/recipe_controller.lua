@@ -11,7 +11,7 @@ end
 
 function RecipeController.open()
   out("Recipe open")
-  RecipeGui.open_window()
+  return RecipeGui.open_window()
 end
 
 function RecipeController.back_key()

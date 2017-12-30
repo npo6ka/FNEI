@@ -50,7 +50,7 @@ function CustomEvents.invoke(gui_name, gui_type, event_name, event)
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
     event_list[gui_name][gui_type][event_name](event)
   else
-    out("Error CustomEvents.invoke: event not found")
+    out("Error CustomEvents.invoke: event not found ", event)
   end
 end
 

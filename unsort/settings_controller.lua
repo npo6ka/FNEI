@@ -11,7 +11,7 @@ end
 
 function SettingsController.open()
   out("settings open")
-  SettingsGui.open_window()
+  return SettingsGui.open_window()
 end
 
 function SettingsController.back_key()

@@ -14,11 +14,13 @@ function RecipeGui.open_window()
   RecipeGui.close_window()
 
   local cur_gui = Player.get().gui.center
-  cur_gui = Gui.addFlow(cur_gui, RecipeGui.name, general_gui_name, "fnei_recipe_flow")
-  cur_gui = Gui.addFrame(cur_gui, RecipeGui.name, "main-frame", "fnei_recipe_main_frame")
+  local ret_gui = Gui.addFlow(cur_gui, RecipeGui.name, general_gui_name, "fnei_recipe_flow")
+  cur_gui = Gui.addFrame(ret_gui, RecipeGui.name, "main-frame", "fnei_recipe_main_frame")
   cur_gui = Gui.addTable(cur_gui, RecipeGui.name, "main-table", "fnei_recipe_main_table", 1)  
 
   RecipeGui.add_header(cur_gui)
+
+  return ret_gui
 end
 
 function RecipeGui.close_window()

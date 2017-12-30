@@ -14,6 +14,7 @@ function Controller.exit_event()
   if cur_cont then
     cur_cont.exit()
     cur_cont = nil
+    Player.get().opened = nil
   end
 end
 
@@ -23,7 +24,7 @@ function Controller.open_event(controller)
     Controller.exit_event()
   end
   cur_cont = controller
-  cur_cont.open()
+  Player.get().opened = cur_cont.open()
 end
 
 function Controller.back_key_event()
@@ -46,7 +47,7 @@ function Controller.main_key_event()
     Controller.exit_event()
     prev_cont = nil
   else
-    Controller.open_event(Controller.get_cont("recipe"))
+    Controller.open_event(Controller.get_cont("main"))
   end
 end
 

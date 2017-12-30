@@ -100,4 +100,14 @@ function Gui.addLabel(parent, cont_name, gui_name, style, caption)
   return parent.add(gui_elem)
 end
 
+function Gui.addTextfield(parent, cont_name, gui_name, style, text, event_handler)
+  local gui_elem = Gui.set_def_fields("textfield", cont_name, gui_name, style)
+  text = text or ""
+  gui_elem.text = text
+
+  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
+
+  return parent.add(gui_elem)
+end
+
 return Gui
