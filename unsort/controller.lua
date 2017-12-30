@@ -17,9 +17,12 @@ function Controller.exit_event()
   end
 end
 
-function Controller.open_event(controller_name)
-  prev_cont = cur_cont
-  cur_cont = controllers[controller_name]
+function Controller.open_event(controller)
+  if cur_cont then
+    prev_cont = cur_cont
+    Controller.exit_event()
+  end
+  cur_cont = controller
   cur_cont.open()
 end
 
@@ -33,7 +36,7 @@ function Controller.back_gui_event()
   Controller.exit_event()
 
   if prev_cont then
-    Controller.open_event(prev_cont.name)
+    Controller.open_event(prev_cont)
     prev_cont = nil
   end
 end
@@ -43,8 +46,18 @@ function Controller.main_key_event()
     Controller.exit_event()
     prev_cont = nil
   else
-    Controller.open_event(controllers.settings.get_name())
+    Controller.open_event(Controller.get_cont("recipe"))
   end
+end
+
+function Controller.get_cont(name)
+  out(name)
+  if controllers[name] then
+    return controllers[name]
+  else
+    out("controller name: ", name, " not found")
+  end
+  return nil
 end
 
 return Controller

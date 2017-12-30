@@ -1,6 +1,5 @@
 local SettingsController = {
   classname = "FNSettingsController",
-  name = "settings"
 }
 
 local SettingsGui = require "unsort/settings_gui"

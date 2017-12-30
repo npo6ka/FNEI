@@ -1,5 +1,5 @@
 local CustomEvents = {
-  classname = "FNCustomEvents"
+  classname = "FNCustomEvents",
 }
 
 local event_list = {}

@@ -1,5 +1,5 @@
 local Settings = {
-  classname = "FNSettings"
+  classname = "FNSettings",
 }
 
 local settings_list = {
