@@ -9,8 +9,8 @@ function Gui.get_prefix()
   return mod_prefix
 end
 
-function Gui.create_gui_name(cont_name, gui_name)
-  return Gui.get_prefix() .. '_' .. cont_name .. '_' .. gui_name
+function Gui.create_gui_name(contr_name, gui_name)
+  return Gui.get_prefix() .. '_' .. contr_name .. '_' .. gui_name
 end
 
 function Gui.set_def_fields(gui_type, cont_name, gui_name, style)
@@ -25,6 +25,26 @@ function Gui.set_def_fields(gui_type, cont_name, gui_name, style)
     gui_elem.style = style
   end
   return gui_elem
+end
+
+function Gui.get_gui(parent, cont_name, gui_name)
+  local full_bame = Gui.create_gui_name(cont_name, gui_name)
+  return Gui:get_gui_proc(parent, full_bame)
+end
+
+function Gui:get_gui_proc(gui, name)
+  if not self.result then self.result = {} end
+  if not gui then return end
+  for k,v in pairs(gui.children_names) do
+    if gui and gui[v] then
+      if gui[v].name == name then
+        self.result = gui[v]
+        break
+      end
+      self.result = self:get_gui(gui[v], name)
+    end
+  end
+  return self.result
 end
 
 function Gui.addSpriteButton(parent, cont_name, gui_name, style, tooltip, event_handler)

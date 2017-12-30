@@ -52,8 +52,10 @@ function CustomEvents.invoke(gui_name, gui_type, event_name, event)
   else
     out("Error CustomEvents.invoke: event not found")
   end
-  out(gui_name, event_name, gui_type)
-  out(event)
+end
+
+function CustomEvents.remove_gui_events(gui_name)
+  event_list[gui_name] = nil
 end
 
 return CustomEvents

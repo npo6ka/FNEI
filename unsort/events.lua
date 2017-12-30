@@ -5,7 +5,6 @@ local Events = {
 local gui_key_name = "pressed-fnei-gui-key"
 local back_key_name = "pressed-fnei-back-key"
 local CustomEvents = require "unsort/custom_events"
-local Controller = require "unsort/controller"
 
 local supported_gui_event = {
   defines.events.on_gui_checked_state_changed,
@@ -21,6 +20,10 @@ end
 
 function Events.del_custom_event(gui_name, gui_type, event_name)
   CustomEvents.del_custom_event(gui_name, gui_type, event_name)
+end
+
+function Events.remove_gui_events(gui_name)
+  CustomEvents.remove_gui_events(gui_name)
 end
 
 function Events.on_configuration_changed(event)
@@ -60,7 +63,6 @@ end
 
 function Events.on_gui_closed(event)
   Player.load(event)
-  out(event)
   if event and event.element and string.match(event.element.name, "fnei%_") then
     Events.gui_key(event)
   end
