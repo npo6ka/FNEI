@@ -15,5 +15,6 @@ Player = require "unsort.player"
 Gui = require "unsort/gui"
 Controller = require "unsort/controller"
 Events = require "unsort/events"
+Settings = require "unsort/settings"
 
 Events:init()

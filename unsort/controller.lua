@@ -18,13 +18,13 @@ function Controller.exit_event()
   end
 end
 
-function Controller.open_event(controller)
+function Controller.open_event(controller, args)
   if cur_cont then
     prev_cont = cur_cont
     Controller.exit_event()
   end
   cur_cont = controller
-  Player.get().opened = cur_cont.open()
+  Player.get().opened = cur_cont.open(args)
 end
 
 function Controller.back_key_event()

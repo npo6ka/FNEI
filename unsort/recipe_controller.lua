@@ -9,7 +9,7 @@ function RecipeController.exit()
   RecipeGui.close_window()
 end
 
-function RecipeController.open()
+function RecipeController.open(args)
   out("Recipe open")
   return RecipeGui.open_window()
 end

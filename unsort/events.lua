@@ -68,6 +68,11 @@ function Events.on_gui_closed(event)
   end
 end
 
+function Events.on_player_created(event)
+  Player.load(event)
+  Settings.init()
+end
+
 function Events.on_event_invoke(event)
   Player.load(event)
   local gui_name, gui_type, event_name  = Events.parse_name(event)
@@ -103,6 +108,7 @@ function Events:init()
   self.event_load(gui_key_name, self.gui_key)
   self.event_load(back_key_name, self.back_key)
   self.event_load(defines.events.on_gui_closed, self.on_gui_closed)
+  self.event_load(defines.events.on_player_created, self.on_player_created)
 
   for _,event in pairs(supported_gui_event) do
     self.event_load(event, self.on_event_invoke)

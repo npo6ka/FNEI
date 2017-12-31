@@ -4,6 +4,7 @@ local SettingsGui = {
 }
 
 local general_gui_name = "main-flow"
+local content_gui_name = "content-frame"
 
 function SettingsGui.is_gui_open()
   local val = Gui.get_gui(Player.get().gui.center, SettingsGui.name, general_gui_name)
@@ -16,9 +17,10 @@ function SettingsGui.open_window()
   local cur_gui = Player.get().gui.center
   local ret_gui = Gui.addFlow(cur_gui, SettingsGui.name, general_gui_name, "fnei_recipe_flow")
   cur_gui = Gui.addFrame(ret_gui, SettingsGui.name, "main-frame", "fnei_recipe_main_frame")
-  cur_gui = Gui.addTable(cur_gui, SettingsGui.name, "main-table", "fnei_recipe_main_table", 1)  
+  cur_gui = Gui.addTable(cur_gui, SettingsGui.name, "main-table", "fnei_recipe_main_table", 1)
 
   SettingsGui.add_header(cur_gui)
+  SettingsGui.add_settings_frame(cur_gui)
 
   return ret_gui
 end
@@ -36,6 +38,15 @@ function SettingsGui.add_header(parent)
   Gui.addLabel(parent, SettingsGui.name, "header-label", "fnei_option_label", {"fnei.options"})
   Gui.addSpriteButton(parent, SettingsGui.name, "back-key", "fnei_back_button_style", {"fnei.back-key"}, Controller.back_key_event)
   Gui.addSpriteButton(parent, SettingsGui.name, "exit-key", "fnei_exit_button_style", {"fnei.exit-key"}, Controller.main_key_event)
+end
+
+function SettingsGui.add_settings_frame(parent)
+  local content = Gui.addFrame(parent, SettingsGui.name, content_gui_name, "fnei_recipe_header_frame", "horizontal")
+  Gui.addTable(content, SettingsGui.name, "content_table", nil, 2)
+end
+
+function SettingsGui.get_cur_cell()
+  return Gui.get_gui(Player.get().gui.center, SettingsGui.name, content_gui_name)
 end
 
 return SettingsGui
