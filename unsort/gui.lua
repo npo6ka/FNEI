@@ -10,7 +10,12 @@ function Gui.get_prefix()
 end
 
 function Gui.create_gui_name(contr_name, gui_name)
-  return Gui.get_prefix() .. '_' .. contr_name .. '_' .. gui_name
+  if type(contr_name) == "string" and type(gui_name) == "string" then
+    return Gui.get_prefix() .. '_' .. contr_name .. '_' .. gui_name
+  else
+    out("Error in function Gui.create_gui_name: type ~= string: ", contr_name, gui_name)
+    return nil
+  end
 end
 
 function Gui.set_def_fields(gui_type, cont_name, gui_name, style)
@@ -41,7 +46,7 @@ function Gui:get_gui_proc(gui, name)
         self.result = gui[v]
         break
       end
-      self.result = self:get_gui(gui[v], name)
+      self.result = self:get_gui_proc(gui[v], name)
     end
   end
   return self.result
@@ -87,9 +92,12 @@ function Gui.addDropDown(parent, cont_name, gui_name, style, items, selected_ind
   return parent.add(gui_elem)
 end
 
-function Gui.addCheckbox(parent, cont_name, gui_name, style, state)
+function Gui.addCheckbox(parent, cont_name, gui_name, style, state, event_handler)
   local gui_elem = Gui.set_def_fields("checkbox", cont_name, gui_name, style)
-  gui_elem.state = state
+  gui_elem.state = state or false
+
+  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
+
   return parent.add(gui_elem)
 end
 

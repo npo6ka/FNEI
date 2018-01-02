@@ -70,7 +70,12 @@ end
 
 function Events.on_player_created(event)
   Player.load(event)
+  out("on_player_created")
   Settings.init()
+end
+
+function Events.on_player_left_game(event)
+  out("left", event)
 end
 
 function Events.on_event_invoke(event)
@@ -104,11 +109,15 @@ end
 
 function Events:init()
   script.on_configuration_changed(self.on_configuration_changed)
+  script.on_load(self.on_load)
+
   self.event_load(defines.events.on_tick, self.on_tick)
   self.event_load(gui_key_name, self.gui_key)
   self.event_load(back_key_name, self.back_key)
   self.event_load(defines.events.on_gui_closed, self.on_gui_closed)
   self.event_load(defines.events.on_player_created, self.on_player_created)
+  self.event_load(defines.events.on_player_left_game, self.on_player_left_game)
+
 
   for _,event in pairs(supported_gui_event) do
     self.event_load(event, self.on_event_invoke)

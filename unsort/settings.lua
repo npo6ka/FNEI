@@ -2,22 +2,27 @@ local Settings = {
   classname = "FNSettings",
 }
 
+
 local settings_list = {}
-settings_list["option-1"] = { type = "checkbox", def_val = true}
+settings_list["need-show"] = { type = "checkbox", def_val = true}
 settings_list["option-2"] = { type = "checkbox", def_val = false}
 settings_list["option-3"] = { type = "checkbox", def_val = true}
-
 
 local element_list = {
   checkbox = require "unsort/settings_elements/checkbox_element"
 }
+
+for name, sett in pairs(settings_list) do
+  sett.elem = element_list[sett.type]
+  sett.name = name
+end
 
 function Settings.get_sett_list()
   return settings_list
 end
 
 function Settings.get_val(sett_name)
-  settings_list[sett_name].elem.get_val(sett_name)
+  return settings_list[sett_name].elem.get_val(sett_name)
 end
 
 function Settings.set_val(sett_name, val)
@@ -34,7 +39,6 @@ end
 
 function Settings.init()
   for name, sett in pairs(Settings.get_sett_list()) do
-    sett.elem = element_list[sett.type]
     sett.elem.init(name, sett.def_val)
   end
 end

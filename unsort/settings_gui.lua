@@ -4,7 +4,7 @@ local SettingsGui = {
 }
 
 local general_gui_name = "main-flow"
-local content_gui_name = "content-frame"
+local content_gui_name = "content_table"
 
 function SettingsGui.is_gui_open()
   local val = Gui.get_gui(Player.get().gui.center, SettingsGui.name, general_gui_name)
@@ -41,12 +41,21 @@ function SettingsGui.add_header(parent)
 end
 
 function SettingsGui.add_settings_frame(parent)
-  local content = Gui.addFrame(parent, SettingsGui.name, content_gui_name, "fnei_recipe_header_frame", "horizontal")
-  Gui.addTable(content, SettingsGui.name, "content_table", nil, 2)
+  local content = Gui.addFrame(parent, SettingsGui.name, "content-frame", "fnei_recipe_header_frame", "horizontal")
+  Gui.addTable(content, SettingsGui.name, content_gui_name, nil, 2)
 end
 
-function SettingsGui.get_cur_cell()
-  return Gui.get_gui(Player.get().gui.center, SettingsGui.name, content_gui_name)
+function SettingsGui.add_option_in_gui(sett)
+  local gui = Gui.get_gui(Player.get().gui.center, SettingsGui.name, content_gui_name)
+
+  if not gui then
+    out("Error in function SettingsGui.add_option_in_gui: gui == nil")
+    return
+  end
+
+  sett.elem.add_label_func(gui, SettingsGui.name, sett)
+  sett.elem.add_content_func(gui, SettingsGui.name, sett)
+
 end
 
 return SettingsGui

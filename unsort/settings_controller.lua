@@ -12,6 +12,12 @@ end
 function SettingsController.open()
   out("settings open")
   local ret_gui = SettingsGui.open_window()
+  local list = Settings.get_sett_list()
+
+  for name, sett in pairs(list) do
+    SettingsGui.add_option_in_gui(sett)
+  end
+
   return ret_gui
 end
 
