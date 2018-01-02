@@ -19,12 +19,12 @@ function DropDownSett.add_label_func(parent, cont_name, sett)
 end
 
 function DropDownSett.add_content_func(parent, cont_name, sett)
-  Gui.addDropDown(parent, cont_name, sett.name, nil, sett.items, sett.def_val, DropDownSett.event)
+  local event = sett.event or DropDownSett.event
+  Gui.addDropDown(parent, cont_name, sett.name, nil, sett.items, Settings.get_val(sett.name), event)
 end
 
 function DropDownSett.event(event, sett_name)
   DropDownSett.set_val(sett_name, event.element.selected_index)
-  out(Settings.get_val(sett_name))
 end
 
 return DropDownSett

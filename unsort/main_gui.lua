@@ -6,14 +6,14 @@ local MainGui = {
 local general_gui_name = "main-flow"
 
 function MainGui.is_gui_open()
-  local val = Gui.get_gui(Player.get().gui.center, MainGui.name, general_gui_name)
+  local val = Gui.get_gui(Gui.get_pos(), MainGui.name, general_gui_name)
   return next(val) ~= nil
 end
 
 function MainGui.open_window()
   MainGui.close_window()
 
-  local cur_gui = Player.get().gui.center
+  local cur_gui = Gui.get_pos()
   local ret_gui = Gui.addFlow(cur_gui, MainGui.name, general_gui_name, "fnei_recipe_flow")
   cur_gui = Gui.addFrame(ret_gui, MainGui.name, "main-frame", "fnei_recipe_main_frame")
   cur_gui = Gui.addTable(cur_gui, MainGui.name, "main-table", "fnei_recipe_main_table", 1)  
@@ -25,7 +25,7 @@ end
 
 function MainGui.close_window()
   if MainGui.is_gui_open() then
-    Gui.get_gui(Player.get().gui.center, MainGui.name, general_gui_name).destroy()
+    Gui.get_gui(Gui.get_pos(), MainGui.name, general_gui_name).destroy()
     Events.remove_gui_events(MainGui.name)
   end
 end

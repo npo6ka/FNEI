@@ -32,6 +32,20 @@ function Gui.set_def_fields(gui_type, cont_name, gui_name, style)
   return gui_elem
 end
 
+function Gui.get_pos()
+  local pos = Settings.get_val("position")
+
+  if pos == 1 then
+    return Player.get().gui.left
+  elseif pos == 2 then
+    return Player.get().gui.top
+  elseif pos == 3 then
+    return Player.get().gui.center
+  else
+    Debug:error("utils: get_gui: invalid direction: ", pos)
+  end
+end
+
 function Gui.get_gui(parent, cont_name, gui_name)
   local full_bame = Gui.create_gui_name(cont_name, gui_name)
   return Gui:get_gui_proc(parent, full_bame)

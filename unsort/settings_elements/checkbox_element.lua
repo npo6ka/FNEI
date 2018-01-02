@@ -19,7 +19,7 @@ function CheckBoxSett.add_label_func(parent, cont_name, sett)
 end
 
 function CheckBoxSett.add_content_func(parent, cont_name, sett)
-  Gui.addCheckbox(parent, cont_name, sett.name, nil, sett.def_val, CheckBoxSett.event)
+  Gui.addCheckbox(parent, cont_name, sett.name, nil, Settings.get_val(sett.name), CheckBoxSett.event)
 end
 
 function CheckBoxSett.event(event, sett_name)

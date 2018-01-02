@@ -1,8 +1,8 @@
-Force = require "utils/fnei_force"
-RawTech = require "utils/fnei_raw_technologies"
-Recipe = require "utils/fnei_recipe_list"
-Item = require "utils/fnei_items"
-CraftCategoty = require "utils/fnei_crafting_category_list"
+Force = require "utils/force"
+RawTech = require "utils/raw_technologies"
+Recipe = require "utils/recipe_list"
+Item = require "utils/items"
+CraftCategoty = require "utils/crafting_category_list"
 
 function get_recipe_list(player)
   return Recipe:get_recipe_list_p(player)

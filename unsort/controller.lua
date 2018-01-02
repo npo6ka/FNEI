@@ -52,13 +52,11 @@ function Controller.main_key_event()
 end
 
 function Controller.get_cont(name)
-  out(name)
   if controllers[name] then
     return controllers[name]
   else
     out("controller name: ", name, " not found")
   end
-  return nil
 end
 
 return Controller

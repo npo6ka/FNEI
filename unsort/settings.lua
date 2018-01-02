@@ -7,7 +7,7 @@ local settings_list = {}
 settings_list["need-show"] =                  { type = "checkbox", def_val = true}
 settings_list["option-2"] =                   { type = "checkbox", def_val = false}
 settings_list["option-3"] =                   { type = "checkbox", def_val = true}
-settings_list["position"] =                   { type = "drop-down", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}}
+settings_list["position"] =                   { type = "drop-down", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, event = Controller.get_cont("settings").new_gui_location}
 --settings_list["option-crafting-buildings"] =  { type = "crafting_buildings", def_val = true}
 
 
@@ -26,7 +26,11 @@ function Settings.get_sett_list()
 end
 
 function Settings.get_val(sett_name)
-  return settings_list[sett_name].elem.get_val(sett_name)
+  if sett_name then
+    return settings_list[sett_name].elem.get_val(sett_name)
+  else
+    Debug:error("Error in fanction Settings.get_val: sett_name == nil")
+  end
 end
 
 function Settings.set_val(sett_name, val)

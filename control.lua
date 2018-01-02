@@ -10,7 +10,7 @@ function out(...)
 end
 
 -------------- include DefaultLibs ---------------
-
+require "utils.data_wrapper"
 Player = require "unsort.player"
 Gui = require "unsort/gui"
 Controller = require "unsort/controller"

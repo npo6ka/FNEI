@@ -7,14 +7,14 @@ local general_gui_name = "main-flow"
 local content_gui_name = "content_table"
 
 function SettingsGui.is_gui_open()
-  local val = Gui.get_gui(Player.get().gui.center, SettingsGui.name, general_gui_name)
+  local val = Gui.get_gui(Gui.get_pos(), SettingsGui.name, general_gui_name)
   return next(val) ~= nil
 end
 
 function SettingsGui.open_window()
   SettingsGui.close_window()
 
-  local cur_gui = Player.get().gui.center
+  local cur_gui = Gui.get_pos()
   local ret_gui = Gui.addFlow(cur_gui, SettingsGui.name, general_gui_name, "fnei_recipe_flow")
   cur_gui = Gui.addFrame(ret_gui, SettingsGui.name, "main-frame", "fnei_recipe_main_frame")
   cur_gui = Gui.addTable(cur_gui, SettingsGui.name, "main-table", "fnei_recipe_main_table", 1)
@@ -27,7 +27,7 @@ end
 
 function SettingsGui.close_window()
   if SettingsGui.is_gui_open() then
-    Gui.get_gui(Player.get().gui.center, SettingsGui.name, general_gui_name).destroy()
+    Gui.get_gui(Gui.get_pos(), SettingsGui.name, general_gui_name).destroy()
     Events.remove_gui_events(SettingsGui.name)
   end
 end
@@ -46,7 +46,7 @@ function SettingsGui.add_settings_frame(parent)
 end
 
 function SettingsGui.add_option_in_gui(sett)
-  local gui = Gui.get_gui(Player.get().gui.center, SettingsGui.name, content_gui_name)
+  local gui = Gui.get_gui(Gui.get_pos(), SettingsGui.name, content_gui_name)
 
   if not gui then
     out("Error in function SettingsGui.add_option_in_gui: gui == nil")
