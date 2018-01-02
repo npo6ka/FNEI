@@ -85,10 +85,13 @@ function Gui.addTable(parent, cont_name, gui_name, style, column_count)
   return parent.add(gui_elem)
 end
 
-function Gui.addDropDown(parent, cont_name, gui_name, style, items, selected_index)
+function Gui.addDropDown(parent, cont_name, gui_name, style, items, selected_index, event_handler)
   local gui_elem = Gui.set_def_fields("drop-down", cont_name, gui_name, style)
   gui_elem.items = items
   gui_elem.selected_index = selected_index
+
+  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
+
   return parent.add(gui_elem)
 end
 
