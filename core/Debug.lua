@@ -76,7 +76,7 @@ function Debug:get_message(tag, level, logClass, ...)
 end
 
 function Debug:print_to_chat(message)
-  if game and game.players["npo6ka"] then
+  if game ~= nil and game.players["npo6ka"] then
     game.players["npo6ka"].print(message)
   end
 end
@@ -86,7 +86,7 @@ function Debug:print_to_log(message)
 end
 
 function Debug:print_to_file(message)
-  if game then
+  if game ~= nil then
     game.write_file(self.filename, message .. "\n", self.append)
   end
 end

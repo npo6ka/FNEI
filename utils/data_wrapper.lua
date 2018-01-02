@@ -20,15 +20,19 @@ function get_item_list(player)
   return Item:get_item_list()
 end
 
-function get_gui_pos(player)
-  local index = fnei.oc.get_gui_position( player )
-  if index == 1 then
-    return player.gui.left
-  elseif index == 2 then
-    return player.gui.top
-  elseif index == 3 then
-    return player.gui.center
-  else
-    player.print("utils: get_gui: invalid direction: " .. index)
+--[[function get_crafting_buildings()
+  local ret_tb = {}
+  local craft_cat = CraftCategoty:get_crafting_category_list(Item:get_item_list())
+
+  for cat, items in pairs(craft_cat) do
+    for _, item in pairs(items) do
+      ret_tb[item.name] = item
+    end
   end
+
+  return ret_tb
+end]]
+
+function get_crafting_category()
+  return CraftCategoty:get_crafting_category_list(Item:get_item_list())
 end

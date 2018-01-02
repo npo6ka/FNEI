@@ -135,4 +135,15 @@ function Gui.addTextfield(parent, cont_name, gui_name, style, text, event_handle
   return parent.add(gui_elem)
 end
 
+function Gui.addScrollPane(parent, cont_name, gui_name, style)
+  local gui_elem = Gui.set_def_fields("scroll-pane", cont_name, gui_name, style)
+
+  return parent.add(gui_elem)
+end
+
+
+
+
+
+
 return Gui
