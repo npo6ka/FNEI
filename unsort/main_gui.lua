@@ -6,7 +6,7 @@ local MainGui = {
 local general_gui_name = "main-flow"
 
 function MainGui.is_gui_open()
-  local val = Gui.get_gui(Gui.get_pos(), MainGui.name, general_gui_name)
+  local val = Gui.get_gui(Gui.get_pos(), general_gui_name)
   return next(val) ~= nil
 end
 
@@ -25,7 +25,7 @@ end
 
 function MainGui.close_window()
   if MainGui.is_gui_open() then
-    Gui.get_gui(Gui.get_pos(), MainGui.name, general_gui_name).destroy()
+    Gui.get_gui(Gui.get_pos(), general_gui_name).destroy()
     Events.remove_gui_events(MainGui.name)
   end
 end
@@ -37,8 +37,8 @@ function MainGui.add_header(parent)
   Gui.addLabel(parent, MainGui.name, "header-label", nil, "Search:")
   Gui.addTextfield(parent, MainGui.name, "search-field", nil, nil, MainGui.search_event)
 
-  Gui.addSpriteButton(parent, MainGui.name, "settings-key", "fnei_settings_button_style", {"fnei.settings-key"}, MainGui.settings_key_event)
-  Gui.addSpriteButton(parent, MainGui.name, "exit-key", "fnei_exit_button_style", {"fnei.exit-key"}, Controller.main_key_event)
+  Gui.addSpriteButton(parent, { name = "settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"} }, MainGui.settings_key_event)
+  Gui.addSpriteButton(parent, { name = "exit-key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"} }, Controller.main_key_event)
 end
 
 function MainGui.settings_key_event(event)

@@ -6,7 +6,7 @@ local RecipeGui  = {
 local general_gui_name = "main-flow"
 
 function RecipeGui.is_gui_open()
-  local val = Gui.get_gui(Gui.get_pos(), RecipeGui.name, general_gui_name)
+  local val = Gui.get_gui(Gui.get_pos(), general_gui_name)
   return next(val) ~= nil
 end
 
@@ -25,7 +25,7 @@ end
 
 function RecipeGui.close_window()
   if RecipeGui.is_gui_open() then
-    Gui.get_gui(Gui.get_pos(), RecipeGui.name, general_gui_name).destroy()
+    Gui.get_gui(Gui.get_pos(), general_gui_name).destroy()
     Events.remove_gui_events(RecipeGui.name)
   end
 end
@@ -35,9 +35,9 @@ function RecipeGui.add_header(parent)
   parent = Gui.addTable(parent, RecipeGui.name, "header-table", "fnei_recipe_header_table", 5)
   Gui.addFrame(parent, RecipeGui.name, "header-frame")
   Gui.addLabel(parent, RecipeGui.name, "header-label", "fnei_recipe_title_label", "recipe_name")
-  Gui.addSpriteButton(parent, RecipeGui.name, "back-key", "fnei_back_button_style", {"fnei.back-key"}, Controller.back_key_event)
-  Gui.addSpriteButton(parent, RecipeGui.name, "settings-key", "fnei_settings_button_style", {"fnei.settings-key"}, RecipeGui.settings_key_event)
-  Gui.addSpriteButton(parent, RecipeGui.name, "exit-key", "fnei_exit_button_style", {"fnei.exit-key"}, Controller.main_key_event)
+  Gui.addSpriteButton(parent, { name = "back-key", style = "fnei_back_button_style", tooltip = {"fnei.back-key"} },Controller.back_key_event)
+  Gui.addSpriteButton(parent, { name = "settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"} }, RecipeGui.settings_key_event)
+  Gui.addSpriteButton(parent, { name = "exit-key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"} }, Controller.main_key_event)
 end
 
 function RecipeGui.settings_key_event(event)

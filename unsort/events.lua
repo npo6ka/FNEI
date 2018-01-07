@@ -43,18 +43,6 @@ end
 function Events.gui_key(event)
   Player.load(event)
   Controller.main_key_event()
-
-  -- if game.players[event.player_index].gui.center["fnei_element_list"] then
-
-  --   return
-  -- end
-
-  -- local gui = game.players[event.player_index].gui.center.add({type = "flow", name = "fnei_element_list", direction = "horizontal"})
-  -- Gui.addSpriteButton(gui, "main", "settings-key", {"fnei.settings-key"}, "fnei_settings_button_style", Events.but_click)
-  -- gui.add({type = "choose-elem-button", name = "fnei_main_sdf", elem_type = "fluid"})
-  -- gui.add({type = "choose-elem-button", name = "fnei_main_sd1f", elem_type = "item"})
-  -- gui.add({type = "choose-elem-button", name = "fnei_main_sdf2", elem_type = "recipe"})
-  -- game.players[event.player_index].opened = gui
 end
 
 function Events.on_tick(event)

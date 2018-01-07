@@ -59,4 +59,12 @@ function Controller.get_cont(name)
   end
 end
 
+function Controller.get_cur_con()
+  return cur_cont
+end
+
+function Controller.get_cur_con_name()
+  return cur_cont.get_name()
+end
+
 return Controller

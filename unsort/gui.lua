@@ -46,7 +46,8 @@ function Gui.get_pos()
   end
 end
 
-function Gui.get_gui(parent, cont_name, gui_name)
+function Gui.get_gui(parent, gui_name)
+  local cont_name = Controller.get_cur_con_name()
   local full_bame = Gui.create_gui_name(cont_name, gui_name)
   return Gui:get_gui_proc(parent, full_bame)
 end
@@ -66,16 +67,18 @@ function Gui:get_gui_proc(gui, name)
   return self.result
 end
 
-function Gui.addSpriteButton(parent, cont_name, gui_name, style, tooltip, event_handler)
-  local gui_elem = Gui.set_def_fields("sprite-button", cont_name, gui_name, style)
+function Gui.addSpriteButton(parent, gui_elem, event_handler)
+  local cont_name = Controller.get_cur_con_name()
+  gui_elem.type = "sprite-button"
 
-  if tooltip then
-    gui_elem.tooltip = tooltip
-  else
-    gui_elem.tooltip = {"",""}
+  if event_handler then
+    Events.add_custom_event(cont_name, gui_elem.type, gui_elem.name, event_handler)
   end
 
-  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
+  gui_elem.name = Gui.create_gui_name(cont_name, gui_elem.name)
+  if gui_elem.style == "" then
+    gui_elem.style = gui_elem.name
+  end
 
   return parent.add(gui_elem)
 end
@@ -141,9 +144,8 @@ function Gui.addScrollPane(parent, cont_name, gui_name, style)
   return parent.add(gui_elem)
 end
 
-
-
-
-
+function Gui.get_local_name(element)
+  return (element and element.localised_name) or "unknow"
+end
 
 return Gui
