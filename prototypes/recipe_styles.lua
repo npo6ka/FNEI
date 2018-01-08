@@ -3,7 +3,7 @@
 data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "center",
     font = "font-mb",
     scalable = false,
@@ -16,7 +16,7 @@ data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
 data.raw["gui-style"].default["fnei_recipe_title_label"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "center",
     font = "font-mb",
     scalable = false,
@@ -30,7 +30,7 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
 data.raw["gui-style"].default["fnei_recipe_madein"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "center",
     scalable = false,
     height = 36,
@@ -42,7 +42,7 @@ data.raw["gui-style"].default["fnei_recipe_madein"] =
 data.raw["gui-style"].default["fnei_recipe_technologies"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "center",
     scalable = false,
     height = 68,
@@ -54,7 +54,7 @@ data.raw["gui-style"].default["fnei_recipe_technologies"] =
 data.raw["gui-style"].default["fnei_recipe_element"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "center",
     scalable = false,
     height = 36,
@@ -64,7 +64,7 @@ data.raw["gui-style"].default["fnei_recipe_element"] =
 data.raw["gui-style"].default["fnei_recipe_type_lable"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "right",
     scalable = false,
     height = 36,
@@ -76,7 +76,7 @@ data.raw["gui-style"].default["fnei_recipe_type_lable"] =
 data.raw["gui-style"].default["fnei_recipe_paging_label"] =
 {
     type = "label_style",
-    parent = "label_style",
+    parent = "label",
     align = "left",
     scalable = false,
     height = 36,
@@ -89,7 +89,7 @@ data.raw["gui-style"].default["fnei_recipe_paging_label"] =
 
 data.raw["gui-style"].default["fnei_recipe_flow"] =
 {
-  type = "flow_style",
+  type = "horizontal_flow_style",
   minimal_width = 526,
   maximal_width = 526,
   minimal_height = 710,
@@ -99,21 +99,21 @@ data.raw["gui-style"].default["fnei_recipe_flow"] =
 
 data.raw["gui-style"].default["fnei_arrow_flow"] =
 {
-  type = "flow_style",
-    top_padding = 5,
-    right_padding = 0,
-    bottom_padding = 0,
-    left_padding = 0,
-    horizontal_spacing = 0,
-    vertical_spacing = 0,
-    resize_row_to_width = true,
-    resize_to_row_height = true,
-    max_on_row = 0,
+  type = "horizontal_flow_style",
+  top_padding = 5,
+  right_padding = 0,
+  bottom_padding = 0,
+  left_padding = 0,
+  horizontal_spacing = 0,
+  vertical_spacing = 0,
+  resize_row_to_width = true,
+  resize_to_row_height = true,
+  max_on_row = 0,
 }
 
 data.raw["gui-style"].default["fnei_list_elements_flow"] =
 {
-  type = "flow_style",
+  type = "horizontal_flow_style",
   minimal_height = 38,
   maximal_height = 38,
 }
@@ -214,7 +214,7 @@ data.raw["gui-style"].default["fnei_prod_table"] =
 data.raw["gui-style"].default["fnei_recipe_list_elements"] =
 {
   type = "table_style",
-  parent = "table_style",
+  parent = "table",
   vertical_spacing = 2,
   scalable = false,
 }
@@ -235,7 +235,7 @@ data.raw["gui-style"].default["fnei_scroll_recipe_style"] =
 data.raw["gui-style"].default["fnei_left_arrow_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 28,
   width = 28,
   scalable = false,
@@ -271,7 +271,7 @@ data.raw["gui-style"].default["fnei_left_arrow_button_style"] =
 data.raw["gui-style"].default["fnei_right_arrow_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 28,
   width = 28,
   scalable = false,
@@ -307,7 +307,7 @@ data.raw["gui-style"].default["fnei_right_arrow_button_style"] =
 data.raw["gui-style"].default["fnei_red_tech_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 68,
   width = 68,
 
@@ -361,7 +361,7 @@ data.raw["gui-style"].default["fnei_red_tech_button_style"] =
 data.raw["gui-style"].default["fnei_yellow_tech_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 68,
   width = 68,
 
@@ -415,7 +415,7 @@ data.raw["gui-style"].default["fnei_yellow_tech_button_style"] =
 data.raw["gui-style"].default["fnei_green_tech_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 68,
   width = 68,
 

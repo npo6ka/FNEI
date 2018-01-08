@@ -72,7 +72,6 @@ function get_crafting_category_table()
   for _,item in pairs(game.item_prototypes) do
     local entity = item.place_result
     if entity ~= nil and entity.crafting_categories then
-      --out(entity.name.." "..entity.ingredient_count)
       for category,v in pairs(entity.crafting_categories) do
         table.insert(category_tb, {cat_name = category, item_name = item.name})
       end
@@ -103,48 +102,25 @@ function get_item_list_from_cat_tb( category )
   return items
 end
 --utils
-function get_filtred_items( player, recipe )
+function get_filtred_items( player, category )
   local ret_list = {}
-  local items = get_craft_cat_whis_amount(player, recipe.category, #recipe.ingredients)
+  local items = get_item_list_from_cat_tb(category)
   for _,item in pairs(items) do
     if fnei.oc.get_craft_state_for_building( player, item.name) then
-      table.insert(ret_list, {type = "item", name = item})
+      table.insert(ret_list, item)
     end
   end
+
   return ret_list
 end
 --utils
 function get_madein_list( player, recipe )
   if recipe then
-    --[[if player.character then
-      local cr_cat = player.character.prototype.crafting_categories
-      if cr_cat then
-        for category,v in pairs(cr_cat) do
-          out(category)
-        end
-      end
-    end]]
-    return get_filtred_items(player, recipe)
+    return get_filtred_items(player, recipe.category)
   else 
     return {}
   end
 end
-
---utils
-function can_player_craft_this_recipe( player, recipe )
-  if player and player.character then
-    local cr_cat = player.character.prototype.crafting_categories
-    if cr_cat then
-      for category,v in pairs(cr_cat) do
-        if category == recipe.category then
-          return true
-        end
-      end
-    end
-  end
-  return false
-end
-
 --utils
 function check_non_destination( player, recipe )
   if not fnei.oc.show_non_destination(player) and not recipe.enabled and get_technologies(player, recipe.name) == nil then
@@ -160,7 +136,7 @@ function get_filtered_recipe_list( player, recipes )
     local cat = rec.category
     if cat then
       if filer_buf[cat] == nil then
-        filer_buf[cat] = get_filtred_items(player, rec)
+        filer_buf[cat] = get_filtred_items(player, cat)
       end
       if #filer_buf[cat] > 0 and check_non_destination(player, rec) then
         table.insert(ret_list, rec)
@@ -305,6 +281,7 @@ function open_tech(player, name, list)
             local recipe = player.force.recipes[effect.recipe]
             if recipe and recipe.enabled == true then
               table.insert(list.recipe, recipe.name)
+              out(recipe.name)
             end
           end
         end
@@ -328,6 +305,7 @@ function reload_tech(player, list)
   for i=1,#recipe_list do
     local recipe = player.force.recipes[recipe_list[i]]
     if recipe then
+      out("load: "..recipe.name)
       recipe.enabled = true
     end
   end

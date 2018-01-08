@@ -31,7 +31,7 @@ data.raw["gui-style"].default["fnei_option_param_3_scroll"] =
 data.raw["gui-style"].default["fnei_red_building_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 36,
   width = 36,
 
@@ -85,7 +85,7 @@ data.raw["gui-style"].default["fnei_red_building_button_style"] =
 data.raw["gui-style"].default["fnei_green_building_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 36,
   width = 36,
 

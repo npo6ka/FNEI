@@ -68,16 +68,16 @@ function fnei.recipe_gui.open_recipe_gui(player)
 
   local main_flow = get_gui_pos(player).add({type = "flow", name = "fnei_recipe_main_flow", style = "fnei_recipe_flow"})
     local main_frame = main_flow.add({type = "frame", name = "fnei_recipe_main_frame", style = "fnei_recipe_main_frame"})
-      local main_table = main_frame.add({type = "table", name = "fnei_recipe_main_table", colspan = 1, style = "fnei_recipe_main_table"})
+      local main_table = main_frame.add({type = "table", name = "fnei_recipe_main_table", column_count = 1, style = "fnei_recipe_main_table"})
         local header = main_table.add({type = "frame", name = "fnei_recipe_header_frame", direction = "horizontal", style = "fnei_recipe_header_frame"})
-          local header_tab = header.add({type = "table", name = "fnei_recipe_header_table", colspan = 5, style = "fnei_recipe_header_table"})
+          local header_tab = header.add({type = "table", name = "fnei_recipe_header_table", column_count = 5, style = "fnei_recipe_header_table"})
             header_tab.add({type = "flow", name = "fnei_recipe_header_icon"})
             header_tab.add({type = "label", name = "fnei_recipe_header_label", caption = "recipe_name"})
             header_tab.add({type = "sprite-button", name = "fnei_recipe_back_key", style = "fnei_back_button_style", tooltip = {"fnei.back-key"}})
             header_tab.add({type = "sprite-button", name = "fnei_recipe_settings_key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"}})
             header_tab.add({type = "sprite-button", name = "fnei_recipe_exit_key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"}})
         local paging = main_table.add({type = "frame", name = "fnei_recipe_paging_frame", style = "fnei_recipe_paging_frame"})
-          local paging_tab = paging.add({type = "table", name = "fnei_recipe_paging_table", colspan = 5, style = "fnei_recipe_paging_table"})
+          local paging_tab = paging.add({type = "table", name = "fnei_recipe_paging_table", column_count = 5, style = "fnei_recipe_paging_table"})
             local arrow = paging_tab.add({type = "flow", name = "fnei_recipe_left_arrow_flow", style = "fnei_arrow_flow"})
               arrow.add({type = "sprite-button", name = "fnei_recipe_left_key", style = "fnei_left_arrow_button_style", tooltip = {"fnei.previous-key"}, sprite = ""})
             paging_tab.add({type = "label", name = "fnei_recipe_type_lable", caption = "something", style = "fnei_recipe_type_lable"})
@@ -85,20 +85,20 @@ function fnei.recipe_gui.open_recipe_gui(player)
             paging_tab.add({type = "label", name = "fnei_recipe_paging_label", caption = "page unknown", style = "fnei_recipe_paging_label"})
             arrow = paging_tab.add({type = "flow", name = "fnei_recipe_right_arrow_flow", style = "fnei_arrow_flow"})
               arrow.add({type = "sprite-button", name = "fnei_recipe_right_key", style = "fnei_right_arrow_button_style", tooltip = {"fnei.next-key"}, sprite = ""})
-        local prod_table = main_table.add({type = "table", name = "fnei_prod_table", colspan = 2, style = "fnei_prod_table"})
+        local prod_table = main_table.add({type = "table", name = "fnei_prod_table", column_count = 2, style = "fnei_prod_table"})
           local label_ingridients = prod_table.add({type = "frame", name = "fnei_recipe_ingr_frame", style = "fnei_recipe_ingr_frame"})
             label_ingridients.add({type = "label", caption = {"fnei.ingredients"}})
           local label_results = prod_table.add({type = "frame", name = "fnei_recipe_res_frame", style = "fnei_recipe_res_frame"})
             label_results.add({type = "label", caption = {"fnei.results"}})
           local list_ingr_frame = prod_table.add({type = "frame", name = "fnei_recipe_list_ingr_frame", style = "fnei_recipe_list_ingr_frame"})
             local list_ingr_scroll = list_ingr_frame.add({type = "scroll-pane", name = "fnei_list_ingr_scroll", direction = "vertical", style = "fnei_scroll_recipe_style"})
-              list_ingr_scroll.add({type = "table", name = "fnei_list_ingr", colspan = 1, style = "fnei_recipe_list_elements"})
+              list_ingr_scroll.add({type = "table", name = "fnei_list_ingr", column_count = 1, style = "fnei_recipe_list_elements"})
           local list_res_frame = prod_table.add({type = "frame", name = "fnei_recipe_list_res_frame", style = "fnei_recipe_list_res_frame"})
             local list_res_scroll = list_res_frame.add({type = "scroll-pane", name = "fnei_list_res_scroll", direction = "vertical", style = "fnei_scroll_recipe_style"})
-              list_res_scroll.add({type = "table", name = "fnei_list_res", colspan = 1, style = "fnei_recipe_list_elements"})
+              list_res_scroll.add({type = "table", name = "fnei_list_res", column_count = 1, style = "fnei_recipe_list_elements"})
         local madein_gui = main_table.add({type = "frame", name = "fnei_madein_frame", direction = "horizontal"})
           madein_gui.add({type = "label", caption = {"fnei.made-in"}, style = "fnei_recipe_madein"})
-          madein_gui.add({type = "table", name = "fnei_madein_table", colspan = 5})
+          madein_gui.add({type = "table", name = "fnei_madein_table", column_count = 5})
 end
 
 function fnei.recipe_gui.close_recipe_gui(player)
@@ -137,7 +137,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
     type_lable.caption = "unknown "
   end
 
-  item_icon.add(get_image(cur_elem.name, cur_elem.type .. "Name", "slot_button_style"))
+  item_icon.add(get_image(cur_elem.name, cur_elem.type .. "Name", "slot_button"))
   paging_label.caption = cur_page .. "/" .. cnt_page
 
   local gui_ingr_list = fnei:get_gui(get_gui_pos(player), "fnei_list_ingr")
@@ -150,7 +150,7 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
   time_slot.add({
     type = "sprite-button",
     name = "fnei_time",
-    style = "slot_button_style",
+    style = "slot_button",
     tooltip = {"", "time"},
     sprite = "fnei_time_icon"
   })
@@ -158,12 +158,12 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
 
   for _,ingr in pairs(ingr_list) do
     local ing_str = gui_ingr_list.add({type = "flow", direction = "horizontal", style = "fnei_list_elements_flow"})
-    ing_str.add(get_image(ingr.name, ingr.type .. "Name", "slot_button_style"))
+    ing_str.add(get_image(ingr.name, ingr.type .. "Name", "slot_button"))
     ing_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(ingr, player)))
   end
   if #ingr_list < 8 then
     local gui_ingr_scroll = fnei:get_gui(get_gui_pos(player), "fnei_list_ingr_scroll")
-    gui_ingr_scroll.vertical_scroll_policy = "never"
+    --gui_ingr_scroll.vertically_squashable = false
   end
   for i=1, -list_diff do
     gui_ingr_list.add({type = "flow", style = "fnei_list_elements_flow"})
@@ -172,12 +172,12 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
 --result list
   for _,res in pairs(prod_list) do
     local res_str = gui_res_list.add({type = "flow", direction = "horizontal", style = "fnei_list_elements_flow"})
-    res_str.add(get_image(res.name, res.type  .. "Name", "slot_button_style"))
+    res_str.add(get_image(res.name, res.type  .. "Name", "slot_button"))
     res_str.add(fnei.recipe_gui.get_element_lable(fnei.recipe_gui.get_recipe_caption(res, player)))
   end
   if #prod_list < 9 then
     local gui_res_scroll = fnei:get_gui(get_gui_pos(player), "fnei_list_res_scroll")
-    gui_res_scroll.vertical_scroll_policy = "never"
+    --gui_res_scroll.vertically_squashable = false
   end
   for i=1, list_diff do
     gui_res_list.add({type = "flow", style = "fnei_list_elements_flow"})
@@ -185,19 +185,8 @@ function fnei.recipe_gui.set_recipe_gui(player, recipe_name, time, ingr_list, pr
 
 --made in
   local gui_madein = fnei:get_gui(get_gui_pos(player), "fnei_madein_table")
-
-  if can_player_craft_this_recipe(player, get_recipe_list(player)[recipe_name]) then
-    gui_madein.add({
-      type = "sprite-button",
-      name = "fnei_hand",
-      style = "slot_button_style",
-      tooltip = {"", "handcraft"},
-      sprite = "fnei_hand_icon"
-    })
-  end
-
   for _,item in pairs(madein_list) do
-    gui_madein.add(get_image(item.name, item.type, "slot_button_style"))
+    gui_madein.add(get_image(item.name, item.type, "slot_button"))
   end
 --tech
   if tech ~= nil then

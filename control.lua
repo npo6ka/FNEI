@@ -10,8 +10,6 @@ if not global.fnei then global.fnei = {} end
 if not global.fnei.settings then global.fnei.settings = {} end
 if not global.fnei.rc then global.fnei.rc = {} end
 if not global.fnei.mc then global.fnei.mc = {} end
-if not fnei.force then fnei.force = {} end
---if not global.fnei.force then global.fnei.force = {} end
 
 function out(string)
   if game.players["npo6ka"] then
@@ -21,8 +19,6 @@ end
 
 require "libs/utils"
 require "libs/utils_style"
-require "utils/fnei_recipe_list"
-require "utils/fnei_crafting_category_list"
 require "controls/main_control"
 require "controls/recipe_control"
 require "controls/option_control"
@@ -32,7 +28,6 @@ script.on_configuration_changed(function()
   if not global.fnei.settings then global.fnei.settings = {} end
   if not global.fnei.rc then global.fnei.rc = {} end
   if not global.fnei.mc then global.fnei.mc = {} end
-  --if not global.fnei.force then global.fnei.force = {} end
 end)
 
 script.on_event(defines.events.on_tick, function(event)

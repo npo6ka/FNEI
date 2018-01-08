@@ -37,7 +37,7 @@ function fnei.main_gui.set_main_gui(player, tb_width, elements, cnt_page, cur_pa
   if elem_list.fnei_table then
     elem_list.fnei_table.destroy()
   end
-  tb = elem_list.add({type = "table", name = "fnei_table", colspan = tb_width})
+  tb = elem_list.add({type = "table", name = "fnei_table", column_count = tb_width})
 
   for _,element in pairs(elements) do
     tb.add(get_image(element.name, element.type, element.style))

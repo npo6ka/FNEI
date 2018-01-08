@@ -9,15 +9,6 @@ data:extend({
     height = 32,
     scale = 1,
   },
-    {
-    type = "sprite",
-    name = "fnei_hand_icon",
-    filename = "__core__/graphics/hand.png",
-    priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
-    scale = 1,
-  },
 
 --Fonts
   {
@@ -64,7 +55,7 @@ data:extend({
 data.raw["gui-style"].default["fnei_empty_slot_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
     
   clicked_graphical_set = {
     type = "monolith",
@@ -118,17 +109,6 @@ data.raw["gui-style"].default["fnei_default_frame"] =
   title_bottom_padding = 0,
   title_left_padding = 0,
   font_color = { r = 1, g = 0, b = 0, a = 1 },
-  flow_style = {
-    top_padding = 0,
-    right_padding = 0,
-    bottom_padding = 0,
-    left_padding = 0,
-    horizontal_spacing = 0,
-    vertical_spacing = 0,
-    resize_row_to_width = true,
-    resize_to_row_height = true,
-    max_on_row = 0,
-  },
   scalable = false,
 }
 
@@ -152,7 +132,7 @@ data.raw["gui-style"].default["fnei_default_table"] =
 data.raw["gui-style"].default["fnei_empty_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   scalable = false, 
   clicked_graphical_set = {
     type = "monolith",
@@ -192,7 +172,7 @@ data.raw["gui-style"].default["fnei_empty_button_style"] =
 data.raw["gui-style"].default["fnei_settings_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 36,
   width = 36,
   scalable = false,
@@ -228,7 +208,7 @@ data.raw["gui-style"].default["fnei_settings_button_style"] =
 data.raw["gui-style"].default["fnei_exit_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 36,
   width = 36,
   scalable = false,
@@ -264,7 +244,7 @@ data.raw["gui-style"].default["fnei_exit_button_style"] =
 data.raw["gui-style"].default["fnei_back_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button_style",
+  parent = "slot_button",
   height = 36,
   width = 36,
   scalable = false,
