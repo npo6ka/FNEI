@@ -34,7 +34,7 @@ end
 function SettingsGui.close_window()
   if SettingsGui.is_gui_open() then
     Gui.get_gui(Gui.get_pos(), general_gui_name).destroy()
-    Events.remove_gui_events(SettingsGui.name)
+    --Events.remove_gui_events(SettingsGui.name)
   end
 end
 

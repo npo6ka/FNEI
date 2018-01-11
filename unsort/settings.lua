@@ -2,7 +2,6 @@ local Settings = {
   classname = "FNSettings",
 }
 
-
 local settings_list = {}
 settings_list["need-show"] =     { type = "checkbox", def_val = true}
 settings_list["option-2"] =      { type = "checkbox", def_val = false}
@@ -42,11 +41,9 @@ function Settings.set_val(sett_name, val)
 end
 
 function Settings.get_global_sett()
-  local pl_name = Player.get().name
-  if not global.fnei then global.fnei = {} end
-  if not global.fnei[pl_name] then global.fnei[pl_name] = {} end
-  if not global.fnei[pl_name].settings then global.fnei[pl_name].settings = {} end
-  return global.fnei[pl_name].settings
+  local pl_global = Player.get_global()
+  if not pl_global.settings then pl_global.settings = {} end
+  return pl_global.settings
 end
 
 return Settings

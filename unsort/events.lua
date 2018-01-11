@@ -22,22 +22,14 @@ function Events.del_custom_event(gui_name, gui_type, event_name)
   CustomEvents.del_custom_event(gui_name, gui_type, event_name)
 end
 
-function Events.remove_gui_events(gui_name)
-  CustomEvents.remove_gui_events(gui_name)
-end
-
 function Events.on_configuration_changed(event)
-  --if not global.fnei then global.fnei = {} end
+  if not global.fnei then global.fnei = {} end
+  if not global.fnei.event_list then global.fnei.event_list = {} end
 end
 
 function Events.back_key(event)
   Player.load(event)
   Controller.back_key_event()
-end
-
-function Events.but_click(event)
-  out("but_click")
-  Events.del_custom_event("main", "sprite-button", "settings-key")
 end
 
 function Events.gui_key(event)
@@ -50,16 +42,10 @@ function Events.on_tick(event)
 end
 
 function Events.on_gui_closed(event)
-  Player.load(event)
   if event and event.element and string.match(event.element.name, "fnei%_") then
+    Player.load(event)
     Events.gui_key(event)
   end
-end
-
-function Events.on_player_created(event)
-  Player.load(event)
-  out("on_player_created")
-  Settings.init()
 end
 
 function Events.on_player_left_game(event)
@@ -103,9 +89,7 @@ function Events:init()
   self.event_load(gui_key_name, self.gui_key)
   self.event_load(back_key_name, self.back_key)
   self.event_load(defines.events.on_gui_closed, self.on_gui_closed)
-  self.event_load(defines.events.on_player_created, self.on_player_created)
   self.event_load(defines.events.on_player_left_game, self.on_player_left_game)
-
 
   for _,event in pairs(supported_gui_event) do
     self.event_load(event, self.on_event_invoke)
