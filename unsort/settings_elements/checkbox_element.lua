@@ -2,16 +2,18 @@ local CheckBoxSett = {
   classname = "FNCheckBoxSett",
 }
 
-function CheckBoxSett.init(name, def_val)
-  Settings.get_global_sett()[name] = def_val
+function CheckBoxSett.get_val(setting)
+  local global_set = Settings.get_global_sett()
+
+  if not global_set[setting.name] then
+    global_set[setting.name] = setting.def_val
+  end
+
+  return global_set[setting.name]
 end
 
-function CheckBoxSett.get_val(name)
-  return Settings.get_global_sett()[name]
-end
-
-function CheckBoxSett.set_val(name, val)
-  Settings.get_global_sett()[name] = val
+function CheckBoxSett.set_val(setting, val)
+  Settings.get_global_sett()[setting.name] = val
 end
 
 function CheckBoxSett.add_label_func(parent, cont_name, sett)

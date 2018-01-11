@@ -2,16 +2,18 @@ local DropDownSett = {
   classname = "FNDropDownSett",
 }
 
-function DropDownSett.init(name, def_val)
-  Settings.get_global_sett()[name] = def_val
+function DropDownSett.get_val(setting)
+    local global_set = Settings.get_global_sett()
+
+  if not global_set[setting.name] then
+    global_set[setting.name] = setting.def_val
+  end
+
+  return global_set[setting.name]
 end
 
-function DropDownSett.get_val(name)
-  return Settings.get_global_sett()[name]
-end
-
-function DropDownSett.set_val(name, val)
-  Settings.get_global_sett()[name] = val
+function DropDownSett.set_val(setting, val)
+  Settings.get_global_sett()[setting.name] = val
 end
 
 function DropDownSett.add_label_func(parent, cont_name, sett)

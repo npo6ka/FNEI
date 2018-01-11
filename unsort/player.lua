@@ -1,5 +1,4 @@
 
-
 local Player = {
   classname = "FNPlayer"
 }

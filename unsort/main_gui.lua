@@ -7,7 +7,7 @@ local general_gui_name = "main-flow"
 
 function MainGui.is_gui_open()
   local val = Gui.get_gui(Gui.get_pos(), general_gui_name)
-  return next(val) ~= nil
+  return (val and next(val) ~= nil) or false
 end
 
 function MainGui.open_window()

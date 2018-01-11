@@ -26,15 +26,19 @@ function Settings.get_sett_list()
 end
 
 function Settings.get_val(sett_name)
-  if sett_name then
-    return settings_list[sett_name].elem.get_val(sett_name)
+  local sett = sett_name and settings_list[sett_name]
+  if sett then
+    return sett.elem.get_val(sett)
   else
-    Debug:error("Error in fanction Settings.get_val: sett_name == nil")
+    Debug:error("Error in fanction Settings.get_val: sett_name ", sett_name, " not found")
   end
 end
 
 function Settings.set_val(sett_name, val)
-  settings_list[sett_name].elem.set_val(sett_name, val)
+  local sett = sett_name and settings_list[sett_name]
+  if sett then
+    settings_list[sett_name].elem.set_val(settings_list[sett_name], val)
+  end
 end
 
 function Settings.get_global_sett()
@@ -43,12 +47,6 @@ function Settings.get_global_sett()
   if not global.fnei[pl_name] then global.fnei[pl_name] = {} end
   if not global.fnei[pl_name].settings then global.fnei[pl_name].settings = {} end
   return global.fnei[pl_name].settings
-end
-
-function Settings.init()
-  for name, sett in pairs(Settings.get_sett_list()) do
-    sett.elem.init(name, sett.def_val)
-  end
 end
 
 return Settings

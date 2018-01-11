@@ -21,11 +21,11 @@ function CraftingBuildingsSett.init(name, def_val)
   Settings.get_global_sett()[name] = settings
 end
 
-function CraftingBuildingsSett.get_val(name)
-  return Settings.get_global_sett()[name]
+function CraftingBuildingsSett.get_val(setting)
+  --return Settings.get_global_sett()[name]
 end
 
-function CraftingBuildingsSett.set_val(name, val)
+function CraftingBuildingsSett.set_val(setting, val)
   --Settings.get_global_sett()[name] = val
 end
 
