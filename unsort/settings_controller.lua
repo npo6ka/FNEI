@@ -3,12 +3,12 @@ local SettingsController = {
 }
 
 local SettingsGui = require "unsort/settings_gui"
+
 local tab_name = {}
+local cur_tab = 0
 tab_name["main-settings"] = 0
 tab_name["crafting-category"] = 1
 tab_name["admin-settings"] = 2
-
-local cur_tab = 0
 
 function SettingsController.exit()
   out("settings exit")

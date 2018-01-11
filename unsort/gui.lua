@@ -32,6 +32,21 @@ function Gui.set_def_fields(gui_type, cont_name, gui_name, style)
   return gui_elem
 end
 
+--check old fnei gui and close them
+function Gui.close_old_fnei_gui()
+  local function gui_iterate(parent)
+    for _,gui_name in pairs(parent.children_names) do
+      if string.match(gui_name or "", "fnei") and parent[gui_name].valid then
+        parent[gui_name].destroy()
+      end
+    end
+  end
+
+  gui_iterate(Player.get().gui.left)
+  gui_iterate(Player.get().gui.top)
+  gui_iterate(Player.get().gui.center)
+end
+
 function Gui.get_pos()
   local pos = Settings.get_val("position")
 

@@ -29,6 +29,7 @@ function MainGui.close_window()
   if MainGui.is_gui_open() then
     Gui.get_gui(Gui.get_pos(), general_gui_name).destroy()
   end
+  Gui.close_old_fnei_gui()
 end
 
 function MainGui.add_header(parent)

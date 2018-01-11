@@ -33,6 +33,7 @@ end
   return ret_tb
 end]]
 
+--??????? Need test
 local cr_cat
 
 function get_crafting_category()
