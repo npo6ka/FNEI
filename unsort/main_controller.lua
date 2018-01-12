@@ -22,4 +22,8 @@ function MainController.get_name()
   return MainGui.name
 end
 
+function MainController.init_events()
+  MainGui.init_events()
+end
+
 return MainController

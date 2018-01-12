@@ -1,4 +1,4 @@
-local Events = {
+Events = {
   classname = "FNEvents"
 }
 
@@ -93,11 +93,11 @@ function Events:init()
 
   for _,event in pairs(supported_gui_event) do
     self.event_load(event, self.on_event_invoke)
-  end  
+  end
+
+  Controller.init_events()
 end
 
 function Events.event_load(event_name, func)
   script.on_event(event_name, func)
 end
-
-return Events

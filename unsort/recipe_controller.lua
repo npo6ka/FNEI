@@ -22,4 +22,8 @@ function RecipeController.get_name()
   return RecipeGui.name
 end
 
+function RecipeController.init_events()
+
+end
+
 return RecipeController

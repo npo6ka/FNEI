@@ -1,4 +1,4 @@
-local Gui = {
+Gui = {
   classname = "FNGui"
 }
 
@@ -162,5 +162,3 @@ end
 function Gui.get_local_name(element)
   return (element and element.localised_name) or "unknow"
 end
-
-return Gui

@@ -12,10 +12,13 @@ end
 
 -------------- include DefaultLibs ---------------
 require "utils.data_wrapper"
-Player = require "unsort.player"
-Gui = require "unsort/gui"
-Controller = require "unsort/controller"
-Events = require "unsort/events"
-Settings = require "unsort/settings"
+require "unsort.player"
+
+require "unsort/controller"
+
+require "unsort/gui"
+
+require "unsort/events"
+require "unsort/settings"
 
 Events:init()

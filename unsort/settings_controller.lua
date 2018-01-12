@@ -55,4 +55,8 @@ function SettingsController.is_cur_tab(gui_name)
  return tab_name[gui_name] == cur_tab
 end
 
+function SettingsController.init_events()
+  --SettingsGui.init_events()
+end
+
 return SettingsController

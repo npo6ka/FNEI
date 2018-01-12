@@ -1,4 +1,4 @@
-local Settings = {
+Settings = {
   classname = "FNSettings",
 }
 
@@ -45,5 +45,3 @@ function Settings.get_global_sett()
   if not pl_global.settings then pl_global.settings = {} end
   return pl_global.settings
 end
-
-return Settings

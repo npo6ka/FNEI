@@ -1,8 +1,8 @@
-if not global.fnei.event_list then global.fnei.event_list = {} end
-
 local CustomEvents = {
   classname = "FNCustomEvents",
 }
+
+event_list = {}
 
 function CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
   Debug:debug(CustomEvents.classname, "CustomEvents.add_custom_event(", gui_name, gui_type, event_name, func, ")")
@@ -12,13 +12,13 @@ function CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
   end
 
   if not CustomEvents.event_exists(gui_name, gui_type, event_name) then
-    if not global.fnei.event_list[gui_name] then
-      global.fnei.event_list[gui_name] = {}
+    if not event_list[gui_name] then
+      event_list[gui_name] = {}
     end
-    if not global.fnei.event_list[gui_name][gui_type] then
-      global.fnei.event_list[gui_name][gui_type] = {}
+    if not event_list[gui_name][gui_type] then
+      event_list[gui_name][gui_type] = {}
     end
-    global.fnei.event_list[gui_name][gui_type][event_name] = func
+    event_list[gui_name][gui_type][event_name] = func
   end
 end
 
@@ -29,7 +29,7 @@ function CustomEvents.del_custom_event(gui_name, gui_type, event_name)
     return
   end
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
-    global.fnei.event_list[gui_name][gui_type][event_name] = nil
+    event_list[gui_name][gui_type][event_name] = nil
   else 
     out("Error CustomEvents.del_custom_event: Event not found")
   end
@@ -37,9 +37,9 @@ end
 
 function CustomEvents.event_exists(gui_name, gui_type, event_name)
   Debug:debug(CustomEvents.classname, "CustomEvents.event_exists(", gui_name, gui_type, event_name, ")")
-  if global.fnei.event_list[gui_name] and 
-     global.fnei.event_list[gui_name][gui_type] and 
-     global.fnei.event_list[gui_name][gui_type][event_name] then
+  if event_list[gui_name] and 
+     event_list[gui_name][gui_type] and 
+     event_list[gui_name][gui_type][event_name] then
     return true
   end
   return false
@@ -52,7 +52,7 @@ function CustomEvents.invoke(gui_name, gui_type, event_name, event)
     return
   end
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
-    global.fnei.event_list[gui_name][gui_type][event_name](event, event_name)
+    event_list[gui_name][gui_type][event_name](event, event_name)
   else
     out("Error CustomEvents.invoke: event not found ", event, event.element.name)
   end
@@ -60,7 +60,7 @@ end
 
 function CustomEvents.remove_gui_events(gui_name)
   Debug:debug(CustomEvents.classname, "CustomEvents.remove_gui_events(", gui_name, ")")
-  global.fnei.event_list[gui_name] = nil
+  event_list[gui_name] = nil
 end
 
 return CustomEvents

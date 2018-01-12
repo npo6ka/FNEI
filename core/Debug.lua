@@ -87,6 +87,9 @@ end
 
 function Debug:print_to_file(message)
   if game ~= nil then
+    if Player then
+      message = tostring(Player.get_tick() or "") .. " " .. message
+    end
     game.write_file(self.filename, message .. "\n", self.append)
   end
 end

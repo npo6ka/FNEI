@@ -1,4 +1,4 @@
-local Controller = {
+Controller = {
   classname = "FNPlayer"
 }
 
@@ -7,6 +7,12 @@ local controllers = {
   recipe = require "unsort/recipe_controller",
   settings = require "unsort/settings_controller",
 }
+
+function Controller.init_events()
+  controllers.main.init_events()
+  controllers.recipe.init_events()
+  controllers.settings.init_events()
+end
 
 function Controller.get_cont(name)
   if controllers[name] then
@@ -113,5 +119,3 @@ function Controller.main_key_event()
     Controller.open_event(Controller.get_cont("main"))
   end
 end
-
-return Controller
