@@ -41,7 +41,7 @@ function RecipeGui.add_header(parent)
 end
 
 function RecipeGui.settings_key_event(event)
-  Controller.open_event(Controller.get_cont("settings"))
+  Controller.open_event("settings")
 end
 
 return RecipeGui

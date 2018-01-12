@@ -53,7 +53,7 @@ function MainGui.open_window()
 end
 
 function MainGui.settings_key_event(event)
-  Controller.open_event(Controller.get_cont("settings"))
+  Controller.open_event("settings")
 end
 
 function MainGui.search_event(event)

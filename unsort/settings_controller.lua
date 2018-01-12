@@ -11,10 +11,12 @@ tab_name["crafting-category"] = 1
 tab_name["admin-settings"] = 2
 
 function SettingsController.exit()
+  out("settings exit")
   SettingsGui.close_window()
 end
 
 function SettingsController.open()
+  out("settings open")
   local ret_gui = SettingsGui.open_window()
   local list = Settings.get_sett_list()
 
@@ -38,7 +40,7 @@ function SettingsController.new_gui_location(event, sett_name)
     local index = event.element.selected_index
     Controller.exit_event()
     Settings.set_val(sett_name, index)
-    Controller.open_event(Controller.get_cont("settings"))
+    Controller.open_event("settings")
   end
 end
 

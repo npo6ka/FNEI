@@ -15,7 +15,7 @@ function Controller.init_events()
 end
 
 function Controller.get_cont(name)
-  if controllers[name] then
+  if name and controllers[name] then
     return controllers[name]
   else
     out("controller name: ", name, " not found")
@@ -23,22 +23,23 @@ function Controller.get_cont(name)
 end
 
 function Controller.get_cur_con()
-  local pl_global = Player.get_global()
-
-  return pl_global.cur_cont
-end
-
-function Controller.get_cur_con_name()
-  local cont = Controller.get_cur_con()
-
-  if cont then
-    return  cont.get_name()
+  local con_name = Controller.get_cur_con_name()
+  if con_name then
+    return Controller.get_cont(con_name)
   end
   return nil
 end
 
+function Controller.get_cur_con_name()
+  return Player.get_global().cur_cont
+end
+
 function Controller.set_cur_cont(cont)
-  Player.get_global().cur_cont = cont
+  if cont then
+    Player.get_global().cur_cont = cont.get_name()
+  else 
+    Player.get_global().cur_cont = nil
+  end
 end
 
 function Controller.get_con_queue()
@@ -48,13 +49,13 @@ function Controller.get_con_queue()
   return pl_global.con_queue
 end
 
-function Controller.get_first_con_in_queue()
+function Controller.get_first_con_name_in_queue()
   return Controller.get_con_queue()[1]
 end
 
 function Controller.add_con_in_queue(cont)
   if cont then
-    table.insert(Controller.get_con_queue(), cont)
+    table.insert(Controller.get_con_queue(), cont.get_name())
   end
 end
 
@@ -80,15 +81,20 @@ function Controller.exit_event()
   end
 end
 
-function Controller.open_event(controller, args)
+function Controller.open_event(cont_name, args)
   local cur_cont = Controller.get_cur_con()
 
   if cur_cont then
     Controller.add_con_in_queue(cur_cont)
     Controller.exit_event()
   end
-  Controller.set_cur_cont(controller)
-  Player.get().opened = controller.open(args)
+  local controller = Controller.get_cont(cont_name)
+  if controller then
+    Controller.set_cur_cont(controller)
+    Player.get().opened = controller.open(args)
+  else
+    Debug:error("Error in function Controller.open_event: cont_name ", cont_name, "not found")
+  end
 end
 
 function Controller.back_key_event()
@@ -100,7 +106,7 @@ function Controller.back_key_event()
 end
 
 function Controller.back_gui_event()
-  local prev_cont = Controller.get_first_con_in_queue()
+  local prev_cont = Controller.get_first_con_name_in_queue()
   Controller.exit_event()
 
   if prev_cont then
@@ -116,6 +122,6 @@ function Controller.main_key_event()
     Controller.exit_event()
     Controller.remove_all_con_in_queue()
   else
-    Controller.open_event(Controller.get_cont("main"))
+    Controller.open_event("main")
   end
 end
