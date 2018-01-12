@@ -5,10 +5,9 @@ local SettingsController = {
 local SettingsGui = require "unsort/settings_gui"
 
 local tab_name = {}
-local cur_tab = 0
-tab_name["main-settings"] = 0
-tab_name["crafting-category"] = 1
-tab_name["admin-settings"] = 2
+tab_name["main-settings"] = 1
+tab_name["crafting-category"] = 2
+tab_name["admin-settings"] = 3
 
 function SettingsController.exit()
   out("settings exit")
@@ -46,13 +45,9 @@ end
 
 function SettingsController.set_new_tab_event(event, gui_name)
   if gui_name and tab_name[gui_name] ~= nil then
-    cur_tab = tab_name[gui_name]
-    SettingsGui.drow_tabs(parent)
+    local cur_tab = tab_name[gui_name]
+    SettingsGui.change_cur_tab(cur_tab)
   end
-end
-
-function SettingsController.is_cur_tab(gui_name)
- return tab_name[gui_name] == cur_tab
 end
 
 function SettingsController.init_events()
