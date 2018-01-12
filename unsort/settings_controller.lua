@@ -54,6 +54,7 @@ end
 
 function SettingsController.init_events()
   SettingsGui.init_events()
+  Settings.init_events()
 end
 
 return SettingsController

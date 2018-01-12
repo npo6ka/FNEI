@@ -21,4 +21,5 @@ require "unsort/gui"
 require "unsort/events"
 require "unsort/settings"
 
+Settings.init()
 Events:init()

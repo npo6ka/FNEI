@@ -73,27 +73,6 @@ function SettingsGui.close_window()
   end
 end
 
--- function SettingsGui.drow_tabs(parent)
---   local tabs_flow = parent[tab_flow_name]
---   local contr = Controller.get_cur_con()
-
---   if tabs_flow and tabs_flow.valid then
---     tabs_flow.destroy()
---   end
---   tabs_flow = Gui.addFlow(parent, SettingsGui.name, tab_flow_name)  
---   Gui.addSpriteButton(tabs_flow, { name = "main-settings", style = SettingsGui.get_tab_style(contr, "main-settings"), tooltip = "?main settings", caption = "?main settings" }, contr.set_new_tab_event)
---   Gui.addSpriteButton(tabs_flow, { name = "crafting-category", style = SettingsGui.get_tab_style(contr, "crafting-category"), tooltip = "?crafting category", caption = "?crafting category" }, contr.set_new_tab_event)
---   Gui.addSpriteButton(tabs_flow, { name = "admin-settings", style = SettingsGui.get_tab_style(contr, "admin-settings"), tooltip = "?admin settings", caption = "?admin settings" }, contr.set_new_tab_event)
--- end
-
--- function SettingsGui.get_tab_style( contr, tab_name )
---   if contr.is_cur_tab(tab_name) then
---     return "fnei_selected_tab_button_style"
---   else
---     return "fnei_empty_tab_button_style"
---   end
--- end
-
 function SettingsGui.change_cur_tab(tab_index)
   local tabs = Gui.get_gui(Gui.get_pos(), tab_flow_name)
   for number, tab in pairs(tabs.children) do

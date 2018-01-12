@@ -3,17 +3,19 @@ local DropDownSett = {
 }
 
 function DropDownSett.get_val(setting)
-    local global_set = Settings.get_global_sett()
+  local global_set = Settings.get_global_sett()
 
-  if not global_set[setting.name] then
+  if global_set[setting.name] == nil then
     global_set[setting.name] = setting.def_val
+    out("def_val")
   end
 
   return global_set[setting.name]
 end
 
 function DropDownSett.set_val(setting, val)
-  Settings.get_global_sett()[setting.name] = val
+  local sets = Settings.get_global_sett()
+  sets[setting.name] = val
 end
 
 function DropDownSett.add_label_func(parent, sett)
@@ -26,6 +28,11 @@ end
 
 function DropDownSett.event(event, sett_name)
   DropDownSett.set_val(sett_name, event.element.selected_index)
+end
+
+function DropDownSett.event_init(sett)
+  local event = sett.event or DropDownSett.event
+  Events.add_custom_event(Controller.get_cont("settings").get_name(), sett.type, sett.name, event)
 end
 
 return DropDownSett
