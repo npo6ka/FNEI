@@ -5,12 +5,11 @@ local MainController = {
 local MainGui = require "unsort/main_gui"
 
 function MainController.exit()
-  out("Main exit")
+  out(MainGui)
   MainGui.close_window()
 end
 
 function MainController.open()
-  out("Main open")
   return MainGui.open_window()
 end
 

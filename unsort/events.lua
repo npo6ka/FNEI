@@ -98,6 +98,17 @@ function Events:init()
   Controller.init_events()
 end
 
+function Events.init_temp_events(gui_name, gui_template)
+  if gui_template then
+    for _,gui_temp in pairs(gui_template) do
+      if gui_temp.event then
+        Events.add_custom_event(gui_name, gui_temp.type, gui_temp.name, gui_temp.event)
+      end
+      Events.init_temp_events(gui_name, gui_temp.children)
+    end
+  end
+end
+
 function Events.event_load(event_name, func)
   script.on_event(event_name, func)
 end

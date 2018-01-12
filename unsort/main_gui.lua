@@ -20,7 +20,7 @@ function MainGui.init_template()
               { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"}, event = MainGui.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"}, event = Controller.main_key_event },
             }}
-          }}
+          }},
 
   ------------------ content -------------------
 
@@ -30,20 +30,9 @@ function MainGui.init_template()
   }
 end
 
-function MainGui.rec_init(gui_template)
-  if gui_template then
-    for _,gui_temp in pairs(gui_template) do
-      if gui_temp.event then
-        Events.add_custom_event(MainGui.name, gui_temp.type, gui_temp.name, gui_temp.event)
-      end
-      MainGui.rec_init(gui_temp.children)
-    end
-  end
-end
-
 function MainGui.init_events()
   MainGui.init_template()
-  MainGui.rec_init(main_gui_template)
+  Events.init_temp_events(MainGui.name, main_gui_template)
 end
 
 function MainGui.is_gui_open()
