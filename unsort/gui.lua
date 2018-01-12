@@ -11,25 +11,11 @@ end
 
 function Gui.create_gui_name(contr_name, gui_name)
   if type(contr_name) == "string" and type(gui_name) == "string" then
-    return Gui.get_prefix() .. '_' .. contr_name .. '_' .. gui_name
+    return mod_prefix .. '_' .. contr_name .. '_' .. gui_name
   else
     out("Error in function Gui.create_gui_name: type ~= string: ", contr_name, gui_name)
     return nil
   end
-end
-
-function Gui.set_def_fields(gui_type, cont_name, gui_name, style)
-  local gui_elem = {
-    type = gui_type,
-    name = Gui.create_gui_name(cont_name, gui_name),
-  }
-
-  if style == "" then
-    gui_elem.style = gui_elem.name
-  else
-    gui_elem.style = style
-  end
-  return gui_elem
 end
 
 --check old fnei gui and close them
@@ -82,83 +68,96 @@ function Gui:get_gui_proc(gui, name)
   return self.result
 end
 
-function Gui.addSpriteButton(parent, gui_elem, event_handler)
-  local cont_name = Controller.get_cur_con_name()
-  gui_elem.type = "sprite-button"
-
-  if event_handler then
-    Events.add_custom_event(cont_name, gui_elem.type, gui_elem.name, event_handler)
-  end
-
-  gui_elem.name = Gui.create_gui_name(cont_name, gui_elem.name)
-  if gui_elem.style == "" then
-    gui_elem.style = gui_elem.name
-  end
-
-  return parent.add(gui_elem)
-end
-
-function Gui.addFlow(parent, cont_name, gui_name, style)
-  local gui_elem = Gui.set_def_fields("flow", cont_name, gui_name, style)
-  return parent.add(gui_elem)
-end
-
-function Gui.addFrame(parent, cont_name, gui_name, style, direction)
-  local gui_elem = Gui.set_def_fields("frame", cont_name, gui_name, style)
-  if direction then
-    gui_elem.direction = direction
-  end
-  return parent.add(gui_elem)
-end
-
-function Gui.addTable(parent, cont_name, gui_name, style, column_count)
-  local gui_elem = Gui.set_def_fields("table", cont_name, gui_name, style)
-  gui_elem.column_count = column_count
-  return parent.add(gui_elem)
-end
-
-function Gui.addDropDown(parent, cont_name, gui_name, style, items, selected_index, event_handler)
-  local gui_elem = Gui.set_def_fields("drop-down", cont_name, gui_name, style)
-  gui_elem.items = items
-  gui_elem.selected_index = selected_index
-
-  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
-
-  return parent.add(gui_elem)
-end
-
-function Gui.addCheckbox(parent, cont_name, gui_name, style, state, event_handler)
-  local gui_elem = Gui.set_def_fields("checkbox", cont_name, gui_name, style)
-  gui_elem.state = state or false
-
-  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
-
-  return parent.add(gui_elem)
-end
-
-function Gui.addLabel(parent, cont_name, gui_name, style, caption)
-  local gui_elem = Gui.set_def_fields("label", cont_name, gui_name, style)
-  caption = caption or "unknow"
-  gui_elem.caption = caption
-  return parent.add(gui_elem)
-end
-
-function Gui.addTextfield(parent, cont_name, gui_name, style, text, event_handler)
-  local gui_elem = Gui.set_def_fields("textfield", cont_name, gui_name, style)
-  text = text or ""
-  gui_elem.text = text
-
-  Events.add_custom_event(cont_name, gui_elem.type, gui_name, event_handler)
-
-  return parent.add(gui_elem)
-end
-
-function Gui.addScrollPane(parent, cont_name, gui_name, style)
-  local gui_elem = Gui.set_def_fields("scroll-pane", cont_name, gui_name, style)
-
-  return parent.add(gui_elem)
-end
-
 function Gui.get_local_name(element)
   return (element and element.localised_name) or "unknow"
 end
+
+local gui_function = {}
+
+function Gui.init_function()
+  gui_function["sprite-button"] = Gui.add_sprite_button
+  gui_function["flow"] = Gui.add_flow
+  gui_function["frame"] = Gui.add_frame
+  gui_function["table"] = Gui.add_table
+  gui_function["drop-down"] = Gui.add_drop_down
+  gui_function["checkbox"] = Gui.add_checkbox
+  gui_function["label"] = Gui.add_label
+  gui_function["textfield"] = Gui.add_textfield
+  gui_function["scroll-pane"] = Gui.add_scroll_pane
+end
+
+function Gui.add_gui_template(parent, gui_temp)
+  if gui_temp then
+    local gui
+    for _,gui_temp in pairs(gui_temp) do
+      local gui_elem = {}
+      for type, gui_field in pairs(gui_temp) do
+        if type ~= "children" and  type ~= "event" then
+          gui_elem[type] = gui_field
+        end
+      end
+
+      if gui_function[gui_temp.type] then
+        gui = gui_function[gui_temp.type](parent, gui_elem)
+      else
+        Debug:error("Error in function Gui.add_template: unknow gui_type: ", gui_temp.type)
+      end
+
+      Gui.add_gui_template(gui, gui_temp.children)    
+    end
+    return gui
+  end
+end
+
+function Gui.set_def_fields(gui_elem)
+  local cont_name = Controller.get_cur_con_name()
+
+  gui_elem.name = Gui.create_gui_name(cont_name, gui_elem.name)
+
+  if gui_elem.style == "" then
+    gui_elem.style = gui_elem.name
+  end
+  return gui_elem
+end
+
+function Gui.add_sprite_button(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_flow(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_frame(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_table(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_drop_down(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_checkbox(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_label(parent, gui_elem)
+  Gui.set_def_fields(gui_elem)
+  gui_elem.caption = gui_elem.caption or "unknow"
+  return parent.add(gui_elem)
+end
+
+function Gui.add_textfield(parent, gui_elem)
+  Gui.set_def_fields(gui_elem)
+  gui_elem.text = gui_elem.text or ""
+  return parent.add(gui_elem)
+end
+
+function Gui.add_scroll_pane(parent, cont_name, gui_name, style)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+Gui.init_function()
