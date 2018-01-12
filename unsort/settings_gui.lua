@@ -55,7 +55,7 @@ end
 
 function SettingsGui.is_gui_open()
   local val = Gui.get_gui(Gui.get_pos(), settings_gui_template[1].name)
-  if next(val) and val.valid then
+  if val and next(val) and val.valid then
     return true
   else
     return false
@@ -105,17 +105,30 @@ function SettingsGui.change_cur_tab(tab_index)
   end
 end
 
-function SettingsGui.add_option_in_gui(sett)
-  -- local gui = Gui.get_gui(Gui.get_pos(), content_gui_name)
+function SettingsGui.add_option_list(sett_list, tab_index)
+  local gui = Gui.get_gui(Gui.get_pos(), content_gui_name)
 
-  -- if not gui then
-  --   out("Error in function SettingsGui.add_option_in_gui: gui == nil")
-  --   return
-  -- end
+  if not gui then
+    debug:error("Error in function SettingsGui.add_option_in_gui: gui == nil")
+    return
+  end
 
-  -- sett.elem.add_label_func(gui, SettingsGui.name, sett)
-  -- sett.elem.add_content_func(gui, SettingsGui.name, sett)
+  for _,gui in pairs(gui.children) do
+    if gui and gui.valid then
+      gui.destroy()
+    end
+  end
 
+  for name, sett in pairs(sett_list) do
+    if sett.tab_num == tab_index then
+      SettingsGui.add_option_in_gui(gui, sett)
+    end
+  end
+end
+
+function SettingsGui.add_option_in_gui(parent, sett)
+  sett.elem.add_label_func(parent, sett)
+  sett.elem.add_content_func(parent, sett)
 end
 
 return SettingsGui

@@ -16,13 +16,12 @@ function DropDownSett.set_val(setting, val)
   Settings.get_global_sett()[setting.name] = val
 end
 
-function DropDownSett.add_label_func(parent, cont_name, sett)
-  Gui.addLabel(parent, cont_name, sett.name .. "-label", "fnei_option_param_label", {"fnei." .. sett.name})
+function DropDownSett.add_label_func(parent, sett)
+  Gui.add_label(parent, { type = "label", name = sett.name .. "-label", style = "fnei_option_param_label", caption = {"fnei." .. sett.name}, tooltip = {"fnei." .. sett.name}})
 end
 
-function DropDownSett.add_content_func(parent, cont_name, sett)
-  local event = sett.event or DropDownSett.event
-  Gui.addDropDown(parent, cont_name, sett.name, nil, sett.items, Settings.get_val(sett.name), event)
+function DropDownSett.add_content_func(parent, sett)
+  Gui.add_drop_down(parent, { type = "drop-down", name = sett.name, items = sett.items, selected_index = Settings.get_val(sett.name) })
 end
 
 function DropDownSett.event(event, sett_name)

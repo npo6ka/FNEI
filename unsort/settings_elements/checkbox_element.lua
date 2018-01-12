@@ -16,12 +16,12 @@ function CheckBoxSett.set_val(setting, val)
   Settings.get_global_sett()[setting.name] = val
 end
 
-function CheckBoxSett.add_label_func(parent, cont_name, sett)
-  Gui.addLabel(parent, cont_name, sett.name .. "-label", "fnei_option_param_label", {"fnei." .. sett.name})
+function CheckBoxSett.add_label_func(parent, sett)
+  Gui.add_label(parent, { type = "label", name = sett.name .. "-label", style = "fnei_option_param_label", caption = {"fnei." .. sett.name}, tooltip = {"fnei." .. sett.name}})
 end
 
-function CheckBoxSett.add_content_func(parent, cont_name, sett)
-  Gui.addCheckbox(parent, cont_name, sett.name, nil, Settings.get_val(sett.name), CheckBoxSett.event)
+function CheckBoxSett.add_content_func(parent, sett)
+  Gui.add_checkbox(parent, { type = "checkbox", name = sett.name, state = Settings.get_val(sett.name) })
 end
 
 function CheckBoxSett.event(event, sett_name)
