@@ -56,7 +56,7 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
     table.insert(flow_childer, { type = "sprite-button", name = sett.name .. "_" .. cat_text .. "_" .. cat .. "_but", 
                                  style = CraftingBuildingsSett.get_category_style(settings[categoties], cat), tooltip = cat, children = 
     {
-      { type = "label", name = sett.name .. "_cat_" .. cat .. "_lable", single_line = false, caption = cat, tooltip = cat }
+      { type = "label", name = sett.name .. "_" .. cat_text .. "_" .. cat .. "_lable", single_line = false, caption = cat, tooltip = cat }
     }})
 
     for _, item in pairs(items) do
@@ -67,7 +67,7 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
       })
     end
 
-    table.insert(gui_template, { type = "flow", name = sett.name .. cat, direction = "horizontal", children = flow_childer })
+    table.insert(gui_template, { type = "flow", name = sett.name .. "-flow-" .. cat, direction = "horizontal", children = flow_childer })
   end
 
   gui_template = {
@@ -129,9 +129,6 @@ function CraftingBuildingsSett.event_init(sett)
 end
 
 function CraftingBuildingsSett.get_building_style(settings, cat, item_name)
-
-
-
   if  not settings[buildings][item_name] then
     return "fnei_disable_building_button_style"
   elseif settings[categoties][cat] then
