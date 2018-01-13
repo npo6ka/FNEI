@@ -7,15 +7,15 @@ local element_list = {}
 
 
 function Settings.init()
-  settings_list["need-show"] =     { type = "checkbox", tab_num = 1, def_val = false}
+  settings_list["need-show"] =     { type = "checkbox", tab_num = 1, def_val = true}
   settings_list["option-2"] =      { type = "checkbox", tab_num = 1, def_val = false}
   settings_list["option-3"] =      { type = "checkbox", tab_num = 1, def_val = true}
   settings_list["position"] =      { type = "drop-down", tab_num = 1, def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, event = Controller.get_cont("settings").new_gui_location}
-  --settings_list["show-recipes"] =  { type = "crafting_buildings", tab_num = 2, def_val = true}
+  settings_list["show-recipes"] =  { type = "crafting-buildings", tab_num = 2, def_val = true}
   settings_list["admin-settings"] = { type = "checkbox", tab_num = 3, def_val = false}
 
   element_list["checkbox"] =            require "unsort/settings_elements/checkbox_element"
-  element_list["crafting_buildings"] =  require "unsort/settings_elements/crafting_buildings_element"
+  element_list["crafting-buildings"] =  require "unsort/settings_elements/crafting_buildings_element"
   element_list["drop-down"] =           require "unsort/settings_elements/drop_down_element"
 
   for name, sett in pairs(settings_list) do

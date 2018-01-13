@@ -20,9 +20,9 @@ data.raw["gui-style"].default["fnei_option_text_frame"] =
 data.raw["gui-style"].default["fnei_option_param_3_scroll"] =
 {
   type = "scroll_pane_style",
-  maximal_width = 232,
-  minimal_width = 232,
-  maximal_height = 120,
+  maximal_width = 485,
+  minimal_width = 485,
+  maximal_height = 400,
   scalable = false,
 }
 
@@ -213,7 +213,7 @@ data.raw["gui-style"].default["fnei_green_category_button_style"] =
   type = "button_style",
   parent = "slot_button",
   height = 36,
-  width = 72,
+  width = 108,
 
   clicked_graphical_set = {
     type = "monolith",
@@ -258,6 +258,60 @@ data.raw["gui-style"].default["fnei_green_category_button_style"] =
       width = 36,
       x = 111,
       y = 108,
+    },
+  },
+}
+
+data.raw["gui-style"].default["fnei_red_category_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 36,
+  width = 108,
+
+  clicked_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 36,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 36,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 36,
     },
   },
 }

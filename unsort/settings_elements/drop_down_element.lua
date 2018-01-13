@@ -27,7 +27,7 @@ function DropDownSett.add_content_func(parent, sett)
 end
 
 function DropDownSett.event(event, sett_name)
-  DropDownSett.set_val(sett_name, event.element.selected_index)
+  Settings.set_val(sett_name, event.element.selected_index)
 end
 
 function DropDownSett.event_init(sett)

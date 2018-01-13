@@ -89,21 +89,21 @@ end
 function Gui.add_gui_template(parent, gui_temp)
   if gui_temp then
     local gui
-    for _,gui_temp in pairs(gui_temp) do
+    for _,gui_templ in pairs(gui_temp) do
       local gui_elem = {}
-      for type, gui_field in pairs(gui_temp) do
+      for type, gui_field in pairs(gui_templ) do
         if type ~= "children" and  type ~= "event" then
           gui_elem[type] = gui_field
         end
       end
 
-      if gui_function[gui_temp.type] then
-        gui = gui_function[gui_temp.type](parent, gui_elem)
+      if gui_function[gui_templ.type] then
+        gui = gui_function[gui_templ.type](parent, gui_elem)
       else
         Debug:error("Error in function Gui.add_template: unknow gui_type: ", gui_temp.type)
       end
 
-      Gui.add_gui_template(gui, gui_temp.children)    
+      Gui.add_gui_template(gui, gui_templ.children)    
     end
     return gui
   end
@@ -147,7 +147,10 @@ end
 function Gui.add_label(parent, gui_elem)
   Gui.set_def_fields(gui_elem)
   gui_elem.caption = gui_elem.caption or "unknow"
-  return parent.add(gui_elem)
+  local gui = parent.add(gui_elem)
+  gui.style.single_line = gui_elem.single_line or false
+  if gui_elem.want_ellipsis ~= nil then gui.style.want_ellipsis = gui_elem.want_ellipsis end
+  return gui
 end
 
 function Gui.add_textfield(parent, gui_elem)
@@ -156,7 +159,7 @@ function Gui.add_textfield(parent, gui_elem)
   return parent.add(gui_elem)
 end
 
-function Gui.add_scroll_pane(parent, cont_name, gui_name, style)
+function Gui.add_scroll_pane(parent, gui_elem)
   return parent.add(Gui.set_def_fields(gui_elem))
 end
 

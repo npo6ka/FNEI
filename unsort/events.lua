@@ -54,7 +54,7 @@ end
 
 function Events.on_event_invoke(event)
   Player.load(event)
-  local gui_name, gui_type, event_name  = Events.parse_name(event)
+  local gui_name, gui_type, event_name = Events.parse_name(event)
   CustomEvents.invoke(gui_name, gui_type, event_name, event)
 end
 
