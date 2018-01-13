@@ -100,7 +100,7 @@ data.raw["gui-style"].default["fnei_selected_tab_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_red_building_button_style"] = 
+data.raw["gui-style"].default["fnei_enabled_building_button_style"] = 
 {
   type = "button_style",
   parent = "slot_button",
@@ -118,8 +118,8 @@ data.raw["gui-style"].default["fnei_red_building_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
-      y = 36,
+      x = 185,
+      y = 108,
     },
   },
   default_graphical_set = {
@@ -134,7 +134,7 @@ data.raw["gui-style"].default["fnei_red_building_button_style"] =
       priority = "extra-high-no-scale",
       width = 36,
       x = 111,
-      y = 36,
+      y = 108,
     },
   },
   hovered_graphical_set = {
@@ -148,13 +148,13 @@ data.raw["gui-style"].default["fnei_red_building_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
-      y = 36,
+      x = 148,
+      y = 108,
     },
   },
 }
 
-data.raw["gui-style"].default["fnei_green_building_button_style"] = 
+data.raw["gui-style"].default["fnei_disable_building_button_style"] = 
 {
   type = "button_style",
   parent = "slot_button",
@@ -172,8 +172,8 @@ data.raw["gui-style"].default["fnei_green_building_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
-      y = 108,
+      x = 185,
+      y = 36,
     },
   },
   default_graphical_set = {
@@ -188,7 +188,7 @@ data.raw["gui-style"].default["fnei_green_building_button_style"] =
       priority = "extra-high-no-scale",
       width = 36,
       x = 111,
-      y = 108,
+      y = 36,
     },
   },
   hovered_graphical_set = {
@@ -202,13 +202,67 @@ data.raw["gui-style"].default["fnei_green_building_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
-      y = 108,
+      x = 148,
+      y = 36,
     },
   },
 }
 
-data.raw["gui-style"].default["fnei_green_category_button_style"] = 
+data.raw["gui-style"].default["fnei_hide_building_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 36,
+  width = 36,
+
+  clicked_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 185,
+      y = 0,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 0,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 148,
+      y = 0,
+    },
+  },
+}
+
+data.raw["gui-style"].default["fnei_enable_category_button_style"] = 
 {
   type = "button_style",
   parent = "slot_button",
@@ -226,7 +280,7 @@ data.raw["gui-style"].default["fnei_green_category_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
+      x = 185,
       y = 108,
     },
   },
@@ -256,13 +310,13 @@ data.raw["gui-style"].default["fnei_green_category_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
+      x = 148,
       y = 108,
     },
   },
 }
 
-data.raw["gui-style"].default["fnei_red_category_button_style"] = 
+data.raw["gui-style"].default["fnei_disable_category_button_style"] = 
 {
   type = "button_style",
   parent = "slot_button",
@@ -280,8 +334,8 @@ data.raw["gui-style"].default["fnei_red_category_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
-      y = 36,
+      x = 185,
+      y = 0,
     },
   },
   default_graphical_set = {
@@ -296,7 +350,7 @@ data.raw["gui-style"].default["fnei_red_category_button_style"] =
       priority = "extra-high-no-scale",
       width = 36,
       x = 111,
-      y = 36,
+      y = 0,
     },
   },
   hovered_graphical_set = {
@@ -310,8 +364,8 @@ data.raw["gui-style"].default["fnei_red_category_button_style"] =
       height = 36,
       priority = "extra-high-no-scale",
       width = 36,
-      x = 111,
-      y = 36,
+      x = 148,
+      y = 0,
     },
   },
 }

@@ -61,7 +61,7 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
 
     for _, item in pairs(items) do
       table.insert(flow_childer, { type = "sprite-button", name = sett.name .. "_" .. cat .. "_" .. item.name,  
-                                   style = CraftingBuildingsSett.get_building_style(settings[buildings], item.name),
+                                   style = CraftingBuildingsSett.get_building_style(settings, cat, item.name),
                                    tip = {"", Gui.get_local_name(item), "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
                                    sprite = "item/"..item.name,
       })
@@ -99,7 +99,7 @@ function CraftingBuildingsSett.change_content_style(sett_name)
       gui = Gui.get_gui(parent, sett_name .. "_" .. cat .. "_" .. item.name)
 
       if gui then 
-        gui.style = CraftingBuildingsSett.get_building_style(settings[buildings], item.name)
+        gui.style = CraftingBuildingsSett.get_building_style(settings, cat, item.name)
       end
     end
   end
@@ -128,23 +128,26 @@ function CraftingBuildingsSett.event_init(sett)
   Events.add_custom_event(Controller.get_cont("settings").get_name(), "label", sett.name, event)
 end
 
-function CraftingBuildingsSett.get_building_style(settings, item_name)
-  if settings[item_name] then
-    return "fnei_green_building_button_style"
+function CraftingBuildingsSett.get_building_style(settings, cat, item_name)
+
+
+
+  if  not settings[buildings][item_name] then
+    return "fnei_disable_building_button_style"
+  elseif settings[categoties][cat] then
+    return "fnei_enabled_building_button_style"
   else
-    return "fnei_red_building_button_style"
+    return "fnei_hide_building_button_style"
   end
 end
 
 function CraftingBuildingsSett.get_category_style(settings, cat_name)
   if settings[cat_name] then
-    return "fnei_green_category_button_style"
+    return "fnei_enable_category_button_style"
   else
-    return "fnei_red_category_button_style"
+    return "fnei_disable_category_button_style"
   end
 end
-
-
 
 return CraftingBuildingsSett
 
