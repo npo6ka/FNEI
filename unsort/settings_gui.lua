@@ -26,7 +26,7 @@ function SettingsGui.init_template()
 ------------------ tabs ------------------
 
           { type = "flow", name = "tabs-flow",  children = {
-            { type = "sprite-button", name = "main-settings", style = "fnei_selected_tab_button_style", tooltip = "?main settings", caption = "?main settings", event = cont.set_new_tab_event },
+            { type = "sprite-button", name = "main-settings", style = "fnei_selected_tab_button_style", tooltip = "?main settings", caption = "?main settings", font = "font-s", event = cont.set_new_tab_event },
             { type = "sprite-button", name = "crafting-category", style = "fnei_empty_tab_button_style", tooltip = "?crafting category", caption = "?crafting category", event = cont.set_new_tab_event },
             { type = "sprite-button", name = "admin-settings", style = "fnei_empty_tab_button_style", tooltip = "?admin settings", caption = "?admin settings", event = cont.set_new_tab_event },
           }},

@@ -34,6 +34,7 @@ data.raw["gui-style"].default["fnei_empty_tab_button_style"] =
   parent = "slot_button",
   height = 36,
   width = 169,
+  font = "font-s",
     
   clicked_graphical_set = {
     type = "monolith",
