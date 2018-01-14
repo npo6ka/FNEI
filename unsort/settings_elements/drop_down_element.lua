@@ -7,7 +7,6 @@ function DropDownSett.get_val(setting)
 
   if global_set[setting.name] == nil then
     global_set[setting.name] = setting.def_val
-    out("def_val")
   end
 
   return global_set[setting.name]
@@ -19,7 +18,7 @@ function DropDownSett.set_val(setting, val)
 end
 
 function DropDownSett.add_label_func(parent, sett)
-  Gui.add_label(parent, { type = "label", name = sett.name .. "-label", style = "fnei_option_param_label", caption = {"fnei." .. sett.name}, tooltip = {"fnei." .. sett.name}})
+  Gui.add_label(parent, { type = "label", name = sett.name .. "-label", style = "fnei_settings_param-label", caption = {"fnei." .. sett.name} })
 end
 
 function DropDownSett.add_content_func(parent, sett)

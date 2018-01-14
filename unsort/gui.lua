@@ -146,10 +146,15 @@ end
 
 function Gui.add_label(parent, gui_elem)
   Gui.set_def_fields(gui_elem)
+
   gui_elem.caption = gui_elem.caption or "unknow"
+  gui_elem.tooltip = gui_elem.tooltip or gui_elem.caption
+
   local gui = parent.add(gui_elem)
+
   gui.style.single_line = gui_elem.single_line or false
   if gui_elem.want_ellipsis ~= nil then gui.style.want_ellipsis = gui_elem.want_ellipsis end
+
   return gui
 end
 

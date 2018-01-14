@@ -9,34 +9,32 @@ function SettingsGui.init_template()
   local cont = Controller.get_cont(SettingsGui.name)
 
   settings_gui_template = {
-    { type = "flow", name = "main-flow", style = "fnei_recipe_flow", children = {
-      { type = "frame", name = "main-frame", style = "fnei_recipe_main_frame", children = {
-        { type = "table", name = "main-table", style = "fnei_recipe_main_table", column_count = 1, children = {
+    { type = "flow", name = "main-flow", style = "fnei_settings_genetal-flow", children = {
+      { type = "frame", name = "main-frame", style = "fnei_settings_main-frame", children = {
+        { type = "table", name = "main-table", style = "fnei_settings_main-table", column_count = 1, children = {
 
 ------------------ header ------------------
 
-          { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
-            { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 3, children = {
-              { type = "label", name = "header-label", style = "fnei_option_label", caption = {"fnei.options"} },
-              { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"fnei.back-key"}, event = Controller.back_key_event },
-              { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"}, event = Controller.main_key_event },
+          { type = "frame", name = "header-frame", style = "fnei_settings_header-frame", direction = "horizontal", children = {
+            { type = "table", name = "header-table", style = "fnei_settings_header-table", column_count = 3, children = {
+              { type = "label", name = "header-label", style = "fnei_settings_header-label", caption = {"gui-menu.options"} },
+              { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = Controller.back_key_event },
+              { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}
           }},
 
 ------------------ tabs ------------------
 
-          { type = "flow", name = "tabs-flow",  children = {
-            { type = "sprite-button", name = "main-settings", style = "fnei_selected_tab_button_style", tooltip = "?main settings", caption = "?main settings", font = "font-s", event = cont.set_new_tab_event },
-            { type = "sprite-button", name = "crafting-category", style = "fnei_empty_tab_button_style", tooltip = "?crafting category", caption = "?crafting category", event = cont.set_new_tab_event },
-            { type = "sprite-button", name = "admin-settings", style = "fnei_empty_tab_button_style", tooltip = "?admin settings", caption = "?admin settings", event = cont.set_new_tab_event },
+          { type = "flow", name = "tabs-flow", style = "fnei_settings_tab-flow", children = {
+            { type = "sprite-button", name = "main-settings", style = "fnei_settings_selected-tab", tooltip = {"fnei.main-settings"}, caption = {"fnei.main-settings"}, event = cont.set_new_tab_event },
+            { type = "sprite-button", name = "crafting-category", style = "fnei_settings_empty-tab", tooltip = {"fnei.crafting-category"}, caption = {"fnei.crafting-category"}, event = cont.set_new_tab_event },
+            { type = "sprite-button", name = "admin-settings", style = "fnei_settings_empty-tab", tooltip = {"fnei.admin-settings"}, caption = {"fnei.admin-settings"}, event = cont.set_new_tab_event },
           }},
 
 ------------------ settings ------------------
 
-          { type = "frame", name = "content-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
-            { type = "table", name = "content-table", column_count = 2, children = {
-
-            }}
+          { type = "frame", name = "content-frame", style = "fnei_settings_content-frame", direction = "horizontal", children = {
+            { type = "table", name = "content-table", style = "fnei_settings_content-table", column_count = 2}
           }}
         }}  
       }}
@@ -77,9 +75,9 @@ function SettingsGui.change_cur_tab(tab_index)
   local tabs = Gui.get_gui(Gui.get_pos(), tab_flow_name)
   for number, tab in pairs(tabs.children) do
     if number == tab_index then
-      tab.style = "fnei_selected_tab_button_style"
+      tab.style = "fnei_settings_selected-tab"
     else
-      tab.style = "fnei_empty_tab_button_style"
+      tab.style = "fnei_settings_empty-tab"
     end
   end
 end

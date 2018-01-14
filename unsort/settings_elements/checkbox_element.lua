@@ -17,7 +17,7 @@ function CheckBoxSett.set_val(setting, val)
 end
 
 function CheckBoxSett.add_label_func(parent, sett)
-  Gui.add_label(parent, { type = "label", name = sett.name .. "-label", style = "fnei_option_param_label", caption = {"fnei." .. sett.name}, tooltip = {"fnei." .. sett.name}})
+  Gui.add_label(parent, { type = "label", name = sett.name .. "-label", style = "fnei_settings_param-label", caption = {"fnei." .. sett.name} })
 end
 
 function CheckBoxSett.add_content_func(parent, sett)

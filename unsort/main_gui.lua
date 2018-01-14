@@ -15,10 +15,10 @@ function MainGui.init_template()
 
           { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
             { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 4, children = {
-              { type = "label", name = "header-label", caption = "?Search:" },
+              { type = "label", name = "header-label", caption = {"gui-browse-mods.search"} },
               { type = "textfield", name = "search-field", event = MainGui.search_event },
-              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"}, event = MainGui.settings_key_event },
-              { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"}, event = Controller.main_key_event },
+              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = MainGui.settings_key_event },
+              { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}
           }},
 

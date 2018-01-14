@@ -39,11 +39,23 @@ function CraftingBuildingsSett.set_val(setting, val)
   local gl_sett = CraftingBuildingsSett.get_val(setting)
 
   if gl_sett[val.type] and gl_sett[val.type][val.name] ~= nil then
-    gl_sett[val.type][val.name] = not gl_sett[val.type][val.name]
+    if val.val == 2 then
+      gl_sett[val.type][val.name] = true
+    elseif val.val == 4 then
+      gl_sett[val.type][val.name] = false
+    end
   end
 end
 
 function CraftingBuildingsSett.add_label_func(parent, sett) end
+
+function CraftingBuildingsSett.split_cat(category)
+  local ret_str = string.format("%.12s", category)
+  if string.len(category) > 12 then
+    return ret_str .. "…"
+  end
+  return ret_str
+end
 
 function CraftingBuildingsSett.add_content_func(parent, sett)
   local settings = CraftingBuildingsSett.get_val(sett)
@@ -54,15 +66,14 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
     local flow_childer = {}
 
     table.insert(flow_childer, { type = "sprite-button", name = sett.name .. "_" .. cat_text .. "_" .. cat .. "_but", 
-                                 style = CraftingBuildingsSett.get_category_style(settings, cat), tooltip = cat, children = 
-    {
-      { type = "label", name = sett.name .. "_" .. cat_text .. "_" .. cat .. "_lable", single_line = false, caption = cat, tooltip = cat }
-    }})
+                                 style = CraftingBuildingsSett.get_category_style(settings, cat),
+                                 tooltip = {"", cat, "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
+                                 caption = CraftingBuildingsSett.split_cat(cat) })
 
     for _, item in pairs(items) do
       table.insert(flow_childer, { type = "sprite-button", name = sett.name .. "_" .. cat .. "_" .. item.name,  
                                    style = CraftingBuildingsSett.get_building_style(settings, cat, item.name),
-                                   tip = {"", Gui.get_local_name(item), "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
+                                   tooltip = {"", Gui.get_local_name(item), "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
                                    sprite = "item/"..item.name,
       })
     end
@@ -71,10 +82,10 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
   end
 
   gui_template = {
-    { type = "table", name = sett.name .."-table", column_count = 1, children = {
-      { type = "label", name = "header-label-2", style = "fnei_option_label", caption = "mnogo razlichnoi infi blablablabla bla blabla bla bla blabla vb l a bl a b l a b l a b l a b l a b l a b l a" },
-      { type = "scroll-pane", name = sett.name .. "-scroll-pane", style = "fnei_option_param_3_scroll", children = {
-        { type = "table", name = sett.name .. "-flow-table", column_count = 1, children = gui_template }
+    { type = "table", name = sett.name .."-table", style = "fnei_settings_content-table", column_count = 1, children = {
+      { type = "label", name = "header-label-2", style = "fnei_settings_craft-category-label", caption = {"fnei.craftin-cat-msg"} },
+      { type = "scroll-pane", name = sett.name .. "-scroll-pane", style = "fnei_settings_craft-cat-scroll", children = {
+        { type = "table", name = sett.name .. "-flow-table", style = "fnei_settings_content-table", column_count = 1, children = gui_template }
       }}
     }}
   }
@@ -130,10 +141,10 @@ function CraftingBuildingsSett.event(event, sett_name)
   local gui_elem = CraftingBuildingsSett.parse_name(event.element.name or "")
   
   if gui_elem[4] == cat_text then
-    Settings.set_val(sett_name, {type = categoties, name = gui_elem[5]})
+    Settings.set_val(sett_name, {type = categoties, name = gui_elem[5], val = event.button })
     CraftingBuildingsSett.change_category_style(sett_name, gui_elem[5])
   else
-    Settings.set_val(sett_name, {type = buildings, name = gui_elem[5]})
+    Settings.set_val(sett_name, {type = buildings, name = gui_elem[5], val = event.button })
     CraftingBuildingsSett.change_building_style(sett_name, gui_elem[5])
   end
 end
@@ -146,54 +157,20 @@ end
 
 function CraftingBuildingsSett.get_building_style(settings, cat_name, item_name)
   if  not settings[buildings][item_name] then
-    return "fnei_disable_building_button_style"
+    return "fnei_settings_disabled-building"
   elseif settings[categoties][cat_name] then
-    return "fnei_enabled_building_button_style"
+    return "fnei_settings_enabled-building"
   else
-    return "fnei_hide_building_button_style"
+    return "fnei_settings_hidden-building"
   end
 end
 
 function CraftingBuildingsSett.get_category_style(settings, cat_name)
   if settings[categoties][cat_name] then
-    return "fnei_enable_category_button_style"
+    return "fnei_settings_enable-category"
   else
-    return "fnei_disable_category_button_style"
+    return "fnei_settings_disable-category"
   end
 end
 
 return CraftingBuildingsSett
-
-
---[[
-
-  local cat_tb = get_item_list_from_cat_tb()
-  for _,elem in pairs(cat_tb) do
-    item_table.add(fnei.option_gui.get_img(elem.name, fnei.option_gui.get_item_style(player, elem.name)))
-  end
-
-
-function fnei.option_gui.get_img( name, style )
-  local local_name = (game.item_prototypes[name] and game.item_prototypes[name].localised_name) or name
-  local tip = {"", local_name, "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}}
-  local img_name = "fnei_building_"..name
-
-  return {
-    type = "sprite-button",
-    name = img_name,
-    style = style,
-    tooltip = tip,
-    sprite = "item/"..name
-  }
-end
-
-function fnei.option_gui.change_buildings_state( player, elem_name )
-  if fnei.gui.is_option_open(player) then
-    local item = fnei:get_gui(get_gui_pos(player), "fnei_building_"..elem_name)
-    if item then
-      item.style = fnei.option_gui.get_item_style(player, elem_name)
-    end
-  end
-end
-
-]]
