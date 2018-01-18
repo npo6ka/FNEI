@@ -49,8 +49,9 @@ function Controller.get_con_queue()
   return pl_global.con_queue
 end
 
-function Controller.get_first_con_name_in_queue()
-  return Controller.get_con_queue()[1]
+function Controller.get_last_con_name_in_queue()
+  local cont = Controller.get_con_queue()
+  return cont[#cont]
 end
 
 function Controller.add_con_in_queue(cont)
@@ -59,8 +60,9 @@ function Controller.add_con_in_queue(cont)
   end
 end
 
-function Controller.remove_first_con_in_queue()
-  table.remove(Controller.get_con_queue(), 1)
+function Controller.remove_last_con_in_queue()
+  local cont = Controller.get_con_queue()
+  table.remove(cont, #cont)
 end
 
 function Controller.remove_all_con_in_queue()
@@ -106,12 +108,12 @@ function Controller.back_key_event()
 end
 
 function Controller.back_gui_event()
-  local prev_cont = Controller.get_first_con_name_in_queue()
+  local prev_cont = Controller.get_last_con_name_in_queue()
   Controller.exit_event()
 
   if prev_cont then
     Controller.open_event(prev_cont)
-    Controller.remove_first_con_in_queue()
+    Controller.remove_last_con_in_queue()
   end
 end
 

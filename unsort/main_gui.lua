@@ -38,12 +38,6 @@ function MainGui.init_template()
 
   ------------------ content -------------------
 
-          { type = "choose-elem-button", name = "test-choose", elem_type = "item", style = "fnei_test"},
-          { type = "choose-elem-button", name = "test-choose-2", elem_type = "fluid"},
-          { type = "choose-elem-button", name = "test-choose-3", elem_type = "entity"},
-          { type = "choose-elem-button", name = "test-choose-4", elem_type = "tile"},
-          { type = "choose-elem-button", name = "test-choose-5", elem_type = "signal"},
-          { type = "choose-elem-button", name = "test-choose-6", elem_type = "recipe"},
         }}  
       }}
     }}
@@ -79,7 +73,11 @@ end
 
 function MainGui.is_gui_open()
   local val = Gui.get_gui(Gui.get_pos(), main_gui_template[1].name)
-  return (val and next(val) ~= nil) or false
+  if val and next(val) and val.valid then
+    return true
+  else
+    return false
+  end
 end
 
 function MainGui.close_window()
@@ -114,8 +112,6 @@ end
 
 function MainGui.search_event(event)
   out(event)
-  local gui = Gui.get_gui(Gui.get_pos(), "test-choose")
-  gui.style.width = 32
 end
 
 return MainGui

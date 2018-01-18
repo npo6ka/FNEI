@@ -23,7 +23,7 @@ function RecipeController.get_name()
 end
 
 function RecipeController.init_events()
-
+  RecipeGui.init_events()
 end
 
 return RecipeController

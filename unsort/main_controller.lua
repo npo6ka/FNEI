@@ -27,7 +27,7 @@ function MainController.init_events()
 end
 
 function MainController.open_craft_item(event)
-  
+  Controller.open_event("recipe")
 end
 
 function MainController.open_craft_fluid(event)
