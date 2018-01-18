@@ -81,9 +81,11 @@ function Gui.init_function()
   gui_function["table"] = Gui.add_table
   gui_function["drop-down"] = Gui.add_drop_down
   gui_function["checkbox"] = Gui.add_checkbox
+  gui_function["button"] = Gui.add_button
   gui_function["label"] = Gui.add_label
   gui_function["textfield"] = Gui.add_textfield
   gui_function["scroll-pane"] = Gui.add_scroll_pane
+  gui_function["choose-elem-button"] = Gui.add_choose_button
 end
 
 function Gui.add_gui_template(parent, gui_temp)
@@ -144,6 +146,10 @@ function Gui.add_checkbox(parent, gui_elem)
   return parent.add(Gui.set_def_fields(gui_elem))
 end
 
+function Gui.add_button(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
 function Gui.add_label(parent, gui_elem)
   Gui.set_def_fields(gui_elem)
 
@@ -165,6 +171,10 @@ function Gui.add_textfield(parent, gui_elem)
 end
 
 function Gui.add_scroll_pane(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(gui_elem))
+end
+
+function Gui.add_choose_button(parent, gui_elem)
   return parent.add(Gui.set_def_fields(gui_elem))
 end
 

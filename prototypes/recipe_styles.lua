@@ -465,3 +465,58 @@ data.raw["gui-style"].default["fnei_green_tech_button_style"] =
     },
   },
 }
+
+
+data.raw["gui-style"].default["fnei_test"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 68,
+  width = 68,
+
+  clicked_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 108,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 108,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    bottom_monolith_border = 1,
+    left_monolith_border = 1,
+    right_monolith_border = 1,
+    top_monolith_border = 1,
+    monolith_image = {
+      filename = "__core__/graphics/gui.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 36,
+      x = 111,
+      y = 108,
+    },
+  },
+}

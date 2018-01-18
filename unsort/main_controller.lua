@@ -26,4 +26,20 @@ function MainController.init_events()
   MainGui.init_events()
 end
 
+function MainController.open_craft_item(event)
+  
+end
+
+function MainController.open_craft_fluid(event)
+  
+end
+
+function MainController.open_usage_item(event)
+  
+end
+
+function MainController.open_usage_fluid(event)
+  
+end
+
 return MainController

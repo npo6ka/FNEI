@@ -14,6 +14,10 @@ local supported_gui_event = {
   defines.events.on_gui_elem_changed,
 }
 
+function Events.debug()
+  CustomEvents.debug()
+end
+
 function Events.add_custom_event(gui_name, gui_type, event_name, func)
   CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
 end

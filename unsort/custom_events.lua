@@ -63,4 +63,14 @@ function CustomEvents.remove_gui_events(gui_name)
   event_list[gui_name] = nil
 end
 
+function CustomEvents.debug()
+  for a,gui_event in pairs(event_list) do
+    for b,gui_name in pairs(gui_event) do
+      for c,gui_event in pairs(gui_name) do
+        out(a, b, c)
+      end
+    end
+  end
+end
+
 return CustomEvents
