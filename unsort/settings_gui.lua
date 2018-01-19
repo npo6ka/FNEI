@@ -62,6 +62,7 @@ end
 
 function SettingsGui.open_window()
   SettingsGui.close_window()
+
   return Gui.add_gui_template(Gui.get_pos(), settings_gui_template)
 end
 

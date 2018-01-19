@@ -13,6 +13,7 @@ end
 -------------- include DefaultLibs ---------------
 require "utils.data_wrapper"
 require "unsort.player"
+require "unsort/tabs"
 
 require "unsort/controller"
 

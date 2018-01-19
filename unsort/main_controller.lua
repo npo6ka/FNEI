@@ -26,20 +26,23 @@ function MainController.init_events()
   MainGui.init_events()
 end
 
+local test = Tabs:new("main", {"maintab1", "maintab2"})
+
 function MainController.open_craft_item(event)
   Controller.open_event("recipe")
 end
 
 function MainController.open_craft_fluid(event)
+  out(test:get_cur_tab())
   
 end
 
 function MainController.open_usage_item(event)
-  
+  test:set_cur_tab("maintab1")
 end
 
 function MainController.open_usage_fluid(event)
-  
+  test:set_cur_tab("maintab2")
 end
 
 return MainController
