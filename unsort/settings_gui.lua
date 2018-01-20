@@ -27,11 +27,7 @@ function SettingsGui.init_template()
 
 ------------------ tabs ------------------
 
-          { type = "flow", name = tab_flow_name, style = "fnei_settings_tab-flow", children = {
-            { type = "sprite-button", name = "main-settings", style = "fnei_settings_selected-tab", tooltip = {"fnei.main-settings"}, caption = {"fnei.main-settings"}, event = cont.set_new_tab_event },
-            { type = "sprite-button", name = "crafting-category", style = "fnei_settings_empty-tab", tooltip = {"fnei.crafting-category"}, caption = {"fnei.crafting-category"}, event = cont.set_new_tab_event },
-            { type = "sprite-button", name = "admin-settings", style = "fnei_settings_empty-tab", tooltip = {"fnei.admin-settings"}, caption = {"fnei.admin-settings"}, event = cont.set_new_tab_event },
-          }},
+          { type = "flow", name = tab_flow_name, style = "fnei_settings_tab-flow" },
 
 ------------------ settings ------------------
 
@@ -65,24 +61,18 @@ function SettingsGui.open_window()
   return Gui.add_gui_template(Gui.get_pos(), settings_gui_template)
 end
 
+function SettingsGui.draw_tabs(tabs)
+  local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
+  tabs:draw_tabs(gui)
+end
+
 function SettingsGui.close_window()
   if SettingsGui.is_gui_open() then
     Gui.get_gui(Gui.get_pos(), settings_gui_template[1].name).destroy()
   end
 end
 
-function SettingsGui.change_cur_tab(tab_index)
-  local tabs = Gui.get_gui(Gui.get_pos(), tab_flow_name)
-  for number, tab in pairs(tabs.children) do
-    if number == tab_index then
-      tab.style = "fnei_settings_selected-tab"
-    else
-      tab.style = "fnei_settings_empty-tab"
-    end
-  end
-end
-
-function SettingsGui.add_option_list(sett_list, tab_index)
+function SettingsGui.add_option_list(sett_list, tab_name)
   local gui = Gui.get_gui(Gui.get_pos(), content_gui_name)
 
   if not gui then
@@ -97,7 +87,7 @@ function SettingsGui.add_option_list(sett_list, tab_index)
   end
 
   for name, sett in pairs(sett_list) do
-    if sett.tab_num == tab_index then
+    if sett.tab == tab_name then
       SettingsGui.add_option_in_gui(gui, sett)
     end
   end

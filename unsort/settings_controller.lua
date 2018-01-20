@@ -3,11 +3,7 @@ local SettingsController = {
 }
 
 local SettingsGui = require "unsort/settings_gui"
-
-local tab_name = {}
-tab_name["main-settings"] = 1
-tab_name["crafting-category"] = 2
-tab_name["admin-settings"] = 3
+local tabs
 
 function SettingsController.exit()
   out("settings exit")
@@ -18,13 +14,14 @@ function SettingsController.open()
   out("settings open")
 
   local ret_gui = SettingsGui.open_window()
-  SettingsController.draw_settings(1)
+  SettingsGui.draw_tabs(tabs)
+  SettingsController.draw_settings()
 
   return ret_gui
 end
 
-function SettingsController.draw_settings(tab_index)
-  SettingsGui.add_option_list(Settings.get_sett_list(), tab_index)
+function SettingsController.draw_settings()
+  SettingsGui.add_option_list(Settings.get_sett_list(), tabs:get_cur_tab())
 end
 
 function SettingsController.back_key()
@@ -45,16 +42,13 @@ function SettingsController.new_gui_location(event, sett_name)
 end
 
 function SettingsController.set_new_tab_event(event, gui_name)
-  if gui_name and tab_name[gui_name] ~= nil then
-    local cur_tab = tab_name[gui_name]
-    SettingsGui.change_cur_tab(cur_tab)
-    SettingsController.draw_settings(cur_tab)
-  end
+  SettingsController.draw_settings(tabs:get_cur_tab())
 end
 
 function SettingsController.init_events()
   SettingsGui.init_events()
   Settings.init_events()
+  tabs = Tabs:new("sett-tabs", SettingsGui.name, {"main-settings", "crafting-category", "admin-settings"}, "fnei_settings_selected-tab", "fnei_settings_empty-tab", SettingsController.set_new_tab_event)
 end
 
 return SettingsController

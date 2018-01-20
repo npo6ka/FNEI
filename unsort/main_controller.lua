@@ -28,7 +28,7 @@ function MainController.get_name()
 end
 
 function MainController.init_events()
-  tabs = Tabs:new("main-tabs", MainGui.name, {"main-settings", "crafting-category", "admin-settings"}, "fnei_settings_selected-tab", "fnei_settings_empty-tab", MainController.change_tab)
+  tabs = Tabs:new("main-tabs", MainGui.name, {"default-search", "fnei-search", "category-search"}, "fnei_settings_selected-tab", "fnei_settings_empty-tab", MainController.change_tab)
   MainGui.init_events()
 end
 
