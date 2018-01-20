@@ -8,6 +8,7 @@ local factorio_search_tab
 local fnei_search_tab
 local categoty_search_tab
 local content_tb_name = "main-table"
+local tab_flow_name = "tabs-flow"
 
 function MainGui.init_template()
   local contr = Controller.get_cont("main")
@@ -30,11 +31,7 @@ function MainGui.init_template()
 
   ------------------ tabs ------------------
 
-          { type = "flow", name = "tabs-flow", style = "fnei_settings_tab-flow", children = {
-            { type = "sprite-button", name = "main-settings", style = "fnei_settings_selected-tab", tooltip = {"fnei.default-search"}, caption = {"fnei.default-search"}, event = nil},
-            { type = "sprite-button", name = "crafting-category", style = "fnei_settings_empty-tab", tooltip = {"fnei.fnei-search"}, caption = {"fnei.fnei-search"}, event = nil },
-            { type = "sprite-button", name = "admin-settings", style = "fnei_settings_empty-tab", tooltip = {"fnei.category-search"}, caption = {"fnei.category-search"}, event = nil },
-          }},
+          { type = "flow", name = tab_flow_name, style = "fnei_settings_tab-flow" },
 
   ------------------ content -------------------
 
@@ -85,6 +82,11 @@ function MainGui.close_window()
     Gui.get_gui(Gui.get_pos(), main_gui_template[1].name).destroy()
   end
   Gui.close_old_fnei_gui()
+end
+
+function MainGui.draw_tabs(tabs)
+  local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
+  tabs:draw_tabs(gui)
 end
 
 function MainGui.open_window()

@@ -4,6 +4,8 @@ local SettingsGui = {
 }
 
 local settings_gui_template
+local tab_flow_name = "tabs-flow"
+local content_gui_name = "content-table"
 
 function SettingsGui.init_template()
   local cont = Controller.get_cont(SettingsGui.name)
@@ -25,7 +27,7 @@ function SettingsGui.init_template()
 
 ------------------ tabs ------------------
 
-          { type = "flow", name = "tabs-flow", style = "fnei_settings_tab-flow", children = {
+          { type = "flow", name = tab_flow_name, style = "fnei_settings_tab-flow", children = {
             { type = "sprite-button", name = "main-settings", style = "fnei_settings_selected-tab", tooltip = {"fnei.main-settings"}, caption = {"fnei.main-settings"}, event = cont.set_new_tab_event },
             { type = "sprite-button", name = "crafting-category", style = "fnei_settings_empty-tab", tooltip = {"fnei.crafting-category"}, caption = {"fnei.crafting-category"}, event = cont.set_new_tab_event },
             { type = "sprite-button", name = "admin-settings", style = "fnei_settings_empty-tab", tooltip = {"fnei.admin-settings"}, caption = {"fnei.admin-settings"}, event = cont.set_new_tab_event },
@@ -34,7 +36,7 @@ function SettingsGui.init_template()
 ------------------ settings ------------------
 
           { type = "frame", name = "content-frame", style = "fnei_settings_content-frame", direction = "horizontal", children = {
-            { type = "table", name = "content-table", style = "fnei_settings_content-table", column_count = 2}
+            { type = "table", name = content_gui_name, style = "fnei_settings_content-table", column_count = 2}
           }}
         }}  
       }}
@@ -42,9 +44,6 @@ function SettingsGui.init_template()
   }
 
 end
-
-local tab_flow_name = "tabs-flow"
-local content_gui_name = "content-table"
 
 function SettingsGui.init_events()
   SettingsGui.init_template()
