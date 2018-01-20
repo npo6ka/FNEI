@@ -37,6 +37,6 @@ end]]
 local cr_cat
 
 function get_crafting_category()
-  if not cr_cat then out("gen"); cr_cat = CraftCategoty:get_crafting_category_list(Item:get_item_list()) end
+  if not cr_cat then cr_cat = CraftCategoty:get_crafting_category_list(Item:get_item_list()) end
   return cr_cat
 end

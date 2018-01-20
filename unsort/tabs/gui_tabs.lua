@@ -1,4 +1,6 @@
-GuiTabs = {}
+GuiTabs = {
+  classname = "FNGuiTabs",
+}
 
 function GuiTabs:new(name, en_style, dis_style)
 

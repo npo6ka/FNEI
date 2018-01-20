@@ -1,5 +1,7 @@
 if not GuiTabs then require "unsort/tabs/gui_tabs" end 
-Tabs = {}
+Tabs = {
+  classname = "FNTabs",
+}
 
 function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
 
