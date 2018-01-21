@@ -84,9 +84,9 @@ function MainGui.close_window()
   Gui.close_old_fnei_gui()
 end
 
-function MainGui.draw_tabs(tabs)
+function MainGui.draw_tabs(tabs_name)
   local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
-  tabs:draw_tabs(gui)
+  Tabs.draw_tabs(gui, tabs_name)
 end
 
 function MainGui.open_window()
