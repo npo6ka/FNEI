@@ -11,15 +11,17 @@ function GuiTabs:new(name, en_style, dis_style)
     tab_gui = nil
   }
 
-  function obj:draw_tabs(parent, tabs, cur_tab)
-    if parent and parent.valid then
-      self.tab_gui = parent.name
-    elseif self.tab_gui then
-      parent = Gui.get_gui(Gui.get_pos(), self.tab_gui)
-    else
-      Debug:error("Error in function GuiTabs:draw_tabs: parent == nil: tab_name = ", tab_name)
+  function obj:draw_tabs(gui_name, tabs, cur_tab)
+    if gui_name then
+      self.tab_gui = gui_name
+    end
+
+    if not self.tab_gui then
+      Debug:error("Error in function GuiTabs:draw_tabs: parent == nil: tab_name = ", self.tab_name)
       return
     end
+
+    parent = Gui.get_gui(Gui.get_pos(), self.tab_gui)
 
     for gui_name, gui in pairs(parent.children) do
       if gui and gui.valid then

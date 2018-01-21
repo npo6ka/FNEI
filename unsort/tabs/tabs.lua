@@ -48,8 +48,8 @@ function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
     return self.tabs
   end
 
-  function obj:draw_tabs(parent)
-    self.gui:draw_tabs(parent, self.tabs, self:get_cur_tab())
+  function obj:draw_tabs(gui_name)
+    self.gui:draw_tabs(gui_name, self.tabs, self:get_cur_tab())
   end
 
   function obj.tab_event(event, name)

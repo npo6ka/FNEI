@@ -62,8 +62,8 @@ function SettingsGui.open_window()
 end
 
 function SettingsGui.draw_tabs(tabs)
-  local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
-  tabs:draw_tabs(gui)
+  --local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
+  tabs:draw_tabs(tab_flow_name)
 end
 
 function SettingsGui.close_window()
