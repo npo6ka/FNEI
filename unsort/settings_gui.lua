@@ -75,7 +75,7 @@ end
 function SettingsGui.add_option_list(sett_list, tab_name)
   local gui = Gui.get_gui(Gui.get_pos(), content_gui_name)
 
-  if not gui then
+  if not gui or not gui.valid then
     debug:error("Error in function SettingsGui.add_option_in_gui: gui == nil")
     return
   end
