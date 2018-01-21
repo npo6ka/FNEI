@@ -4,7 +4,7 @@ local SettingsGui = {
 }
 
 local settings_gui_template
-local tab_flow_name = "tabs-flow"
+local tab_flow_name = "sett-tabs-flow"
 local content_gui_name = "content-table"
 
 function SettingsGui.init_template()

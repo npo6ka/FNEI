@@ -21,15 +21,19 @@ function GuiTabs:new(name, en_style, dis_style)
       return
     end
 
-    parent = Gui.get_gui(Gui.get_pos(), self.tab_gui)
 
-    for gui_name, gui in pairs(parent.children) do
+    parent = Gui.get_gui(Gui.get_pos(), self.tab_gui)
+    out(Player.get().name, parent.name)
+    if not (parent and parent.valid) then
+      return
+    end
+    out("redraw")
+
+    for _, gui in pairs(parent.children) do
       if gui and gui.valid then
         gui.destroy()
       end
     end
-
-    gui = Gui.add_flow(parent, { type = "flow", name = self.tab_name .. "-tab-flow"})
 
     for tb_name, val in pairs(tabs) do
       local style = dis_style
@@ -37,7 +41,7 @@ function GuiTabs:new(name, en_style, dis_style)
         style = en_style
       end
 
-      Gui.add_sprite_button(gui, { type = "sprite-button", name = self.tab_name .. "-" .. tb_name, style = style,  tooltip = {"fnei." .. tb_name}, caption = {"fnei." .. tb_name},})
+      Gui.add_sprite_button(parent, { type = "sprite-button", name = self.tab_name .. "-" .. tb_name, style = style,  tooltip = {"fnei." .. tb_name}, caption = {"fnei." .. tb_name},})
     end
   end
 
