@@ -85,8 +85,8 @@ function MainGui.close_window()
 end
 
 function MainGui.draw_tabs(tabs)
-  --local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
-  tabs:draw_tabs(tab_flow_name)
+  local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
+  tabs:draw_tabs(gui)
 end
 
 function MainGui.open_window()

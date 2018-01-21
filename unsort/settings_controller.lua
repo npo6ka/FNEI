@@ -42,6 +42,7 @@ function SettingsController.new_gui_location(event, sett_name)
 end
 
 function SettingsController.set_new_tab_event(event, gui_name)
+  SettingsGui.draw_tabs(tabs)
   SettingsController.draw_settings(tabs:get_cur_tab())
 end
 

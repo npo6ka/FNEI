@@ -52,6 +52,7 @@ function MainController.open_usage_fluid(event)
 end
 
 function MainController.change_tab(event, name)
+  MainGui.draw_tabs(tabs)
   out(name)
 end
 

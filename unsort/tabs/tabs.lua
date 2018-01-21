@@ -1,13 +1,16 @@
-if not GuiTabs then require "unsort/tabs/gui_tabs" end 
 Tabs = {
   classname = "FNTabs",
 }
+
+local GuiTabs = require "unsort/tabs/gui_tabs"
 
 function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
 
   local obj = {
     tab_name = tab_name,
     tabs = {},
+    en_style = en_style,
+    dis_style = dis_style,
     func = func
   }
 
@@ -19,7 +22,6 @@ function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
       ind = ind + 1
       Events.add_custom_event(gui_name, "sprite-button", tab_name .. "-" .. tab, obj.tab_event)
     end
-    obj.gui = GuiTabs:new(tab_name, en_style, dis_style)
   end
 
   function obj:get_tab_global()
@@ -41,15 +43,15 @@ function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
   function obj:set_cur_tab(val)
     local global = self:get_tab_global()
     global[self.tab_name] = self.tabs[val]
-    self:draw_tabs()
+    --self:draw_tabs()
   end
 
   function obj:get_tabs_list()
     return self.tabs
   end
 
-  function obj:draw_tabs(gui_name)
-    self.gui:draw_tabs(gui_name, self.tabs, self:get_cur_tab())
+  function obj:draw_tabs(parent)
+    GuiTabs.draw_tabs(parent, self)
   end
 
   function obj.tab_event(event, name)
