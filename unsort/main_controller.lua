@@ -15,6 +15,7 @@ function MainController.open()
 
   local gui = MainGui.open_window()
   MainGui.draw_tabs(tabs)
+  MainGui.draw_search_tab(tabs:get_cur_tab())
 
   return gui
 end
@@ -35,11 +36,11 @@ end
 
 
 function MainController.open_craft_item(event)
-  Controller.open_event("recipe")
+  --Controller.open_event("recipe")
 end
 
 function MainController.open_craft_fluid(event)
-  out(Tabs.get_cur_tab(tab_name))
+  --out(Tabs.get_cur_tab(tab_name))
   
 end
 
@@ -52,8 +53,7 @@ function MainController.open_usage_fluid(event)
 end
 
 function MainController.change_tab(event, name)
-  --Tabs.set_cur_tab(tab_name, Tabs.get_tab_name(tab_name, name))
-  --MainGui.draw_tabs(tab_name)
+  MainGui.draw_search_tab(tabs:get_cur_tab())
   out(name)
 end
 

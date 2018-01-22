@@ -2,18 +2,18 @@ local FneiMainGui = {
   classname = "FNFneiMainGui",
 }
 
-local factorio_search_tab
+local fnei_search_tab
 
 function FneiMainGui.init_template()
   local contr = Controller.get_cont("main")
 
-  factorio_search_tab = {
-    { type = "frame", name = "content-frame", direction = "vertical", children = {
+  fnei_search_tab = {
+    { type = "flow", name = "cont-flow", direction = "vertical", children = {
       { type = "label", name = "choose-item-label", caption = {"fnei.choose-item"} },
       { type = "flow", name = "choose-item-flow", direction = "horizontal", children = {
         { type = "choose-elem-button", name = "choose-item", elem_type = "item"},
         { type = "flow", name = "choose-item-flow", direction = "vertical", children = {
-          { type = "button", name = "item-recipe", caption = {"fnei.recipe"}, event = contr.open_craft_item},
+          { type = "button", name = "item-recipe", caption = {"fnei.fnei_search_tab"}, event = contr.open_craft_item},
           { type = "button", name = "item-usage", caption = {"fnei.usage"}, event = contr.open_usage_item },
         }},
       }},
@@ -29,13 +29,13 @@ function FneiMainGui.init_template()
   }
 end
 
-function FneiMainGui.init_events()
+function FneiMainGui.init_events(gui_name)
   FneiMainGui.init_template()
-  --Events.init_temp_events(FneiMainGui.name, factorio_search_tab)
+  Events.init_temp_events(gui_name, fnei_search_tab)
 end
 
-function FneiMainGui.draw_content()
-
+function FneiMainGui.draw_content(parent)
+  Gui.add_gui_template(parent, fnei_search_tab)
 end
 
 return FneiMainGui
