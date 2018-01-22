@@ -9,6 +9,7 @@ function CategoryMainGui.init_template()
 
   category_search_tab = {
     { type = "flow", name = "cont-flow", direction = "vertical", children = {
+      { type = "label", name = "category-tab-desription", caption = {"fnei.category-tab-desription"} },
       { type = "label", name = "choose-item-label", caption = {"fnei.choose-item"} },
       { type = "flow", name = "choose-item-flow", direction = "horizontal", children = {
         { type = "choose-elem-button", name = "choose-item", elem_type = "item"},
@@ -37,8 +38,7 @@ end
 
 function CategoryMainGui.draw_content(parent)
   Gui.add_gui_template(parent, category_search_tab)
-  Gui.get_gui(Gui.get_pos(), "choose-fluid2").locked = true
-  Gui.get_gui(Gui.get_pos(), "choose-fluid2").elem_value = "fast-inserter"
+  
   --Gui.get_gui(Gui.get_pos(), "choose-fluid2").locked = true
 end
 
