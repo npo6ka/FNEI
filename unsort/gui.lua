@@ -49,23 +49,28 @@ end
 
 function Gui.get_gui(parent, gui_name)
   local cont_name = Controller.get_cur_con_name()
-  local full_bame = Gui.create_gui_name(cont_name, gui_name)
-  return Gui:get_gui_proc(parent, full_bame)
+  local full_name = Gui.create_gui_name(cont_name, gui_name)
+  out(full_name)
+  return Gui.get_gui_proc(parent, full_name)
 end
 
-function Gui:get_gui_proc(gui, name)
-  if not self.result then self.result = {} end
-  if not gui then return end
-  for k,v in pairs(gui.children_names) do
-    if gui and gui[v] then
-      if gui[v].name == name then
-        self.result = gui[v]
-        break
+function Gui.get_gui_proc(parent, name)
+  if not parent then return end
+  local result
+  for _,g in pairs(parent.children) do
+    if g and g.valid then
+      if g.name == name then
+        return g
       end
-      self.result = self:get_gui_proc(gui[v], name)
+      result = Gui.get_gui_proc(g, name)
+      if result then 
+        return result 
+      end
+    else
+      Debug:error("not valid element: ", g.name)
     end
   end
-  return self.result
+  return result
 end
 
 function Gui.get_local_name(element)

@@ -4,7 +4,7 @@ local SettingsGui = {
 }
 
 local settings_gui_template
-local tab_flow_name = "tabs-flow"
+local tab_flow_name = "sett-tabs"
 local content_gui_name = "content-table"
 
 function SettingsGui.init_template()
@@ -27,7 +27,7 @@ function SettingsGui.init_template()
 
 ------------------ tabs ------------------
 
-          { type = "flow", name = tab_flow_name, style = "fnei_settings_tab-flow" },
+          { type = "flow", name = tab_flow_name },
 
 ------------------ settings ------------------
 
@@ -62,8 +62,7 @@ function SettingsGui.open_window()
 end
 
 function SettingsGui.draw_tabs(tabs)
-  local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
-  --tabs:draw_tabs(gui)
+  tabs:draw_tabs()
 end
 
 function SettingsGui.close_window()

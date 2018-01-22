@@ -8,7 +8,7 @@ local factorio_search_tab
 local fnei_search_tab
 local categoty_search_tab
 local content_tb_name = "main-table"
-local tab_flow_name = "tabs-flow"
+local tab_flow_name = "main-tabs"
 
 function MainGui.init_template()
   local contr = Controller.get_cont("main")
@@ -31,11 +31,11 @@ function MainGui.init_template()
 
   ------------------ tabs ------------------
 
-          { type = "flow", name = tab_flow_name, style = "fnei_settings_tab-flow" },
+          { type = "flow", name = tab_flow_name },
 
   ------------------ content -------------------
 
-        }}  
+        }}
       }}
     }}
   }
@@ -84,9 +84,8 @@ function MainGui.close_window()
   Gui.close_old_fnei_gui()
 end
 
-function MainGui.draw_tabs(tabs_name)
-  local gui = Gui.get_gui(Gui.get_pos(), tab_flow_name)
-  Tabs.draw_tabs(gui, tabs_name)
+function MainGui.draw_tabs(tabs)
+  tabs:draw_tabs()
 end
 
 function MainGui.open_window()
@@ -94,7 +93,6 @@ function MainGui.open_window()
 
   local gui = Gui.add_gui_template(Gui.get_pos(), main_gui_template)
   MainGui.draw_factorio_search_tab()
-
   return gui
 end
 
@@ -104,7 +102,7 @@ function MainGui.draw_factorio_search_tab()
   if gui then
     Gui.add_gui_template(gui, factorio_search_tab)
   else
-    Debag:error("Error in function MainGui.draw_factorio_search_tab(): gui == nil")
+    Debug:error("Error in function MainGui.draw_factorio_search_tab(): gui == nil")
   end
 end
 
