@@ -45,13 +45,23 @@ function MainGui.init_template()
   }
 end
 
-function MainGui.init_events()
+function MainGui.init_events(gui_tabs_cont_list)
   MainGui.init_template()
   Events.init_temp_events(MainGui.name, main_gui_template)
 
-  for _,gui in pairs(gui_tabs) do
-    gui.init_events(MainGui.name)
+  for gui_name,gui in pairs(gui_tabs) do
+    local contr = gui_tabs_cont_list[gui_name]
+
+    if not contr then
+      Debug:error("Error in function MainGui.init_events: controller ", gui_name, "not found")
+    end
+    
+    gui.init_events(MainGui.name, contr)
   end
+end
+
+function MainGui.get_cur_gui_tab(tab_name)
+  return gui_tabs[tab_name]
 end
 
 function MainGui.is_gui_open()

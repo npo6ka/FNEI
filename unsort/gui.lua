@@ -183,4 +183,20 @@ function Gui.add_choose_button(parent, gui_elem)
   return parent.add(Gui.set_def_fields(gui_elem))
 end
 
+function Gui.set_choose_but_val(button, val)
+  if button then
+    if button.elem_type == "item" then
+      if val and game.item_prototypes[val] then
+        button.elem_value = val
+      end
+    elseif button.elem_type == "fluid" then
+      if val and game.fluid_prototypes[val] then
+        button.elem_value = val
+      end
+    end
+  else
+    Debug:error("Gui.set_choose_but_val: gui_elem == nil")
+  end
+end
+
 Gui.init_function()

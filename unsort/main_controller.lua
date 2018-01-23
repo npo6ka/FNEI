@@ -4,7 +4,24 @@ local MainController = {
 
 local MainGui = require "unsort/main_gui"
 local tabs = "main-tabs"
-local pages = "main-pages"
+--local pages = "main-pages"
+
+local gui_tabs_cont = {}
+gui_tabs_cont["default-search"] = require "unsort/main_controllers/main_default_controller"
+gui_tabs_cont["fnei-search"] = require "unsort/main_controllers/main_fnei_controller"
+gui_tabs_cont["category-search"] = require "unsort/main_controllers/main_category_controller"
+
+function MainController.init_events()
+  local tab_list = {}
+
+  for tb_name,_ in pairs(gui_tabs_cont) do 
+    table.insert(tab_list, tb_name)
+  end
+
+  tabs = Tabs:new(tabs, MainGui.name, tab_list, "fnei_settings_selected-tab", "fnei_settings_empty-tab", MainController.change_tab)
+  --pages = Page:new(pages, MainGui.name, 2, forward_func, back_func)
+  MainGui.init_events(gui_tabs_cont)
+end
 
 function MainController.exit()
   out("Main exit")
@@ -29,37 +46,12 @@ function MainController.get_name()
   return MainGui.name
 end
 
-function MainController.init_events()
-  tabs = Tabs:new(tabs, MainGui.name, {"default-search", "fnei-search", "category-search"}, "fnei_settings_selected-tab", "fnei_settings_empty-tab", MainController.change_tab)
-  pages = Page:new(pages, MainGui.name, 2, forward_func, back_func)
-  MainGui.init_events()
+function MainController.get_cur_contr_tab()
+  return gui_tabs_cont[tabs:get_cur_tab()]
 end
 
-
-function MainController.open_craft_item(event)
-  --Controller.open_event("recipe")
-end
-
-function MainController.open_craft_fluid(event)
-  --out(Tabs.get_cur_tab(tab_name))
-  
-end
-
-function MainController.open_usage_item(event)
-  out("set new list")
-  pages:set_page_list({"a", "b", "c", "d", "e"})
-  out(pages:amount_page())
-  out(pages:get_cur_page())
-
-  local gui = Gui.get_gui(Gui.get_pos(), "cont-flow")
-  pages:draw_forward_arrow( gui )
-  pages:draw_back_arrow( gui )
-
-
-end
-
-function MainController.open_usage_fluid(event)
-
+function MainController.get_cur_gui_tab()
+  return MainGui.get_cur_gui_tab(tabs:get_cur_tab())
 end
 
 function MainController.change_tab(event, name)

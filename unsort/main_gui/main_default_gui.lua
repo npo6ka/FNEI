@@ -4,15 +4,13 @@ local DefaultMainGui = {
 
 local default_search_tab
 
-function DefaultMainGui.init_template()
-  local contr = Controller.get_cont("main")
-
+function DefaultMainGui.init_template(contr)
   default_search_tab = {
     { type = "flow", name = "cont-flow", direction = "vertical", children = {
       { type = "label", name = "default-tab-desription", caption = {"fnei.default-tab-desription"} },
       { type = "label", name = "choose-item-label", caption = {"fnei.choose-item"} },
       { type = "flow", name = "choose-item-flow", direction = "horizontal", children = {
-        { type = "choose-elem-button", name = "choose-item", elem_type = "item"},
+        { type = "choose-elem-button", name = "choose-item", elem_type = "item", event = contr.set_item},
         { type = "flow", name = "choose-item-flow", direction = "vertical", children = {
           { type = "button", name = "item-recipe", caption = {"fnei.default_search_tab"}, event = contr.open_craft_item},
           { type = "button", name = "item-usage", caption = {"fnei.usage"}, event = contr.open_usage_item },
@@ -20,7 +18,7 @@ function DefaultMainGui.init_template()
       }},
       { type = "label", name = "choose-fluid-label", caption = {"fnei.choose-fluid"} },
       { type = "flow", name = "choose-fluid-flow", direction = "horizontal", children = {
-        { type = "choose-elem-button", name = "choose-fluid", elem_type = "fluid"},
+        { type = "choose-elem-button", name = "choose-fluid", elem_type = "fluid", event = contr.set_fluid},
         { type = "flow", name = "choose-fluid-flow", direction = "vertical", children = {
           { type = "button", name = "fluid-recipe", caption = {"fnei.recipe"}, event = contr.open_craft_fluid },
           { type = "button", name = "fluid-usage", caption = {"fnei.usage"}, event = contr.open_usage_fluid },
@@ -30,13 +28,22 @@ function DefaultMainGui.init_template()
   }
 end
 
-function DefaultMainGui.init_events(gui_name)
-  DefaultMainGui.init_template()
+function DefaultMainGui.init_events(gui_name, contr)
+  DefaultMainGui.init_template(contr)
   Events.init_temp_events(gui_name, default_search_tab)
 end
 
 function DefaultMainGui.draw_content(parent)
   Gui.add_gui_template(parent, default_search_tab)
+  DefaultMainGui.set_choose_but_val()
+end
+
+function DefaultMainGui.set_choose_but_val()
+  local contr = Controller.get_cont("main").get_cur_contr_tab()
+  if contr then
+    Gui.set_choose_but_val(Gui.get_gui(Gui.get_pos(), "choose-item"), contr.get_item())
+    Gui.set_choose_but_val(Gui.get_gui(Gui.get_pos(), "choose-fluid"), contr.get_fluid())
+  end
 end
 
 return DefaultMainGui
