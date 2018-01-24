@@ -50,7 +50,6 @@ end
 function Gui.get_gui(parent, gui_name)
   local cont_name = Controller.get_cur_con_name()
   local full_name = Gui.create_gui_name(cont_name, gui_name)
-  out(full_name)
   return Gui.get_gui_proc(parent, full_name)
 end
 
@@ -180,7 +179,10 @@ function Gui.add_scroll_pane(parent, gui_elem)
 end
 
 function Gui.add_choose_button(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  local gui = parent.add(Gui.set_def_fields(gui_elem))
+  Gui.set_choose_but_val(gui, gui_elem.elem_value)
+  gui.locked = gui_elem.locked
+  return gui
 end
 
 function Gui.set_choose_but_val(button, val)

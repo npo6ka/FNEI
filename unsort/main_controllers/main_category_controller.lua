@@ -2,8 +2,14 @@ local CategoryMainController = {
   classname = "FNCategoryMainController",
 }
 
-function CategoryMainController.init_events()
+local cont_gui
 
+function CategoryMainController.init_event(gui_name, content_gui)
+  cont_gui = content_gui
+end
+
+function CategoryMainController.draw_content()
+  
 end
 
 return CategoryMainController

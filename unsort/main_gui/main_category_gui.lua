@@ -19,7 +19,7 @@ function CategoryMainGui.init_events(gui_name, contr)
   Events.init_temp_events(gui_name, category_search_tab)
 end
 
-function CategoryMainGui.draw_content(parent)
+function CategoryMainGui.draw_template(parent)
   Gui.add_gui_template(parent, category_search_tab)
   
   --Gui.get_gui(Gui.get_pos(), "choose-fluid2").locked = true

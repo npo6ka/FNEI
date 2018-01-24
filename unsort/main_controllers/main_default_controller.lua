@@ -2,26 +2,27 @@ local DefaultMainController = {
   classname = "FNDefaultMainController",
 }
 
+local cont_gui
+
+function DefaultMainController.init_event(gui_name, content_gui)
+  cont_gui = content_gui
+end
+
 function DefaultMainController.open_craft_item(event)
   --Controller.open_event("recipe")
   out("DefaultMainController.open_craft_item")
 end
 
 function DefaultMainController.open_craft_fluid(event)
-  --out(Tabs.get_cur_tab(tab_name))
   out("DefaultMainController.open_craft_fluid")
 end
 
 function DefaultMainController.open_usage_item(event)
-  -- out("set new list")
-  -- pages:set_page_list({"a", "b", "c", "d", "e"})
-  -- out(pages:amount_page())
-  -- out(pages:get_cur_page())
-
-  -- local gui = Gui.get_gui(Gui.get_pos(), "cont-flow")
-  -- pages:draw_forward_arrow( gui )
-  -- pages:draw_back_arrow( gui )
   out("DefaultMainController.open_usage_item")
+end
+
+function DefaultMainController.draw_content()
+  cont_gui.set_choose_but_val()
 end
 
 function DefaultMainController.open_usage_fluid(event)

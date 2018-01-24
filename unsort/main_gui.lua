@@ -24,8 +24,7 @@ function MainGui.init_template()
 
           { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
             { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 4, children = {
-              { type = "label", name = "header-label", caption = {"gui-browse-mods.search"} },
-              { type = "textfield", name = "search-field", event = MainGui.search_event },
+              { type = "label", name = "header-label", caption = {"FNEI"} },
               { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = MainGui.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}
@@ -37,7 +36,7 @@ function MainGui.init_template()
 
   ------------------ content -------------------
 
-          { type = "flow", name = content_flow_name, style = "fnei_recipe_flow" },
+          { type = "flow", name = content_flow_name },
 
         }}
       }}
@@ -55,8 +54,9 @@ function MainGui.init_events(gui_tabs_cont_list)
     if not contr then
       Debug:error("Error in function MainGui.init_events: controller ", gui_name, "not found")
     end
-    
+
     gui.init_events(MainGui.name, contr)
+    contr.init_event(MainGui.name, gui_tabs[gui_name])
   end
 end
 
@@ -99,7 +99,7 @@ function MainGui.draw_search_tab(cur_tab)
   end
 
   if parent and gui_tabs[cur_tab] then
-    gui_tabs[cur_tab].draw_content(parent)
+    gui_tabs[cur_tab].draw_template(parent)
   else
     Debug:error("Error in function MainGui.draw_factorio_search_tab(): gui == nil")
   end

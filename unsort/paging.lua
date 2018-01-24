@@ -67,7 +67,7 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj:get_page_list()
-    return self:get_page_global().list
+    return self:get_page_global().list or {}
   end
 
   function obj:get_list_for_tab(tab_namber)
@@ -88,10 +88,22 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj:draw_forward_arrow( parent )
+    for _, gui in pairs(parent.children) do
+      if gui and gui.valid then
+        gui.destroy()
+      end
+    end
+
     Gui.add_sprite_button(parent, { type = "sprite-button", name = self.page_name .. "-forward", style = "fnei_right_arrow_button_style" })
   end
 
   function obj:draw_back_arrow( parent )
+    for _, gui in pairs(parent.children) do
+      if gui and gui.valid then
+        gui.destroy()
+      end
+    end
+
     Gui.add_sprite_button(parent, { type = "sprite-button", name = self.page_name .. "-back", style = "fnei_left_arrow_button_style" })
   end
 
@@ -115,12 +127,6 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
     if obj.back_func then
       obj.back_func(event, tab_name)
     end
-
-    local list = obj:get_list_for_tab(obj:get_cur_page())
-    for _,el in pairs(list) do
-      out(el)
-    end
-
   end
 
   init()

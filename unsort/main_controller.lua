@@ -4,7 +4,6 @@ local MainController = {
 
 local MainGui = require "unsort/main_gui"
 local tabs = "main-tabs"
---local pages = "main-pages"
 
 local gui_tabs_cont = {}
 gui_tabs_cont["default-search"] = require "unsort/main_controllers/main_default_controller"
@@ -19,7 +18,6 @@ function MainController.init_events()
   end
 
   tabs = Tabs:new(tabs, MainGui.name, tab_list, "fnei_settings_selected-tab", "fnei_settings_empty-tab", MainController.change_tab)
-  --pages = Page:new(pages, MainGui.name, 2, forward_func, back_func)
   MainGui.init_events(gui_tabs_cont)
 end
 
@@ -33,7 +31,7 @@ function MainController.open()
 
   local gui = MainGui.open_window()
   MainGui.draw_tabs(tabs)
-  MainGui.draw_search_tab(tabs:get_cur_tab())
+  MainController.draw_tab()
 
   return gui
 end
@@ -54,9 +52,14 @@ function MainController.get_cur_gui_tab()
   return MainGui.get_cur_gui_tab(tabs:get_cur_tab())
 end
 
-function MainController.change_tab(event, name)
+function MainController.draw_tab()
   MainGui.draw_search_tab(tabs:get_cur_tab())
-  out(name)
+  gui_tabs_cont[tabs:get_cur_tab()].draw_content()
+end
+
+
+function MainController.change_tab(event, name)
+  MainController.draw_tab()
 end
 
 return MainController

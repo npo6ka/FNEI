@@ -16,7 +16,7 @@ function get_fluid_list(player)
   return game.fluid_prototypes
 end
 
-function get_item_list(player)
+function get_item_list()
   return Item:get_item_list()
 end
 
