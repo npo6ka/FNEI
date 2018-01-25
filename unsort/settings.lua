@@ -11,12 +11,15 @@ function Settings.init()
   settings_list["option-2"] =      { type = "checkbox", tab = "main-settings", def_val = false}
   settings_list["option-3"] =      { type = "checkbox", tab = "main-settings", def_val = true}
   settings_list["position"] =      { type = "drop-down", tab = "main-settings", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, event = Controller.get_cont("settings").new_gui_location}
+  settings_list["fnei-line-count"] = { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 5, max_val = 30}
   settings_list["show-recipes"] =  { type = "crafting-buildings", tab = "crafting-category", def_val = true}
   settings_list["admin-settings"] = { type = "checkbox", tab = "admin-settings", def_val = false}
 
   element_list["checkbox"] =            require "unsort/settings_elements/checkbox_element"
   element_list["crafting-buildings"] =  require "unsort/settings_elements/crafting_buildings_element"
   element_list["drop-down"] =           require "unsort/settings_elements/drop_down_element"
+  element_list["numeric-up-down"] =     require "unsort/settings_elements/numeric_up_down_element"
+
 
   for name, sett in pairs(settings_list) do
     sett.elem = element_list[sett.type]
