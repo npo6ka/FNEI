@@ -9,7 +9,15 @@ data:extend({
     height = 32,
     scale = 1,
   },
-
+  {
+    type = "sprite",
+    name = "fnei_hand_icon",
+    filename = "__core__/graphics/hand.png",
+    priority = "extra-high-no-scale",
+    width = 32,
+    height = 32,
+    scale = 1,
+  },
 --Fonts
   {
     type = "font",

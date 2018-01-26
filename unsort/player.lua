@@ -24,10 +24,19 @@ function Player.get_tick()
   return cur_tick
 end
 
-
 function Player.get_global()
   if not global.fnei[cur_player.name] then global.fnei[cur_player.name] = {} end
   return global.fnei[cur_player.name]
+end
+
+function Player.get_fglobal()
+  if cur_player.force then
+    local name = cur_player.force.name .. "_force"
+    if not global.fnei[name] then global.fnei[name] = {} end
+    return global.fnei[name]
+  else
+    Debug:error("Error in function Player.get_fglobal: force not found")
+  end
 end
 
 function Player.isAdmin()

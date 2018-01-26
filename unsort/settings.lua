@@ -8,8 +8,11 @@ local element_list = {}
 
 function Settings.init()
   settings_list["need-show"] =     { type = "checkbox", tab = "main-settings", def_val = true}
-  settings_list["option-2"] =      { type = "checkbox", tab = "main-settings", def_val = false}
-  settings_list["option-3"] =      { type = "checkbox", tab = "main-settings", def_val = true}
+  settings_list["use-only-attainable-technologies"] = { type = "checkbox", tab = "main-settings", def_val = true}
+  settings_list["use-only-attainable-recipes"] =      { type = "checkbox", tab = "main-settings", def_val = true}
+  settings_list["show-hidden-recipes"] =      { type = "checkbox", tab = "main-settings", def_val = false}
+  settings_list["show-disable-recipes"] =      { type = "checkbox", tab = "main-settings", def_val = true}
+  settings_list["show-hidden-items"] =      { type = "checkbox", tab = "main-settings", def_val = false}
   settings_list["position"] =      { type = "drop-down", tab = "main-settings", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, event = Controller.get_cont("settings").new_gui_location}
   settings_list["fnei-line-count"] = { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 5, max_val = 30}
   settings_list["show-recipes"] =  { type = "crafting-buildings", tab = "crafting-category", def_val = true}

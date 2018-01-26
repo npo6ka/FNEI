@@ -9,6 +9,8 @@ function DefaultMainController.init_event(gui_name, content_gui)
 end
 
 function DefaultMainController.open_craft_item(event)
+  get_recipe_list()
+  
   --Controller.open_event("recipe")
   out("DefaultMainController.open_craft_item")
 end

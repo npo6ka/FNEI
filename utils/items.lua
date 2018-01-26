@@ -1,14 +1,9 @@
-if not Force then Force = require "utils/fnei_force" end
----
--- Description of the module.
--- @module Item
---
 local Item = {
   classname = "FNItems"
 }
 
 function Item:get_item_list()
-  Debug:debug(Item.classname, "get_item_list_f( )")
+  Debug:debug(Item.classname, "get_item_list( )")
   return game.item_prototypes or {}
 end
 
