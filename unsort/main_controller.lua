@@ -8,7 +8,7 @@ local tabs = "main-tabs"
 local gui_tabs_cont = {}
 gui_tabs_cont["default-search"] = require "unsort/main_controllers/main_default_controller"
 gui_tabs_cont["fnei-search"] = require "unsort/main_controllers/main_fnei_controller"
-gui_tabs_cont["category-search"] = require "unsort/main_controllers/main_category_controller"
+--gui_tabs_cont["category-search"] = require "unsort/main_controllers/main_category_controller"
 
 function MainController.init_events()
   local tab_list = {}

@@ -8,27 +8,8 @@ function DefaultMainController.init_event(gui_name, content_gui)
   cont_gui = content_gui
 end
 
-function DefaultMainController.open_craft_item(event)
-  get_recipe_list()
-  
-  --Controller.open_event("recipe")
-  out("DefaultMainController.open_craft_item")
-end
-
-function DefaultMainController.open_craft_fluid(event)
-  out("DefaultMainController.open_craft_fluid")
-end
-
-function DefaultMainController.open_usage_item(event)
-  out("DefaultMainController.open_usage_item")
-end
-
 function DefaultMainController.draw_content()
   cont_gui.set_choose_but_val()
-end
-
-function DefaultMainController.open_usage_fluid(event)
-  out("DefaultMainController.open_usage_fluid")
 end
 
 function DefaultMainController.set_item(event, name)
@@ -49,6 +30,38 @@ end
 
 function DefaultMainController.get_fluid()
   return Player.get_global().main_choose_button_fluid
+end
+
+function DefaultMainController.open_craft_item(event)
+  local choose_but = Gui.get_gui(Gui.get_pos(), "choose-item")
+
+  if choose_but and choose_but.elem_value then
+    out("open item craft recipes: ", choose_but.elem_value)
+  end
+end
+
+function DefaultMainController.open_usage_item(event)
+  local choose_but = Gui.get_gui(Gui.get_pos(), "choose-item")
+  
+  if choose_but and choose_but.elem_value then
+    out("open item usage recipes: ", choose_but.elem_value)
+  end
+end
+
+function DefaultMainController.open_craft_fluid(event)
+  local choose_but = Gui.get_gui(Gui.get_pos(), "choose-fluid")
+  
+  if choose_but and choose_but.elem_value then
+    out("open fluid craft recipes: ", choose_but.elem_value)
+  end
+end
+
+function DefaultMainController.open_usage_fluid(event)
+  local choose_but = Gui.get_gui(Gui.get_pos(), "choose-fluid")
+  
+  if choose_but and choose_but.elem_value then
+    out("open fluid usage recipes: ", choose_but.elem_value)
+  end
 end
 
 return DefaultMainController
