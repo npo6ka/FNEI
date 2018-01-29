@@ -4,9 +4,6 @@ Item = require "utils/items"
 CraftCategoty = require "utils/crafting_category_list"
 
 function get_tech_list()
-  if Settings.get_val("use-only-attainable-technologies") then
-    return RawTech:get_aTech_list()
-  end
   return RawTech:get_tech_list()
 end
 
@@ -40,19 +37,6 @@ function get_item_list()
     return Item:get_vItem_list(Item:get_item_list())
   end
 end
-
---[[function get_crafting_buildings()
-  local ret_tb = {}
-  local craft_cat = CraftCategoty:get_crafting_category_list(Item:get_item_list())
-
-  for cat, items in pairs(craft_cat) do
-    for _, item in pairs(items) do
-      ret_tb[item.name] = item
-    end
-  end
-
-  return ret_tb
-end]]
 
 function get_crafting_categories_list()
   return CraftCategoty:get_crafting_category_list()

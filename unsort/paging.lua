@@ -108,10 +108,7 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj.page_forward_event(event, name)
-    out(name)
-
     obj:set_cur_page(obj:get_cur_page() + 1)
-    out(obj:get_cur_page())
 
     if obj.forward_func then
       obj.forward_func(event, tab_name)
@@ -119,10 +116,7 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj.page_back_event(event, name)
-    out(name)
-
     obj:set_cur_page(obj:get_cur_page() - 1)
-    out(obj:get_cur_page())
 
     if obj.back_func then
       obj.back_func(event, tab_name)
