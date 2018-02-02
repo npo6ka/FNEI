@@ -36,7 +36,7 @@ function DefaultMainController.open_craft_item(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-item")
 
   if choose_but and choose_but.elem_value then
-    out("open item craft recipes: ", choose_but.elem_value)
+    Controller.open_event("recipe", { type = "craft", name = choose_but.elem_value})
   end
 end
 
@@ -44,7 +44,7 @@ function DefaultMainController.open_usage_item(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-item")
   
   if choose_but and choose_but.elem_value then
-    out("open item usage recipes: ", choose_but.elem_value)
+    Controller.open_event("recipe", { type = "usage", name = choose_but.elem_value})
   end
 end
 
@@ -52,7 +52,7 @@ function DefaultMainController.open_craft_fluid(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-fluid")
   
   if choose_but and choose_but.elem_value then
-    out("open fluid craft recipes: ", choose_but.elem_value)
+    Controller.open_event("recipe", { type = "craft", name = choose_but.elem_value})
   end
 end
 
@@ -60,7 +60,7 @@ function DefaultMainController.open_usage_fluid(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-fluid")
   
   if choose_but and choose_but.elem_value then
-    out("open fluid usage recipes: ", choose_but.elem_value)
+    Controller.open_event("recipe", { type = "usage", name = choose_but.elem_value})
   end
 end
 

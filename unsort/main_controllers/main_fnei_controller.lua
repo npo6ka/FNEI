@@ -78,9 +78,9 @@ function FneiMainController.open_item_recipe_event(event, elem_name)
     end
 
     if event.button == defines.mouse_button_type.right then
-      out("open item usage recipes: ", elem_name)
+      Controller.open_event("recipe", { type = "usage", name = elem_name})
     else
-      out("open item craft recipes: ", elem_name)
+      Controller.open_event("recipe", { type = "craft", name = elem_name})
     end
   end
 end
@@ -94,9 +94,9 @@ function FneiMainController.open_fluid_recipe_event(event, elem_name)
     end
 
     if event.button == defines.mouse_button_type.right then
-      out("open fluid usage recipes: ", elem_name)
+      Controller.open_event("recipe", { type = "usage", name = elem_name})
     else
-      out("open fluid craft recipes: ", elem_name)
+      Controller.open_event("recipe", { type = "craft", name = elem_name})
     end
   end
 end

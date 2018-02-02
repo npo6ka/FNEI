@@ -41,7 +41,7 @@ function Controller.set_cur_cont(cont)
     Player.get_global().cur_cont = nil
   end
 end
-
+----------------------------------------------------------------------------
 function Controller.get_con_queue()
   local pl_global = Player.get_global()
 
@@ -69,8 +69,7 @@ function Controller.remove_all_con_in_queue()
   local queue = Controller.get_con_queue()
   queue = {}
 end
-
-
+-----------------------------------------------------------------------------
 
 
 function Controller.exit_event()
@@ -79,8 +78,16 @@ function Controller.exit_event()
   if cur_cont then
     cur_cont.exit()
     Controller.set_cur_cont(nil)
-    Player.get().opened = nil
+    Controller.reset_opened_gui()
   end
+end
+
+function Controller.set_opened_gui(gui)
+  Player.get().opened = gui
+end
+
+function Controller.reset_opened_gui()
+  Player.get().opened = nil
 end
 
 function Controller.open_event(cont_name, args)
@@ -93,7 +100,8 @@ function Controller.open_event(cont_name, args)
   local controller = Controller.get_cont(cont_name)
   if controller then
     Controller.set_cur_cont(controller)
-    Player.get().opened = controller.open(args)
+    local gui = controller.open(args)
+    Controller.set_opened_gui(gui)
   else
     Debug:error("Error in function Controller.open_event: cont_name ", cont_name, "not found")
   end

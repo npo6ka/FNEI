@@ -83,7 +83,6 @@ end
 
 
 function RecipeGui.is_gui_open()
-  out(recipe_gui_template)
   local val = Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name)
   if val and next(val) and val.valid then
     return true
@@ -100,7 +99,7 @@ end
 
 function RecipeGui.close_window()
   if RecipeGui.is_gui_open() then
-    Gui.get_gui(Gui.get_pos(), general_gui_name).destroy()
+    Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name).destroy()
   end
 end
 
