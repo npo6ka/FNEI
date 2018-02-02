@@ -15,6 +15,7 @@ require "utils.data_wrapper"
 require "unsort.player"
 require "unsort/tabs/tabs"
 require "unsort/paging"
+require "unsort/queue"
 require "unsort/events"
 
 require "unsort/controller"

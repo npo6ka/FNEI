@@ -2,7 +2,6 @@ Page = {
   classname = "FNPage",
 }
 
-
 function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
 
   local obj = {

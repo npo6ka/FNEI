@@ -2,6 +2,8 @@ Controller = {
   classname = "FNPlayer"
 }
 
+local queue = Queue:new("controllers")
+
 local controllers = {
   main = require "unsort/main_controller",
   recipe = require "unsort/recipe_controller",
@@ -31,56 +33,10 @@ function Controller.get_cur_con()
 end
 
 function Controller.get_cur_con_name()
-  return Player.get_global().cur_cont
+  return queue:get()
 end
 
-function Controller.set_cur_cont(cont)
-  if cont then
-    Player.get_global().cur_cont = cont.get_name()
-  else 
-    Player.get_global().cur_cont = nil
-  end
-end
-----------------------------------------------------------------------------
-function Controller.get_con_queue()
-  local pl_global = Player.get_global()
-
-  if not pl_global.con_queue then pl_global.con_queue = {} end
-  return pl_global.con_queue
-end
-
-function Controller.get_last_con_name_in_queue()
-  local cont = Controller.get_con_queue()
-  return cont[#cont]
-end
-
-function Controller.add_con_in_queue(cont)
-  if cont then
-    table.insert(Controller.get_con_queue(), cont.get_name())
-  end
-end
-
-function Controller.remove_last_con_in_queue()
-  local cont = Controller.get_con_queue()
-  table.remove(cont, #cont)
-end
-
-function Controller.remove_all_con_in_queue()
-  local queue = Controller.get_con_queue()
-  queue = {}
-end
 -----------------------------------------------------------------------------
-
-
-function Controller.exit_event()
-  local cur_cont = Controller.get_cur_con()
-
-  if cur_cont then
-    cur_cont.exit()
-    Controller.set_cur_cont(nil)
-    Controller.reset_opened_gui()
-  end
-end
 
 function Controller.set_opened_gui(gui)
   Player.get().opened = gui
@@ -90,16 +46,45 @@ function Controller.reset_opened_gui()
   Player.get().opened = nil
 end
 
+-----------------------------------------------------------------------------
+
+function Controller.exit_event()
+  local cur_cont = Controller.get_cur_con()
+
+  if cur_cont then
+    cur_cont.exit()
+    queue:clear()
+    --Controller.get_cont("recipe").remove_queue()
+    Controller.reset_opened_gui()
+  end
+end
+
+function Controller.close_event()
+  local cur_cont = Controller.get_cur_con()
+
+  if cur_cont then
+    cur_cont.exit()
+    queue:remove()
+    Controller.reset_opened_gui()
+  end
+end
+
 function Controller.open_event(cont_name, args)
   local cur_cont = Controller.get_cur_con()
 
   if cur_cont then
-    Controller.add_con_in_queue(cur_cont)
-    Controller.exit_event()
+    cur_cont.exit()
+    Controller.reset_opened_gui()
   end
+
+  Controller.open_gui_event(cont_name, args)
+end
+
+function Controller.open_gui_event(cont_name, args)
   local controller = Controller.get_cont(cont_name)
+
   if controller then
-    Controller.set_cur_cont(controller)
+    queue:add(cont_name)
     local gui = controller.open(args)
     Controller.set_opened_gui(gui)
   else
@@ -111,27 +96,20 @@ function Controller.back_key_event()
   local cur_cont = Controller.get_cur_con()
 
   if cur_cont and cur_cont.back_key() then
-    Controller.back_gui_event()
-  end
-end
+    Controller.close_event()
 
-function Controller.back_gui_event()
-  local prev_cont = Controller.get_last_con_name_in_queue()
-  Controller.exit_event()
-
-  if prev_cont then
-    Controller.open_event(prev_cont)
-    Controller.remove_last_con_in_queue()
+    if not queue:is_empty() then
+      local prev_cont = queue:get()
+      queue:remove()
+      Controller.open_gui_event(prev_cont)
+    end
   end
 end
 
 function Controller.main_key_event()
-  local cur_cont = Controller.get_cur_con()
-
-  if cur_cont then
-    Controller.exit_event()
-    Controller.remove_all_con_in_queue()
-  else
+  if queue:is_empty() then
     Controller.open_event("main")
+  else
+    Controller.exit_event()
   end
 end
