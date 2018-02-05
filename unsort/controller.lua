@@ -39,7 +39,9 @@ end
 -----------------------------------------------------------------------------
 
 function Controller.set_opened_gui(gui)
-  Player.get().opened = gui
+  if gui and gui.valid then
+    Player.get().opened = gui
+  end
 end
 
 function Controller.reset_opened_gui()
@@ -70,14 +72,18 @@ function Controller.close_event()
 end
 
 function Controller.open_event(cont_name, args)
-  local cur_cont = Controller.get_cur_con()
+  local controller = Controller.get_cont(cont_name)
 
-  if cur_cont then
-    cur_cont.exit()
-    Controller.reset_opened_gui()
+  if controller and controller.can_open_gui() then
+    local cur_cont = Controller.get_cur_con()
+
+    if cur_cont then
+      cur_cont.exit()
+      Controller.reset_opened_gui()
+    end
+
+    Controller.open_gui_event(cont_name, args)
   end
-
-  Controller.open_gui_event(cont_name, args)
 end
 
 function Controller.open_gui_event(cont_name, args)

@@ -42,7 +42,7 @@ function Recipe:create_attainable_recipes()
 
   for _,recipe in pairs(recipe_list) do
     local dep = rec_dep[recipe.name]
-    if dep and #dep > 0 then
+    if (dep and #dep > 0) or recipe.enabled then
       ret_tb[recipe.name] = recipe
     end
   end

@@ -40,6 +40,10 @@ function MainController.back_key()
   return true
 end
 
+function MainController.can_open_gui()
+  return true
+end
+
 function MainController.get_name()
   return MainGui.name
 end

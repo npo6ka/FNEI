@@ -28,6 +28,10 @@ function SettingsController.back_key()
   return true
 end
 
+function SettingsController.can_open_gui()
+  return true
+end
+
 function SettingsController.get_name()
   return SettingsGui.name
 end

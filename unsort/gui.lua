@@ -195,6 +195,8 @@ function Gui.set_choose_but_val(button, val)
       if val and game.fluid_prototypes[val] then
         button.elem_value = val
       end
+    elseif button.elem_type == "recipe" then
+      button.elem_value = val
     end
   else
     Debug:error("Gui.set_choose_but_val: gui_elem == nil")

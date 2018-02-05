@@ -45,17 +45,7 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj:set_page_list(item_list)
-    local page_list = {}
-
-    for _, item in pairs(item_list) do
-      if type(item) == "string" then
-        table.insert(page_list, item)
-      elseif item.name and type(item.name) == "string" then
-        table.insert(page_list, item.name)
-      end
-    end
-
-    self:get_page_global().list = page_list
+    self:get_page_global().list = item_list
 
     --set new cur_page
     local max_tab = self:amount_page()

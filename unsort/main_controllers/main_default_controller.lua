@@ -32,35 +32,44 @@ function DefaultMainController.get_fluid()
   return Player.get_global().main_choose_button_fluid
 end
 
+
 function DefaultMainController.open_craft_item(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-item")
+  local contr = Controller.get_cont("recipe")
 
   if choose_but and choose_but.elem_value then
-    Controller.open_event("recipe", { type = "craft", name = choose_but.elem_value})
+    contr.add_element_in_new_queue("craft", "item", choose_but.elem_value)
+    Controller.open_event("recipe")
   end
 end
 
 function DefaultMainController.open_usage_item(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-item")
-  
+  local contr = Controller.get_cont("recipe")
+
   if choose_but and choose_but.elem_value then
-    Controller.open_event("recipe", { type = "usage", name = choose_but.elem_value})
+    contr.add_element_in_new_queue("usage", "item", choose_but.elem_value)
+    Controller.open_event("recipe")
   end
 end
 
 function DefaultMainController.open_craft_fluid(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-fluid")
+  local contr = Controller.get_cont("recipe")
   
   if choose_but and choose_but.elem_value then
-    Controller.open_event("recipe", { type = "craft", name = choose_but.elem_value})
+    contr.add_element_in_new_queue("craft", "fluid", choose_but.elem_value)
+    Controller.open_event("recipe")
   end
 end
 
 function DefaultMainController.open_usage_fluid(event)
   local choose_but = Gui.get_gui(Gui.get_pos(), "choose-fluid")
+  local contr = Controller.get_cont("recipe")
   
   if choose_but and choose_but.elem_value then
-    Controller.open_event("recipe", { type = "usage", name = choose_but.elem_value})
+    contr.add_element_in_new_queue("usage", "fluid", choose_but.elem_value)
+    Controller.open_event("recipe")
   end
 end
 

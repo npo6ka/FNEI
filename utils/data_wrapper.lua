@@ -8,7 +8,7 @@ function get_tech_list()
 end
 
 function get_recipe_list()
-  local rec_list
+  local rec_list = {}
 
   if Settings.get_val("use-only-attainable-recipes") then
     rec_list = Recipe:get_aRecipe_list()
@@ -23,11 +23,16 @@ function get_recipe_list()
   if not Settings.get_val("show-disable-recipes") then
     rec_list = Recipe:get_enRecipe_list(rec_list)
   end
-  return ret_list
+
+  return rec_list
 end
 
 function get_fluid_list()
   return game.fluid_prototypes
+end
+
+function get_full_item_list()
+  return Item:get_item_list()
 end
 
 function get_item_list()
@@ -44,4 +49,13 @@ end
 
 function get_crafting_category(cat_name, amount_items)
   return CraftCategoty:get_craft_cat_whis_slot_amount(cat_name, amount_items)
+end
+
+function get_localised_name( element )
+  return element and (element.localised_name or element.name)
+end
+
+function round(num, idp)
+  local mult = 10^(idp or 0)
+  return math.floor(num * mult + 0.5) / mult
 end
