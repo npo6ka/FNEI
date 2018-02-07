@@ -13,12 +13,17 @@ end
 
 function Recipe:get_aRecipe_list()
   Debug:debug(Recipe.classname, "get_aRecipe_list( )")
-  if not aRecipe then aRecipe = self:create_attainable_recipes() end
-  return aRecipe or {}
+
+  local global = Player.get_fglobal()
+  if not global["aRecipe"] then
+    global["aRecipe"] = self:create_attainable_recipes()
+  end
+
+  return global["aRecipe"]
 end
 
 --return a list of technologies that can open this recipe_name or {}
-function Recipe:get_technology_for_recipe(recipe_name)
+function Recipe:get_technologies_for_recipe(recipe_name)
   Debug:debug(Recipe.classname, "get_technology_for_recipe(", recipe_name, ")")
   return RawTech:get_recipe_list_in_tech_dependencies()[recipe_name] or {}
 end

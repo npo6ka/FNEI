@@ -11,8 +11,9 @@ function out(...)
 end
 
 -------------- include DefaultLibs ---------------
-require "utils.data_wrapper"
-require "unsort.player"
+require "utils/data_wrapper"
+require "utils/utils"
+require "unsort/player"
 require "unsort/tabs/tabs"
 require "unsort/paging"
 require "unsort/queue"

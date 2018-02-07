@@ -29,16 +29,11 @@ function RecipeGui.init_template()
 
           { type = "frame", name = "paging-frame", style = "fnei_recipe_paging_frame", children = {
             { type = "table", name = "paging-table", style = "fnei_recipe_paging_table", column_count = 5, children = {
-              { type = "flow", name = "left-arrow-flow", style = "fnei_arrow_flow", children = {
-                { type = "sprite-button", name = "left-key", style = "fnei_left_arrow_button_style", tooltip = {"fnei.previous-key"}, event = nil },
-              }},
-              { type = "label", name = "type-lable", style = "fnei_recipe_type_lable", caption = "something" },
-              { type = "flow", name = "item-icon", style = "fnei_arrow_flow" },
+              { type = "flow", name = "left-arrow-flow", style = "fnei_arrow_flow" },
+              { type = "label", name = "type-label", style = "fnei_recipe_type_lable", caption = "something" },
+              { type = "flow", name = "prot-icon", style = "fnei_arrow_flow" },
               { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", caption = "page unknown" },
-              { type = "flow", name = "right-arrow-flow", style = "fnei_arrow_flow", children = {
-                { type = "sprite-button", name = "right-key", style = "fnei_right_arrow_button_style", tooltip = {"fnei.next-key"}, event = nil },
-              }},
-
+              { type = "flow", name = "right-arrow-flow", style = "fnei_arrow_flow" },
             }},
           }},
 
@@ -53,12 +48,7 @@ function RecipeGui.init_template()
             }},
             { type = "frame", name = "list-ingr-frame", style = "fnei_recipe_list_ingr_frame", children = {
               { type = "scroll-pane", name = "ingr-scroll", style = "fnei_scroll_recipe_style", direction = "vertical", children = {
-                { type = "table", name = "list-ingr", style = "fnei_recipe_list_elements", column_count = 1, children = {
-                  { type = "flow", name = "time-flow", style = "fnei_list_elements_flow", direction = "horizontal", children = {
-                    { type = "sprite-button", name = "fnei_time", style = "slot_button", tooltip = {"fnei.time"}, sprite = "fnei_time_icon" },
-                    { type = "label", name = "fnei_time_label", caption = "time"},
-                  }}
-                }}
+                { type = "table", name = "list-ingr", style = "fnei_recipe_list_elements", column_count = 1 }
               }}
             }},
             { type = "frame", name = "list-res-frame", style = "fnei_recipe_list_res_frame", children = {
@@ -120,7 +110,8 @@ end
 
 function RecipeGui.set_recipe_icon(recipe)
   local icon_flow = Gui.get_gui(Gui.get_pos(), "header-icon")
-  if icon_flow["selected-recipe"] and icon_flow["selected-recipe"].valid then icon_flow["selected-recipe"].destroy() end
+
+  clear_gui(icon_flow)
   Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", elem_type = "recipe", elem_value = recipe.name, locked = true })
 end
 
@@ -128,7 +119,12 @@ function RecipeGui.set_ingredients(list)
   local ingr_tb = Gui.get_gui(Gui.get_pos(), "list-ingr")
   local template = {}
 
-
+  table.insert(template,  
+    { type = "flow", name = "time-flow", style = "fnei_list_elements_flow", direction = "horizontal", children = {
+      { type = "sprite-button", name = "fnei_time", style = "slot_button", tooltip = {"fnei.time"}, sprite = "fnei_time_icon" },
+      { type = "label", name = "fnei_time_label", caption = "time"},
+    }})
+                  
   for _,ingr in pairs(list) do
     table.insert(template, { type = "flow", name = ingr.name .. "-flow", style = "fnei_list_elements_flow", direction = "horizontal", children = {
       { type = "choose-elem-button", name = ingr.type .. "-" .. ingr.name, elem_type = ingr.type, elem_value = ingr.name, locked = true },
@@ -136,6 +132,7 @@ function RecipeGui.set_ingredients(list)
     }})
   end
   
+  clear_gui(ingr_tb)
   Gui.add_gui_template(ingr_tb, template)
 end
 
@@ -151,15 +148,52 @@ function RecipeGui.set_products(list)
     }})
   end
   
+  clear_gui(res_tb)
   Gui.add_gui_template(res_tb, template)
 end
 
-function RecipeGui.set_made_in_list()
+function RecipeGui.set_made_in_list(recipe)
+
+
+
+  -- local craft_cat_sett = Settings.get_val("show-recipes")
+  -- local craft_cat_list = get_crafting_categories_list()
+
+  -- if craft_cat_sett.categories[recipe.category] then
+  --   local cat_list = craft_cat_list[recipe.category]
+
+  --   for _, cat in pairs(cat_list) do
+  --     if cat.type == "player" or cat.ingredient_count >= #recipe.ingredients then
+  --       if cat.val and craft_cat_sett.buildings[cat.val.name] then
+  --         draw_list[rec_name] = recipe
+  --       end
+  --     end
+  --   end
+  -- end
 
 end
 
-function RecipeGui.set_techs()
+function RecipeGui.set_techs(recipe)
 
+end
+
+function RecipeGui.set_crafting_type(action_type)
+  local label = Gui.get_gui(Gui.get_pos(), "type-label")
+
+  if action_type == "usage" then
+    label.caption = {"fnei.usage-for"}
+  elseif action_type == "craft" then
+    label.caption = {"fnei.recipe-for"}
+  else
+    label.caption = "unknown "
+  end
+end
+
+function RecipeGui.draw_cur_prot(type, name)
+  local prot_flow = Gui.get_gui(Gui.get_pos(), "prot-icon")
+  clear_gui(prot_flow)
+
+  Gui.add_choose_button(prot_flow, { type = "choose-elem-button", name = type .. "-" .. name, elem_type = type, elem_value = name, locked = true })
 end
 
 function RecipeGui.get_element_caption(element)
@@ -200,14 +234,16 @@ function RecipeGui.get_element_caption(element)
   end
 end
 
-function RecipeGui.add_header(parent)
-  -- parent = Gui.addFrame(parent, RecipeGui.name, "header-frame", "fnei_recipe_header_frame", "horizontal")
-  -- parent = Gui.addTable(parent, RecipeGui.name, "header-table", "fnei_recipe_header_table", 5)
-  -- Gui.addFrame(parent, RecipeGui.name, "header-frame")
-  -- Gui.addLabel(parent, RecipeGui.name, "header-label", "fnei_recipe_title_label", "recipe_name")
-  -- Gui.addSpriteButton(parent, { name = "back-key", style = "fnei_back_button_style", tooltip = {"fnei.back-key"} },Controller.back_key_event)
-  -- Gui.addSpriteButton(parent, { name = "settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"} }, RecipeGui.settings_key_event)
-  -- Gui.addSpriteButton(parent, { name = "exit-key", style = "fnei_exit_button_style", tooltip = {"fnei.exit-key"} }, Controller.main_key_event)
+function RecipeGui.draw_paging(page)
+  local page_gui = Gui.get_gui(Gui.get_pos(), "paging-table")
+  local label = Gui.get_gui(page_gui, "paging-label")
+  local amnt = page:amount_page()
+
+  page:draw_forward_arrow( Gui.get_gui(page_gui, "right-arrow-flow") )
+  page:draw_back_arrow( Gui.get_gui(page_gui, "left-arrow-flow") )
+  
+  if amnt == 0 then amnt = 1 end
+  label.caption = {"", {"fnei.page"}, ": " .. page:get_cur_page() .. "/".. amnt}
 end
 
 function RecipeGui.settings_key_event(event)

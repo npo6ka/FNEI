@@ -39,7 +39,7 @@ end
 function SettingsController.new_gui_location(event, sett_name)
   if not event.button then
     local index = event.element.selected_index
-    Controller.exit_event()
+    Controller.close_event()
     Settings.set_val(sett_name, index)
     Controller.open_event("settings")
   end

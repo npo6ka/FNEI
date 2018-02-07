@@ -7,7 +7,7 @@ local queue = Queue:new("recipe_queue")
 local pages = "recipe-pages"
 
 function RecipeController.init_events()
-  pages = Page:new(pages, RecipeController.get_name(), 1, draw_content, draw_content)
+  pages = Page:new(pages, RecipeController.get_name(), 1, RecipeController.change_page_event, RecipeController.change_page_event)
   RecipeGui.init_events()
 end
 
@@ -22,7 +22,8 @@ function RecipeController.open()
   RecipeController.set_page_list()
 
   local gui = RecipeGui.open_window()
-  RecipeController.draw_recipe()
+  RecipeController.change_page_event()
+
   return gui
 end
 
@@ -64,6 +65,7 @@ function RecipeController.set_page_list()
 
   if last_prot then
     pages:set_page_list(RecipeController.get_recipe_list(last_prot.action_type, last_prot.type, last_prot.name))
+    pages:set_cur_page(1)
   end
 end
 
@@ -76,36 +78,54 @@ function RecipeController.draw_recipe()
     return
   end
 
-  RecipeGui.set_recipe_time(recipe.energy)
   RecipeGui.set_recipe_name(recipe.localised_name or recipe.name)
   RecipeGui.set_recipe_icon(recipe)
   RecipeGui.set_ingredients(recipe.ingredients)
+  RecipeGui.set_recipe_time(recipe.energy)
   RecipeGui.set_products(recipe.products)
-  RecipeGui.set_made_in_list()
-  RecipeGui.set_techs()
+  RecipeGui.set_made_in_list(recipe)
+  RecipeGui.set_techs(recipe)
 end
 
--- set page
--- set craft_type
--- set cur_item
+function RecipeController.draw_paging()
+  RecipeGui.draw_paging(pages)
+end
 
+function RecipeController.set_crafting_type()
+  local cur_prot = queue.get() or {}
+  RecipeGui.set_crafting_type(cur_prot.action_type)
+end
+
+function RecipeController.draw_cur_prot()
+  local cur_prot = queue.get() or {}
+  RecipeGui.draw_cur_prot(cur_prot.type, cur_prot.name)
+end
 
 
 function RecipeController.add_prot_event(event, name)
   -- body
 end
 
+function RecipeController.change_page_event()
+  RecipeController.draw_paging()
+  RecipeController.draw_recipe()
+  RecipeController.set_crafting_type()
+  RecipeController.draw_cur_prot()
+end
+
 --------------------------------------------------------------------------------------
 
 function RecipeController.get_recipe_list(action_type, type, prot)
+  local recipe_list = {}
   if action_type == "craft" then
-    return RecipeController.get_caraft_recipe_list(prot, type)
+    recipe_list = RecipeController.get_caraft_recipe_list(prot, type)
   elseif action_type == "usage" then
-    return RecipeController.get_usage_recipe_list(prot, type)
+    recipe_list = RecipeController.get_usage_recipe_list(prot, type)
   else
     Debug:error("Error in function RecipeController.get_recipe_list: unknown craft type: ", action_type, "")
-    return {}
   end
+
+  return get_filtred_recipe_list(recipe_list)
 end
 
 function RecipeController.get_caraft_recipe_list(element, el_type)

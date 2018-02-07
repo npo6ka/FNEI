@@ -27,10 +27,6 @@ end
 function FneiMainGui.init_events(gui_name, contr)
   FneiMainGui.init_template(contr)
   Events.init_temp_events(gui_name, fnei_search_tab)
-
-
-  --contr.open_recipe_event 
-
 end
 
 function FneiMainGui.draw_template(parent)
@@ -60,11 +56,7 @@ end
 function FneiMainGui.draw_item_list(data_list)
   local gui_tabel = Gui.get_gui(Gui.get_pos(), "data-table")
 
-  for _, gui in pairs(gui_tabel.children) do
-    if gui and gui.valid then
-      gui.destroy()
-    end
-  end
+  clear_gui(gui_tabel)
 
   local contr = Controller.get_cont("main").get_cur_contr_tab()
 
