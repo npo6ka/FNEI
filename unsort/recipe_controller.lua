@@ -29,6 +29,7 @@ end
 
 function RecipeController.back_key()
   queue:remove()
+  pages:set_cur_page(1)
   return queue.is_empty()
 end
 
@@ -56,6 +57,7 @@ function RecipeController.add_element(action_type, prot_type, prot_name)
 
     if recipe_list and #recipe_list > 0 then
       queue:add({ type = prot_type, name = prot_name, action_type = action_type })
+      pages:set_cur_page(1)
     end
   end
 end
@@ -65,7 +67,6 @@ function RecipeController.set_page_list()
 
   if last_prot then
     pages:set_page_list(RecipeController.get_recipe_list(last_prot.action_type, last_prot.type, last_prot.name))
-    pages:set_cur_page(1)
   end
 end
 

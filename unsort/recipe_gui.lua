@@ -61,7 +61,7 @@ function RecipeGui.init_template()
 ------------------- madein --------------------
 
           { type = "frame", name = "madein-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
-            { type = "label", name = "madein-lable", style = "fnei_recipe_madein", caption = "something" },
+            { type = "label", name = "madein-lable", style = "fnei_recipe_madein", caption = {"fnei.made-in"} },
             { type = "table", name = "madein-table", column_count = 5 }
           }},
 
@@ -153,23 +153,26 @@ function RecipeGui.set_products(list)
 end
 
 function RecipeGui.set_made_in_list(recipe)
+  local gui_tabel = Gui.get_gui(Gui.get_pos(), "madein-table")
+  local craft_cat_sett = Settings.get_val("show-recipes")
+  local craft_cat_list = get_crafting_categories_list()
 
+  clear_gui(gui_tabel)
 
+  if craft_cat_sett.categories[recipe.category] then
+    local cat_list = craft_cat_list[recipe.category]
 
-  -- local craft_cat_sett = Settings.get_val("show-recipes")
-  -- local craft_cat_list = get_crafting_categories_list()
-
-  -- if craft_cat_sett.categories[recipe.category] then
-  --   local cat_list = craft_cat_list[recipe.category]
-
-  --   for _, cat in pairs(cat_list) do
-  --     if cat.type == "player" or cat.ingredient_count >= #recipe.ingredients then
-  --       if cat.val and craft_cat_sett.buildings[cat.val.name] then
-  --         draw_list[rec_name] = recipe
-  --       end
-  --     end
-  --   end
-  -- end
+    for _, cat in pairs(cat_list) do
+      if cat.type == "player" then
+        Gui.add_sprite_button(gui_tabel, { type = "sprite-button", name = cat.val.name,
+                                     --style = CraftingBuildingsSett.get_building_style(settings, cat, item.val.name),
+                                     tooltip = {"", {"fnei.handcraft"}},
+                                     sprite = "fnei_hand_icon" })
+      elseif cat.ingredient_count >= #recipe.ingredients and craft_cat_sett.buildings[cat.val.name] then
+        Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = cat.val.name, elem_type = "item", elem_value = cat.val.name, locked = true })
+      end
+    end
+  end
 
 end
 
