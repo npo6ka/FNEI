@@ -65,6 +65,10 @@ function RecipeGui.init_template()
             { type = "table", name = "madein-table", column_count = 5 }
           }},
 
+------------------- techs --------------------
+
+          { type = "flow", name = "tech-flow" },
+
         }}  
       }}
     }}
@@ -177,7 +181,34 @@ function RecipeGui.set_made_in_list(recipe)
 end
 
 function RecipeGui.set_techs(recipe)
+  local tech_list = get_technologies_for_recipe(recipe.name)
 
+  if tech_list and #tech_list > 0 then
+    local gui_flow = Gui.get_gui(Gui.get_pos(), "tech-flow")
+
+    clear_gui(gui_flow)
+
+    local techs = {}
+
+    for _, tech in pairs(tech_list) do
+      table.insert(techs, {
+        type = "sprite-button",
+        name = tech.name,
+        style = "fnei_green_tech_button_style",
+        tooltip = get_localised_name(tech),
+        sprite = "technology/" .. tech.name
+      })
+    end
+
+    local template = {
+      { type = "frame", name = "tech-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
+        { type = "label", name = "tech-label", style = "fnei_recipe_technologies", caption = {"fnei.technology"} },
+        { type = "table", name = "tach-table", column_count = 3, children = techs },
+      }}
+    }
+
+    Gui.add_gui_template(gui_flow, template)
+  end
 end
 
 function RecipeGui.set_crafting_type(action_type)

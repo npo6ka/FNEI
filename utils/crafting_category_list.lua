@@ -16,11 +16,6 @@ function CraftCategoty:get_crafting_category_list()
   return craf_cat or {}
 end
 
--- function CraftCategoty:get_craft_cat_whis_slot_amount(category, need_amount_slot)
---   Debug:debug(CraftCategoty.classname, "get_craft_cat_whis_slot_amount(", category, ",", need_amount_slot, ")")
---   return self:get_crafting_categories_list_whis_amount(category, need_amount_slot) or {}
--- end
-
 ----------------------- secondary function --------------------------
 
 function CraftCategoty:create_crafting_category_list()
@@ -54,31 +49,5 @@ function CraftCategoty:create_crafting_category_list()
 
   return ret_tb
 end
-
--- function CraftCategoty:get_crafting_categories_list_whis_amount(category, amount)
---   local ret_tb = {}
---   local craf_cat = CraftCategoty:get_crafting_category_list()[category]
---   if craf_cat then
---     for _,item in pairs(craf_cat) do
---       --if item.type == "building" then
---       if item.type ~= "player" then
---         if item.val and item.val.place_result then
---           local entity = item.val.place_result
---           if entity.ingredient_count ~= nil then 
---             if entity.ingredient_count >= amount then
---               table.insert(ret_tb, item)
---             end
---           else
---             table.insert(ret_tb, item)
---           end
---         end
---       else--if item.type == "player" then
---         table.insert(ret_tb, item)
---       end
---     end
---   end
-
---   return ret_tb
--- end
 
 return CraftCategoty

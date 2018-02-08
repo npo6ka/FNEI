@@ -48,7 +48,7 @@ function get_crafting_categories_list()
 end
 
 function get_technologies_for_recipe(recipe_name)
-  Recipe:get_technologies_for_recipe(recipe_name)
+  return Recipe:get_technologies_for_recipe(recipe_name)
 end
 
 function is_attainable_tech(tech)
