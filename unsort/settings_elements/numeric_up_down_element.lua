@@ -41,12 +41,12 @@ function NumericUpDown.get_template(sett)
   return 
   {
     { type = "flow", name = sett.name .. "_flow", style = nil, children = {
-      { type = "textfield", name = sett.name .. textfield_name, style = nil, event = NumericUpDown.text_chenge_event },
-      { type = "flow", name = sett.name .. "_vertical_flow", style = nil, direction = "vertical", children = {
-        { type = "button", name = sett.name .. up_but_name, style = nil, event =  NumericUpDown.up_event },
-        { type = "button", name = sett.name .. down_but_name, style = nil, event = NumericUpDown.down_event },
+      { type = "textfield", name = sett.name .. textfield_name, style = "fnei_settings_numeric-text-field", event = NumericUpDown.text_chenge_event },
+      { type = "flow", name = sett.name .. "_vertical_flow", style = "fnei_settings_updown-arrow-flow", direction = "vertical", children = {
+        { type = "button", name = sett.name .. up_but_name, style = "fnei_settings_up_arrow", event =  NumericUpDown.up_event },
+        { type = "button", name = sett.name .. down_but_name, style = "fnei_settings_down_arrow", event = NumericUpDown.down_event },
       }},
-      { type = "label", name = sett.name .. war_label_name, style = nil, caption = "" },
+      { type = "label", name = sett.name .. war_label_name, style = "fnei_settings_warning-text", caption = "" },
     }}
   }
 end
@@ -69,32 +69,51 @@ function NumericUpDown.text_chenge_event(event, sett_name)
       local num = tonumber(val)
       element.text = num or ""
       local option = Settings.get_sett_list()[sett_name] or {}
-      local gui = Gui.get_gui(Gui.get_pos(), sett_name .. war_label_name)
 
-      if num >= option.min_val and num <= option.max_val then
+      if num and num >= option.min_val and num <= option.max_val then
         Settings.set_val(sett_name, tonumber(val))
-        gui.caption = ""
+        NumericUpDown.success_set(sett_name)
       else
-        local msg = ": [" .. (option.min_val or 0) .. "-" .. (option.max_val or "2^32") .. "]"
-
-        gui.caption = {"", {"fnei.out-of-range"}, msg}
+        NumericUpDown.wrong_set(sett_name, ": [" .. (option.min_val or 0) .. "-" .. (option.max_val or "2^32") .. "]")
       end
     end
   end
 end
 
+function NumericUpDown.success_set(sett_name)
+  local gui_label = Gui.get_gui(Gui.get_pos(), sett_name .. war_label_name)
+  local text_field = Gui.get_gui(Gui.get_pos(), sett_name .. textfield_name)
+
+  if not gui_label or not text_field then
+    return
+  end
+
+  gui_label.caption = ""
+  text_field.style = "fnei_settings_numeric-text-field"
+end
+
+function NumericUpDown.wrong_set(sett_name, msg)
+  local gui_label = Gui.get_gui(Gui.get_pos(), sett_name .. war_label_name)
+  local text_field = Gui.get_gui(Gui.get_pos(), sett_name .. textfield_name)
+
+  if not gui_label or not text_field then
+    return
+  end
+
+  gui_label.caption = {"", {"fnei.out-of-range"}, msg}
+  text_field.style = "fnei_settings_wrong_numeric-text-field"
+end
+
 function NumericUpDown.up_event(event, sett_name)
   sett_name = string.sub(sett_name, 0, string.len(sett_name) - string.len(up_but_name) )
   Settings.set_val(sett_name, Settings.get_val(sett_name) + 1)
-  local gui = Gui.get_gui(Gui.get_pos(), sett_name .. war_label_name)
-  if gui then gui.caption = "" end
+  NumericUpDown.success_set(sett_name)
 end
 
 function NumericUpDown.down_event(event, sett_name)
   sett_name = string.sub(sett_name, 0, string.len(sett_name) - string.len(down_but_name) )
   Settings.set_val(sett_name, Settings.get_val(sett_name) - 1)
-  local gui = Gui.get_gui(Gui.get_pos(), sett_name .. war_label_name)
-  if gui then gui.caption = "" end
+  NumericUpDown.success_set(sett_name)
 end
 
 

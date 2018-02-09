@@ -1,5 +1,23 @@
 -------------------------Font style-----------------------
 
+-------------------------text_field_style--------------------------
+
+data.raw["gui-style"].default["fnei_settings_numeric-text-field"] =
+{
+  type = "textfield_style",
+  parent = "textfield",
+  width = 50,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_settings_wrong_numeric-text-field"] =
+{
+  type = "textfield_style",
+  parent = "invalid_value_textfield",
+  width = 50,
+  scalable = false,
+}
+
 -------------------------flow_style--------------------------
 
 data.raw["gui-style"].default["fnei_settings_genetal-flow"] =
@@ -16,6 +34,13 @@ data.raw["gui-style"].default["fnei_settings_tab-flow"] =
 {
   type = "horizontal_flow_style",
   scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_settings_updown-arrow-flow"] =
+{
+  type = "vertical_flow_style",
+  scalable = false,
+  vertical_spacing = 2,
 }
 
 -------------------------frame_style--------------------------
@@ -437,6 +462,70 @@ data.raw["gui-style"].default["fnei_settings_disable-category"] =
   },
 }
 
+data.raw["gui-style"].default["fnei_settings_up_arrow"] = 
+{
+  type = "button_style",
+  parent = "button",
+  height = 12,
+  width = 24,
+  scalable = false,
+
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__core__/graphics/switch-quickbar.png",
+      height = 12,
+      priority = "extra-high-no-scale",
+      width = 24,
+      x = 0,
+      y = 0,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__core__/graphics/switch-quickbar.png",
+      height = 12,
+      priority = "extra-high-no-scale",
+      width = 24,
+      x = 24,
+      y = 0,
+    },
+  },
+}
+
+data.raw["gui-style"].default["fnei_settings_down_arrow"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 12,
+  width = 24,
+  scalable = false,
+
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__core__/graphics/switch-quickbar.png",
+      height = 12,
+      priority = "extra-high-no-scale",
+      width = 24,
+      x = 0,
+      y = 12,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__core__/graphics/switch-quickbar.png",
+      height = 12,
+      priority = "extra-high-no-scale",
+      width = 24,
+      x = 24,
+      y = 12,
+    },
+  },
+}
+
 ------------------------label_style-------------------------
 
 data.raw["gui-style"].default["fnei_settings_header-label"] =
@@ -466,4 +555,17 @@ data.raw["gui-style"].default["fnei_settings_craft-category-label"] =
   width = 506,
   align = "center",
   scalable = false,
+}
+
+
+data.raw["gui-style"].default["fnei_settings_warning-text"] =
+{
+  type = "label_style",
+  width = 100,
+  scalable = false,
+  font_color = {
+    b = 0,
+    g = 0.2,
+    r = 1
+  },
 }

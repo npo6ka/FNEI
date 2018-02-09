@@ -20,36 +20,3 @@ data:extend({
     consuming = "all"
   }
 })
-
-
-
-data:extend({
-{
-    type = "technology",
-    name = "electronics-machine-10",
-    icon = "__base__/graphics/technology/automation.png",
-    icon_size = 128,
-    effects =
-    {
-      {
-        type = "unlock-recipe",
-        recipe = "electronics-machine-1"
-      }
-    },
-    prerequisites =
-    {
-      "automation",
-    },
-    unit =
-    {
-      count = 3000000,
-      ingredients =
-      {
-        {"science-pack-1", 1},
-      },
-      time = 15
-    },
-    upgrade = true,
-    order = "a-c-a",
-  }}
-)
