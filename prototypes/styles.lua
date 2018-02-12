@@ -100,6 +100,78 @@ data.raw["gui-style"].default["fnei_empty_slot_button_style"] =
   }
 }
 
+data.raw["gui-style"].default["fnei_default_empty-tab"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  font = "font-mb",
+  scalable = false,
+    
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/selected_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/default_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/hovered_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_default_selected-tab"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  font = "font-mb",
+  scalable = false,
+    
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/selected_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/selected_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/hovered_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  }
+}
+
 
 -------------------------frame_style--------------------------
 

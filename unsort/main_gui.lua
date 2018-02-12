@@ -13,18 +13,16 @@ local content_flow_name = "content-flow"
 local tab_flow_name = "main-tabs"
 
 function MainGui.init_template()
-  --local contr = Controller.get_cont("main")
-
   main_gui_template = {
-    { type = "flow", name = "main-flow", style = "fnei_recipe_flow", children = {
-      { type = "frame", name = "main-frame", style = "fnei_recipe_main_frame", children = {
-        { type = "table", name = "main-table", style = "fnei_recipe_main_table", column_count = 1, children = {
+    { type = "flow", name = "main-flow", style = "fnei_main_genetal-flow", children = {
+      { type = "frame", name = "main-frame", style = "fnei_main_frame", children = {
+        { type = "table", name = "main-table", style = "fnei_main_table", column_count = 1, children = {
 
   ------------------ header ------------------
 
-          { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
-            { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 4, children = {
-              { type = "label", name = "header-label", caption = {"fnei.FNEI"} },
+          { type = "frame", name = "header-frame", style = "fnei_main_content-frame", direction = "horizontal", children = {
+            { type = "table", name = "header-table", style = "fnei_main_header-table", column_count = 4, children = {
+              { type = "label", name = "header-label", style = "fnei_main_header-label", caption = {"fnei.FNEI"} },
               { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = MainGui.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}

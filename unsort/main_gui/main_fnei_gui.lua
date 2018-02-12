@@ -3,23 +3,24 @@ local FneiMainGui = {
 }
 
 local fnei_search_tab
+local search_field_name = "search-field"
 
 function FneiMainGui.init_template(contr)
   --local contr = Controller.get_cont("main")
 
   fnei_search_tab = {
-    { type = "frame", name = "content-frame", direction = "vertical", children = {
-      { type = "label", name = "description-label", caption = {"gui.fnei-tab-description"} },
+    { type = "frame", name = "content-frame", style = "fnei_main_content-frame", direction = "vertical", children = {
+      { type = "label", name = "description-label", style = "fnei_main_tab-description-label", caption = {"fnei.fnei-tab-description"} },
       { type = "flow", name = "search-flow", direction = "horizontal", children = {
         { type = "label", name = "header-label", caption = {"gui-browse-mods.search"} },
-        { type = "textfield", name = "search-field", event = contr.search_event },
+        { type = "textfield", name = search_field_name, event = contr.search_event },
       }},
       { type = "flow", name = "paging-flow", direction = "horizontal", children = {
         { type = "flow", name = "back-tab-flow" },
         { type = "label", name = "page-label", caption = "unknown-page" },
         { type = "flow", name = "forward-tab-flow" },
       }},
-      { type = "table", name = "data-table", column_count = 10 }
+      { type = "table", name = "data-table", style = "fnei_main_fnei_content_table", column_count = 12 }
     }}
   }
 end
@@ -32,6 +33,15 @@ end
 function FneiMainGui.draw_template(parent)
   Gui.add_gui_template(parent, fnei_search_tab)
 end
+
+function FneiMainGui.focus_on_search(parent)
+  local cur_tab = Gui.get_gui(Gui.get_pos(), search_field_name)
+  
+  if cur_tab and cur_tab.valid then
+    cur_tab.focus()
+  end
+end
+
 
 function FneiMainGui.set_search_field(search_text)
   local textfield = Gui.get_gui(Gui.get_pos(), "search-field")
@@ -60,11 +70,28 @@ function FneiMainGui.draw_item_list(data_list)
 
   local contr = Controller.get_cont("main").get_cur_contr_tab()
 
+--green_slot_button
+--red_slot_button
+--selected_slot_button --orange
+
+--researched_technology_slot --green
+--available_technology_slot --yellow
+--not_available_technology_slot --red
+--technology_slot_button  --grey
+  
+  local items = get_full_item_list()
+
   for _,prot in pairs(data_list) do
     if string.match(prot, "item%_") then
-      Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "item", elem_value = string.sub(prot, 6), locked = true })
+      local item_name = string.sub(prot, 6)
+      local style = "fnei_main_grey_slot_button"
+      if items and items[item_name] and items[item_name].has_flag("hidden") then
+        style = "fnei_main_red_slot_button"
+      end
+      
+      Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "item", style = style, elem_value = item_name, locked = true })
     elseif string.match(prot, "fluid%_") then
-      Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "fluid", elem_value = string.sub(prot, 7), locked = true })
+      Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "fluid", style = "fnei_main_grey_slot_button", elem_value = string.sub(prot, 7), locked = true })
     end
   end
 end

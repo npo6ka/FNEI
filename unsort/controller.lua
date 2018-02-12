@@ -39,13 +39,15 @@ end
 -----------------------------------------------------------------------------
 
 function Controller.set_opened_gui(gui)
-  if gui and gui.valid then
+  if Settings.get_val("need-show") and gui and gui.valid then
     Player.get().opened = gui
   end
 end
 
 function Controller.reset_opened_gui()
-  Player.get().opened = nil
+  if Settings.get_val("need-show") then
+    Player.get().opened = nil
+  end
 end
 
 -----------------------------------------------------------------------------

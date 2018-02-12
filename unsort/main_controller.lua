@@ -17,7 +17,7 @@ function MainController.init_events()
     table.insert(tab_list, tb_name)
   end
 
-  tabs = Tabs:new(tabs, MainGui.name, tab_list, "fnei_settings_selected-tab", "fnei_settings_empty-tab", MainController.change_tab)
+  tabs = Tabs:new(tabs, MainGui.name, tab_list, "fnei_main_selected-tab", "fnei_main_empty-tab", MainController.change_tab)
   MainGui.init_events(gui_tabs_cont)
 end
 

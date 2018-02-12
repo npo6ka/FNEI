@@ -1,7 +1,7 @@
 require "prototypes.styles"
 require "prototypes.main_styles"
 require "prototypes.recipe_styles"
-require "prototypes.option_styles"
+require "prototypes.settings_styles"
 
 data:extend({
   {

@@ -6,8 +6,8 @@ local default_search_tab
 
 function DefaultMainGui.init_template(contr)
   default_search_tab = {
-    { type = "frame", name = "content-frame", direction = "vertical", children = {
-      { type = "label", name = "default-tab-desription", style = "fnei_settings_craft-category-label", caption = {"fnei.default-tab-desription"} },
+    { type = "frame", name = "content-frame", direction = "vertical", style = "fnei_main_content-frame", children = {
+      { type = "label", name = "default-tab-desription", style = "fnei_main_tab-description-label", caption = {"fnei.default-tab-desription"} },
       { type = "label", name = "choose-item-label", caption = {"fnei.choose-item"} },
       { type = "flow", name = "choose-item-flow", direction = "horizontal", children = {
         { type = "choose-elem-button", name = "choose-item", elem_type = "item", event = contr.set_item },

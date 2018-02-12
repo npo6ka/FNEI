@@ -112,77 +112,19 @@ data.raw["gui-style"].default["fnei_settings_craft-cat-scroll"] =
 data.raw["gui-style"].default["fnei_settings_empty-tab"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "fnei_default_empty-tab",
   height = 36,
   width = 167,
-  font = "font-mb",
   scalable = false,
-    
-  clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/selected_tab.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 169,
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/default_tab.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 169,
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/hovered_tab.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 169,
-    },
-  }
 }
 
 data.raw["gui-style"].default["fnei_settings_selected-tab"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "fnei_default_selected-tab",
   height = 36,
   width = 167,
   scalable = false,
-  font = "font-mb",
-    
-  clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/selected_tab.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 169,
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/selected_tab.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 169,
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/hovered_tab.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 169,
-    },
-  }
 }
 
 data.raw["gui-style"].default["fnei_settings_enabled-building"] = 
@@ -531,7 +473,7 @@ data.raw["gui-style"].default["fnei_settings_down_arrow"] =
 data.raw["gui-style"].default["fnei_settings_header-label"] =
 {
   type = "label_style",
-  font = "font-mb",
+  font = "font-lb",
   width = 432,
   align = "center",
   scalable = false,
@@ -551,12 +493,10 @@ data.raw["gui-style"].default["fnei_settings_param-label"] =
 data.raw["gui-style"].default["fnei_settings_craft-category-label"] =
 {
   type = "label_style",
-  font = "font-mb",
   width = 506,
   align = "center",
   scalable = false,
 }
-
 
 data.raw["gui-style"].default["fnei_settings_warning-text"] =
 {
