@@ -11,14 +11,14 @@ function FneiMainGui.init_template(contr)
   fnei_search_tab = {
     { type = "frame", name = "content-frame", style = "fnei_main_content-frame", direction = "vertical", children = {
       { type = "label", name = "description-label", style = "fnei_main_tab-description-label", caption = {"fnei.fnei-tab-description"} },
-      { type = "flow", name = "search-flow", direction = "horizontal", children = {
-        { type = "label", name = "header-label", caption = {"gui-browse-mods.search"} },
-        { type = "textfield", name = search_field_name, event = contr.search_event },
+      { type = "flow", name = "search-flow", style = "fnei_main_content_flow", direction = "horizontal", children = {
+        { type = "label", name = "header-label", style = "fnei_main_default_search_label", caption = {"", {"gui-browse-mods.search"}, " :"} },
+        { type = "textfield", name = search_field_name, style = "fnei_main_search_field", event = contr.search_event },
       }},
-      { type = "flow", name = "paging-flow", direction = "horizontal", children = {
-        { type = "flow", name = "back-tab-flow" },
-        { type = "label", name = "page-label", caption = "unknown-page" },
-        { type = "flow", name = "forward-tab-flow" },
+      { type = "flow", name = "paging-flow", style = "fnei_main_content_flow", direction = "horizontal", children = {
+        { type = "flow", name = "back-tab-flow", style = "fnei_main_content_flow" },
+        { type = "label", name = "page-label", style = "fnei_main_page_label", caption = "" },
+        { type = "flow", name = "forward-tab-flow", style = "fnei_main_content_flow" },
       }},
       { type = "table", name = "data-table", style = "fnei_main_fnei_content_table", column_count = 12 }
     }}

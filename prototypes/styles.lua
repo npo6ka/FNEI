@@ -53,7 +53,7 @@ data:extend({
     type = "font",
     name = "font-lb",
     from = "default-semibold",
-    size = 18
+    size = 17
   }
 })
 

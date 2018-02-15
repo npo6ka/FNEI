@@ -5,10 +5,36 @@
 data.raw["gui-style"].default["fnei_main_genetal-flow"] =
 {
   type = "horizontal_flow_style",
-  minimal_width = 526,
-  maximal_width = 526,
-  minimal_height = 800,
-  maximal_height = 800,
+  width = 526,
+  height = 760,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_content_flow"] =
+{
+  type = "horizontal_flow_style",
+  horizontal_spacing = 1,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_default_selection_flow"] =
+{
+  type = "horizontal_flow_style",
+  horizontal_spacing = 4,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_default_choose_flow"] =
+{
+  type = "horizontal_flow_style",
+  top_padding = 6,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_default_element_flow"] =
+{
+  type = "vertical_flow_style",
+  width = 230,
   scalable = false,
 }
 
@@ -58,6 +84,15 @@ data.raw["gui-style"].default["fnei_main_fnei_content_table"] =
   scalable = false,
 }
 
+data.raw["gui-style"].default["fnei_main_default_content_table"] =
+{
+  type = "table_style",
+  parent = "fnei_default_table",
+  horizontal_spacing = 4,
+  vertical_spacing = 2,
+  scalable = false,
+}
+
 ----------------------scroll_pane_style-----------------------
 
 ------------------------label_style-------------------------
@@ -71,11 +106,46 @@ data.raw["gui-style"].default["fnei_main_header-label"] =
   scalable = false,
 }
 
+data.raw["gui-style"].default["fnei_main_default_prot_label"] =
+{
+  type = "label_style",
+  font = "font-mb",
+  scalable = false,
+}
+
 data.raw["gui-style"].default["fnei_main_tab-description-label"] =
 {
   type = "label_style",
   width = 454,
   align = "center",
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_default_search_label"] =
+{
+  type = "label_style",
+  width = 300,
+  top_padding = 3,
+  align = "right",
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_page_label"] =
+{
+  type = "label_style",
+  width = 396,
+  top_padding = 3,
+  align = "center",
+  scalable = false,
+}
+
+-------------------------text_field_style--------------------------
+
+data.raw["gui-style"].default["fnei_main_search_field"] =
+{
+  type = "textfield_style",
+  parent = "textfield",
+  width = 152,
   scalable = false,
 }
 
@@ -113,5 +183,24 @@ data.raw["gui-style"].default["fnei_main_grey_slot_button"] = {
   parent = "slot_button",
   height = 36,
   width = 36,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_default_search_slot_button"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 48,
+  width = 48,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_default_button"] = 
+{
+  type = "button_style",
+  height = 30,
+  width = 120,
+  top_padding = 0,
+  font = "font-mb",
   scalable = false,
 }
