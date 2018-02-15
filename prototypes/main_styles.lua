@@ -6,7 +6,7 @@ data.raw["gui-style"].default["fnei_main_genetal-flow"] =
 {
   type = "horizontal_flow_style",
   width = 526,
-  height = 760,
+  height = 710,
   scalable = false,
 }
 

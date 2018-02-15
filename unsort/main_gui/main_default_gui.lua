@@ -16,9 +16,9 @@ function DefaultMainGui.init_template(contr)
               { type = "choose-elem-button", name = "choose-item", style = "fnei_main_default_search_slot_button", elem_type = "item", event = contr.set_item }
             }},
             { type = "table", name = "item-content-tabel", style = "fnei_main_default_content_table", column_count = 2, children = {
-              { type = "checkbox", name = "item-checkbox-recipe", style = nil, state = false, tooltip = {"fnei.default_open_type"}, event = nil},
-              { type = "button", name = "item-recipe", style = "fnei_main_default_button", caption = {"fnei.recipe"}, event = contr.open_craft_item},
-              { type = "checkbox", name = "item-checkbox-usage", style = nil, state = false, tooltip = {"fnei.default_open_type"}, event = nil},
+              { type = "checkbox", name = "item-checkbox-craft", style = nil, state = false, tooltip = {"fnei.item-auto-craft"}, event = contr.item_craft_checkbox_event},
+              { type = "button", name = "item-craft", style = "fnei_main_default_button", caption = {"fnei.recipe"}, event = contr.open_craft_item},
+              { type = "checkbox", name = "item-checkbox-usage", style = nil, state = false, tooltip = {"fnei.item-auto-usage"}, event = contr.item_usage_checkbox_event},
               { type = "button", name = "item-usage", style = "fnei_main_default_button", caption = {"fnei.usage"}, event = contr.open_usage_item },
             }}
           }}
@@ -30,9 +30,9 @@ function DefaultMainGui.init_template(contr)
               { type = "choose-elem-button", name = "choose-fluid", style = "fnei_main_default_search_slot_button", elem_type = "fluid", event = contr.set_fluid }
             }},
             { type = "table", name = "fluid-content-tabel", style = "fnei_main_default_content_table", column_count = 2, children = {
-              { type = "checkbox", name = "fluid-checkbox-recipe", style = nil, state = false, tooltip = {"fnei.default_open_type"}, event = nil},
-              { type = "button", name = "fluid-recipe", style = "fnei_main_default_button", caption = {"fnei.recipe"}, event = contr.open_craft_fluid},
-              { type = "checkbox", name = "fluid-checkbox-usage", style = nil, state = false, tooltip = {"fnei.default_open_type"}, event = nil},
+              { type = "checkbox", name = "fluid-checkbox-craft", style = nil, state = false, tooltip = {"fnei.fluid-auto-craft"}, event = contr.fluid_craft_checkbox_event},
+              { type = "button", name = "fluid-craft", style = "fnei_main_default_button", caption = {"fnei.recipe"}, event = contr.open_craft_fluid},
+              { type = "checkbox", name = "fluid-checkbox-usage", style = nil, state = false, tooltip = {"fnei.fluid-auto-usage"}, event = contr.fluid_usage_checkbox_event},
               { type = "button", name = "fluid-usage", style = "fnei_main_default_button", caption = {"fnei.usage"}, event = contr.open_usage_fluid },
             }}
           }}
@@ -49,6 +49,20 @@ end
 
 function DefaultMainGui.draw_template(parent)
   Gui.add_gui_template(parent, default_search_tab)
+end
+
+function DefaultMainGui.set_checkbox_val(chb1, chb2, chb3, chb4)
+  local checkbox = Gui.get_gui(Gui.get_pos(), "item-checkbox-craft") or {}
+  checkbox.state = chb1
+
+  local checkbox = Gui.get_gui(Gui.get_pos(), "item-checkbox-usage") or {}
+  checkbox.state = chb2
+
+  local checkbox = Gui.get_gui(Gui.get_pos(), "fluid-checkbox-craft") or {}
+  checkbox.state = chb3
+
+  local checkbox = Gui.get_gui(Gui.get_pos(), "fluid-checkbox-usage") or {}
+  checkbox.state = chb4
 end
 
 function DefaultMainGui.set_choose_but_val()
