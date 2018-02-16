@@ -71,7 +71,7 @@ function SettingsGui.close_window()
   end
 end
 
-function SettingsGui.add_option_list(sett_list, tab_name)
+function SettingsGui.add_option_list(sett_list)
   local gui = Gui.get_gui(Gui.get_pos(), content_gui_name)
 
   if not gui or not gui.valid then
@@ -86,9 +86,7 @@ function SettingsGui.add_option_list(sett_list, tab_name)
   end
 
   for name, sett in pairs(sett_list) do
-    if sett.tab == tab_name then
-      SettingsGui.add_option_in_gui(gui, sett)
-    end
+    SettingsGui.add_option_in_gui(gui, sett)
   end
 end
 

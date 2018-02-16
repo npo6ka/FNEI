@@ -21,7 +21,7 @@ function CheckBoxSett.add_label_func(parent, sett)
 end
 
 function CheckBoxSett.add_content_func(parent, sett)
-  Gui.add_checkbox(parent, { type = "checkbox", name = sett.name, state = Settings.get_val(sett.name) })
+  Gui.add_checkbox(parent, { type = "checkbox", name = sett.name, state = Settings.get_val(sett.name) or false })
 end
 
 function CheckBoxSett.event(event, sett_name)

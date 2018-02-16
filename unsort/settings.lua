@@ -19,14 +19,16 @@ function Settings.init()
   
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   
-  settings_list["admin-settings"] =               { type = "checkbox", tab = "admin-settings", def_val = false }
+  settings_list["admin-settings"] =               { type = "global-checkbox", tab = "admin-settings", def_val = nil, event = Controller.get_cont("settings").check_admin_settings_event }
+  settings_list["show-tech"] =                    { type = "checkbox", tab = "admin-settings", def_val = false }
 
-  settings_list["item-auto-craft"] =        { type = "checkbox", tab = "default-settings", def_val = false }
-  settings_list["item-auto-usage"] =        { type = "checkbox", tab = "default-settings", def_val = false }
-  settings_list["fluid-auto-craft"] =        { type = "checkbox", tab = "default-settings", def_val = false }
-  settings_list["fluid-auto-usage"] =        { type = "checkbox", tab = "default-settings", def_val = false }
+  settings_list["item-auto-craft"] =              { type = "checkbox", tab = "default-settings", def_val = false }
+  settings_list["item-auto-usage"] =              { type = "checkbox", tab = "default-settings", def_val = false }
+  settings_list["fluid-auto-craft"] =             { type = "checkbox", tab = "default-settings", def_val = false }
+  settings_list["fluid-auto-usage"] =             { type = "checkbox", tab = "default-settings", def_val = false }
 
   element_list["checkbox"] =            require "unsort/settings_elements/checkbox_element"
+  element_list["global-checkbox"] =     require "unsort/settings_elements/global_checkbox_element"
   element_list["crafting-buildings"] =  require "unsort/settings_elements/crafting_buildings_element"
   element_list["drop-down"] =           require "unsort/settings_elements/drop_down_element"
   element_list["numeric-up-down"] =     require "unsort/settings_elements/numeric_up_down_element"

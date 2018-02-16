@@ -24,6 +24,12 @@ function Player.get_tick()
   return cur_tick
 end
 
+function Player.print(val)
+  if cur_player then
+    cur_player.print(val)
+  end
+end
+
 function Player.get_global()
   if not global.fnei[cur_player.name] then global.fnei[cur_player.name] = {} end
   return global.fnei[cur_player.name]
@@ -40,9 +46,9 @@ function Player.get_fglobal()
 end
 
 function Player.isAdmin()
-  if Lua_player == nil then
-    out("Error in function Player.isAdmin: Lua_player == nil")
+  if cur_player == nil then
+    Debug:error("Error in function Player.isAdmin: Lua_player == nil")
     return false
   end
-  return Lua_player.admin
+  return cur_player.admin
 end
