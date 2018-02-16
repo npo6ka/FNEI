@@ -68,8 +68,8 @@ end
 function DefaultMainGui.set_choose_but_val()
   local contr = Controller.get_cont("main").get_cur_contr_tab()
   if contr then
-    Gui.set_choose_but_val(Gui.get_gui(Gui.get_pos(), "choose-item"), contr.get_item())
-    Gui.set_choose_but_val(Gui.get_gui(Gui.get_pos(), "choose-fluid"), contr.get_fluid())
+    Gui.set_choose_but_val(Gui.get_gui(Gui.get_pos(), "choose-item"), contr.get_item() or "wooden-chest")
+    Gui.set_choose_but_val(Gui.get_gui(Gui.get_pos(), "choose-fluid"), contr.get_fluid() or "water")
   end
 end
 
