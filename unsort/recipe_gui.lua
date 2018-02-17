@@ -62,7 +62,7 @@ function RecipeGui.init_template()
 
           { type = "frame", name = "madein-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
             { type = "label", name = "madein-lable", style = "fnei_recipe_madein", caption = {"fnei.made-in"} },
-            { type = "table", name = "madein-table", column_count = 5 }
+            { type = "table", name = "madein-table", column_count = 7 }
           }},
 
 ------------------- techs --------------------
@@ -74,6 +74,15 @@ function RecipeGui.init_template()
     }}
   }
 end
+
+--green_slot_button
+--red_slot_button
+--selected_slot_button --orange
+
+--researched_technology_slot --green
+--available_technology_slot --yellow
+--not_available_technology_slot --red
+--technology_slot_button  --grey
 
 function RecipeGui.init_events()
   RecipeGui.init_template()
@@ -131,7 +140,7 @@ function RecipeGui.set_ingredients(list)
                   
   for _,ingr in pairs(list) do
     table.insert(template, { type = "flow", name = ingr.name .. "-flow", style = "fnei_list_elements_flow", direction = "horizontal", children = {
-      { type = "choose-elem-button", name = ingr.type .. "-" .. ingr.name, elem_type = ingr.type, elem_value = ingr.name, locked = true },
+      { type = "choose-elem-button", name = ingr.type .. "_" .. ingr.name, elem_type = ingr.type, elem_value = ingr.name, locked = true },
       { type = "label", name = ingr.name .. "-label", style = "fnei_recipe_element", caption = RecipeGui.get_element_caption(ingr) }
     }})
   end
@@ -147,7 +156,7 @@ function RecipeGui.set_products(list)
 
   for _,res in pairs(list) do
     table.insert(template, { type = "flow", name = res.name .. "-flow", style = "fnei_list_elements_flow", direction = "horizontal", children = {
-      { type = "choose-elem-button", name = res.type .. "-" .. res.name, elem_type = res.type, elem_value = res.name, locked = true },
+      { type = "choose-elem-button", name = res.type .. "_" .. res.name, elem_type = res.type, elem_value = res.name, locked = true },
       { type = "label",  name = res.name .. "-label", style = "fnei_recipe_element", caption = RecipeGui.get_element_caption(res) }
     }})
   end
@@ -160,6 +169,7 @@ function RecipeGui.set_made_in_list(recipe)
   local gui_tabel = Gui.get_gui(Gui.get_pos(), "madein-table")
   local craft_cat_sett = Settings.get_val("show-recipes")
   local craft_cat_list = get_crafting_categories_list()
+  local item_list = get_full_item_list()
 
   clear_gui(gui_tabel)
 
@@ -167,13 +177,44 @@ function RecipeGui.set_made_in_list(recipe)
     local cat_list = craft_cat_list[recipe.category]
 
     for _, cat in pairs(cat_list) do
+      local caption = ""
+      local element
+
       if cat.type == "player" then
-        Gui.add_sprite_button(gui_tabel, { type = "sprite-button", name = cat.val.name,
-                                     --style = CraftingBuildingsSett.get_building_style(settings, cat, item.val.name),
-                                     tooltip = {"", {"fnei.handcraft"}},
-                                     sprite = "fnei_hand_icon" })
+        local player = Player.get()
+        
+        if player and player.character_crafting_speed_modifier + 1 ~= 0 then
+          caption = round(recipe.energy / (player.character_crafting_speed_modifier + 1), 3)
+        end
+
+        element = { type = "sprite-button", 
+                    name = cat.val.name,
+                    style = "slot_button",
+                    tooltip = {"", {"fnei.handcraft"}},
+                    sprite = "fnei_hand_icon"
+                  }
       elseif cat.ingredient_count >= #recipe.ingredients and craft_cat_sett.buildings[cat.val.name] then
-        Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = cat.val.name, elem_type = "item", elem_value = cat.val.name, locked = true })
+        local entity = item_list[cat.val.name].place_result
+
+        if entity and entity.crafting_speed ~= nil then
+          caption = round(recipe.energy / entity.crafting_speed, 3)
+        end
+
+        element = { type = "choose-elem-button", 
+                    name = "item_" .. cat.val.name,  
+                    style = nil, 
+                    elem_type = "item", 
+                    elem_value = cat.val.name, 
+                    locked = true
+                  }
+      end
+      if element then
+        Gui.add_gui_template(gui_tabel, {
+          { type = "flow", name = cat.val.name .. "-flow", style = nil, direction = "vertical", children = {
+            element,
+            { type = "label", name = cat.val.name .. "-label", caption = caption }
+          }}
+        })
       end
     end
   end
@@ -226,8 +267,9 @@ end
 function RecipeGui.draw_cur_prot(type, name)
   local prot_flow = Gui.get_gui(Gui.get_pos(), "prot-icon")
   clear_gui(prot_flow)
-
-  Gui.add_choose_button(prot_flow, { type = "choose-elem-button", name = type .. "-" .. name, elem_type = type, elem_value = name, locked = true })
+  if name then
+    Gui.add_choose_button(prot_flow, { type = "choose-elem-button", name = type .. "_" .. name, elem_type = type, elem_value = name, locked = true })
+  end
 end
 
 function RecipeGui.get_element_caption(element)

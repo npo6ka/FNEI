@@ -69,16 +69,6 @@ function FneiMainGui.draw_item_list(data_list)
   clear_gui(gui_tabel)
 
   local contr = Controller.get_cont("main").get_cur_contr_tab()
-
---green_slot_button
---red_slot_button
---selected_slot_button --orange
-
---researched_technology_slot --green
---available_technology_slot --yellow
---not_available_technology_slot --red
---technology_slot_button  --grey
-  
   local items = get_full_item_list()
 
   for _,prot in pairs(data_list) do

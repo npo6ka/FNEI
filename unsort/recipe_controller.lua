@@ -9,6 +9,9 @@ local pages = "recipe-pages"
 function RecipeController.init_events()
   pages = Page:new(pages, RecipeController.get_name(), 1, RecipeController.change_page_event, RecipeController.change_page_event)
   RecipeGui.init_events()
+
+  Events.add_custom_event(RecipeGui.name, "choose-elem-button", "fluid", RecipeController.open_fluid_recipe_event)
+  Events.add_custom_event(RecipeGui.name, "choose-elem-button", "item", RecipeController.open_item_recipe_event)
 end
 
 function RecipeController.exit()
@@ -19,18 +22,23 @@ end
 function RecipeController.open()
   out("Recipe open")
 
-  RecipeController.set_page_list()
-
   local gui = RecipeGui.open_window()
-  RecipeController.change_page_event()
+
+  RecipeController.open_new_recipes()
 
   return gui
+end
+
+function RecipeController.open_new_recipes()
+  RecipeController.set_page_list()
+  RecipeController.change_page_event()
 end
 
 function RecipeController.back_key()
   queue:remove()
   pages:set_cur_page(1)
-  return queue.is_empty()
+  RecipeController.open_new_recipes()
+  return queue:is_empty()
 end
 
 function RecipeController.can_open_gui()
@@ -39,6 +47,42 @@ end
 
 function RecipeController.get_name()
   return RecipeGui.name
+end
+
+function RecipeController.open_item_recipe_event(event, elem_name)
+  if elem_name == "item" then
+    local _,pos =  string.find(event.element.name, "item%_")
+
+    if pos then
+      elem_name = string.sub(event.element.name, pos + 1)
+    end
+
+    if event.button == defines.mouse_button_type.right then
+      RecipeController.add_element("usage", "item", elem_name)
+      RecipeController.open_new_recipes()
+    else
+      RecipeController.add_element("craft", "item", elem_name)
+      RecipeController.open_new_recipes()
+    end
+  end
+end
+
+function RecipeController.open_fluid_recipe_event(event, elem_name)
+  if elem_name == "fluid" then
+    local _,pos =  string.find(event.element.name, "fluid%_")
+
+    if pos then
+      elem_name = string.sub(event.element.name, pos + 1)
+    end
+
+    if event.button == defines.mouse_button_type.right then
+      RecipeController.add_element("usage", "fluid", elem_name)
+      RecipeController.open_new_recipes()
+    else
+      RecipeController.add_element("craft", "fluid", elem_name)
+      RecipeController.open_new_recipes()
+    end
+  end
 end
 
 --------------------------------------------------------------------------
@@ -52,7 +96,7 @@ end
 function RecipeController.add_element(action_type, prot_type, prot_name)
   local last_elem = queue:get()
 
-  if last_elem == nil or (prot_name ~= last_elem.name and prot_type ~= last_elem.type and action_type ~= last_elem.action_type) then
+  if last_elem == nil or (prot_name ~= last_elem.name or prot_type ~= last_elem.type or action_type ~= last_elem.action_type) then
     local recipe_list = RecipeController.get_recipe_list(action_type, prot_type, prot_name)
 
     if recipe_list and #recipe_list > 0 then
