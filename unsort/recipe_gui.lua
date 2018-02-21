@@ -234,7 +234,7 @@ function RecipeGui.set_techs(recipe)
     for _, tech in pairs(tech_list) do
       table.insert(techs, {
         type = "sprite-button",
-        name = tech.name,
+        name = "tech_".. tech.name,
         style = "fnei_green_tech_button_style",
         tooltip = get_localised_name(tech),
         sprite = "technology/" .. tech.name

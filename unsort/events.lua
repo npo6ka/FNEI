@@ -42,7 +42,7 @@ function Events.gui_key(event)
 end
 
 function Events.on_tick(event)
-
+  TechHook.on_tick(event)
 end
 
 function Events.on_gui_closed(event)
@@ -50,6 +50,7 @@ function Events.on_gui_closed(event)
     Player.load(event)
     Events.gui_key(event)
   end
+  TechHook.on_gui_close(event)
 end
 
 function Events.on_player_left_game(event)
@@ -58,8 +59,8 @@ end
 
 function Events.on_event_invoke(event)
   Player.load(event)
-  local gui_name, gui_type, event_name = Events.parse_name(event)
-  CustomEvents.invoke(gui_name, gui_type, event_name, event)
+  local gui_name, gui_type, event_name, split_strings = Events.parse_name(event)
+  CustomEvents.invoke(gui_name, gui_type, event_name, event, split_strings)
 end
 
 function Events.parse_name(event)
@@ -73,16 +74,15 @@ function Events.parse_name(event)
     return 
   end
 
-  local split_func = string.gmatch(element.name or "", "[^_]+")
+  local split_strings = {}
 
-  local mod = split_func();
-  if mod ~= Gui.get_prefix() then
-    return
+  for num in string.gmatch(element.name or "", "[^_]+") do
+    table.insert(split_strings, num)
   end
 
-  local gui_name = split_func();
-  local event_name = split_func();
-  return gui_name, element.type, event_name
+  if split_strings[1] == Gui.get_prefix() then
+    return split_strings[2], element.type, split_strings[3], split_strings
+  end  
 end
 
 function Events:init()

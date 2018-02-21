@@ -17,6 +17,7 @@ require "unsort/player"
 require "unsort/tabs/tabs"
 require "unsort/paging"
 require "unsort/queue"
+require "unsort/open_tech_hook"
 require "unsort/events"
 
 require "unsort/controller"

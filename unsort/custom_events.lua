@@ -45,14 +45,14 @@ function CustomEvents.event_exists(gui_name, gui_type, event_name)
   return false
 end
 
-function CustomEvents.invoke(gui_name, gui_type, event_name, event)
+function CustomEvents.invoke(gui_name, gui_type, event_name, event, split_strings)
   Debug:debug(CustomEvents.classname, "CustomEvents.invoke(", gui_name, gui_type, event_name, event, ")")
   if not gui_name or not event_name or not event then
     out("Error in CustomEvents.invoke: input == nil")
     return
   end
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
-    event_list[gui_name][gui_type][event_name](event, event_name)
+    event_list[gui_name][gui_type][event_name](event, event_name, split_strings)
   else
     out("Error CustomEvents.invoke: event not found ", event, event.element.name, gui_name, gui_type, event_name)
   end

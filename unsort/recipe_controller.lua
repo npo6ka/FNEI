@@ -12,6 +12,7 @@ function RecipeController.init_events()
 
   Events.add_custom_event(RecipeGui.name, "choose-elem-button", "fluid", RecipeController.open_fluid_recipe_event)
   Events.add_custom_event(RecipeGui.name, "choose-elem-button", "item", RecipeController.open_item_recipe_event)
+  Events.add_custom_event(RecipeGui.name, "sprite-button", "tech", RecipeController.open_tech_event)
 end
 
 function RecipeController.exit()
@@ -83,6 +84,10 @@ function RecipeController.open_fluid_recipe_event(event, elem_name)
       RecipeController.open_new_recipes()
     end
   end
+end
+
+function RecipeController.open_tech_event(event, elem_name, split_names)
+  TechHook.show_tech(split_names[4])
 end
 
 --------------------------------------------------------------------------
