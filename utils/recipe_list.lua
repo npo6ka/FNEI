@@ -14,12 +14,11 @@ end
 function Recipe:get_aRecipe_list()
   Debug:debug(Recipe.classname, "get_aRecipe_list( )")
 
-  local global = Player.get_fglobal()
-  if not global["aRecipe"] then
-    global["aRecipe"] = self:create_attainable_recipes()
+  if not aRecipe then
+    aRecipe = self:create_attainable_recipes()
   end
 
-  return global["aRecipe"]
+  return aRecipe
 end
 
 --return a list of technologies that can open this recipe_name or {}
@@ -44,11 +43,23 @@ function Recipe:create_attainable_recipes()
   local ret_tb = {}
   local recipe_list = Recipe:get_recipe_list()
   local rec_dep = RawTech:get_recipe_list_in_tech_dependencies()
+  local a_tech = RawTech:get_aTech_list()
 
   for _,recipe in pairs(recipe_list) do
-    local dep = rec_dep[recipe.name]
-    if (dep and #dep > 0) or recipe.enabled then
+    local dep = rec_dep[recipe.name] or {}
+    if recipe.enabled then
       ret_tb[recipe.name] = recipe
+    else
+      local flag = false
+      for _,tech in pairs(dep) do
+        if a_tech[tech.name] then
+          flag = true
+        end
+      end
+
+      if flag then
+        ret_tb[recipe.name] = recipe
+      end
     end
   end
 

@@ -19,7 +19,8 @@ function TechHook.open_tech(force, name)
             end
           end
         end
-        table.insert(tech_buf, { tech = pre_tech, progress = force.get_saved_technology_progress(pre_tech) })
+        table.insert(tech_buf, { tech = pre_tech, progress = force.get_saved_technology_progress(pre_tech), enabled = pre_tech.enabled })
+
         pre_tech.researched = true
       end
     end
@@ -29,6 +30,7 @@ end
 function TechHook.reload_tech(force)
   for _,elem in pairs(tech_buf) do
     elem.tech.researched = false
+    elem.tech.enabled = elem.enabled
     force.set_saved_technology_progress(elem.tech, elem.progress)
   end
 
@@ -44,11 +46,17 @@ function TechHook.show_tech(name)
     local force = player.force
     
     if force.current_research then
+      local cur_progress = force.research_progress
+      local tech = force.current_research
+
       global.fnei.cur_tech = {
         force = force,
-        tech = force.current_research, 
+        tech = tech,
         time = 0,
       }
+
+      force.current_research = nil
+      force.set_saved_technology_progress(tech, cur_progress)
     end
 
     TechHook.open_tech(force, name)
@@ -57,8 +65,6 @@ function TechHook.show_tech(name)
 
     Player.get_global().opened_gui = Controller.get_cur_con_name()
     player.opened = 2
-
-    force.set_saved_technology_progress(force.current_research, force.get_saved_technology_progress(force.current_research))
     force.current_research = nil
 
     tech_buf = {}
@@ -73,6 +79,7 @@ function TechHook.return_prev_tech()
     if cur_tech.force.current_research == nil then
       cur_tech.force.current_research = cur_tech.tech.name
     end
+    
     global.fnei.cur_tech = nil
   else
     cur_tech.time = cur_tech.time + 1

@@ -75,15 +75,6 @@ function RecipeGui.init_template()
   }
 end
 
---green_slot_button
---red_slot_button
---selected_slot_button --orange
-
---researched_technology_slot --green
---available_technology_slot --yellow
---not_available_technology_slot --red
---technology_slot_button  --grey
-
 function RecipeGui.init_events()
   RecipeGui.init_template()
   Events.init_temp_events(RecipeGui.name, recipe_gui_template)
@@ -235,7 +226,7 @@ function RecipeGui.set_techs(recipe)
       table.insert(techs, {
         type = "sprite-button",
         name = "tech_".. tech.name,
-        style = "fnei_green_tech_button_style",
+        style = RecipeGui.get_tech_style( tech ),
         tooltip = get_localised_name(tech),
         sprite = "technology/" .. tech.name
       })
@@ -249,6 +240,22 @@ function RecipeGui.set_techs(recipe)
     }
 
     Gui.add_gui_template(gui_flow, template)
+  end
+end
+
+function RecipeGui.get_tech_style( tech )
+  if not is_attainable_tech(tech) then
+    return "fnei_recipe_grey_tech_button"
+  elseif tech.researched then
+    return "fnei_recipe_green_tech_button"
+  else
+    local preq = tech.prerequisites
+    for _,tec in pairs(preq) do
+      if tec and not tec.researched then
+        return "fnei_recipe_red_tech_button"
+      end
+    end
+    return "fnei_recipe_yellow_tech_button"
   end
 end
 

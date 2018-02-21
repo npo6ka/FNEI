@@ -3,6 +3,8 @@ local RawTech = {
 }
 
 local atech_list = {}
+local atech
+local dep_tech
 
 function RawTech:get_tech_list()
   Debug:debug(RawTech.classname, "get_tech_list( )")
@@ -12,12 +14,12 @@ end
 --return a list of attainable technologies or empty list
 function RawTech:get_aTech_list()
   Debug:debug(RawTech.classname, "get_atech_list( )")
-  local global = Player.get_fglobal()
-  if not global["atech"] then
-    global["atech"] = self:create_attainable_tech()
+
+  if not atech then
+    atech = self:create_attainable_tech()
   end
 
-  return global["atech"]
+  return atech
 end
 
 function RawTech:is_attainable_tech(tech)
@@ -27,31 +29,35 @@ end
 
 function RawTech:get_recipe_list_in_tech_dependencies()
   Debug:debug(RawTech.classname, "get_recipe_in_tech_dependencies( )")
-  local global = Player.get_fglobal()
-  if not global["dep_tech"] then
-    global["dep_tech"] = self:create_tech_dependencies()
+
+  if not dep_tech then
+    dep_tech = self:create_tech_dependencies()
   end
 
-  return global["dep_tech"]
+  return dep_tech
 end
 ----------------------------- secondary fanction --------------------------------
 
 function RawTech:is_attainable_tech_buf(tech)
   local tech_name = tech.name
-  if atech_list[tech_name] == nil then
-    atech_list[tech_name] = false
+
+  if tech_name and atech_list[tech_name] == nil then
     local flag = true
-    for _,pretech in pairs(tech.prerequisites) do
-      if not pretech.enabled then
-        flag = false
-      elseif pretech.researched then
-        flag = flag and true
-      else
+    atech_list[tech_name] = false
+
+    if not tech.enabled then
+      flag = false
+    elseif tech.researched then
+      flag = true
+    else
+      for _,pretech in pairs(tech.prerequisites) do
         flag = flag and self:is_attainable_tech_buf(pretech)
       end
     end
+
     atech_list[tech_name] = flag
   end
+
   return atech_list[tech_name]
 end
 

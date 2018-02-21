@@ -304,168 +304,41 @@ data.raw["gui-style"].default["fnei_right_arrow_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_red_tech_button_style"] = 
+data.raw["gui-style"].default["fnei_recipe_red_tech_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "not_available_technology_slot",
   height = 68,
   width = 68,
-
-  clicked_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 36,
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 36,
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 36,
-    },
-  },
+  scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_yellow_tech_button_style"] = 
+data.raw["gui-style"].default["fnei_recipe_green_tech_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "researched_technology_slot",
   height = 68,
   width = 68,
-
-  clicked_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 72,
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 72,
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 72,
-    },
-  },
+  scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_green_tech_button_style"] = 
+data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "available_technology_slot",
   height = 68,
   width = 68,
-
-  clicked_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 108,
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 108,
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    bottom_monolith_border = 1,
-    left_monolith_border = 1,
-    right_monolith_border = 1,
-    top_monolith_border = 1,
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 108,
-    },
-  },
+  scalable = false,
 }
 
+data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] = 
+{
+  type = "button_style",
+  parent = "technology_slot_button",
+  height = 68,
+  width = 68,
+  scalable = false,
+}
 
 data.raw["gui-style"].default["fnei_test"] = 
 {

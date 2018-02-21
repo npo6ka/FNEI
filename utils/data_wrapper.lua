@@ -52,7 +52,7 @@ function get_technologies_for_recipe(recipe_name)
 end
 
 function is_attainable_tech(tech)
-  RawTech:is_attainable_tech(tech)
+  return RawTech:is_attainable_tech(tech)
 end
 
 function get_filtred_recipe_list(recipe_list)
@@ -76,22 +76,3 @@ function get_filtred_recipe_list(recipe_list)
 
   return ret_list
 end
-
-function is_avalable_recipe(recipe)
-  -- local craft_cat_sett = Settings.get_val("show-recipes")
-  -- local craft_cat_list = get_crafting_categories_list()
-
-  -- if craft_cat_sett.categories[recipe.category] then
-  --   local cat_list = craft_cat_list[recipe.category]
-
-  --   for _, cat in pairs(cat_list) do
-  --     if cat.type == "player" or cat.ingredient_count >= #recipe.ingredients then
-  --       if cat.val and craft_cat_sett.buildings[cat.val.name] then
-  --         ret_list[rec_name] = recipe
-  --       end
-  --     end
-  --   end
-  -- end
-  -- return true
-end
-
