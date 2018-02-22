@@ -64,6 +64,7 @@ function TechHook.show_tech(name)
     TechHook.reload_tech(force)
 
     Player.get_global().opened_gui = Controller.get_cur_con_name()
+    Controller.close_event()
     player.opened = 2
     force.current_research = nil
 

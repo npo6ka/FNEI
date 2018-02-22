@@ -134,7 +134,7 @@ function RecipeController.draw_recipe()
     return
   end
 
-  RecipeGui.set_recipe_name(recipe.localised_name or recipe.name)
+  RecipeGui.set_recipe_name(recipe)
   RecipeGui.set_recipe_icon(recipe)
   RecipeGui.set_ingredients(recipe.ingredients)
   RecipeGui.set_recipe_time(recipe.energy)
@@ -181,7 +181,38 @@ function RecipeController.get_recipe_list(action_type, type, prot)
     Debug:error("Error in function RecipeController.get_recipe_list: unknown craft type: ", action_type, "")
   end
 
-  return get_filtred_recipe_list(recipe_list)
+  local rec_list = get_filtred_recipe_list(recipe_list)
+  return RecipeController.sort_recipe_list(recipe_list)
+end
+
+function RecipeController.sort_recipe_list(recipe_list)
+  local en_list = {}
+  local dis_list = {}
+  local hid_list = {}
+
+  for _,recipe in pairs(recipe_list) do
+    if recipe.hidden then
+      table.insert(hid_list, recipe)
+    elseif recipe.enabled then
+      table.insert(en_list, recipe)
+    else
+      table.insert(dis_list, recipe)
+    end
+  end
+
+  local ret_tb = {}
+
+  for _,recipe in pairs(en_list) do
+    table.insert(ret_tb, recipe)
+  end
+  for _,recipe in pairs(dis_list) do
+    table.insert(ret_tb, recipe)
+  end
+  for _,recipe in pairs(hid_list) do
+    table.insert(ret_tb, recipe)
+  end
+
+  return ret_tb
 end
 
 function RecipeController.get_caraft_recipe_list(element, el_type)

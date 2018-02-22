@@ -10,7 +10,7 @@ data.raw["gui-style"].default["fnei_red_recipe_title_label"] =
     height = 36,
     width = 348,
     want_ellipsis = true,
-    font_color = {r=1, g=0.2537254, b=0.25980392}
+    font_color = { r=1, g=0.2537254, b=0.25980392 }
 }
 
 data.raw["gui-style"].default["fnei_recipe_title_label"] =
@@ -19,11 +19,27 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     parent = "label",
     align = "center",
     font = "font-mb",
-    scalable = false,
     height = 36,
     width = 348,
     scale = 1,
     want_ellipsis = true,
+    font_color = { r=0, g=0.9, b=0 },
+    scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_recipe_red_title_label"] =
+{
+    type = "label_style",
+    parent = "fnei_recipe_title_label",
+    font_color = { r=1, g=0.2537254, b=0.25980392 },
+    scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_recipe_grey_title_label"] =
+{
+    type = "label_style",
+    parent = "fnei_recipe_title_label",
+    font_color = { r=0.5, g=0.5, b=0.5 },
     scalable = false,
 }
 

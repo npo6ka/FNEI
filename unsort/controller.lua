@@ -58,7 +58,6 @@ function Controller.exit_event()
   if cur_cont then
     cur_cont.exit()
     queue:clear()
-    --Controller.get_cont("recipe").remove_queue()
     Controller.reset_opened_gui()
   end
 end

@@ -20,7 +20,7 @@ function RecipeGui.init_template()
               { type = "flow", name = "header-icon" },
               { type = "label", name = "header-label", style = "fnei_recipe_title_label", caption = "recipe_name" },
               { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = Controller.back_key_event },
-              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"fnei.settings-key"}, event = RecipeGui.settings_key_event },
+              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = RecipeGui.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}
           }},
@@ -30,9 +30,9 @@ function RecipeGui.init_template()
           { type = "frame", name = "paging-frame", style = "fnei_recipe_paging_frame", children = {
             { type = "table", name = "paging-table", style = "fnei_recipe_paging_table", column_count = 5, children = {
               { type = "flow", name = "left-arrow-flow", style = "fnei_arrow_flow" },
-              { type = "label", name = "type-label", style = "fnei_recipe_type_lable", caption = "something" },
+              { type = "label", name = "type-label", style = "fnei_recipe_type_lable" },
               { type = "flow", name = "prot-icon", style = "fnei_arrow_flow" },
-              { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", caption = "page unknown" },
+              { type = "label", name = "paging-label", style = "fnei_recipe_paging_label" },
               { type = "flow", name = "right-arrow-flow", style = "fnei_arrow_flow" },
             }},
           }},
@@ -107,9 +107,20 @@ function RecipeGui.set_recipe_time(energy)
   time.caption = energy
 end
 
-function RecipeGui.set_recipe_name(recipe_name)
+function RecipeGui.set_recipe_name(recipe)
   local name = Gui.get_gui(Gui.get_pos(), "header-label")
-  name.caption = recipe_name
+  name.caption = get_localised_name( recipe )
+  name.tooltip = name.caption
+
+  local style = "fnei_recipe_title_label"
+  
+  if recipe and recipe.hidden then
+    style = "fnei_recipe_grey_title_label"
+  elseif recipe and not recipe.enabled then
+    style = "fnei_recipe_red_title_label"
+  end
+
+  name.style = style
 end
 
 function RecipeGui.set_recipe_icon(recipe)
@@ -214,12 +225,11 @@ end
 
 function RecipeGui.set_techs(recipe)
   local tech_list = get_technologies_for_recipe(recipe.name)
+  local gui_flow = Gui.get_gui(Gui.get_pos(), "tech-flow")
+
+  clear_gui(gui_flow)
 
   if tech_list and #tech_list > 0 then
-    local gui_flow = Gui.get_gui(Gui.get_pos(), "tech-flow")
-
-    clear_gui(gui_flow)
-
     local techs = {}
 
     for _, tech in pairs(tech_list) do
