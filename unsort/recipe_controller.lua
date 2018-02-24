@@ -139,7 +139,6 @@ function RecipeController.save_page()
     if list and list[1] then
       RecipeController.set_page_name_for_recipe(val.action_type, val.type, val.name, list[1])
       val.page = list[1]
-out("test paging:", queue:get().page, "")
     end
   end
 end
@@ -228,6 +227,18 @@ function RecipeController.change_page_event()
   RecipeController.set_crafting_type()
   RecipeController.draw_cur_prot()
   RecipeController.save_page()
+end
+
+function RecipeController.settings_key_event(event)
+  Controller.open_event("settings")
+end
+
+function RecipeController.back_key_event(event)
+  if event.control or event.shift then
+    queue:clear()
+  end
+
+  Controller.back_key_event()
 end
 
 -------------------------------- recipe list ----------------------------------------

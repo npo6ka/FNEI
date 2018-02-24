@@ -356,3 +356,75 @@ data.raw["gui-style"].default["fnei_back_button_style"] =
     },
   }
 }
+
+data.raw["gui-style"].default["fnei_left_arrow_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 28,
+  width = 28,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/prev_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/prev_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/prev_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_right_arrow_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 28,
+  width = 28,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/next_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/next_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/next_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
