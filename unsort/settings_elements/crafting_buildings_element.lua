@@ -6,42 +6,30 @@ local cat_text = "cat"
 local buildings = "buildings"
 local categories = "categories"
 
-function CraftingBuildingsSett.get_val(setting)
+function CraftingBuildingsSett.get_val(setting, type, val)
   local global_set = Settings.get_global_sett()
 
-  if not global_set[setting.name] then global_set[setting.name] = {} end
-  global_set = global_set[setting.name]
-
-  if not global_set[categories] then
-    local craft_tb = get_crafting_categories_list()
-
-    global_set[categories] = {}
-    for cat, items in pairs(craft_tb) do
-      global_set[categories][cat] = setting.def_val
-    end
+  if not global_set[setting.name] then
+    global_set[setting.name] = {}
+    global_set[setting.name][categories] = {}
+    global_set[setting.name][buildings] = {}
   end
 
-  if not global_set[buildings] then 
-    local craft_tb = get_crafting_categories_list()
-
-    global_set[buildings] = {}
-    for cat, items in pairs(craft_tb) do
-      for _, item in pairs(items) do
-        global_set[buildings][item.val.name] = setting.def_val
-      end
-    end
+  if global_set[setting.name][type] then
+    if global_set[setting.name][type][val] == nil then global_set[setting.name][type][val] = setting.def_val end
+    return global_set[setting.name][type][val]
+  else
+    Debug:error("Error in function CraftingBuildingsSett.get_val: unknown type", type, "")
   end
-
-  return global_set
 end
 
 function CraftingBuildingsSett.set_val(setting, val)
-  local gl_sett = CraftingBuildingsSett.get_val(setting)
+  local gl_sett = Settings.get_global_sett()[setting.name]
 
-  if gl_sett[val.type] and gl_sett[val.type][val.name] ~= nil then
-    if val.val == 2 then
+  if gl_sett[val.type] then
+    if val.button == 2 then
       gl_sett[val.type][val.name] = true
-    elseif val.val == 4 then
+    elseif val.button == 4 then
       gl_sett[val.type][val.name] = false
     end
   end
@@ -58,7 +46,6 @@ function CraftingBuildingsSett.split_cat(category)
 end
 
 function CraftingBuildingsSett.add_content_func(parent, sett)
-  local settings = CraftingBuildingsSett.get_val(sett)
   local craft_tb = get_crafting_categories_list()
   local gui_template = {}
 
@@ -66,7 +53,7 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
     local flow_childer = {}
 
     table.insert(flow_childer, { type = "sprite-button", name = sett.name .. "_" .. cat_text .. "_" .. cat .. "_but", 
-                                 style = CraftingBuildingsSett.get_category_style(settings, cat),
+                                 style = CraftingBuildingsSett.get_category_style(cat),
                                  tooltip = {"", cat, "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
                                  caption = CraftingBuildingsSett.split_cat(cat) })
 
@@ -74,12 +61,12 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
       if item.type == "building" then
         table.insert(flow_childer, { type = "choose-elem-button", name = sett.name .. "_" .. cat .. "_" .. item.val.name, 
                                      elem_type = "item", elem_value = item.val.name, locked = true,
-                                     style = CraftingBuildingsSett.get_building_style(settings, cat, item.val.name),
+                                     style = CraftingBuildingsSett.get_building_style(cat, item.val.name),
                                      tooltip = {"", Gui.get_local_name(item.val), "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
         })
       elseif item.type == "player" then
         table.insert(flow_childer, { type = "sprite-button", name = sett.name .. "_" .. cat .. "_" .. item.val.name,  
-                                     style = CraftingBuildingsSett.get_building_style(settings, cat, item.val.name),
+                                     style = CraftingBuildingsSett.get_building_style(cat, item.val.name),
                                      tooltip = {"", {"fnei.handcraft"}, "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
                                      sprite = "fnei_hand_icon",
         })
@@ -112,7 +99,6 @@ function CraftingBuildingsSett.parse_name(name)
 end
 
 function CraftingBuildingsSett.change_category_style(sett_name, elem_name)
-  local settings = Settings.get_val(sett_name)
   local parent = Gui.get_gui(Gui.get_pos(), sett_name .. "-flow-table")
   local parse_str
 
@@ -120,16 +106,15 @@ function CraftingBuildingsSett.change_category_style(sett_name, elem_name)
     for _,gui_elem in pairs(flow_gui.children) do
       parse_str = CraftingBuildingsSett.parse_name(gui_elem.name)
       if parse_str[4] == cat_text and parse_str[5] == elem_name then
-        gui_elem.style = CraftingBuildingsSett.get_category_style(settings, elem_name)
+        gui_elem.style = CraftingBuildingsSett.get_category_style(elem_name)
       elseif parse_str[4] == elem_name then
-        gui_elem.style = CraftingBuildingsSett.get_building_style(settings, elem_name, parse_str[5])
+        gui_elem.style = CraftingBuildingsSett.get_building_style(elem_name, parse_str[5])
       end
     end
   end
 end
 
 function CraftingBuildingsSett.change_building_style(sett_name, elem_name)
-  local settings = Settings.get_val(sett_name)
   local parent = Gui.get_gui(Gui.get_pos(), sett_name .. "-flow-table")
   local parse_str
 
@@ -137,21 +122,19 @@ function CraftingBuildingsSett.change_building_style(sett_name, elem_name)
     for _,gui_elem in pairs(flow_gui.children) do
       parse_str = CraftingBuildingsSett.parse_name(gui_elem.name)
       if parse_str[4] ~= cat_text and parse_str[5] == elem_name then
-        gui_elem.style = CraftingBuildingsSett.get_building_style(settings, parse_str[4], elem_name)
+        gui_elem.style = CraftingBuildingsSett.get_building_style(parse_str[4], elem_name)
       end
     end
   end
 end
 
-function CraftingBuildingsSett.event(event, sett_name)
-  local gui_elem = CraftingBuildingsSett.parse_name(event.element.name or "")
-  
-  if gui_elem[4] == cat_text then
-    Settings.set_val(sett_name, {type = categories, name = gui_elem[5], val = event.button })
-    CraftingBuildingsSett.change_category_style(sett_name, gui_elem[5])
+function CraftingBuildingsSett.event(event, sett_name, gui_names)
+  if gui_names[4] == cat_text then
+    Settings.set_val(sett_name, {type = categories, name = gui_names[5], button = event.button })
+    CraftingBuildingsSett.change_category_style(sett_name, gui_names[5])
   else
-    Settings.set_val(sett_name, {type = buildings, name = gui_elem[5], val = event.button })
-    CraftingBuildingsSett.change_building_style(sett_name, gui_elem[5])
+    Settings.set_val(sett_name, {type = buildings, name = gui_names[5], button = event.button })
+    CraftingBuildingsSett.change_building_style(sett_name, gui_names[5])
   end
 end
 
@@ -162,18 +145,18 @@ function CraftingBuildingsSett.event_init(sett)
   Events.add_custom_event(Controller.get_cont("settings").get_name(), "label", sett.name, event)
 end
 
-function CraftingBuildingsSett.get_building_style(settings, cat_name, item_name)
-  if not settings[buildings][item_name] then
+function CraftingBuildingsSett.get_building_style(cat_name, item_name)
+  if not Settings.get_val("show-recipes", "buildings", item_name) then
     return "fnei_settings_disabled-building"
-  elseif settings[categories][cat_name] then
+  elseif Settings.get_val("show-recipes", "categories", cat_name) then
     return "fnei_settings_enabled-building"
   else
     return "fnei_settings_hidden-building"
   end
 end
 
-function CraftingBuildingsSett.get_category_style(settings, cat_name)
-  if settings[categories][cat_name] then
+function CraftingBuildingsSett.get_category_style(cat_name)
+  if Settings.get_val("show-recipes", "categories", cat_name) then
     return "fnei_settings_enable-category"
   else
     return "fnei_settings_disable-category"

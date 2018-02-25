@@ -481,7 +481,7 @@ data.raw["gui-style"].default["fnei_settings_header-label"] =
 data.raw["gui-style"].default["fnei_settings_param-label"] =
 {
   type = "label_style",
-  maximal_width = 330,
+  width = 330,
   left_padding = 1,
   right_padding = 1,
   top_padding = 1,
@@ -501,10 +501,6 @@ data.raw["gui-style"].default["fnei_settings_warning-text"] =
 {
   type = "label_style",
   width = 100,
+  font_color = { b = 0, g = 0.2, r = 1 },
   scalable = false,
-  font_color = {
-    b = 0,
-    g = 0.2,
-    r = 1
-  },
 }

@@ -46,10 +46,10 @@ function Settings.get_sett_list()
   return settings_list
 end
 
-function Settings.get_val(sett_name)
+function Settings.get_val(sett_name, arg1, arg2)
   local sett = sett_name and settings_list[sett_name]
   if sett then
-    return sett.elem.get_val(sett)
+    return sett.elem.get_val(sett, arg1, arg2)
   else
     Debug:error("Error in fanction Settings.get_val: sett_name ", sett_name, " not found")
   end

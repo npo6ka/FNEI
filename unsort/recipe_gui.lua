@@ -30,9 +30,9 @@ function RecipeGui.init_template()
           { type = "frame", name = "paging-frame", style = "fnei_recipe_paging_frame", children = {
             { type = "table", name = "paging-table", style = "fnei_recipe_paging_table", column_count = 5, children = {
               { type = "flow", name = "left-arrow-flow", style = "fnei_recipe_arrow_flow" },
-              { type = "label", name = "type-label", style = "fnei_recipe_type_label", vertical_align = "center", align = "right" },
+              { type = "label", name = "type-label", style = "fnei_recipe_type_label", vertical_align = "center", align = "right", caption = "" },
               { type = "flow", name = "prot-icon", style = "fnei_recipe_arrow_flow" },
-              { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", vertical_align = "center", align = "left" },
+              { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", vertical_align = "center", align = "left", caption = "" },
               { type = "flow", name = "right-arrow-flow", style = "fnei_recipe_arrow_flow" },
             }},
           }},
@@ -169,20 +169,19 @@ end
 
 function RecipeGui.set_made_in_list(recipe)
   local gui_tabel = Gui.get_gui(Gui.get_pos(), "madein-table")
-  local craft_cat_sett = Settings.get_val("show-recipes")
   local craft_cat_list = get_crafting_categories_list()
   local item_list = get_full_item_list()
 
   clear_gui(gui_tabel)
 
-  if craft_cat_sett.categories[recipe.category] then
+  if Settings.get_val("show-recipes", "categories", recipe.category) then
     local cat_list = craft_cat_list[recipe.category]
 
     for _, cat in pairs(cat_list) do
       local caption = ""
       local element
 
-      if cat.type == "player" then
+      if cat.type == "player" and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local player = Player.get()
         
         if player and player.character_crafting_speed_modifier + 1 ~= 0 then
@@ -195,7 +194,7 @@ function RecipeGui.set_made_in_list(recipe)
                     tooltip = {"", {"fnei.handcraft"}},
                     sprite = "fnei_hand_icon"
                   }
-      elseif cat.ingredient_count >= #recipe.ingredients and craft_cat_sett.buildings[cat.val.name] then
+      elseif cat.type == "building" and cat.ingredient_count >= #recipe.ingredients and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local entity = item_list[cat.val.name].place_result
 
         if entity and entity.crafting_speed ~= nil then
