@@ -62,9 +62,12 @@ function RecipeController.draw_recipe()
 
   RecipeGui.set_recipe_name(recipe)
   RecipeGui.set_recipe_icon(recipe)
-  RecipeGui.set_ingredients(recipe.ingredients)
+
+  local prot_dif = #recipe.ingredients + 1 - #recipe.products
+  RecipeGui.set_ingredients(recipe.ingredients, -prot_dif)
+  RecipeGui.set_products(recipe.products, prot_dif)
+
   RecipeGui.set_recipe_time(recipe.energy)
-  RecipeGui.set_products(recipe.products)
   RecipeGui.set_made_in_list(recipe)
   RecipeGui.set_techs(recipe)
 end

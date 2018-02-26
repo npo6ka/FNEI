@@ -130,7 +130,7 @@ function RecipeGui.set_recipe_icon(recipe)
   Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", elem_type = "recipe", elem_value = recipe.name, locked = true })
 end
 
-function RecipeGui.set_ingredients(list)
+function RecipeGui.set_ingredients(list, dif_prot)
   local ingr_tb = Gui.get_gui(Gui.get_pos(), "list-ingr")
   local template = {}
 
@@ -146,12 +146,24 @@ function RecipeGui.set_ingredients(list)
       { type = "label", name = ingr.name .. "-label", style = "fnei_recipe_element_label", vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(ingr) }
     }})
   end
+
+  local scroll = Gui.get_gui(Gui.get_pos(), "ingr-scroll") or {}
+  if list and #list < 7 then
+    scroll.vertical_scroll_policy = "never"
+  else
+    scroll.vertical_scroll_policy = "auto"
+  end
+
+
+  for i = 1, dif_prot do
+    table.insert(template, { type = "flow", name = "empty_flow" .. i, style = "fnei_recipe_list_elements_flow" })
+  end
   
   clear_gui(ingr_tb)
   Gui.add_gui_template(ingr_tb, template)
 end
 
-function RecipeGui.set_products(list)
+function RecipeGui.set_products(list, dif_prot)
   local res_tb = Gui.get_gui(Gui.get_pos(), "list-res")
   local template = {}
 
@@ -161,6 +173,17 @@ function RecipeGui.set_products(list)
       { type = "choose-elem-button", name = res.type .. "_" .. res.name, elem_type = res.type, elem_value = res.name, locked = true },
       { type = "label",  name = res.name .. "-label", style = "fnei_recipe_element_label", vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(res) }
     }})
+  end
+
+  local scroll = Gui.get_gui(Gui.get_pos(), "res-scroll") or {}
+  if list and #list < 8 then
+    scroll.vertical_scroll_policy = "never"
+  else
+    scroll.vertical_scroll_policy = "auto"
+  end
+
+  for i = 1, dif_prot do
+    table.insert(template, { type = "flow", name = "empty_flow" .. i, style = "fnei_recipe_list_elements_flow" })
   end
   
   clear_gui(res_tb)
@@ -183,9 +206,9 @@ function RecipeGui.set_made_in_list(recipe)
 
       if cat.type == "player" and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local player = Player.get()
-        
-        if player and player.character_crafting_speed_modifier + 1 ~= 0 then
-          caption = round(recipe.energy / (player.character_crafting_speed_modifier + 1), 3)
+
+        if player and player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1 ~= 0 then
+          caption = round(recipe.energy / (player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1), 3)
         end
 
         element = { type = "sprite-button", 
@@ -230,7 +253,7 @@ function RecipeGui.set_made_in_list(recipe)
 
 end
 
-function RecipeGui.set_techs(recipe)
+function RecipeGui.set_techs( recipe )
   local tech_list = get_technologies_for_recipe(recipe.name)
   local gui_flow = Gui.get_gui(Gui.get_pos(), "tech-flow")
 
@@ -276,7 +299,7 @@ function RecipeGui.get_tech_style( tech )
   end
 end
 
-function RecipeGui.set_crafting_type(action_type)
+function RecipeGui.set_crafting_type( action_type )
   local label = Gui.get_gui(Gui.get_pos(), "type-label")
 
   if action_type == "usage" then
