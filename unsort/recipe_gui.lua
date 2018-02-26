@@ -167,7 +167,6 @@ function RecipeGui.set_products(list, dif_prot)
   local res_tb = Gui.get_gui(Gui.get_pos(), "list-res")
   local template = {}
 
-
   for _,res in pairs(list) do
     table.insert(template, { type = "flow", name = res.name .. "-flow", style = "fnei_recipe_list_elements_flow", direction = "horizontal", children = {
       { type = "choose-elem-button", name = res.type .. "_" .. res.name, elem_type = res.type, elem_value = res.name, locked = true },
@@ -201,13 +200,13 @@ function RecipeGui.set_made_in_list(recipe)
     local cat_list = craft_cat_list[recipe.category]
 
     for _, cat in pairs(cat_list) do
-      local caption = ""
+      local caption = Settings.get_val("show-craft-time-label")
       local element
 
       if cat.type == "player" and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local player = Player.get()
 
-        if player and player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1 ~= 0 then
+        if caption and player and player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1 ~= 0 then
           caption = round(recipe.energy / (player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1), 3)
         end
 
@@ -220,7 +219,7 @@ function RecipeGui.set_made_in_list(recipe)
       elseif cat.type == "building" and cat.ingredient_count >= #recipe.ingredients and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local entity = item_list[cat.val.name].place_result
 
-        if entity and entity.crafting_speed ~= nil then
+        if caption and entity and entity.crafting_speed ~= nil then
           caption = round(recipe.energy / entity.crafting_speed, 3)
         end
 
@@ -232,19 +231,27 @@ function RecipeGui.set_made_in_list(recipe)
                     locked = true
                   }
       end
+
       if element then
+        local label
+
+        if caption then
+          label = { 
+            type = "label", 
+            name = cat.val.name .. "-label", 
+            style = "fnei_recipe_craft_time_for_building_label", 
+            vertical_align = "top", 
+            align = "center", 
+            want_ellipsis = true, 
+            caption = caption, 
+            tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption} 
+          }
+        end
+
         Gui.add_gui_template(gui_tabel, {
           { type = "flow", name = cat.val.name .. "-flow", style = "fnei_recipe_building_flow", direction = "vertical", children = {
             element,
-            { 
-              type = "label", 
-              name = cat.val.name .. "-label", 
-              style = "fnei_recipe_craft_time_for_building_label", 
-              vertical_align = "top", 
-              align = "center", 
-              want_ellipsis = true, 
-              caption = caption, 
-              tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption} }
+            label
           }}
         })
       end

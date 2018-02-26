@@ -17,6 +17,7 @@ function Settings.init()
   settings_list["detail-chance"] =                { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["focus-search"] =                 { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["close-gui-when-tech-open"] =     { type = "checkbox", tab = "main-settings", def_val = false }
+  settings_list["show-craft-time-label"] =     { type = "checkbox", tab = "main-settings", def_val = true }
   
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   
