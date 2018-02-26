@@ -32,7 +32,11 @@ end
 
 function RecipeController.back_key()
   queue:remove()
-  RecipeController.open_new_recipes()
+
+  if RecipeController.can_open_gui() then
+    RecipeController.open_new_recipes()
+  end
+
   return queue:is_empty()
 end
 
@@ -46,8 +50,19 @@ end
 
 ----------------------------------- gui ---------------------------------------
 
-function RecipeController.open_new_recipes()
+function RecipeController.open_new_recipes()  
   RecipeController.set_page_list()
+
+  if pages:amount_page() == 0 then
+    if RecipeController.can_open_gui() then
+      queue:remove()
+      RecipeController.open_new_recipes()
+    else
+      Controller.back_key_event()
+    end
+    return
+  end
+
   RecipeController.change_page_event()
 end
 
