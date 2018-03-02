@@ -55,6 +55,10 @@ function is_attainable_tech(tech)
   return RawTech:is_attainable_tech(tech)
 end
 
+function get_equals_recipe_list()
+  return Recipe:get_equals_recipe_list()
+end
+
 function get_filtred_recipe_list(recipe_list)
   local ret_list = {}
   local craft_cat_list = get_crafting_categories_list()

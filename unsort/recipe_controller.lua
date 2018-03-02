@@ -272,7 +272,37 @@ function RecipeController.get_recipe_list(action_type, type, prot)
   end
 
   local rec_list = get_filtred_recipe_list(recipe_list)
-  return RecipeController.sort_recipe_list(recipe_list)
+  rec_list = RecipeController.delete_equals_recipe(rec_list)
+  return RecipeController.sort_recipe_list(rec_list)
+end
+
+function RecipeController.delete_equals_recipe(list)
+  if not Settings.get_val("show-the-same-recipes") then
+    local ret_tb = {}
+    local eq_rec = get_equals_recipe_list()
+
+    for name, recipe in pairs(list) do
+      if eq_rec[name] then
+        local flag = true
+
+        for _, s_recipe in pairs(eq_rec[name]) do
+          if ret_tb[s_recipe.name] then
+            flag = false
+            break
+          end
+        end
+
+        if flag then 
+          ret_tb[name] = recipe
+        end
+      else
+        ret_tb[name] = recipe
+      end
+    end
+
+    return ret_tb
+  end
+  return list
 end
 
 function RecipeController.sort_recipe_list(recipe_list)
@@ -312,7 +342,7 @@ function RecipeController.get_caraft_recipe_list(element, el_type)
   for _,recipe in pairs(recipes) do
     for _,product in pairs(recipe.products) do
       if product.name == element and product.type == el_type then
-        table.insert(ret_tb, recipe)
+        ret_tb[recipe.name] = recipe
       end
     end
   end
@@ -327,7 +357,7 @@ function RecipeController.get_usage_recipe_list(element, el_type)
   for _,recipe in pairs(recipes) do
     for _,ingredient in pairs(recipe.ingredients) do
       if ingredient.name == element and ingredient.type == el_type then
-        table.insert(ret_tb, recipe)
+        ret_tb[recipe.name] = recipe
       end
     end
   end

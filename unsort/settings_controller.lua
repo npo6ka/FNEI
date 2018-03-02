@@ -26,8 +26,8 @@ function SettingsController.draw_settings()
   local sett_list = {}
 
   if cur_tab == "admin-settings" then
-    if not Settings.get_val("admin-settings") then
-      table.insert(sett_list, settings["admin-settings"])
+    if not Settings.get_val("admin") then
+      table.insert(sett_list, settings["admin"])
     else
       sett_list = SettingsController.set_settings_for_tab(settings, cur_tab)
     end
@@ -78,14 +78,14 @@ function SettingsController.check_admin_settings_event(event, sett_name)
     return
   end
 
-  if Settings.get_val("admin-settings") == nil then
+  if Settings.get_val("admin") == nil then
     Player.print({"fnei.admin-option-warning"})
-    Settings.set_val("admin-settings", false)
+    Settings.set_val("admin", false)
     event.element.state = false
     return
   end
 
-  Settings.set_val("admin-settings", event.element.state)
+  Settings.set_val("admin", event.element.state)
   SettingsController.draw_settings(tabs:get_cur_tab())
 end
 

@@ -28,7 +28,7 @@ function RawTech:is_attainable_tech(tech)
 end
 
 function RawTech:get_recipe_list_in_tech_dependencies()
-  Debug:debug(RawTech.classname, "get_recipe_in_tech_dependencies( )")
+ -- Debug:debug(RawTech.classname, "get_recipe_in_tech_dependencies( )")
 
   if not dep_tech then
     dep_tech = self:create_tech_dependencies()
