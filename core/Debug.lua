@@ -3,7 +3,7 @@ Debug = {}
 Debug.filename="fnei\\fnei.log"
 Debug.limit = 5
 Debug.append = false
-Debug.mode = true
+Debug.mode = false
 
 if Debug.mode then
   Debug.print_tb = {
@@ -16,7 +16,7 @@ else
   Debug.print_tb = {
   --         chat   log    file  
     info =  {false, false, false},
-    error = {true,  true,  true},
+    error = {false, true,  true },
     debug = {false, false, false},
   }
 end

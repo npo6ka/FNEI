@@ -196,7 +196,7 @@ function RecipeGui.set_made_in_list(recipe)
 
   clear_gui(gui_tabel)
 
-  if Settings.get_val("show-recipes", "categories", recipe.category) then
+  if recipe and Settings.get_val("show-recipes", "categories", recipe.category) then
     local cat_list = craft_cat_list[recipe.category]
 
     for _, cat in pairs(cat_list) do
@@ -216,7 +216,8 @@ function RecipeGui.set_made_in_list(recipe)
                     tooltip = {"", {"fnei.handcraft"}},
                     sprite = "fnei_hand_icon"
                   }
-      elseif cat.type == "building" and cat.ingredient_count >= #recipe.ingredients and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+      elseif cat.type == "building" and recipe.ingredients and cat.ingredient_count and cat.ingredient_count >= #recipe.ingredients and 
+             Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local entity = item_list[cat.val.name].place_result
 
         if caption and entity and entity.crafting_speed ~= nil then
