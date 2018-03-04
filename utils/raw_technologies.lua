@@ -84,7 +84,15 @@ function RawTech:create_tech_dependencies()
         if not ret_tb[modifier.recipe] then
           ret_tb[modifier.recipe] = {}
         end
-        table.insert(ret_tb[modifier.recipe], tech)
+        local flag = true
+        for _,d_tech in pairs(ret_tb[modifier.recipe]) do
+          if d_tech.name == tech.name then
+            flag = false
+          end
+        end
+        if flag then
+          table.insert(ret_tb[modifier.recipe], tech)
+        end
       end
     end
   end

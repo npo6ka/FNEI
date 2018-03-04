@@ -222,8 +222,6 @@ function RecipeGui.set_made_in_list(recipe)
 
         if caption and entity and entity.crafting_speed ~= nil then
           caption = round(recipe.energy / entity.crafting_speed, 3)
-        else
-          caption = ""
         end
 
         element = { type = "choose-elem-button",
