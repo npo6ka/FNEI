@@ -17,7 +17,7 @@ function RecipeGui.init_template()
 
           { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
             { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 5, children = {
-              { type = "flow", name = "header-icon" },
+              { type = "flow", name = "header-icon", style = "fnei_default_horizontal_flow" },
               { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", want_ellipsis = true, caption = "recipe_name" },
               { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
               { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = cont.settings_key_event },
@@ -31,7 +31,7 @@ function RecipeGui.init_template()
             { type = "table", name = "paging-table", style = "fnei_recipe_paging_table", column_count = 5, children = {
               { type = "flow", name = "left-arrow-flow", style = "fnei_recipe_arrow_flow" },
               { type = "label", name = "type-label", style = "fnei_recipe_type_label", vertical_align = "center", align = "right", caption = "" },
-              { type = "flow", name = "prot-icon", style = "fnei_recipe_arrow_flow" },
+              { type = "flow", name = "prot-icon", style = "fnei_recipe_header_icon_flow" },
               { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", vertical_align = "center", align = "left", caption = "" },
               { type = "flow", name = "right-arrow-flow", style = "fnei_recipe_arrow_flow" },
             }},
@@ -41,10 +41,10 @@ function RecipeGui.init_template()
         
           { type = "table", name = "prod-table", style = "fnei_recipe_products_table", column_count = 2, children = {
             { type = "frame", name = "ingr-frame", style = "fnei_recipe_ingr_frame", children = {
-              { type = "label", name = "ingr-label", caption = {"fnei.ingredients"} },
+              { type = "label", name = "ingr-label", style = "fnei_default_label", caption = {"fnei.ingredients"} },
             }},
             { type = "frame", name = "res-frame", style = "fnei_recipe_res_frame", children = {
-              { type = "label", name = "res-label", caption = {"fnei.results"} },
+              { type = "label", name = "res-label", style = "fnei_default_label", caption = {"fnei.results"} },
             }},
             { type = "frame", name = "list-ingr-frame", style = "fnei_recipe_list_ingr_frame", children = {
               { type = "scroll-pane", name = "ingr-scroll", style = "fnei_recipe_products_scroll_pane", direction = "vertical", children = {
@@ -62,12 +62,12 @@ function RecipeGui.init_template()
 
           { type = "frame", name = "madein-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
             { type = "label", name = "madein-lable", style = "fnei_recipe_madein_label", caption = {"fnei.made-in"} },
-            { type = "table", name = "madein-table", column_count = 7 }
+            { type = "table", name = "madein-table", style = "fnei_recipe_made_in_table", column_count = 7 }
           }},
 
 ------------------- techs --------------------
 
-          { type = "flow", name = "tech-flow" },
+          { type = "flow", name = "tech-flow", style = "fnei_default_horizontal_flow" },
 
         }}  
       }}
@@ -127,7 +127,7 @@ function RecipeGui.set_recipe_icon(recipe)
   local icon_flow = Gui.get_gui(Gui.get_pos(), "header-icon")
 
   clear_gui(icon_flow)
-  Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", elem_type = "recipe", elem_value = recipe.name, locked = true })
+  Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", style = "fnei_default_button", elem_type = "recipe", elem_value = recipe.name, locked = true })
 end
 
 function RecipeGui.set_ingredients(list, dif_prot)
@@ -142,7 +142,7 @@ function RecipeGui.set_ingredients(list, dif_prot)
                   
   for _,ingr in pairs(list) do
     table.insert(template, { type = "flow", name = ingr.name .. "-flow", style = "fnei_recipe_list_elements_flow", direction = "horizontal", children = {
-      { type = "choose-elem-button", name = ingr.type .. "_" .. ingr.name, elem_type = ingr.type, elem_value = ingr.name, locked = true },
+      { type = "choose-elem-button", name = ingr.type .. "_" .. ingr.name, style = "fnei_default_button", elem_type = ingr.type, elem_value = ingr.name, locked = true },
       { type = "label", name = ingr.name .. "-label", style = "fnei_recipe_element_label", vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(ingr) }
     }})
   end
@@ -169,7 +169,7 @@ function RecipeGui.set_products(list, dif_prot)
 
   for _,res in pairs(list) do
     table.insert(template, { type = "flow", name = res.name .. "-flow", style = "fnei_recipe_list_elements_flow", direction = "horizontal", children = {
-      { type = "choose-elem-button", name = res.type .. "_" .. res.name, elem_type = res.type, elem_value = res.name, locked = true },
+      { type = "choose-elem-button", name = res.type .. "_" .. res.name, style = "fnei_default_button", elem_type = res.type, elem_value = res.name, locked = true },
       { type = "label",  name = res.name .. "-label", style = "fnei_recipe_element_label", vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(res) }
     }})
   end
@@ -210,23 +210,25 @@ function RecipeGui.set_made_in_list(recipe)
           caption = round(recipe.energy / (player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1), 3)
         end
 
-        element = { type = "sprite-button", 
+        element = { type = "sprite-button",
                     name = cat.val.name,
-                    style = "slot_button",
+                    style = "fnei_default_button",
                     tooltip = {"", {"fnei.handcraft"}},
                     sprite = "fnei_hand_icon"
                   }
-      elseif cat.type == "building" and recipe.ingredients and cat.ingredient_count and cat.ingredient_count >= #recipe.ingredients and 
+      elseif cat.type == "building" and cat.ingredient_count and cat.ingredient_count >= #recipe.ingredients and 
              Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local entity = item_list[cat.val.name].place_result
 
         if caption and entity and entity.crafting_speed ~= nil then
           caption = round(recipe.energy / entity.crafting_speed, 3)
+        else
+          caption = ""
         end
 
-        element = { type = "choose-elem-button", 
-                    name = "item_" .. cat.val.name,  
-                    style = nil, 
+        element = { type = "choose-elem-button",
+                    name = "item_" .. cat.val.name,
+                    style = "fnei_default_button",
                     elem_type = "item", 
                     elem_value = cat.val.name, 
                     locked = true
@@ -283,7 +285,7 @@ function RecipeGui.set_techs( recipe )
     local template = {
       { type = "frame", name = "tech-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
         { type = "label", name = "tech-label", style = "fnei_recipe_technologies_label", caption = {"fnei.technology"} },
-        { type = "table", name = "tach-table", column_count = 3, children = techs },
+        { type = "table", name = "tach-table", style = "fnei_recipe_tech_table", column_count = 3, children = techs },
       }}
     }
 
@@ -323,7 +325,7 @@ function RecipeGui.draw_cur_prot(type, name)
   local prot_flow = Gui.get_gui(Gui.get_pos(), "prot-icon")
   clear_gui(prot_flow)
   if name then
-    Gui.add_choose_button(prot_flow, { type = "choose-elem-button", name = type .. "_" .. name, elem_type = type, elem_value = name, locked = true })
+    Gui.add_choose_button(prot_flow, { type = "choose-elem-button", name = type .. "_" .. name, style = "fnei_default_button", elem_type = type, elem_value = name, locked = true })
   end
 end
 

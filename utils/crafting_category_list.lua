@@ -10,10 +10,20 @@ local craf_cat
 --return a list of attainable technologies or empty list
 function CraftCategoty:get_crafting_category_list()
   Debug:debug(CraftCategoty.classname, "get_crafting_category_list( )")
-  if not craf_cat then
-    craf_cat = self:create_crafting_category_list()
+
+  local entity = Player.get().character
+
+  if entity and entity.name then
+    if not craf_cat then craf_cat = {} end
+
+    if not craf_cat[entity.name] then
+      craf_cat[entity.name] = self:create_crafting_category_list()
+    end
+
+    return craf_cat[entity.name] or {}
   end
-  return craf_cat or {}
+
+  return {}
 end
 
 ----------------------- secondary function --------------------------

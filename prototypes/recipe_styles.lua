@@ -79,7 +79,7 @@ data.raw["gui-style"].default["fnei_recipe_type_label"] =
     parent = "label",
     align = "right",
     height = 36,
-    width = 190,
+    width = 182,
     scalable = false,
 }
 
@@ -120,6 +120,14 @@ data.raw["gui-style"].default["fnei_recipe_arrow_flow"] =
   type = "horizontal_flow_style",
   top_padding = 0,
   left_padding = 0,
+  width = 36,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_recipe_header_icon_flow"] =
+{
+  type = "horizontal_flow_style",
+  width = 36,
   scalable = false,
 }
 
@@ -189,6 +197,7 @@ data.raw["gui-style"].default["fnei_recipe_list_ingr_frame"] =
   type = "frame_style",
   parent = "fnei_default_frame",
   left_padding = 3,
+  width = 252,
   scalable = false,
 }
 
@@ -197,6 +206,7 @@ data.raw["gui-style"].default["fnei_recipe_list_res_frame"] =
   type = "frame_style",
   parent = "fnei_default_frame",
   left_padding = 3,
+  width = 252,
   scalable = false,
 }
 
@@ -238,6 +248,18 @@ data.raw["gui-style"].default["fnei_recipe_list_elements_table"] =
   type = "table_style",
   parent = "table",
   vertical_spacing = 2,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_recipe_made_in_table"] =
+{
+  type = "table_style",
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_recipe_tech_table"] =
+{
+  type = "table_style",
   scalable = false,
 }
 
