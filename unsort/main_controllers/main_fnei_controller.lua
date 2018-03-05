@@ -6,7 +6,7 @@ local pages = "main-pages"
 local cont_gui
 
 function FneiMainController.init_event(gui_name, content_gui)
-  pages = Page:new(pages, gui_name, 12, FneiMainController.draw_content, FneiMainController.draw_content)
+  pages = Page:new(pages, gui_name, 12, FneiMainController.redraw_content, FneiMainController.redraw_content)
   cont_gui = content_gui
 
   Events.add_custom_event(gui_name, "choose-elem-button", "fluid", FneiMainController.open_fluid_recipe_event)
@@ -14,8 +14,12 @@ function FneiMainController.init_event(gui_name, content_gui)
 end
 
 function FneiMainController.draw_content()
-  FneiMainController.set_page_list()
   cont_gui.set_search_field(FneiMainController.get_search_field())
+  FneiMainController.redraw_content()
+end
+
+function FneiMainController.redraw_content()
+  FneiMainController.set_page_list()
   cont_gui.draw_page_label(pages)
   cont_gui.draw_item_list(pages:get_list_for_tab(pages:get_cur_page()))
   if Settings.get_val("focus-search") then
@@ -57,9 +61,9 @@ end
 function FneiMainController.search_event(event)
   if event.text then
     FneiMainController.set_search_field(event.text)
-    FneiMainController.draw_content()
+    FneiMainController.redraw_content()
   elseif event.button == defines.mouse_button_type.right then
-    FneiMainController.set_search_field(str)
+    FneiMainController.set_search_field("")
     FneiMainController.draw_content()
   end
 end
