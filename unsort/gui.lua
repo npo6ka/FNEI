@@ -115,47 +115,58 @@ function Gui.add_gui_template(parent, gui_temp)
   end
 end
 
-function Gui.set_def_fields(gui_elem)
+function Gui.set_def_fields(parent, gui_elem)
   local cont_name = Controller.get_cur_con_name()
+  local gui_name = Gui.create_gui_name(cont_name, gui_elem.name)
 
-  gui_elem.name = Gui.create_gui_name(cont_name, gui_elem.name)
+  if parent[gui_name] then
+    local cnt = 1
+    while parent[gui_name .. cnt] ~= nil do
+      cnt = cnt + 1
+    end
+
+    gui_name = gui_name .. cnt
+  end
+
+  gui_elem.name = gui_name
 
   if gui_elem.style == "" then
     gui_elem.style = gui_elem.name
   end
+  
   return gui_elem
 end
 
 function Gui.add_sprite_button(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_flow(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_frame(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_table(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_drop_down(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_checkbox(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_button(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_label(parent, gui_elem)
-  Gui.set_def_fields(gui_elem)
+  Gui.set_def_fields(parent, gui_elem)
 
   gui_elem.caption = gui_elem.caption or "unknow"
   gui_elem.tooltip = gui_elem.tooltip or gui_elem.caption
@@ -171,17 +182,17 @@ function Gui.add_label(parent, gui_elem)
 end
 
 function Gui.add_textfield(parent, gui_elem)
-  Gui.set_def_fields(gui_elem)
+  Gui.set_def_fields(parent, gui_elem)
   gui_elem.text = gui_elem.text or ""
   return parent.add(gui_elem)
 end
 
 function Gui.add_scroll_pane(parent, gui_elem)
-  return parent.add(Gui.set_def_fields(gui_elem))
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
 function Gui.add_choose_button(parent, gui_elem)
-  local gui = parent.add(Gui.set_def_fields(gui_elem))
+  local gui = parent.add(Gui.set_def_fields(parent, gui_elem))
   Gui.set_choose_but_val(gui, gui_elem.elem_value)
   gui.locked = gui_elem.locked
   return gui
