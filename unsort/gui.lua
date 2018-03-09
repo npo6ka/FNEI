@@ -23,7 +23,9 @@ function Gui.close_old_fnei_gui()
   local function gui_iterate(parent)
     for _,gui_name in pairs(parent.children_names) do
       if string.match(gui_name or "", "fnei") and parent[gui_name].valid then
-        parent[gui_name].destroy()
+        if gui_name ~= "fnei_hotbar_flow" then
+          parent[gui_name].destroy()
+        end
       end
     end
   end

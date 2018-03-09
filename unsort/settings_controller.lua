@@ -93,6 +93,11 @@ function SettingsController.set_new_tab_event(event, gui_name)
   SettingsController.draw_settings(tabs:get_cur_tab())
 end
 
+function SettingsController.change_hotbar_state_event(event, gui_name)
+  Settings.set_val("show-hotbar", event.element.state)
+  Controller.get_cont("hotbar").open()
+end
+
 function SettingsController.init_events()
   SettingsGui.init_events()
   Settings.init_events()

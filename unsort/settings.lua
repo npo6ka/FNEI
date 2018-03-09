@@ -19,6 +19,7 @@ function Settings.init()
   settings_list["close-gui-when-tech-open"] =     { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-craft-time-label"] =        { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-the-same-recipes"] =        { type = "checkbox", tab = "main-settings", def_val = false }
+  settings_list["show-hotbar"] =                  { type = "checkbox", tab = "main-settings", def_val = true, event = Controller.get_cont("settings").change_hotbar_state_event }
   
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   

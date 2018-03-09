@@ -29,6 +29,16 @@ end
 function Events.on_configuration_changed(event)
   if not global.fnei then global.fnei = {} end
   if not global.fnei.event_list then global.fnei.event_list = {} end
+
+  for i, player in pairs(game.players) do
+    Player.load({ player_index = i })
+    Controller.get_cont("hotbar").open()
+  end
+end
+
+function Events.on_player_created(event)
+  Player.load(event)
+  Controller.get_cont("hotbar").open()
 end
 
 function Events.back_key(event)
@@ -88,8 +98,10 @@ end
 
 function Events:init()
   script.on_configuration_changed(self.on_configuration_changed)
+  script.on_init(self.on_configuration_changed)
   script.on_load(self.on_load)
 
+  self.event_load(defines.events.on_player_created, self.on_player_created)
   self.event_load(defines.events.on_tick, self.on_tick)
   self.event_load(gui_key_name, self.gui_key)
   self.event_load(back_key_name, self.back_key)

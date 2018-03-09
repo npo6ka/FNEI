@@ -8,12 +8,13 @@ local controllers = {
   main = require "unsort/main_controller",
   recipe = require "unsort/recipe_controller",
   settings = require "unsort/settings_controller",
+  hotbar = require "unsort/hotbar_controller",
 }
 
 function Controller.init_events()
-  controllers.main.init_events()
-  controllers.recipe.init_events()
-  controllers.settings.init_events()
+  for _,cnt in pairs(controllers) do
+    cnt.init_events()
+  end
 end
 
 function Controller.get_cont(name)
@@ -34,6 +35,14 @@ end
 
 function Controller.get_cur_con_name()
   return queue:get()
+end
+
+function Controller.set_cur_con_name(contr)
+  return queue:add(contr)
+end
+
+function Controller.remove_last_con_name()
+  return queue:remove()
 end
 
 -----------------------------------------------------------------------------

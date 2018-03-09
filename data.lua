@@ -2,6 +2,8 @@ require "prototypes.styles"
 require "prototypes.main_styles"
 require "prototypes.recipe_styles"
 require "prototypes.settings_styles"
+require "prototypes.hotbar_styles"
+
 
 data:extend({
   {
