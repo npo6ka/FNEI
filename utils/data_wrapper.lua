@@ -65,7 +65,7 @@ function get_filtred_recipe_list(recipe_list)
 
   for rec_name, recipe in pairs(recipe_list) do
     if Settings.get_val("show-recipes", "categories", recipe.category) then
-      local cat_list = craft_cat_list[recipe.category]
+      local cat_list = craft_cat_list[recipe.category] or {}
 
       for _, cat in pairs(cat_list) do
         if cat.type == "player" or (cat.ingredient_count and cat.ingredient_count >= #recipe.ingredients) then
