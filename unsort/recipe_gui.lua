@@ -352,7 +352,11 @@ function RecipeGui.get_element_caption(element)
 
 
   if element.amount then
-    return {"fnei.recipe-amnt", element.amount, get_localised_name(prot) }
+    if element.type == "fluid" and element.temperature then
+      return {"fnei.recipe-amnt", element.amount, get_localised_name(prot), "(" .. element.temperature .. "°)" }
+    else 
+      return {"fnei.recipe-amnt", element.amount, get_localised_name(prot), "" }
+    end
   else
     local min = element.amount_min or 0
     local max = element.amount_max or 0
@@ -360,7 +364,7 @@ function RecipeGui.get_element_caption(element)
     local ret_val
 
     if not Settings.get_val("detail-chance") then
-      return {"fnei.recipe-amnt", round((min + max) / 2 * prob, 3), get_localised_name(prot)}
+      return {"fnei.recipe-amnt", round((min + max) / 2 * prob, 3), get_localised_name(prot), ""}
     end
 
     if min ~= max then
@@ -369,9 +373,9 @@ function RecipeGui.get_element_caption(element)
       ret_val = max
     end
     if prob == 1 then
-      return {"fnei.recipe-amnt", ret_val, get_localised_name(prot)}
+      return {"fnei.recipe-amnt", ret_val, get_localised_name(prot), ""}
     else
-      return {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3)}, get_localised_name(prot)}
+      return {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3), ""}, get_localised_name(prot)}
     end
   end
 end
