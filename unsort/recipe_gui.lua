@@ -216,21 +216,32 @@ function RecipeGui.set_made_in_list(recipe)
                     tooltip = {"", {"fnei.handcraft"}},
                     sprite = "fnei_hand_icon"
                   }
-      elseif cat.type == "building" and cat.ingredient_count and cat.ingredient_count >= #recipe.ingredients and 
-             Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        local entity = item_list[cat.val.name].place_result
+      elseif cat.type == "building" and cat.ingredient_count and 
+          Settings.get_val("show-recipes", "buildings", cat.val.name) then
+        local ing_cnt = 0
 
-        if caption and entity and entity.crafting_speed ~= nil then
-          caption = round(recipe.energy / entity.crafting_speed, 3)
+        for _,prot in pairs(recipe.ingredients) do
+          if prot.type == "item" then
+            ing_cnt = ing_cnt + 1
+          end
         end
 
-        element = { type = "choose-elem-button",
-                    name = "item_" .. cat.val.name,
-                    style = "fnei_default_button",
-                    elem_type = "item", 
-                    elem_value = cat.val.name, 
-                    locked = true
-                  }
+        if cat.ingredient_count >= ing_cnt then
+          local entity = item_list[cat.val.name].place_result
+
+          if caption and entity and entity.crafting_speed ~= nil then
+            caption = round(recipe.energy / entity.crafting_speed, 3)
+          end
+
+          element = { 
+            type = "choose-elem-button",
+            name = "item_" .. cat.val.name,
+            style = "fnei_default_button",
+            elem_type = "item", 
+            elem_value = cat.val.name, 
+            locked = true
+          }
+        end
       end
 
       if element then
