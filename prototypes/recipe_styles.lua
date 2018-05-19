@@ -98,7 +98,7 @@ data.raw["gui-style"].default["fnei_recipe_craft_time_for_building_label"] =
     type = "label_style",
     parent = "label",
     top_padding = 0,
-    height = 16,
+    height = 18,
     width = 36,
     scalable = false,
 }
