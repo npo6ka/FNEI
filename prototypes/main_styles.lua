@@ -197,7 +197,7 @@ data.raw["gui-style"].default["fnei_main_default_search_slot_button"] =
 data.raw["gui-style"].default["fnei_main_default_button"] = 
 {
   type = "button_style",
-  height = 30,
+  height = 32,
   width = 120,
   top_padding = 0,
   font = "font-mb",
