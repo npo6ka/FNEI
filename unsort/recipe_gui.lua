@@ -350,17 +350,17 @@ function RecipeGui.get_element_caption(element)
     prot = get_fluid_list()[element.name]
   end
 
+  local ret_val
 
   if element.amount then
-    return {"fnei.recipe-amnt", element.amount, get_localised_name(prot) }
+    ret_val = {"fnei.recipe-amnt", element.amount, get_localised_name(prot) }
   else
     local min = element.amount_min or 0
     local max = element.amount_max or 0
     local prob = element.probability or 0
-    local ret_val
 
     if not Settings.get_val("detail-chance") then
-      return {"fnei.recipe-amnt", round((min + max) / 2 * prob, 3), get_localised_name(prot)}
+      ret_val = {"fnei.recipe-amnt", round((min + max) / 2 * prob, 3), get_localised_name(prot)}
     end
 
     if min ~= max then
@@ -369,11 +369,17 @@ function RecipeGui.get_element_caption(element)
       ret_val = max
     end
     if prob == 1 then
-      return {"fnei.recipe-amnt", ret_val, get_localised_name(prot)}
+      ret_val = {"fnei.recipe-amnt", ret_val, get_localised_name(prot), ""}
     else
-      return {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3)}, get_localised_name(prot)}
+      ret_val = {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3)}, get_localised_name(prot), ""}
     end
   end
+
+  if element.type == "fluid" and element.temperature and Settings.get_val("show-temperature-of-fluids") then
+    ret_val = {"", ret_val, " (" .. element.temperature .. "°)"}
+  end
+
+  return ret_val
 end
 
 function RecipeGui.draw_paging(page)

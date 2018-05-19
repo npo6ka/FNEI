@@ -63,8 +63,6 @@ function get_filtred_recipe_list(recipe_list)
   local ret_list = {}
   local craft_cat_list = get_crafting_categories_list()
 
-  out("test: ", recipe_list)
-
   for rec_name, recipe in pairs(recipe_list) do
     if Settings.get_val("show-recipes", "categories", recipe.category) then
       local cat_list = craft_cat_list[recipe.category] or {}
