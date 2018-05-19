@@ -19,6 +19,6 @@ data:extend({
     type = "custom-input",
     name = "pressed-fnei-back-key",
     key_sequence = "BACKSPACE",
-    consuming = "all"
+    consuming = "script-only"
   }
 })
