@@ -9,7 +9,15 @@ data:extend({
     height = 32,
     scale = 1,
   },
-
+  {
+    type = "sprite",
+    name = "fnei_hand_icon",
+    filename = "__core__/graphics/hand.png",
+    priority = "extra-high-no-scale",
+    width = 32,
+    height = 32,
+    scale = 1,
+  },
 --Fonts
   {
     type = "font",
@@ -45,53 +53,23 @@ data:extend({
     type = "font",
     name = "font-lb",
     from = "default-semibold",
-    size = 18
+    size = 17
   }
 })
 
+-------------------------flow_style--------------------------
 
-------------------------button_style-------------------------
-
-data.raw["gui-style"].default["fnei_empty_slot_button_style"] = 
+data.raw["gui-style"].default["fnei_default_vertical_flow"] =
 {
-  type = "button_style",
-  parent = "slot_button",
-    
-  clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 0
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 0
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 111,
-      y = 0
-    },
-  }
+  type = "vertical_flow_style",
+  scalable = false,
 }
 
+data.raw["gui-style"].default["fnei_default_horizontal_flow"] =
+{
+  type = "horizontal_flow_style",
+  scalable = false,
+}
 
 -------------------------frame_style--------------------------
 
@@ -127,46 +105,21 @@ data.raw["gui-style"].default["fnei_default_table"] =
   scalable = false,
 }
 
+-------------------------label_style--------------------------
+
+data.raw["gui-style"].default["fnei_default_label"] =
+{
+    type = "label_style",
+    scalable = false,
+}
+
 ------------------------button_style-------------------------
 
-data.raw["gui-style"].default["fnei_empty_button_style"] = 
+data.raw["gui-style"].default["fnei_default_button"] = 
 {
   type = "button_style",
   parent = "slot_button",
-  scalable = false, 
-  clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 75,
-      y = 144
-    },
-  },
-  default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 75,
-      y = 144
-    },
-  },
-  hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__core__/graphics/gui.png",
-      height = 36,
-      priority = "extra-high-no-scale",
-      width = 36,
-      x = 75,
-      y = 144
-    },
-  }
+  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_button_style"] = 
@@ -273,6 +226,150 @@ data.raw["gui-style"].default["fnei_back_button_style"] =
       height = 64,
       priority = "extra-high-no-scale",
       width = 64,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_left_arrow_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 28,
+  width = 28,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/prev_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/prev_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/prev_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_right_arrow_button_style"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  height = 28,
+  width = 28,
+  scalable = false,
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/next_3.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/next_1.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/next_2.png",
+      height = 64,
+      priority = "extra-high-no-scale",
+      width = 64,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_default_empty-tab"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  font = "font-mb",
+  scalable = false,
+    
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/selected_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/default_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/hovered_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  }
+}
+
+data.raw["gui-style"].default["fnei_default_selected-tab"] = 
+{
+  type = "button_style",
+  parent = "slot_button",
+  font = "font-mb",
+  scalable = false,
+    
+  clicked_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/selected_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  default_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/selected_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
+    },
+  },
+  hovered_graphical_set = {
+    type = "monolith",
+    monolith_image = {
+      filename = "__FNEI__/graphics/hovered_tab.png",
+      height = 36,
+      priority = "extra-high-no-scale",
+      width = 169,
     },
   }
 }
