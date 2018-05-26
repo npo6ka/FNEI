@@ -2,7 +2,7 @@ Tabs = {
   classname = "FNTabs",
 }
 
-local GuiTabs = require "unsort/tabs/gui_tabs"
+local GuiTabs = require "utils/tabs/gui_tabs"
 
 function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
 

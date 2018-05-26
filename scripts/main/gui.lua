@@ -4,9 +4,9 @@ local MainGui = {
 }
 
 local gui_tabs = {}
-gui_tabs["default-search"] = require "unsort/main_gui/main_default_gui"
-gui_tabs["fnei-search"] = require "unsort/main_gui/main_fnei_gui"
---gui_tabs["category-search"] = require "unsort/main_gui/main_category_gui"
+gui_tabs["default-search"] = require "scripts/main/gui/default"
+gui_tabs["fnei-search"] = require "scripts/main/gui/fnei"
+--gui_tabs["category-search"] = require "scripts/main/gui/category"
 
 local main_gui_template
 local content_flow_name = "content-flow"

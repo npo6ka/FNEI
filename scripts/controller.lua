@@ -5,10 +5,10 @@ Controller = {
 local queue = Queue:new("controllers")
 
 local controllers = {
-  main = require "unsort/main_controller",
-  recipe = require "unsort/recipe_controller",
-  settings = require "unsort/settings_controller",
-  hotbar = require "unsort/hotbar_controller",
+  main = require "scripts/main/controller",
+  recipe = require "scripts/recipe/controller",
+  settings = require "scripts/settings/controller",
+  hotbar = require "scripts/hotbar/controller",
 }
 
 function Controller.init_events()

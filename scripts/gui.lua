@@ -3,7 +3,7 @@ Gui = {
 }
 
 local mod_prefix = "fnei"
-local CustomEvent = require "unsort/custom_events"
+local CustomEvent = require "scripts/custom_events"
 
 function Gui.get_prefix()
   return mod_prefix

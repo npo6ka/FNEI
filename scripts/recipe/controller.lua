@@ -2,7 +2,7 @@ local RecipeController = {
   classname = "FNRecipeController"
 }
 
-local RecipeGui = require "unsort/recipe_gui"
+local RecipeGui = require "scripts/recipe/gui"
 local queue = Queue:new("recipe_queue")
 local pages = "recipe-pages"
 

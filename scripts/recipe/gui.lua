@@ -369,9 +369,9 @@ function RecipeGui.get_element_caption(element)
       ret_val = max
     end
     if prob == 1 then
-      ret_val = {"fnei.recipe-amnt", ret_val, get_localised_name(prot), ""}
+      ret_val = {"fnei.recipe-amnt", ret_val, get_localised_name(prot)}
     else
-      ret_val = {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3)}, get_localised_name(prot), ""}
+      ret_val = {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3)}, get_localised_name(prot)}
     end
   end
 

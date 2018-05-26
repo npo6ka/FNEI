@@ -4,7 +4,7 @@ Events = {
 
 local gui_key_name = "pressed-fnei-gui-key"
 local back_key_name = "pressed-fnei-back-key"
-local CustomEvents = require "unsort/custom_events"
+local CustomEvents = require "scripts/custom_events"
 
 local supported_gui_event = {
   defines.events.on_gui_checked_state_changed,

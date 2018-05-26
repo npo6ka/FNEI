@@ -2,13 +2,13 @@ local MainController = {
   classname = "FNMainController",
 }
 
-local MainGui = require "unsort/main_gui"
+local MainGui = require "scripts/main/gui"
 local tabs = "main-tabs"
 
 local gui_tabs_cont = {}
-gui_tabs_cont["default-search"] = require "unsort/main_controllers/main_default_controller"
-gui_tabs_cont["fnei-search"] = require "unsort/main_controllers/main_fnei_controller"
---gui_tabs_cont["category-search"] = require "unsort/main_controllers/main_category_controller"
+gui_tabs_cont["default-search"] = require "scripts/main/controllers/default"
+gui_tabs_cont["fnei-search"] = require "scripts/main/controllers/fnei"
+--gui_tabs_cont["category-search"] = require "scripts/main/controllers/category"
 
 function MainController.init_events()
   local tab_list = {}

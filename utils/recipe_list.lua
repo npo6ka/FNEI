@@ -138,20 +138,29 @@ function Recipe:create_attainable_recipes()
   local rec_dep = RawTech:get_recipe_list_in_tech_dependencies()
   local a_tech = RawTech:get_aTech_list()
 
+  local cat = {}
+
+  for _,ent in pairs(game.entity_prototypes) do
+    if ent.resource_category then
+      cat[ent.resource_category] = true
+    end
+  end
+
+  for n,v in pairs(cat) do
+    out(n,v)
+  end
+
   for _,recipe in pairs(recipe_list) do
-    local dep = rec_dep[recipe.name] or {}
     if recipe.enabled then
       ret_tb[recipe.name] = recipe
     else
-      local flag = false
+      local dep = rec_dep[recipe.name] or {}
+
       for _,tech in pairs(dep) do
         if a_tech[tech.name] then
-          flag = true
+          ret_tb[recipe.name] = recipe
+          break
         end
-      end
-
-      if flag then
-        ret_tb[recipe.name] = recipe
       end
     end
   end

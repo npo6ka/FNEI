@@ -13,18 +13,18 @@ end
 -------------- include DefaultLibs ---------------
 require "utils/data_wrapper"
 require "utils/utils"
-require "unsort/player"
-require "unsort/tabs/tabs"
-require "unsort/paging"
-require "unsort/queue"
-require "unsort/open_tech_hook"
-require "unsort/events"
+require "scripts/player"
+require "utils/tabs/tabs"
+require "utils/paging"
+require "utils/queue"
+require "utils/open_tech_hook"
+require "scripts/events"
 
-require "unsort/controller"
+require "scripts/controller"
 
-require "unsort/gui"
+require "scripts/gui"
 
-require "unsort/settings"
+require "scripts/settings/settings"
 
 Settings.init()
 Events:init()

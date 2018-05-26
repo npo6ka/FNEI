@@ -33,11 +33,11 @@ function Settings.init()
   settings_list["fluid-auto-craft"] =             { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-usage"] =             { type = "checkbox", tab = "default-settings", def_val = false }
 
-  element_list["checkbox"] =            require "unsort/settings_elements/checkbox_element"
-  element_list["global-checkbox"] =     require "unsort/settings_elements/global_checkbox_element"
-  element_list["crafting-buildings"] =  require "unsort/settings_elements/crafting_buildings_element"
-  element_list["drop-down"] =           require "unsort/settings_elements/drop_down_element"
-  element_list["numeric-up-down"] =     require "unsort/settings_elements/numeric_up_down_element"
+  element_list["checkbox"] =            require "scripts/settings/elements/checkbox"
+  element_list["global-checkbox"] =     require "scripts/settings/elements/global_checkbox"
+  element_list["crafting-buildings"] =  require "scripts/settings/elements/crafting_buildings"
+  element_list["drop-down"] =           require "scripts/settings/elements/drop_down"
+  element_list["numeric-up-down"] =     require "scripts/settings/elements/numeric_up_down"
 
 
   for name, sett in pairs(settings_list) do

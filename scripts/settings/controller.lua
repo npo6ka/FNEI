@@ -2,7 +2,7 @@ local SettingsController = {
   classname = "FNSettingsController",
 }
 
-local SettingsGui = require "unsort/settings_gui"
+local SettingsGui = require "scripts/settings/gui"
 local tabs = "sett-tabs"
 
 function SettingsController.exit()

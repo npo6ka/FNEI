@@ -2,7 +2,7 @@ local HotbarController = {
   classname = "FNHotbarController",
 }
 
-local HotbarGui = require "unsort/hotbar_gui"
+local HotbarGui = require "scripts/hotbar/gui"
 
 function HotbarController.exit()
   out("hotbar exit")
