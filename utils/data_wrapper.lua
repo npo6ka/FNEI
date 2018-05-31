@@ -4,54 +4,11 @@ Item = require "utils/items"
 Entity = require "utils/entity"
 CraftCategoty = require "utils/crafting_category_list"
 
-
--- local cur_calc = 0
--- local pre_calc = {}
-
--- function pre_calculate()
---   if not pre_calc[Player.get().name] then
---     pre_calc[Player.get().name] = true
---     cur_calc = 1
---   end
--- end
-
--- function pre_calculate_on_tick(event)
---   if cur_calc ~= 0 then
---     if event.tick % 30 == 0 then
---       out("init", cur_calc)
---       cur_calc = pre_init_function(cur_calc)
---     end
---   end
--- end
-
-
--- function pre_init_function(num)
---   if num == 1 then
---     Recipe:get_equals_recipe_list()
---   elseif num == 2 then
---     CraftCategoty:get_crafting_category_list()
---   elseif num == 3 then
---     RawTech:get_recipe_list_in_tech_dependencies()
---   elseif num == 4 then
---     Entity:get_mineable_entity_list()
---   elseif num == 5 then
---     Entity:get_nConvert_entity_list()
---   elseif num == 6 then
---     RawTech:get_aTech_list()
---   elseif num == 7 then
---     Recipe:get_aRecipe_list()
---     return 0
---   end
-
---   return num + 1
--- end
-
 function hard_load()
   if not global.fnei.eqRecipe then
-    Recipe:get_equals_redcipe_list()
+    Recipe:get_equals_recipe_list()
   end
 end
-
 
 ------------- Actiion category -------------
 
