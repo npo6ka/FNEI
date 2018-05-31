@@ -31,7 +31,7 @@ function RawTech:get_recipe_list_in_tech_dependencies()
  -- Debug:debug(RawTech.classname, "get_recipe_in_tech_dependencies( )")
 
   if not dep_tech then
-    dep_tech = self:create_tech_dependencies()
+    dep_tech = self:create_tech_dependencies(RawTech:get_tech_list())
   end
 
   return dep_tech
@@ -74,9 +74,8 @@ function RawTech:create_attainable_tech()
   return ret_tb
 end
 
-function RawTech:create_tech_dependencies()
+function RawTech:create_tech_dependencies(tech_list)
   local ret_tb = {}
-  local tech_list = RawTech:get_tech_list()
 
   for _,tech in pairs(tech_list) do
     for _,modifier in pairs(tech.effects) do

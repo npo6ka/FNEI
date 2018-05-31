@@ -53,12 +53,12 @@ end
 
 function Events.on_tick(event)
   TechHook.on_tick(event)
+  hard_load()
 end
 
 function Events.on_gui_closed(event)
   Player.load(event)
   if event and event.element and string.match(event.element.name, "fnei%_") then
-    Player.load(event)
     Events.gui_key(event)
   end
   TechHook.on_gui_close(event)

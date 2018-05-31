@@ -1,11 +1,113 @@
 RawTech = require "utils/raw_technologies"
 Recipe = require "utils/recipe_list"
 Item = require "utils/items"
+Entity = require "utils/entity"
 CraftCategoty = require "utils/crafting_category_list"
+
+
+-- local cur_calc = 0
+-- local pre_calc = {}
+
+-- function pre_calculate()
+--   if not pre_calc[Player.get().name] then
+--     pre_calc[Player.get().name] = true
+--     cur_calc = 1
+--   end
+-- end
+
+-- function pre_calculate_on_tick(event)
+--   if cur_calc ~= 0 then
+--     if event.tick % 30 == 0 then
+--       out("init", cur_calc)
+--       cur_calc = pre_init_function(cur_calc)
+--     end
+--   end
+-- end
+
+
+-- function pre_init_function(num)
+--   if num == 1 then
+--     Recipe:get_equals_recipe_list()
+--   elseif num == 2 then
+--     CraftCategoty:get_crafting_category_list()
+--   elseif num == 3 then
+--     RawTech:get_recipe_list_in_tech_dependencies()
+--   elseif num == 4 then
+--     Entity:get_mineable_entity_list()
+--   elseif num == 5 then
+--     Entity:get_nConvert_entity_list()
+--   elseif num == 6 then
+--     RawTech:get_aTech_list()
+--   elseif num == 7 then
+--     Recipe:get_aRecipe_list()
+--     return 0
+--   end
+
+--   return num + 1
+-- end
+
+function hard_load()
+  if not global.fnei.eqRecipe then
+    Recipe:get_equals_redcipe_list()
+  end
+end
+
+
+------------- Actiion category -------------
+
+function get_crafting_categories_list()
+  return CraftCategoty:get_crafting_category_list()
+end
+
+------------------ Item -------------------
+
+function get_full_item_list()
+  return Item:get_item_list()
+end
+
+function get_item_list()
+  if Settings.get_val("show-hidden-items") then
+    return Item:get_item_list()
+  else
+    return Item:get_vItem_list(Item:get_item_list())
+  end
+end
+
+------------------ Fluid ------------------
+
+function get_fluid_list()
+  return game.fluid_prototypes
+end
+
+------------------ Tech -------------------
 
 function get_tech_list()
   return RawTech:get_tech_list()
 end
+
+function get_technologies_for_recipe(recipe_name)
+  return Recipe:get_technologies_for_recipe(recipe_name)
+end
+
+function is_attainable_tech(tech)
+  return RawTech:is_attainable_tech(tech)
+end
+
+------------------ Entity -----------------
+
+function get_entity_list()
+  return Entity:get_entity_list()
+end
+
+function get_mineable_entity_list()
+  return Entity:get_mineable_entity_list()
+end
+
+function get_not_convert_entity_list()
+  return Entity:get_nConvert_entity_list()
+end
+
+------------------ Recipe -----------------
 
 function get_recipe_list()
   local rec_list = {}
@@ -25,34 +127,6 @@ function get_recipe_list()
   end
 
   return rec_list
-end
-
-function get_fluid_list()
-  return game.fluid_prototypes
-end
-
-function get_full_item_list()
-  return Item:get_item_list()
-end
-
-function get_item_list()
-  if Settings.get_val("show-hidden-items") then
-    return Item:get_item_list()
-  else
-    return Item:get_vItem_list(Item:get_item_list())
-  end
-end
-
-function get_crafting_categories_list()
-  return CraftCategoty:get_crafting_category_list()
-end
-
-function get_technologies_for_recipe(recipe_name)
-  return Recipe:get_technologies_for_recipe(recipe_name)
-end
-
-function is_attainable_tech(tech)
-  return RawTech:is_attainable_tech(tech)
 end
 
 function get_equals_recipe_list()

@@ -1,11 +1,10 @@
-if not RawTech then RawTech = require "utils/fnei_raw_technologies" end
+if not RawTech then RawTech = require "utils/raw_technologies" end
 
 local Recipe = {
   classname = "FNRecipe"
 }
 
 local aRecipe
-local eqRecipe
 
 function Recipe:get_recipe_list()
   Debug:debug(Recipe.classname, "get_recipe_list( )")
@@ -41,19 +40,19 @@ end
 function Recipe:get_equals_recipe_list()
   Debug:debug(Recipe.classname, "get_equals_recipe_list()")
 
-  if not eqRecipe then
-    eqRecipe = self:create_equals_recipe_list()
+  if not global.fnei.eqRecipe then
+    global.fnei.eqRecipe = self:create_equals_recipe_list()
   end
 
-  return eqRecipe
+  return global.fnei.eqRecipe
 end
 
 ----------------------- secondary function --------------------------
 
 function Recipe:create_equals_recipe_list()
-  local recipes = Recipe:get_recipe_list()
+  local recipes = game.recipe_prototypes
   local ret_buf = {}
-  local raw_tech = RawTech:get_tech_list()
+  local raw_tech = game.technology_prototypes
 
   for _, tech in pairs(raw_tech) do
     local n_recipes = {}
@@ -82,13 +81,17 @@ function Recipe:create_equals_recipe_list()
   return ret_buf
 end
 
+local tech_dep
+
 function Recipe:compare(recipe, s_recipe)
   if recipe.energy == s_recipe.energy and recipe.category == s_recipe.category then
     if Recipe:compare_recipe_prot(recipe.ingredients, s_recipe.ingredients) and 
        Recipe:compare_recipe_prot(recipe.products, s_recipe.products) 
     then
-      local techs = RawTech:get_recipe_list_in_tech_dependencies()
-      return Recipe:compare_tech_prot(techs[recipe.name], techs[s_recipe.name])
+      if not tech_dep then
+        tech_dep = RawTech:create_tech_dependencies(game.technology_prototypes)
+      end
+      return Recipe:compare_tech_prot(tech_dep[recipe.name], tech_dep[s_recipe.name])
     end
   end
   return false
@@ -137,18 +140,6 @@ function Recipe:create_attainable_recipes()
   local recipe_list = Recipe:get_recipe_list()
   local rec_dep = RawTech:get_recipe_list_in_tech_dependencies()
   local a_tech = RawTech:get_aTech_list()
-
-  local cat = {}
-
-  for _,ent in pairs(game.entity_prototypes) do
-    if ent.resource_category then
-      cat[ent.resource_category] = true
-    end
-  end
-
-  for n,v in pairs(cat) do
-    out(n,v)
-  end
 
   for _,recipe in pairs(recipe_list) do
     if recipe.enabled then
