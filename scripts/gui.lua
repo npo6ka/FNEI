@@ -21,9 +21,18 @@ end
 --check old fnei gui and close them
 function Gui.close_old_fnei_gui()
   local function gui_iterate(parent)
-    for _,gui_name in pairs(parent.children_names) do
+    for _, gui_name in pairs(parent.children_names) do
       if string.match(gui_name or "", "fnei") and parent[gui_name].valid then
-        if gui_name ~= "fnei_hotbar_flow" then
+        if gui_name == "fnei_left_flow" then
+          for _,sec_gui in pairs(parent[gui_name].children_name or {}) do
+            if sec_gui ~= "fnei_hotbar_flow" then
+              parent[gui_name].destroy()
+            end
+          end
+        else
+          if gui_name == "fnei_hotbar_flow" then
+            Controller.get_cont("hotbar").open()
+          end
           parent[gui_name].destroy()
         end
       end
@@ -57,7 +66,6 @@ function Gui.get_left_gui()
     end
 
     left_gui = left_gui["fnei_left_flow"] or left_gui
-    out("left_gui ", left_gui.name)
 
     return left_gui["fnei_left_flow"] or left_gui
 end
