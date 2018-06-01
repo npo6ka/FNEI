@@ -46,7 +46,7 @@ function TechHook.show_tech(name)
     local force = player.force
     
     if force.current_research then
-      local cur_progress = force.research_progress
+      local cur_progress = force.reserch_progress
       local tech = force.current_research
 
       global.fnei.cur_tech = {
@@ -76,7 +76,7 @@ end
 function TechHook.return_prev_tech()
   local cur_tech = global.fnei.cur_tech
 
-  if cur_tech.time > 0 then
+  if cur_tech.time > 4 then
     if cur_tech.force.current_research == nil then
       cur_tech.force.current_research = cur_tech.tech.name
     end

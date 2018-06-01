@@ -24,7 +24,7 @@ function HotbarGui.init_events()
 end
 
 function HotbarGui.is_gui_open()
-  local val = Gui.get_gui(Player.get().gui.left, hotbar_gui_template[1].name)
+  local val = Gui.get_gui(Gui.get_left_gui(), hotbar_gui_template[1].name)
   if val and next(val) and val.valid then
     return true
   else
@@ -35,12 +35,12 @@ end
 function HotbarGui.open_window()
   HotbarGui.close_window()
 
-  return Gui.add_gui_template(Player.get().gui.left, hotbar_gui_template)
+  return Gui.add_gui_template(Gui.get_left_gui(), hotbar_gui_template)
 end
 
 function HotbarGui.close_window()
   if HotbarGui.is_gui_open() then
-    Gui.get_gui(Player.get().gui.left, hotbar_gui_template[1].name).destroy()
+    Gui.get_gui(Gui.get_left_gui(), hotbar_gui_template[1].name).destroy()
   end
 end
 

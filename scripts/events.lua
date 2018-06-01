@@ -39,6 +39,10 @@ end
 function Events.on_player_created(event)
   Player.load(event)
   Controller.get_cont("hotbar").open()
+
+  Player.get().gui.left.add({ type = "sprite-button", name = "button-2", style = "fnei_hotbar_label_button", caption = "add_custom_event"})
+  Player.get().gui.left.add({ type = "sprite-button", name = "button-3", style = "fnei_hotbar_label_button", caption = "asd"})
+  Player.get().gui.left.add({ type = "sprite-button", name = "button-4", style = "fnei_hotbar_label_button", caption = "qwe"})
 end
 
 function Events.back_key(event)

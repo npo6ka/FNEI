@@ -39,7 +39,7 @@ function Gui.get_pos()
   local pos = Settings.get_val("position")
 
   if pos == 1 then
-    return Player.get().gui.left
+    return Gui.get_left_gui()
   elseif pos == 2 then
     return Player.get().gui.top
   elseif pos == 3 then
@@ -47,6 +47,19 @@ function Gui.get_pos()
   else
     Debug:error("utils: get_gui: invalid direction: ", pos)
   end
+end
+
+function Gui.get_left_gui()
+    local left_gui = Player.get().gui.left
+
+    if not left_gui["fnei_left_flow"] then
+      left_gui.add({ type = "flow", name = "fnei_left_flow", direction = "horizontal" })
+    end
+
+    left_gui = left_gui["fnei_left_flow"] or left_gui
+    out("left_gui ", left_gui.name)
+
+    return left_gui["fnei_left_flow"] or left_gui
 end
 
 function Gui.get_gui(parent, gui_name)
