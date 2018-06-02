@@ -26,10 +26,15 @@ function NumericUpDown.set_val(setting, val)
     end
 
     Settings.get_global_sett()[setting.name] = val
-    local gui = Gui.get_gui(Gui.get_pos(), setting.name .. textfield_name)
-    if gui then
-      gui.text = val
-    end
+    NumericUpDown.set_val_in_gui(setting.name, val)
+  end
+end
+
+function NumericUpDown.set_val_in_gui(sett_name, val)
+  local gui = Gui.get_gui(Gui.get_pos(), sett_name .. textfield_name)
+  
+  if gui then
+    gui.text = val
   end
 end
 

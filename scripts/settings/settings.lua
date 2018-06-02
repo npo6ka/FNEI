@@ -27,19 +27,19 @@ function Settings.init()
   settings_list["admin"] =                        { type = "global-checkbox", tab = "admin-settings", def_val = nil, event = Controller.get_cont("settings").check_admin_settings_event }
   settings_list["open-techs"] =                   { type = "checkbox", tab = "admin-settings", def_val = false }
   settings_list["open-unavailable-techs"] =       { type = "checkbox", tab = "admin-settings", def_val = false }
-  --settings_list["fnei-line-count"] =              { type = "numeric-up-down", tab = "admin-settings", def_val = 4, min_val = 1, max_val = 20 }
+  settings_list["open-tech-latency"] =            { type = "global-numeric-up-down", tab = "admin-settings", def_val = 5, min_val = 1, max_val = 20 }
 
   settings_list["item-auto-craft"] =              { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["item-auto-usage"] =              { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-craft"] =             { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-usage"] =             { type = "checkbox", tab = "default-settings", def_val = false }
 
-  element_list["checkbox"] =            require "scripts/settings/elements/checkbox"
-  element_list["global-checkbox"] =     require "scripts/settings/elements/global_checkbox"
-  element_list["crafting-buildings"] =  require "scripts/settings/elements/crafting_buildings"
-  element_list["drop-down"] =           require "scripts/settings/elements/drop_down"
-  element_list["numeric-up-down"] =     require "scripts/settings/elements/numeric_up_down"
-
+  element_list["checkbox"] =                require "scripts/settings/elements/checkbox"
+  element_list["global-checkbox"] =         require "scripts/settings/elements/global_checkbox"
+  element_list["crafting-buildings"] =      require "scripts/settings/elements/crafting_buildings"
+  element_list["drop-down"] =               require "scripts/settings/elements/drop_down"
+  element_list["numeric-up-down"] =         require "scripts/settings/elements/numeric_up_down"
+  element_list["global-numeric-up-down"] =  require "scripts/settings/elements/global_numeric_up_down"
 
   for name, sett in pairs(settings_list) do
     sett.elem = element_list[sett.type]
