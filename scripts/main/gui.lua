@@ -14,7 +14,7 @@ local tab_flow_name = "main-tabs"
 
 function MainGui.init_template()
   main_gui_template = {
-    { type = "flow", name = "main-flow", style = "fnei_main_genetal-flow", children = {
+    { type = "flow", name = "main-flow", style = "fnei_main_general-flow", children = {
       { type = "frame", name = "main-frame", style = "fnei_main_frame", children = {
         { type = "table", name = "main-table", style = "fnei_main_table", column_count = 1, children = {
 

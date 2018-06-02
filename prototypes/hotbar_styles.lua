@@ -26,8 +26,8 @@ data.raw["gui-style"].default["fnei_hotbar_label_button"] =
 {
   type = "button_style",
   parent = "technology_slot_button",
-  height = 30,
-  width = 40,
+  height = 32,
+  width = 48,
   font = "font-lb",
   scalable = false,
 }

@@ -1,7 +1,7 @@
 
 -------------------------flow_style--------------------------
 
-data.raw["gui-style"].default["fnei_main_genetal-flow"] =
+data.raw["gui-style"].default["fnei_main_general-flow"] =
 {
   type = "horizontal_flow_style",
   width = 526,
@@ -198,7 +198,7 @@ data.raw["gui-style"].default["fnei_main_default_button"] =
 {
   type = "button_style",
   height = 32,
-  width = 120,
+  width = 130,
   top_padding = 0,
   font = "font-mb",
   scalable = false,
