@@ -139,10 +139,16 @@ function CraftingBuildingsSett.event(event, sett_name, gui_names)
 end
 
 function CraftingBuildingsSett.event_init(sett)
-  local event = sett.event or CraftingBuildingsSett.event
-  Events.add_custom_event(Controller.get_cont("settings").get_name(), "sprite-button", sett.name, event)
-  Events.add_custom_event(Controller.get_cont("settings").get_name(), "choose-elem-button", sett.name, event)
-  Events.add_custom_event(Controller.get_cont("settings").get_name(), "label", sett.name, event)
+  if sett.def_event ~= false then
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "sprite-button", sett.name, CraftingBuildingsSett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "choose-elem-button", sett.name, CraftingBuildingsSett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "label", sett.name, CraftingBuildingsSett.event)
+  end
+  if sett.event then
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "sprite-button", sett.name, sett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "choose-elem-button", sett.name, sett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "label", sett.name, sett.event)
+  end
 end
 
 function CraftingBuildingsSett.get_building_style(cat_name, item_name)

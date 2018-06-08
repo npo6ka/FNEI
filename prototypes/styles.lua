@@ -18,6 +18,25 @@ data:extend({
     height = 32,
     scale = 1,
   },
+  {
+    type = "sprite",
+    name = "fnei_favorite_icon",
+    filename = "__FNEI__/graphics/favorite_icon.png",
+    priority = "extra-high-no-scale",
+    width = 64,
+    height = 64,
+    scale = 1,
+  },
+  {
+    type = "sprite",
+    name = "fnei_last_usage_icon",
+    filename = "__FNEI__/graphics/last_usage_icon.png",
+    priority = "extra-high-no-scale",
+    width = 64,
+    height = 64,
+    scale = 1,
+  },
+
 --Fonts
   {
     type = "font",

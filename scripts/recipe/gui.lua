@@ -154,7 +154,6 @@ function RecipeGui.set_ingredients(list, dif_prot)
     scroll.vertical_scroll_policy = "auto"
   end
 
-
   for i = 1, dif_prot do
     table.insert(template, { type = "flow", name = "empty_flow" .. i, style = "fnei_recipe_list_elements_flow" })
   end

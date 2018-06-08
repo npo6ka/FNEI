@@ -19,8 +19,9 @@ function Settings.init()
   settings_list["close-gui-when-tech-open"] =     { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-craft-time-label"] =        { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-the-same-recipes"] =        { type = "checkbox", tab = "main-settings", def_val = false }
-  settings_list["show-hotbar"] =                  { type = "checkbox", tab = "main-settings", def_val = true, event = Controller.get_cont("settings").change_hotbar_state_event }
+  settings_list["show-hotbar"] =                  { type = "checkbox", tab = "main-settings", def_val = true, event = Controller.get_cont("hotbar").change_hotbar_visibility }
   settings_list["show-temperature-of-fluids"] =   { type = "checkbox", tab = "main-settings", def_val = true }
+  settings_list["hotbar-line-num"] =              { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 0, max_val = 15, event = Controller.get_cont("hotbar").change_hotbar_visibility }
 
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   
@@ -33,6 +34,7 @@ function Settings.init()
   settings_list["item-auto-usage"] =              { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-craft"] =             { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-usage"] =             { type = "checkbox", tab = "default-settings", def_val = false }
+  settings_list["show-full-hotbar"] =             { type = "checkbox", tab = "default-settings", def_val = false }
 
   element_list["checkbox"] =                require "scripts/settings/elements/checkbox"
   element_list["global-checkbox"] =         require "scripts/settings/elements/global_checkbox"

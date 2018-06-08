@@ -195,7 +195,7 @@ end
 
 function RecipeController.open_item_recipe_event(event, elem_name)
   if elem_name == "item" then
-    local _,pos =  string.find(event.element.name, "item%_")
+    local _,pos = string.find(event.element.name, "item%_")
 
     if pos then
       elem_name = string.sub(event.element.name, pos + 1)

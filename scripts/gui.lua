@@ -44,6 +44,20 @@ function Gui.close_old_fnei_gui()
   gui_iterate(Player.get().gui.center)
 end
 
+function Gui.set_style_field(parent, gui_name, args)
+  local gui = Gui.get_gui(parent, gui_name)
+
+  if gui and gui.style then
+    local style = gui.style
+
+    for name,val in pairs(args) do
+      style[name] = val
+    end
+  else
+    out("Gui.set_style_field: gui not found parent:", (parent or {}).name, gui_name)
+  end
+end
+
 function Gui.get_pos()
   local pos = Settings.get_val("position")
 
@@ -116,6 +130,10 @@ function Gui.init_function()
 end
 
 function Gui.add_gui_template(parent, gui_temp)
+  if parent == nil then
+    Debug:error("Error in function Gui.add_template: parent == nil: gui_temp =", gui_temp)
+    return
+  end
   if gui_temp then
     local gui
     for _,gui_templ in pairs(gui_temp) do
@@ -128,6 +146,10 @@ function Gui.add_gui_template(parent, gui_temp)
 
       if gui_function[gui_templ.type] then
         gui = gui_function[gui_templ.type](parent, gui_elem)
+
+        if gui == nil then
+          Debug:error("Error in function Gui.add_template: error created gui: ", gui_templ.type, "name:", gui_templ.name)
+        end
       else
         Debug:error("Error in function Gui.add_template: unknow gui_type: ", gui_temp.type)
       end

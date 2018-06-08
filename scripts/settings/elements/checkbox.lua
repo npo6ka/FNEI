@@ -29,8 +29,12 @@ function CheckBoxSett.event(event, sett_name)
 end
 
 function CheckBoxSett.event_init(sett)
-  local event = sett.event or CheckBoxSett.event
-  Events.add_custom_event(Controller.get_cont("settings").get_name(), sett.type, sett.name, event)
+  if sett.def_event ~= false then
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), sett.type, sett.name, CheckBoxSett.event)
+  end
+  if sett.event then
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), sett.type, sett.name, sett.event)
+  end
 end
 
 return CheckBoxSett

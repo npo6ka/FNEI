@@ -18,7 +18,10 @@ function CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
     if not event_list[gui_name][gui_type] then
       event_list[gui_name][gui_type] = {}
     end
-    event_list[gui_name][gui_type][event_name] = func
+    event_list[gui_name][gui_type][event_name] = {}
+    table.insert(event_list[gui_name][gui_type][event_name], func)
+  else
+    table.insert(event_list[gui_name][gui_type][event_name], func)
   end
 end
 
@@ -52,7 +55,10 @@ function CustomEvents.invoke(gui_name, gui_type, event_name, event, split_string
     return
   end
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
-    event_list[gui_name][gui_type][event_name](event, event_name, split_strings)
+    local events = event_list[gui_name][gui_type][event_name]
+    for _,cur_event in pairs(events) do
+      cur_event(event, event_name, split_strings)
+    end
   else
     out("Error CustomEvents.invoke: event not found ", event, event.element.name, gui_name, gui_type, event_name)
   end
@@ -64,10 +70,12 @@ function CustomEvents.remove_gui_events(gui_name)
 end
 
 function CustomEvents.debug()
-  for a,gui_event in pairs(event_list) do
-    for b,gui_name in pairs(gui_event) do
-      for c,gui_event in pairs(gui_name) do
-        out(a, b, c)
+  for a,gui_name in pairs(event_list) do
+    for b,gui_type in pairs(gui_name) do
+      for c,gui_event in pairs(gui_type) do
+        for d,event in pairs(gui_event) do
+          out(a, b, c, d)
+        end
       end
     end
   end

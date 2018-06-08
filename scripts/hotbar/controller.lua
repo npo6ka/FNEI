@@ -4,6 +4,12 @@ local HotbarController = {
 
 local HotbarGui = require "scripts/hotbar/gui"
 
+function HotbarController.init_events()
+  HotbarGui.init_events()
+
+  Events.add_custom_event(HotbarGui.name, "button", "hide-button", HotbarController.change_recipe_visibility)
+end
+
 function HotbarController.exit()
   out("hotbar exit")
 
@@ -27,7 +33,7 @@ function HotbarController.open()
     return ret_gui
   else 
     HotbarController.exit()
-  end  
+  end
 end
 
 function HotbarController.back_key()
@@ -42,8 +48,22 @@ function HotbarController.get_name()
   return HotbarGui.name
 end
 
-function HotbarController.init_events()
-  HotbarGui.init_events()
+
+----------------------------------- Settings evenet -----------------------------------
+
+function HotbarController.change_recipe_visibility(event)
+  local setting = "show-full-hotbar"
+  local val = not Settings.get_val(setting)
+  Settings.set_val(setting, val)
+
+  HotbarController.open()
+end
+
+function HotbarController.change_hotbar_visibility(event)
+  --Settings.set_val("show-hotbar", event.element.state)
+  HotbarController.open()
+
+  out("qwe")
 end
 
 return HotbarController

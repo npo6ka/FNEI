@@ -48,8 +48,8 @@ function NumericUpDown.get_template(sett)
     { type = "flow", name = sett.name .. "_flow", style = nil, children = {
       { type = "textfield", name = sett.name .. textfield_name, style = "fnei_settings_numeric-text-field", event = NumericUpDown.text_chenge_event },
       { type = "flow", name = sett.name .. "_vertical_flow", style = "fnei_settings_updown-arrow-flow", direction = "vertical", children = {
-        { type = "button", name = sett.name .. up_but_name, style = "fnei_settings_up_arrow", event =  NumericUpDown.up_event },
-        { type = "button", name = sett.name .. down_but_name, style = "fnei_settings_down_arrow", event = NumericUpDown.down_event },
+        { type = "button", name = sett.name .. up_but_name, style = "fnei_settings_up_arrow" },
+        { type = "button", name = sett.name .. down_but_name, style = "fnei_settings_down_arrow" },
       }},
       { type = "label", name = sett.name .. war_label_name, style = "fnei_settings_warning-text", caption = "" },
     }}
@@ -121,9 +121,15 @@ function NumericUpDown.down_event(event, sett_name)
   NumericUpDown.success_set(sett_name)
 end
 
-
 function NumericUpDown.event_init(sett)
-  Events.init_temp_events(Controller.get_cont("settings").get_name(), NumericUpDown.get_template(sett))
+  if sett.def_event ~= false then
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "button", sett.name .. up_but_name, NumericUpDown.up_event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "button", sett.name .. down_but_name, NumericUpDown.down_event)
+  end
+  if sett.event then
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "button", sett.name .. up_but_name, sett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "button", sett.name .. down_but_name, sett.event)
+  end
 end
 
 return NumericUpDown

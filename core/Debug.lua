@@ -37,6 +37,12 @@ function Debug:error(...)
 end
 
 function Debug:object_to_string(level, object)
+  function get_tabs(num)
+    local msg = ""
+    for i=0,num do  msg = msg .. "  " end
+    return msg
+  end
+
   if level == nil then level = 0 end
 
   local message = " "
@@ -51,16 +57,13 @@ function Debug:object_to_string(level, object)
     message = message.."\"__function\"" end
   if type(object) == "table" then
     if level <= self.limit then
-      local first = true
-      message = message.."{"
+      message = message .. "\n" .. get_tabs(level) .. "{\n"
       for key, next_object in pairs(object) do
-        if not first then message = message.."," end
-        message = message.."\""..key.."\""..":"..self:object_to_string(level + 1, next_object);
-        first = false
+        message = message .. get_tabs(level + 1) .. "\"" .. key .. "\"" .. ":" .. self:object_to_string(level + 1, next_object) .. ",\n";
       end
-      message = message.."}"
+      message = message .. get_tabs(level) .. "}"
     else
-      message = message.."\"".."__table".."\""
+      message = message .. "\"" .. "__table" .. "\""
     end
   end
   return message
