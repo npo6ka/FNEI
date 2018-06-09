@@ -52,7 +52,7 @@ end
 ----------------------------------- Settings evenet -----------------------------------
 
 function HotbarController.change_recipe_visibility(event)
-  local setting = "show-full-hotbar"
+  local setting = "show-extended-hotbar"
   local val = not Settings.get_val(setting)
   Settings.set_val(setting, val)
 
@@ -60,10 +60,7 @@ function HotbarController.change_recipe_visibility(event)
 end
 
 function HotbarController.change_hotbar_visibility(event)
-  --Settings.set_val("show-hotbar", event.element.state)
   HotbarController.open()
-
-  out("qwe")
 end
 
 return HotbarController

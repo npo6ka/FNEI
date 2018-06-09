@@ -30,10 +30,10 @@ end
 
 function GlobCheckBoxSett.event_init(sett)
   if sett.def_event ~= false then
-    Events.add_custom_event(Controller.get_cont("settings").get_name(), sett.type, sett.name, GlobCheckBoxSett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "checkbox", sett.name, GlobCheckBoxSett.event)
   end
   if sett.event then
-    Events.add_custom_event(Controller.get_cont("settings").get_name(), sett.type, sett.name, sett.event)
+    Events.add_custom_event(Controller.get_cont("settings").get_name(), "checkbox", sett.name, sett.event)
   end
 end
 

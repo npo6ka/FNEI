@@ -45,7 +45,7 @@ function HotbarGui.create_hotbar_choose_button(prot, type)
   end
 end
 
-function HotbarGui.create_hoticon_bar(parent)
+function HotbarGui.create_hotbar_bar_extension(parent)
   local line_cnt = Settings.get_val("hotbar-line-num")
   local parent = Gui.get_gui(parent, "hot-icon-table")
 
@@ -56,12 +56,13 @@ function HotbarGui.create_hoticon_bar(parent)
   local mas1 = {}
   local mas2 = {}
 
-  local block_size = 5
-  local bl_cnt = math.floor((line_cnt - 1) / block_size) + 1
   local template = {}
-  local icon_frame = {}
 
-  if Settings.get_val("show-full-hotbar") then
+  if Settings.get_val("show-extended-hotbar") then
+    local icon_frame = {}
+    local block_size = 5
+    local bl_cnt = math.floor((line_cnt - 1) / block_size) + 1
+
     table.insert(icon_frame, { type = "label", name = "last-usage-button", style = "fnei_hotbar_label", caption = {"fnei.last_button"} })
     table.insert(icon_frame, { type = "label", name = "favorite-button", style = "fnei_hotbar_label", caption = {"fnei.fav_button"} })
 
@@ -107,7 +108,7 @@ function HotbarGui.open_window()
   end
   gui = Gui.add_gui_template(gui[hotbar_flow_name], hotbar_gui_template)
 
-  HotbarGui.create_hoticon_bar(gui)
+  HotbarGui.create_hotbar_bar_extension(gui)
 
   return gui
 end 

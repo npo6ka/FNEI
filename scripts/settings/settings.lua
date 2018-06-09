@@ -12,7 +12,7 @@ function Settings.init()
   settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-disable-recipes"] =         { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-items"] =            { type = "checkbox", tab = "main-settings", def_val = false }
-  settings_list["position"] =                     { type = "drop-down", tab = "main-settings", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, event = Controller.get_cont("settings").new_gui_location }
+  settings_list["position"] =                     { type = "drop-down", tab = "main-settings", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, def_event = false, event = Controller.get_cont("settings").new_gui_location }
   settings_list["fnei-line-count"] =              { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 5, max_val = 12 }
   settings_list["detail-chance"] =                { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["focus-search"] =                 { type = "checkbox", tab = "main-settings", def_val = false }
@@ -25,7 +25,7 @@ function Settings.init()
 
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   
-  settings_list["admin"] =                        { type = "global-checkbox", tab = "admin-settings", def_val = nil, event = Controller.get_cont("settings").check_admin_settings_event }
+  settings_list["admin"] =                        { type = "global-checkbox", tab = "admin-settings", def_val = nil, def_event = false, event = Controller.get_cont("settings").check_admin_settings_event }
   settings_list["open-techs"] =                   { type = "checkbox", tab = "admin-settings", def_val = false }
   settings_list["open-unavailable-techs"] =       { type = "checkbox", tab = "admin-settings", def_val = false }
   settings_list["open-tech-latency"] =            { type = "global-numeric-up-down", tab = "admin-settings", def_val = 2, min_val = 0, max_val = 20 }
@@ -34,7 +34,7 @@ function Settings.init()
   settings_list["item-auto-usage"] =              { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-craft"] =             { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["fluid-auto-usage"] =             { type = "checkbox", tab = "default-settings", def_val = false }
-  settings_list["show-full-hotbar"] =             { type = "checkbox", tab = "default-settings", def_val = false }
+  settings_list["show-extended-hotbar"] =         { type = "checkbox", tab = "default-settings", def_val = false }
 
   element_list["checkbox"] =                require "scripts/settings/elements/checkbox"
   element_list["global-checkbox"] =         require "scripts/settings/elements/global_checkbox"
