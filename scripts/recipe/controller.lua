@@ -101,6 +101,20 @@ function RecipeController.draw_cur_prot()
   RecipeGui.draw_cur_prot(cur_prot.type, cur_prot.name)
 end
 
+function RecipeController.draw_favorite_button()
+  local elem = queue:get()
+
+  local recipe = {
+    type = elem.type,
+    name = elem.name,
+    action_type = elem.action_type,
+    recipe_name = elem.page.name
+  }
+
+  local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe) 
+  RecipeGui.draw_favorite_state(state)
+end
+
 ----------------------------------- queue ---------------------------------------
 
 function RecipeController.add_element_in_new_queue(action_type, prot_type, prot_name)
@@ -245,6 +259,7 @@ function RecipeController.change_page_event()
   RecipeController.set_crafting_type()
   RecipeController.draw_cur_prot()
   RecipeController.save_page()
+  RecipeController.draw_favorite_button()
 end
 
 function RecipeController.settings_key_event(event)
@@ -257,6 +272,22 @@ function RecipeController.back_key_event(event)
   end
 
   Controller.back_key_event()
+end
+
+local state = true
+
+function RecipeController.favorite_key_event(event)
+  local elem = queue:get()
+
+  local recipe = {
+    type = elem.type,
+    name = elem.name,
+    action_type = elem.action_type,
+    recipe_name = elem.page.name
+  }
+
+  Controller.get_cont("hotbar").change_favorite_recipe_state( recipe )
+  RecipeController.draw_favorite_button()
 end
 
 -------------------------------- recipe list ----------------------------------------

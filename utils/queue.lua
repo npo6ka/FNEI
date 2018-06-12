@@ -2,7 +2,7 @@ Queue = {
   classname = "FNQueue",
 }
 
-function Queue:new(queue_name)
+function Queue:new( queue_name )
   local obj = {
     name = queue_name,
   }

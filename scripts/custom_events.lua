@@ -19,9 +19,13 @@ function CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
       event_list[gui_name][gui_type] = {}
     end
     event_list[gui_name][gui_type][event_name] = {}
+  end
+  if type(func) == "function" then 
     table.insert(event_list[gui_name][gui_type][event_name], func)
-  else
-    table.insert(event_list[gui_name][gui_type][event_name], func)
+  elseif type(func) == "table" then
+    for _,fun in pairs(func) do
+      table.insert(event_list[gui_name][gui_type][event_name], fun)
+    end
   end
 end
 

@@ -17,6 +17,7 @@ require "scripts/player"
 require "utils/tabs/tabs"
 require "utils/paging"
 require "utils/queue"
+require "utils/array"
 require "utils/open_tech_hook"
 require "scripts/events"
 

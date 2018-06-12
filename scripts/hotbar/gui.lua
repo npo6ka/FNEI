@@ -37,7 +37,14 @@ end
 
 function HotbarGui.create_hotbar_choose_button(prot, type)
   if prot then
-    return { type = "choose-elem-button", name = prot.type .. "_" .. prot.name or "empty", style = "fnei_default_button", elem_type = prot.type, elem_value = prot.name, locked = true }
+    return { 
+      type = "choose-elem-button", 
+      name = type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.action_type .. "_" .. prot.recipe_name, 
+      style = "fnei_default_button", 
+      elem_type = "recipe", 
+      elem_value = prot.recipe_name, 
+      locked = true 
+    }
   elseif type == "favorite" then
     return { type = "sprite-button", name = "empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.qwe"}, sprite = "fnei_favorite_icon" }
   else
@@ -45,9 +52,9 @@ function HotbarGui.create_hotbar_choose_button(prot, type)
   end
 end
 
-function HotbarGui.create_hotbar_bar_extension(parent)
+function HotbarGui.draw_hotbar_bar_extension(fav_arr, last_arr)
   local line_cnt = Settings.get_val("hotbar-line-num")
-  local parent = Gui.get_gui(parent, "hot-icon-table")
+  local parent = Gui.get_gui(Gui.get_left_gui(), "hot-icon-table")
 
   if line_cnt == 0 then
     return
@@ -72,12 +79,12 @@ function HotbarGui.create_hotbar_bar_extension(parent)
       end
 
       for j = 1,block_size do
-        local cur_indx = (i - 1) * 5 + j
-        local fav_prot = mas1[cur_indx]
+        local cur_indx = (i - 1) * 5 + j     
         local last_prot = mas2[cur_indx]
+        local fav_prot = fav_arr:get(cur_indx)--mas1[cur_indx]
         
-        table.insert(icon_frame, HotbarGui.create_hotbar_choose_button(fav_prot, "last_usage"))
-        table.insert(icon_frame, HotbarGui.create_hotbar_choose_button(last_prot, "favorite"))
+        table.insert(icon_frame, HotbarGui.create_hotbar_choose_button(last_prot, "last_usage"))
+        table.insert(icon_frame, HotbarGui.create_hotbar_choose_button(fav_prot, "favorite"))
       end
 
       table.insert(template, 
@@ -106,11 +113,8 @@ function HotbarGui.open_window()
   if not gui[hotbar_flow_name] then
     gui.add({ type = "flow", name = hotbar_flow_name, style = nil, direction = "vertical" }) 
   end
-  gui = Gui.add_gui_template(gui[hotbar_flow_name], hotbar_gui_template)
 
-  HotbarGui.create_hotbar_bar_extension(gui)
-
-  return gui
+  return Gui.add_gui_template(gui[hotbar_flow_name], hotbar_gui_template)
 end 
 
 function HotbarGui.close_window()

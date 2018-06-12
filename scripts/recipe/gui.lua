@@ -16,9 +16,12 @@ function RecipeGui.init_template()
 ------------------ header ------------------
 
           { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
-            { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 5, children = {
+            { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 6, children = {
               { type = "flow", name = "header-icon", style = "fnei_default_horizontal_flow" },
               { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", want_ellipsis = true, caption = "recipe_name" },
+              { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = { 
+                { type = "sprite-button", name = "favorite-key", tooltip = {"gui.favorite-button"}, event = cont.favorite_key_event },
+              }},
               { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
               { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = cont.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
@@ -99,6 +102,22 @@ end
 function RecipeGui.close_window()
   if RecipeGui.is_gui_open() then
     Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name).destroy()
+  end
+end
+
+function RecipeGui.draw_favorite_state(state)
+  local favorite_button = Gui.get_gui(Gui.get_pos(), "favorite-flow")
+
+  if favorite_button and favorite_button.valid then
+    local style = (state and "fnei_recipe_selected_favorive_button") or "fnei_recipe_favorive_button"
+
+    clear_gui(favorite_button)
+    Gui.add_gui_template(favorite_button, {{ 
+      type = "sprite-button", 
+      name = "favorite-key", 
+      style = style, 
+      tooltip = {"gui.favorite-button"}, 
+    }})
   end
 end
 
