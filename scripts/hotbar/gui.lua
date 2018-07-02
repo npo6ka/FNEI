@@ -35,68 +35,84 @@ function HotbarGui.is_gui_open()
   end
 end
 
-function HotbarGui.create_hotbar_choose_button(prot, type)
-  if prot then
+function HotbarGui.create_hotbar_element_button(prot, type)
+  if prot and prot.recipe_name then
     return { 
       type = "choose-elem-button", 
-      name = type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.action_type .. "_" .. prot.recipe_name, 
+      name = type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name, 
       style = "fnei_default_button", 
       elem_type = "recipe", 
-      elem_value = prot.recipe_name, 
+      elem_value = prot.recipe_name,
       locked = true 
     }
   elseif type == "favorite" then
-    return { type = "sprite-button", name = "empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.qwe"}, sprite = "fnei_favorite_icon" }
+    return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}}, sprite = "fnei_favorite_icon" }
   else
-    return { type = "sprite-button", name = "empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.ewq"}, sprite = "fnei_last_usage_icon" }
+    return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.last_button"}, sprite = "fnei_last_usage_icon" }
   end
 end
 
-function HotbarGui.draw_hotbar_bar_extension(fav_arr, last_arr)
-  local line_cnt = Settings.get_val("hotbar-line-num")
+function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
+  local last_line_cnt = Settings.get_val("hotbar-last-line-num")
+  local fav_line_cnt = Settings.get_val("hotbar-fav-line-num")
   local parent = Gui.get_gui(Gui.get_left_gui(), "hot-icon-table")
+  local columns_number = 2
 
-  if line_cnt == 0 then
+  if last_line_cnt == 0 and fav_line_cnt == 0 then
     return
   end
-
-  local mas1 = {}
-  local mas2 = {}
 
   local template = {}
 
   if Settings.get_val("show-extended-hotbar") then
-    local icon_frame = {}
-    local block_size = 5
-    local bl_cnt = math.floor((line_cnt - 1) / block_size) + 1
-
-    table.insert(icon_frame, { type = "label", name = "last-usage-button", style = "fnei_hotbar_label", caption = {"fnei.last_button"} })
-    table.insert(icon_frame, { type = "label", name = "favorite-button", style = "fnei_hotbar_label", caption = {"fnei.fav_button"} })
-
-    for i = 1,bl_cnt do
-      if i == bl_cnt then
-        block_size = (line_cnt - 1) % block_size + 1
-      end
-
-      for j = 1,block_size do
-        local cur_indx = (i - 1) * 5 + j     
-        local last_prot = mas2[cur_indx]
-        local fav_prot = fav_arr:get(cur_indx)--mas1[cur_indx]
-        
-        table.insert(icon_frame, HotbarGui.create_hotbar_choose_button(last_prot, "last_usage"))
-        table.insert(icon_frame, HotbarGui.create_hotbar_choose_button(fav_prot, "favorite"))
+    if last_line_cnt > 0 then
+      local last_frame = {}
+      local last_label = { type = "label", name = "last-usage-button", style = "fnei_hotbar_label", want_ellipsis = true, single_line = true, caption = {"fnei.last_button"} }
+    
+      for j = 1, last_line_cnt do
+        for i = 1, columns_number do
+          local cur_indx = (j - 1) * columns_number + i
+          local last_prot = last_arr:get(cur_indx)
+          
+          table.insert(last_frame, HotbarGui.create_hotbar_element_button(last_prot, "last-usage"))
+        end
       end
 
       table.insert(template, 
       { 
-        type = "frame", name = "hoticon_frame" .. i, style = "fnei_hotbar_frame", direction = "vertical", children = { 
-          { type = "table", name = "hoticon-table" .. i, style = "fnei_hotbar_zero_spacing_table", column_count = 2, children = icon_frame },
+        type = "frame", name = "hotbar_last_frame", style = "fnei_hotbar_frame", direction = "vertical", children = {
+          { type = "table", name = "hoticon-table", style = "fnei_hotbar_zero_spacing_table", column_count = 1, children = {
+            last_label,
+            { type = "table", name = "hoticon-table", style = "fnei_hotbar_zero_spacing_table", column_count = 2, children = last_frame },
+          }},
         }
       })
-
-      icon_frame = {}
     end
 
+    if fav_line_cnt > 0 then
+      local fav_frame = {}
+      local fav_label = { type = "label", name = "favorite-button", style = "fnei_hotbar_label", want_ellipsis = true, single_line = true, caption = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}} }
+
+      for j = 1, fav_line_cnt do
+        for i = 1, columns_number do
+          local cur_indx = (j - 1) * columns_number + i
+          local fav_prot = fav_arr:get(cur_indx)
+          
+          table.insert(fav_frame, HotbarGui.create_hotbar_element_button(fav_prot, "favorite"))
+        end
+      end
+
+      table.insert(template, 
+      { 
+        type = "frame", name = "hotbar_fav_frame", style = "fnei_hotbar_frame", direction = "vertical", children = {
+          { type = "table", name = "hoticon-table", style = "fnei_hotbar_zero_spacing_table", column_count = 1, children = {
+            fav_label,
+            { type = "table", name = "hoticon-table2", style = "fnei_hotbar_zero_spacing_table", column_count = 2, children = fav_frame },
+          }},
+        }
+      })
+    end
+    
     table.insert(template, { type = "button", name = "hide-button", style = "fnei_hotbar_up_arrow", })
   else
     table.insert(template, { type = "button", name = "hide-button", style = "fnei_hotbar_down_arrow", })

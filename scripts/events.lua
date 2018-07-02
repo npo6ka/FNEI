@@ -32,6 +32,7 @@ function Events.on_configuration_changed(event)
 
   for i, player in pairs(game.players) do
     Player.load({ player_index = i })
+    Gui.close_old_fnei_gui()
     Controller.get_cont("hotbar").open()
   end
 end
@@ -61,7 +62,7 @@ function Events.on_gui_closed(event)
   if event and event.element and string.match(event.element.name, "fnei%_") then
     Events.gui_key(event)
   end
-  TechHook.on_gui_close(event)
+  TechHook.on_gui_closed(event)
 end
 
 function Events.on_player_left_game(event)

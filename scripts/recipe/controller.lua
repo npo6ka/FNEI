@@ -3,7 +3,7 @@ local RecipeController = {
 }
 
 local RecipeGui = require "scripts/recipe/gui"
-local queue = Queue:new("recipe_queue")
+local r_list = List:new("recipe_queue")
 local pages = "recipe-pages"
 
 function RecipeController.init_events()
@@ -31,21 +31,25 @@ function RecipeController.open()
 end
 
 function RecipeController.back_key()
-  queue:remove()
+  r_list:remove()
 
   if RecipeController.can_open_gui() then
     RecipeController.open_new_recipes()
   end
 
-  return queue:is_empty()
+  return r_list:is_empty()
 end
 
 function RecipeController.can_open_gui()
-  return not queue:is_empty()
+  return not r_list:is_empty()
 end
 
 function RecipeController.get_name()
   return RecipeGui.name
+end
+
+function RecipeController.is_gui_open()
+  return RecipeGui.is_gui_open()
 end
 
 ----------------------------------- gui ---------------------------------------
@@ -55,7 +59,7 @@ function RecipeController.open_new_recipes()
 
   if pages:amount_page() == 0 then
     if RecipeController.can_open_gui() then
-      queue:remove()
+      r_list:remove()
       RecipeController.open_new_recipes()
     else
       Controller.back_key_event()
@@ -92,49 +96,82 @@ function RecipeController.draw_paging()
 end
 
 function RecipeController.set_crafting_type()
-  local cur_prot = queue.get() or {}
+  local cur_prot = r_list.get() or {}
   RecipeGui.set_crafting_type(cur_prot.action_type)
 end
 
 function RecipeController.draw_cur_prot()
-  local cur_prot = queue.get() or {}
+  local cur_prot = r_list.get() or {}
   RecipeGui.draw_cur_prot(cur_prot.type, cur_prot.name)
 end
 
-function RecipeController.draw_favorite_button()
-  local elem = queue:get()
-
-  local recipe = {
-    type = elem.type,
-    name = elem.name,
-    action_type = elem.action_type,
-    recipe_name = elem.page.name
+function RecipeController.get_recipe_stucture(prot_type, prot_name, action_type, saved_recipe_name)
+  return  {
+    type = prot_type,
+    name = prot_name,
+    action_type = action_type,
+    recipe_name = saved_recipe_name
   }
+end
+
+function RecipeController.draw_favorite_button()
+  local elem = r_list:get()
+
+  local recipe = {}
+
+  if elem then
+    recipe = RecipeController.get_recipe_stucture(elem.type, elem.name, elem.action_type, elem.page.name)
+  end
 
   local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe) 
   RecipeGui.draw_favorite_state(state)
 end
 
------------------------------------ queue ---------------------------------------
+----------------------------------- recipe list  ---------------------------------------
 
-function RecipeController.add_element_in_new_queue(action_type, prot_type, prot_name)
-  queue:clear()
-  RecipeController.add_element(action_type, prot_type, prot_name)
+function RecipeController.add_element_in_recipe_list(action_type, prot_type, prot_name, cur_page)
+  local cur_gui = Controller.get_cur_con()
+
+  if cur_gui and (cur_gui.get_name() == RecipeGui.name or cur_gui.get_name() == "settings") then
+    RecipeController.add_element(action_type, prot_type, prot_name, cur_page)
+  else
+    RecipeController.add_element_in_new_recipe_list(action_type, prot_type, prot_name, cur_page)
+  end
 end
 
-function RecipeController.add_element(action_type, prot_type, prot_name)
-  local last_elem = queue:get()
+function RecipeController.add_element_in_new_recipe_list(action_type, prot_type, prot_name, cur_page)
+  r_list:clear()
+  local state = RecipeController.add_element(action_type, prot_type, prot_name, cur_page)
+  if state then
+    Controller.get_cont("hotbar").add_last_elem({ })
+  end
+end
+
+function RecipeController.add_element(action_type, prot_type, prot_name, cur_page)
+  local last_elem = r_list:get()
 
   if last_elem == nil or (prot_name ~= last_elem.name or prot_type ~= last_elem.type or action_type ~= last_elem.action_type) then
     local recipe_list = RecipeController.get_recipe_list(action_type, prot_type, prot_name)
 
     if recipe_list and #recipe_list > 0 then
-      queue:add({ type = prot_type, name = prot_name, action_type = action_type, page = RecipeController.get_page_name_for_recipe(action_type, prot_type, prot_name) })
+      local page = RecipeController.get_page_name_for_recipe(action_type, prot_type, prot_name, cur_page)
+      r_list:add({ type = prot_type, name = prot_name, action_type = action_type, page = page })
+      return true
     end
+  else
+    last_elem.page = RecipeController.get_page_name_for_recipe(action_type, prot_type, prot_name, cur_page)
   end
 end
 
-function RecipeController.get_page_name_for_recipe(action_type, prot_type, prot_name)
+function RecipeController.get_page_name_for_recipe(action_type, prot_type, prot_name, cur_page)
+  if cur_page then
+    local recipe = get_recipe_list()[cur_page]
+
+    if recipe then
+      return recipe
+    end
+  end
+
   local global = Player.get_global()
 
   if not global.recipe_page then global.recipe_page = {} end
@@ -163,7 +200,7 @@ function RecipeController.set_page_name_for_recipe(action_type, prot_type, prot_
 end
 
 function RecipeController.save_page()
-  local val = queue:get()
+  local val = r_list:get()
 
   if val then
     local list = pages:get_list_for_tab(pages:get_cur_page())
@@ -175,10 +212,21 @@ function RecipeController.save_page()
   end
 end
 
+function RecipeController.change_last_opened_recipe()
+  local elem = r_list:get()
+  local recipe = {}
+
+  if elem then
+    recipe = RecipeController.get_recipe_stucture(elem.type, elem.name, elem.action_type, elem.page.name)
+  end
+
+  Controller.get_cont("hotbar").replace_last_elem( recipe )
+end
+
 ----------------------------------- paging ---------------------------------------
 
 function RecipeController.set_page_list()
-  local last_prot = queue.get()
+  local last_prot = r_list.get()
 
   if last_prot then
     pages:set_page_list(RecipeController.get_recipe_list(last_prot.action_type, last_prot.type, last_prot.name))
@@ -188,7 +236,7 @@ function RecipeController.set_page_list()
 end
 
 function RecipeController.set_cur_page()
-  local val = queue.get()
+  local val = r_list.get()
 
   if val and val.page then
     local end_val = pages:amount_page()
@@ -260,6 +308,7 @@ function RecipeController.change_page_event()
   RecipeController.draw_cur_prot()
   RecipeController.save_page()
   RecipeController.draw_favorite_button()
+  RecipeController.change_last_opened_recipe()
 end
 
 function RecipeController.settings_key_event(event)
@@ -268,7 +317,7 @@ end
 
 function RecipeController.back_key_event(event)
   if event.control or event.shift then
-    queue:clear()
+    r_list:clear()
   end
 
   Controller.back_key_event()
@@ -277,14 +326,12 @@ end
 local state = true
 
 function RecipeController.favorite_key_event(event)
-  local elem = queue:get()
+  local elem = r_list:get()
+  local recipe = {}
 
-  local recipe = {
-    type = elem.type,
-    name = elem.name,
-    action_type = elem.action_type,
-    recipe_name = elem.page.name
-  }
+  if elem then
+    recipe = RecipeController.get_recipe_stucture(elem.type, elem.name, elem.action_type, elem.page.name)
+  end
 
   Controller.get_cont("hotbar").change_favorite_recipe_state( recipe )
   RecipeController.draw_favorite_button()

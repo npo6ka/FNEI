@@ -75,7 +75,6 @@ function MainGui.close_window()
   if MainGui.is_gui_open() then
     Gui.get_gui(Gui.get_pos(), main_gui_template[1].name).destroy()
   end
-  Gui.close_old_fnei_gui()
 end
 
 function MainGui.draw_tabs(tabs)

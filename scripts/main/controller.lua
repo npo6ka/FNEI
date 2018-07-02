@@ -48,6 +48,10 @@ function MainController.get_name()
   return MainGui.name
 end
 
+function MainController.is_gui_open()
+  return MainGui.is_gui_open()
+end
+
 function MainController.get_cur_contr_tab()
   return gui_tabs_cont[tabs:get_cur_tab()]
 end

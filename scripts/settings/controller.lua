@@ -62,6 +62,10 @@ function SettingsController.get_name()
   return SettingsGui.name
 end
 
+function SettingsController.is_gui_open()
+  return SettingsGui.is_gui_open()
+end
+
 function SettingsController.new_gui_location(event, sett_name)
   if not event.button then
     local index = event.element.selected_index

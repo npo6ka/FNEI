@@ -18,8 +18,10 @@ function Array:new( array_name )
   end
 
   function obj:insert( elem, pos )
-    local array = obj:get_array()
-    table.insert(array, pos, elem)
+    if pos then
+      local array = obj:get_array()
+      table.insert(array, pos, elem)
+    end
   end
 
   function obj:insert_head( elem )
@@ -32,14 +34,18 @@ function Array:new( array_name )
   end
 
   function obj:replace_elem( elem, pos )
-    local array = obj:get_array()
-    array[pos] = elem
+    if pos then
+      local array = obj:get_array()
+      array[pos] = elem
+    end
   end
 
   function obj:swap_element( src_pos, dst_pos )
-    local val = obj:get( dst_pos )
-    obj:replace_elem(obj:get(src_pos), dst_pos)
-    obj:replace_elem(val, src_pos)
+    if src_pos and dst_pos then
+      local val = obj:get( dst_pos )
+      obj:replace_elem(obj:get(src_pos), dst_pos)
+      obj:replace_elem(val, src_pos)
+    end
   end
 
   function obj:clear( )
@@ -47,8 +53,8 @@ function Array:new( array_name )
   end
 
   function obj:remove( pos )
-    local array = obj:get_array()
     if pos and obj:size() >= pos then
+      local array = obj:get_array()
       return table.remove(array, pos)
     end
   end
@@ -67,6 +73,10 @@ function Array:new( array_name )
   function obj:get_elem_pos( elem )
     local array = obj:get_array()
     local size = obj:size()
+
+    if elem == nil then 
+      return nil
+    end
 
     if type(elem) ~= "table" then 
       for i,j in pairs(array) do
@@ -91,6 +101,8 @@ function Array:new( array_name )
         end
       end
     end
+
+    return nil
   end
 
   function obj:debug( )
@@ -100,8 +112,8 @@ function Array:new( array_name )
   end
 
   function obj:get( pos )
-    local array = obj:get_array()
-    if obj:size() >= pos then
+    if pos and obj:size() >= pos then
+      local array = obj:get_array()
       return array[pos]
     end
   end

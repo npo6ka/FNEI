@@ -51,7 +51,7 @@ function DefaultMainController.open_craft_item(event)
   local contr = Controller.get_cont("recipe")
 
   if choose_but and choose_but.elem_value then
-    contr.add_element_in_new_queue("craft", "item", choose_but.elem_value)
+    contr.add_element_in_recipe_list("craft", "item", choose_but.elem_value)
     Controller.open_event("recipe")
   end
 end
@@ -61,7 +61,7 @@ function DefaultMainController.open_usage_item(event)
   local contr = Controller.get_cont("recipe")
 
   if choose_but and choose_but.elem_value then
-    contr.add_element_in_new_queue("usage", "item", choose_but.elem_value)
+    contr.add_element_in_recipe_list("usage", "item", choose_but.elem_value)
     Controller.open_event("recipe")
   end
 end
@@ -71,7 +71,7 @@ function DefaultMainController.open_craft_fluid(event)
   local contr = Controller.get_cont("recipe")
   
   if choose_but and choose_but.elem_value then
-    contr.add_element_in_new_queue("craft", "fluid", choose_but.elem_value)
+    contr.add_element_in_recipe_list("craft", "fluid", choose_but.elem_value)
     Controller.open_event("recipe")
   end
 end
@@ -81,7 +81,7 @@ function DefaultMainController.open_usage_fluid(event)
   local contr = Controller.get_cont("recipe")
   
   if choose_but and choose_but.elem_value then
-    contr.add_element_in_new_queue("usage", "fluid", choose_but.elem_value)
+    contr.add_element_in_recipe_list("usage", "fluid", choose_but.elem_value)
     Controller.open_event("recipe")
   end
 end

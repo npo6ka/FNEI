@@ -13,7 +13,7 @@ function Gui.create_gui_name(contr_name, gui_name)
   if type(contr_name) == "string" and type(gui_name) == "string" then
     return mod_prefix .. '_' .. contr_name .. '_' .. gui_name
   else
-    out("Error in function Gui.create_gui_name: type ~= string: ", contr_name, gui_name)
+     Debug:error("FNGui", "Error in function Gui.create_gui_name: type ~= string: ", contr_name, gui_name)
     return nil
   end
 end
@@ -54,7 +54,7 @@ function Gui.set_style_field(parent, gui_name, args)
       style[name] = val
     end
   else
-    out("Gui.set_style_field: gui not found parent:", (parent or {}).name, gui_name)
+    Debug:error("FNGui", "Gui.set_style_field: gui not found parent:", (parent or {}).name, gui_name)
   end
 end
 

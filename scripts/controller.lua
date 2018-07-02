@@ -2,7 +2,7 @@ Controller = {
   classname = "FNPlayer"
 }
 
-local queue = Queue:new("controllers")
+local queue = List:new("controllers")
 
 local controllers = {
   main = require "scripts/main/controller",
@@ -87,9 +87,16 @@ function Controller.open_event(cont_name, args)
   if controller and controller.can_open_gui() then
     local cur_cont = Controller.get_cur_con()
 
-    if cur_cont then
+    if cur_cont and cur_cont.is_gui_open() then
       cur_cont.exit()
       Controller.reset_opened_gui()
+    end
+
+    if queue:contains_elem(cont_name) then
+      while queue:get() ~= cont_name do
+        queue.remove()
+      end
+      queue.remove()
     end
 
     Controller.open_gui_event(cont_name, args)
@@ -113,8 +120,8 @@ function Controller.back_key_event()
 
   if cur_cont and cur_cont.back_key() then
     Controller.close_event()
-
     if not queue:is_empty() then
+
       local prev_cont = queue:get()
       queue:remove()
       Controller.open_gui_event(prev_cont)

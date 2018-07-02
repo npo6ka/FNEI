@@ -8,7 +8,7 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     vertical_align = "center",
     font = "font-mb",
     height = 36,
-    width = 327,
+    width = 311,
     want_ellipsis = true,
     font_color = { r=0, g=0.9, b=0 },
     scalable = false,
@@ -105,7 +105,7 @@ data.raw["gui-style"].default["fnei_recipe_flow"] =
 data.raw["gui-style"].default["fnei_recipe_favorite_flow"] =
 {
   type = "horizontal_flow_style",
-  width = 20,
+  width = 36,
   scalable = false,
 }
 
@@ -312,8 +312,8 @@ data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
   parent = "slot_button",
   font = "font-mb",
   scalable = false,
-  height = 20,
-  width = 20,
+  height = 36,
+  width = 36,
     
   clicked_graphical_set = {
     type = "monolith",
@@ -350,8 +350,8 @@ data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] =
   parent = "slot_button",
   font = "font-mb",
   scalable = false,
-  height = 20,
-  width = 20,
+  height = 36,
+  width = 36,
     
   clicked_graphical_set = {
     type = "monolith",

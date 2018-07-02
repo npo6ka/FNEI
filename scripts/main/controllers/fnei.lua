@@ -87,10 +87,10 @@ function FneiMainController.open_item_recipe_event(event, elem_name)
     local contr = Controller.get_cont("recipe")
 
     if event.button == defines.mouse_button_type.right then
-      contr.add_element_in_new_queue("usage", "item", elem_name)
+      contr.add_element_in_recipe_list("usage", "item", elem_name)
       Controller.open_event("recipe")
     else
-      contr.add_element_in_new_queue("craft", "item", elem_name)
+      contr.add_element_in_recipe_list("craft", "item", elem_name)
       Controller.open_event("recipe")
     end
   end
@@ -107,10 +107,10 @@ function FneiMainController.open_fluid_recipe_event(event, elem_name)
     local contr = Controller.get_cont("recipe")
 
     if event.button == defines.mouse_button_type.right then
-      contr.add_element_in_new_queue("usage", "fluid", elem_name)
+      contr.add_element_in_recipe_list("usage", "fluid", elem_name)
       Controller.open_event("recipe")
     else
-      contr.add_element_in_new_queue("craft", "fluid", elem_name)
+      contr.add_element_in_recipe_list("craft", "fluid", elem_name)
       Controller.open_event("recipe")
     end
   end

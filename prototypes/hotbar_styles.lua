@@ -32,7 +32,11 @@ data.raw["gui-style"].default["fnei_hotbar_zero_spacing_table"] =
 data.raw["gui-style"].default["fnei_hotbar_label"] =
 {
     type = "label_style",
-    width = 36,
+    top_padding = 0,
+    right_padding = 2,
+    left_padding = 2,
+    width = 72,
+    height = 22,
     align = "center",
     scalable = false,
 }
@@ -65,14 +69,14 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
   parent = "slot_button",
   font = "font-mb",
   scalable = false,
-  height = 13,
+  height = 14,
   width = 78,
     
   clicked_graphical_set = {
     type = "monolith",
     monolith_image = {
       filename = "__FNEI__/graphics/down_hotbar_arrow_clicked.png",
-      height = 13,
+      height = 14,
       priority = "extra-high-no-scale",
       width = 72,
     },
@@ -81,7 +85,7 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
     type = "monolith",
     monolith_image = {
       filename = "__FNEI__/graphics/down_hotbar_arrow_default.png",
-      height = 13,
+      height = 14,
       priority = "extra-high-no-scale",
       width = 72,
     },
@@ -90,7 +94,7 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
     type = "monolith",
     monolith_image = {
       filename = "__FNEI__/graphics/down_hotbar_arrow_hovered.png",
-      height = 13,
+      height = 14,
       priority = "extra-high-no-scale",
       width = 72,
     },
@@ -103,14 +107,14 @@ data.raw["gui-style"].default["fnei_hotbar_up_arrow"] =
   parent = "slot_button",
   font = "font-mb",
   scalable = false,
-  height = 13,
+  height = 14,
   width = 78,
     
   clicked_graphical_set = {
     type = "monolith",
     monolith_image = {
       filename = "__FNEI__/graphics/up_hotbar_arrow_clicked.png",
-      height = 13,
+      height = 14,
       priority = "extra-high-no-scale",
       width = 72,
     },
@@ -119,7 +123,7 @@ data.raw["gui-style"].default["fnei_hotbar_up_arrow"] =
     type = "monolith",
     monolith_image = {
       filename = "__FNEI__/graphics/up_hotbar_arrow_default.png",
-      height = 13,
+      height = 14,
       priority = "extra-high-no-scale",
       width = 72,
     },
@@ -128,7 +132,7 @@ data.raw["gui-style"].default["fnei_hotbar_up_arrow"] =
     type = "monolith",
     monolith_image = {
       filename = "__FNEI__/graphics/up_hotbar_arrow_hovered.png",
-      height = 13,
+      height = 14,
       priority = "extra-high-no-scale",
       width = 72,
     },

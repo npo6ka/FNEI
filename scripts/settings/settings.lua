@@ -21,7 +21,9 @@ function Settings.init()
   settings_list["show-the-same-recipes"] =        { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-hotbar"] =                  { type = "checkbox", tab = "main-settings", def_val = true, event = Controller.get_cont("hotbar").change_hotbar_visibility }
   settings_list["show-temperature-of-fluids"] =   { type = "checkbox", tab = "main-settings", def_val = true }
-  settings_list["hotbar-line-num"] =              { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 0, max_val = 15, event = Controller.get_cont("hotbar").change_hotbar_visibility }
+  settings_list["hotbar-last-line-num"] =         { type = "numeric-up-down", tab = "main-settings", def_val = 3, min_val = 0, max_val = 20, event = Controller.get_cont("hotbar").change_hotbar_visibility }
+  settings_list["hotbar-fav-line-num"] =          { type = "numeric-up-down", tab = "main-settings", def_val = 5, min_val = 0, max_val = 20, event = Controller.get_cont("hotbar").change_hotbar_visibility }
+
 
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   

@@ -93,12 +93,12 @@ function TechHook.on_tick()
   end
 end
 
-function TechHook.on_gui_close(event)
+function TechHook.on_gui_closed(event)
   if event.gui_type == 2 then
     local contr = Player.get_global().opened_gui
 
     if not Settings.get_val("close-gui-when-tech-open") and Settings.get_val("need-show") and contr then
-      Controller.open_gui_event(contr)
+      Controller.open_event(contr)
       Player.get_global().opened_gui = nil
     end
   end
