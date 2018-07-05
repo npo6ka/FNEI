@@ -53,7 +53,7 @@ function HotbarGui.create_hotbar_element_button(prot, type)
       -- elem_value = prot.recipe_name,
       -- locked = true
       type = "sprite-button",
-      name = type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+      name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
       style = "fnei_hotbar_block_button",
       tooltip = tooltip,
       sprite = "recipe/" .. prot.recipe_name

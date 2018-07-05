@@ -17,8 +17,8 @@ function HotbarController.init_events()
   Events.add_custom_event(HotbarGui.name, "button", "hide-button", HotbarController.change_recipe_visibility)
   Events.add_custom_event(HotbarGui.name, "sprite-button", "favorite", HotbarController.favorite_empty_button_click_event)
   Events.add_custom_event(HotbarGui.name, "sprite-button", "last-usage", HotbarController.last_empty_button_click_event)
-  Events.add_custom_event(HotbarGui.name, "choose-elem-button", "favorite", HotbarController.favorite_recipe_click_event)
-  Events.add_custom_event(HotbarGui.name, "choose-elem-button", "last-usage", HotbarController.last_recipe_click_event)
+  Events.add_custom_event(HotbarGui.name, "sprite-button", "rfavorite", HotbarController.favorite_recipe_click_event)
+  Events.add_custom_event(HotbarGui.name, "sprite-button", "rlast-usage", HotbarController.last_recipe_click_event)
 end
 
 function HotbarController.exit()
