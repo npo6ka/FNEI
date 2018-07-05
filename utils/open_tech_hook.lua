@@ -7,22 +7,20 @@ local recipes_buf = {}
 
 function TechHook.open_tech(force, name)
   local tech = force.technologies[name]
+
   if tech then
-    for _,pre_tech in pairs(tech.prerequisites) do
-      if pre_tech.researched == false then
-        TechHook.open_tech(force, pre_tech.name)
-        for _,effect in pairs(pre_tech.effects) do
-          if effect.type == "unlock-recipe" then
-            local recipe = force.recipes[effect.recipe]
-            if recipe and recipe.enabled == true then
-              table.insert(recipes_buf, recipe)
-            end
+    if tech.researched == false then
+      for _,effect in pairs(tech.effects) do
+        if effect.type == "unlock-recipe" then
+          local recipe = force.recipes[effect.recipe]
+          if recipe and recipe.enabled == true then
+            table.insert(recipes_buf, recipe)
           end
         end
-        table.insert(tech_buf, { tech = pre_tech, progress = force.get_saved_technology_progress(pre_tech), enabled = pre_tech.enabled })
-
-        pre_tech.researched = true
       end
+
+      table.insert(tech_buf, { tech = tech, progress = force.get_saved_technology_progress(tech), enabled = tech.enabled })
+      tech.researched = true
     end
   end
 end
@@ -76,7 +74,7 @@ end
 function TechHook.return_prev_tech()
   local cur_tech = global.fnei.cur_tech
 
-  if cur_tech.time > Settings.get_val("open-tech-latency") then
+  if cur_tech.time > 2 then
     if cur_tech.force.current_research == nil then
       cur_tech.force.current_research = cur_tech.tech.name
     end

@@ -30,7 +30,6 @@ function Settings.init()
   settings_list["admin"] =                        { type = "global-checkbox", tab = "admin-settings", def_val = nil, def_event = false, event = Controller.get_cont("settings").check_admin_settings_event }
   settings_list["open-techs"] =                   { type = "checkbox", tab = "admin-settings", def_val = false }
   settings_list["open-unavailable-techs"] =       { type = "checkbox", tab = "admin-settings", def_val = false }
-  settings_list["open-tech-latency"] =            { type = "global-numeric-up-down", tab = "admin-settings", def_val = 2, min_val = 0, max_val = 20 }
 
   settings_list["item-auto-craft"] =              { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["item-auto-usage"] =              { type = "checkbox", tab = "default-settings", def_val = false }
