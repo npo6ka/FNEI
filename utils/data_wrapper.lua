@@ -66,6 +66,10 @@ end
 
 ------------------ Recipe -----------------
 
+function get_all_recipes()
+  return Recipe:get_recipe_list()
+end
+
 function get_recipe_list()
   local rec_list = {}
 
