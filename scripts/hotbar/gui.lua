@@ -42,7 +42,11 @@ function HotbarGui.create_hotbar_element_button(prot, type)
     local tooltip = ""
 
     if recipe then
-      tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name}
+      if type == "favorite" then
+        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name, "\n", {"fnei.alt-to-remove"} }
+      else
+        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name }
+      end
     end
 
     return { 
