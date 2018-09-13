@@ -9,7 +9,7 @@ local element_list = {}
 function Settings.init()
   settings_list["need-show"] =                    { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["use-only-attainable-recipes"] =  { type = "checkbox", tab = "main-settings", def_val = true }
-  settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = false }
+  settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-disable-recipes"] =         { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-items"] =            { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["position"] =                     { type = "drop-down", tab = "main-settings", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, def_event = false, event = Controller.get_cont("settings").new_gui_location }
