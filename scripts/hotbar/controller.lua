@@ -64,6 +64,12 @@ function HotbarController.is_gui_open()
   return HotbarGui.is_gui_open()
 end
 
+function HotbarController.on_configuration_change()
+  HotbarController.update_recipes(favorite)
+  HotbarController.update_recipes(last_usage)
+  HotbarController.open()
+end
+
 ---------------------------- api -----------------------------
 
 function HotbarController.get_favorite_recipe_state(recipe)
@@ -85,6 +91,21 @@ function HotbarController.change_favorite_recipe_state(recipe)
 
       favorite:insert(recipe, slot)
       HotbarController.open()
+    end
+  end
+end
+
+function HotbarController.update_recipes(check_array)
+  local recipe = get_all_recipes()
+
+  local indx = 1
+  while check_array:size() >= indx do
+    local elem = check_array:get(indx)
+
+    if recipe[elem.recipe_name] == nil then
+      check_array:remove(indx)
+    else
+      indx = indx + 1
     end
   end
 end

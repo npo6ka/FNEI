@@ -33,7 +33,7 @@ function Events.on_configuration_changed(event)
   for i, player in pairs(game.players) do
     Player.load({ player_index = i })
     Gui.close_old_fnei_gui()
-    Controller.get_cont("hotbar").open()
+    Controller.get_cont("hotbar").on_configuration_change()
   end
 end
 

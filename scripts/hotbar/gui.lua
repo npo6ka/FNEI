@@ -37,7 +37,6 @@ end
 
 function HotbarGui.create_hotbar_element_button(prot, type)
   if prot and prot.recipe_name then
-    out(prot.recipe_name)
     local recipe = get_all_recipes()[prot.recipe_name]
     local tooltip = ""
 
@@ -47,22 +46,24 @@ function HotbarGui.create_hotbar_element_button(prot, type)
       else
         tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name }
       end
-    end
 
-    return { 
-      -- type = "choose-elem-button",
-      -- name = type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-      -- style = "fnei_default_button",
-      -- elem_type = "recipe",
-      -- elem_value = prot.recipe_name,
-      -- locked = true
-      type = "sprite-button",
-      name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-      style = "fnei_hotbar_block_button",
-      tooltip = tooltip,
-      sprite = "recipe/" .. prot.recipe_name
-    }
-  elseif type == "favorite" then
+      return { 
+        -- type = "choose-elem-button",
+        -- name = type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+        -- style = "fnei_default_button",
+        -- elem_type = "recipe",
+        -- elem_value = prot.recipe_name,
+        -- locked = true
+        type = "sprite-button",
+        name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+        style = "fnei_hotbar_block_button",
+        tooltip = tooltip,
+        sprite = "recipe/" .. prot.recipe_name
+      }
+    end
+  end
+
+  if type == "favorite" then
     return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}}, sprite = "fnei_favorite_icon" }
   else
     return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.last_button"}, sprite = "fnei_last_usage_icon" }
