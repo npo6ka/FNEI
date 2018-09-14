@@ -61,7 +61,14 @@ function CustomEvents.invoke(gui_name, gui_type, event_name, event, split_string
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
     local events = event_list[gui_name][gui_type][event_name]
     for _,cur_event in pairs(events) do
-      cur_event(event, event_name, split_strings)
+      local ok , err = pcall(function()
+        cur_event(event, event_name, split_strings)
+      end)
+
+      if not(ok) then
+        Debug:error(CustomEvents.classname, "FNEI: event ", gui_name, gui_type, event_name, " return error!")
+        Debug:error(CustomEvents.classname, err)
+      end
     end
   else
     out("Error CustomEvents.invoke: event not found ", event, event.element.name, gui_name, gui_type, event_name)
