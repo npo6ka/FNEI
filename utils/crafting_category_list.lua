@@ -29,36 +29,54 @@ end
 
 ----------------------- secondary function --------------------------
 
+-- TODO: Clean this up..
 function CraftCategoty:create_crafting_category_list()
-  local ret_tb = {}
+  local result = {}
+
+  local function add_category_entry(category, entry)
+    if not result[category] then
+      result[category] = {}
+    end
+
+    table.insert(result[category], entry)
+  end
+
+  local character = Player.get().character
   local item_list = Item:get_item_list()
-  local entity = Player.get().character
 
-  if entity ~= nil and entity.prototype.crafting_categories then
-    ret_tb["handcraft"] = {}
-    table.insert(ret_tb["handcraft"], { type = "player", val = { name = "handcraft" } })
+  -- Add character 'by hand' recipes
+  if character and character.prototype.crafting_categories then
+    local by_hand = { type = "player", val = { name = "handcraft" } }
 
-    for category,v in pairs(entity.prototype.crafting_categories) do
-      if not ret_tb[category] then
-        ret_tb[category] = {}
-      end
-      table.insert(ret_tb[category], { type = "player", val = { name = "handcraft" } })
+    add_category_entry('handcraft', by_hand)
+
+    for category, _ in pairs(character.prototype.crafting_categories) do
+      add_category_entry(category, by_hand)
     end
   end
 
-  for _,item in pairs(item_list) do
+  for _, item in pairs(item_list) do
     local entity = item.place_result
-    if entity ~= nil and entity.crafting_categories then
-      for category,v in pairs(entity.crafting_categories) do
-        if not ret_tb[category] then
-          ret_tb[category] = {}
-        end
-        table.insert(ret_tb[category], { type = "building", val = item, ingredient_count = entity.ingredient_count })
+
+    if entity then
+      -- A building might be able to craft items in a category
+      for category, _ in pairs(entity.crafting_categories or {}) do
+        add_category_entry(category, { type = "building", val = item, ingredient_count = entity.ingredient_count })
+      end
+
+      -- A building may be used to mine a certain item
+      for category, _ in pairs(entity.resource_categories or {}) do
+        add_category_entry(category, { type = "resource-miner", val = item, mining_speed = entity.mining_speed, mining_power = entity.mining_power })
+      end
+
+      -- A building may implicitly produce a fluid, regardless of any action
+      if entity.fluid then
+        add_category_entry(entity.name, { type = 'building', val = item, ingredient_count = math.huge })
       end
     end
   end
 
-  return ret_tb
+  return result
 end
 
 return CraftCategoty

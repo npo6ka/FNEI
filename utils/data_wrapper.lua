@@ -107,6 +107,8 @@ function get_filtred_recipe_list(recipe_list)
 
         if cat.type == "player" then
           add_flag = true
+        elseif cat.type == "resource-miner" then
+          add_flag = true
         elseif cat.ingredient_count then
           local ing_cnt = 0
 

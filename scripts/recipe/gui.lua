@@ -144,9 +144,14 @@ end
 
 function RecipeGui.set_recipe_icon(recipe)
   local icon_flow = Gui.get_gui(Gui.get_pos(), "header-icon")
+  local value = recipe.name
+
+  if rawget(recipe, 'impostor') then
+    value = nil
+  end
 
   clear_gui(icon_flow)
-  Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", style = "fnei_default_button", elem_type = "recipe", elem_value = recipe.name, locked = true })
+  Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", style = "fnei_default_button", elem_type = "recipe", elem_value = value, locked = true })
 end
 
 function RecipeGui.set_ingredients(list, dif_prot)
@@ -234,8 +239,7 @@ function RecipeGui.set_made_in_list(recipe)
                     tooltip = {"", {"fnei.handcraft"}},
                     sprite = "fnei_hand_icon"
                   }
-      elseif cat.type == "building" and cat.ingredient_count and 
-          Settings.get_val("show-recipes", "buildings", cat.val.name) then
+      elseif cat.type == "building" and cat.ingredient_count and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local ing_cnt = 0
 
         for _,prot in pairs(recipe.ingredients) do
@@ -251,15 +255,31 @@ function RecipeGui.set_made_in_list(recipe)
             caption = round(recipe.energy / entity.crafting_speed, 3)
           end
 
+          if caption and entity and entity.pumping_speed then
+            caption = round(recipe.energy / entity.pumping_speed, 3)
+          end
+
           element = { 
             type = "choose-elem-button",
             name = "item_" .. cat.val.name,
             style = "fnei_default_button",
-            elem_type = "item", 
-            elem_value = cat.val.name, 
+            elem_type = "item",
+            elem_value = cat.val.name,
             locked = true
           }
         end
+      elseif cat.type == 'resource-miner' and cat.mining_speed and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+        element = {
+          type = "choose-elem-button",
+          name = "item_" .. cat.val.name,
+          style = "fnei_default_button",
+          elem_type = "item",
+          elem_value = cat.val.name,
+          locked = true
+        }
+
+        -- https://wiki.factorio.com/Mining
+        caption = round(recipe.mining_time / ((cat.mining_power - recipe.mining_hardness) * cat.mining_speed), 3)
       end
 
       if element then
@@ -366,6 +386,8 @@ function RecipeGui.get_element_caption(element)
     prot = get_full_item_list()[element.name]
   elseif element.type == "fluid" then
     prot = get_fluid_list()[element.name]
+  elseif element.type == 'entity' then
+    prot = game.entity_prototypes[element.name]
   end
 
   local ret_val
