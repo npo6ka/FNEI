@@ -365,7 +365,7 @@ function RecipeController.delete_equals_recipe(list)
         local flag = true
 
         for _, s_recipe in pairs(eq_rec[name]) do
-          if s_recipe.valid() and ret_tb[s_recipe.name] then
+          if s_recipe.valid and ret_tb[s_recipe.name] then
             flag = false
             break
           end
