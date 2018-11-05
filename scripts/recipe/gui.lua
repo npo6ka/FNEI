@@ -145,13 +145,16 @@ end
 function RecipeGui.set_recipe_icon(recipe)
   local icon_flow = Gui.get_gui(Gui.get_pos(), "header-icon")
   local value = recipe.name
+  local type = "recipe"
 
   if rawget(recipe, 'impostor') then
-    value = nil
+    local _,pos = string.find(value, "impostor[-]minable:")
+    value = string.sub(value, pos + 1)
+    type = "entity"
   end
 
   clear_gui(icon_flow)
-  Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", style = "fnei_default_button", elem_type = "recipe", elem_value = value, locked = true })
+  Gui.add_choose_button(icon_flow, { type = "choose-elem-button", name = "selected-recipe", style = "fnei_default_button", elem_type = type, elem_value = value, locked = true })
 end
 
 function RecipeGui.set_ingredients(list, dif_prot)

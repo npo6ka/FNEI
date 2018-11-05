@@ -68,6 +68,8 @@ function CustomEvents.invoke(gui_name, gui_type, event_name, event, split_string
       if not(ok) then
         Debug:error(CustomEvents.classname, "FNEI: event ", gui_name, gui_type, event_name, " return error!")
         Debug:error(CustomEvents.classname, err)
+
+        Gui.refresh_fnei_gui()
       end
     end
   else

@@ -39,12 +39,20 @@ function HotbarGui.create_hotbar_element_button(prot, type)
   if prot and prot.recipe_name then
     local recipe = get_all_recipes()[prot.recipe_name]
     local tooltip = ""
+    local sprite = "recipe/" .. prot.recipe_name
 
     if recipe then
       if type == "favorite" then
         tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name, "\n", {"fnei.alt-to-remove"} }
       else
         tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name }
+      end
+
+      if rawget(recipe, 'impostor') then
+        local ps,pos = string.find(prot.recipe_name, "impostor[-]minable:")
+
+        sprite = string.sub(prot.recipe_name, pos + 1)
+        sprite = "entity/" .. sprite
       end
 
       return { 
@@ -58,7 +66,7 @@ function HotbarGui.create_hotbar_element_button(prot, type)
         name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
         style = "fnei_hotbar_block_button",
         tooltip = tooltip,
-        sprite = "recipe/" .. prot.recipe_name
+        sprite = sprite
       }
     end
   end

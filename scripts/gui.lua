@@ -44,6 +44,20 @@ function Gui.close_old_fnei_gui()
   gui_iterate(Player.get().gui.center)
 end
 
+function Gui.refresh_fnei_gui()
+  local function gui_iterate(parent)
+    for _, gui_name in pairs(parent.children_names) do
+      if string.match(gui_name or "", "fnei") and parent[gui_name].valid then
+        parent[gui_name].destroy()
+      end
+    end
+  end
+  
+  gui_iterate(Player.get().gui.left)
+  gui_iterate(Player.get().gui.top)
+  gui_iterate(Player.get().gui.center)
+end
+
 function Gui.set_style_field(parent, gui_name, args)
   local gui = Gui.get_gui(parent, gui_name)
 
@@ -244,17 +258,26 @@ function Gui.add_choose_button(parent, gui_elem)
 end
 
 function Gui.set_choose_but_val(button, val)
+  local function check_val(val, list, debug_text)
+    if val and list[val] then
+      return val
+    else
+      Debug:error("Gui.set_choose_but_val: ", debug_text, val, "not found")
+      return nil
+    end
+  end
+
   if button then
     if button.elem_type == "item" then
-      if val and game.item_prototypes[val] then
-        button.elem_value = val
-      end
+      button.elem_value = check_val(val, game.item_prototypes, "item")
     elseif button.elem_type == "fluid" then
-      if val and game.fluid_prototypes[val] then
-        button.elem_value = val
-      end
+      button.elem_value = check_val(val, game.fluid_prototypes, "fluid")
     elseif button.elem_type == "recipe" then
-      button.elem_value = val
+      button.elem_value = check_val(val, game.recipe_prototypes, "recipe")
+    elseif button.elem_type == "entity" then
+      button.elem_value = check_val(val, game.entity_prototypes, "entity")
+    else 
+      Debug:error("Gui.set_choose_but_val: unknown choose-button type")
     end
   else
     Debug:error("Gui.set_choose_but_val: gui_elem == nil")
