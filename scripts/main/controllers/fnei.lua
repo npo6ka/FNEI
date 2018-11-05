@@ -2,6 +2,8 @@ local FneiMainController = {
   classname = "FNFneiMainController",
 }
 
+local translate = require 'utils/translate'
+
 local pages = "main-pages"
 local cont_gui
 
@@ -28,34 +30,30 @@ function FneiMainController.redraw_content()
 end
 
 function FneiMainController.set_page_list()
-  local page_list = {}
-  local items = get_item_list()
-  local fluid = get_fluid_list()
-
-  for _,item in pairs(items) do
-    table.insert(page_list, "item_" .. item.name)
-  end
-  for _,fluid in pairs(fluid) do
-    table.insert(page_list, "fluid_" .. fluid.name)
-  end
-
-  page_list = FneiMainController.sort_prot(page_list)
-
-  pages.num_per_page = 12 * Settings.get_val("fnei-line-count")
-  pages:set_page_list(page_list)
-end
-
-function FneiMainController.sort_prot(prot_list)
-  local ret_tb = {}
   local search_text = FneiMainController.get_search_field():gsub(" ", "-"):gsub("%p", "%%%0"):lower()
+  local page_list = {}
 
-  for _, prot in pairs(prot_list) do
-    if string.match(prot:lower(), search_text) then
-      table.insert(ret_tb, prot)
+  local items  = get_item_list()
+  local fluids = get_fluid_list()
+
+  for _, item in pairs(items) do
+    local term = translate(item.name, "item") or item.name
+
+    if string.find(term:lower(), search_text) then
+      table.insert(page_list, "item_" .. item.name)
     end
   end
 
-  return ret_tb
+  for _, fluid in pairs(fluids) do
+    local term = translate(fluid.name, "fluid") or fluid.name
+
+    if string.find(term:lower(), search_text) then
+      table.insert(page_list, "fluid_" .. fluid.name)
+    end
+  end
+
+  pages.num_per_page = 12 * Settings.get_val("fnei-line-count")
+  pages:set_page_list(page_list)
 end
 
 function FneiMainController.search_event(event)
