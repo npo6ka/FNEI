@@ -8,7 +8,16 @@ local aRecipe
 
 function Recipe:get_recipe_list()
   Debug:debug(Recipe.classname, "get_recipe_list( )")
-  return Player.get().force.recipes or {}
+
+  local proto   = Player.get().force.recipes or {}
+  local recipes = {}
+
+  for name, recipe in pairs(proto) do
+    recipes[name] = recipe
+  end
+
+  Recipe:append_implicit_recipes(recipes)
+  return recipes
 end
 
 function Recipe:get_aRecipe_list()
@@ -48,6 +57,68 @@ function Recipe:get_equals_recipe_list()
 end
 
 ----------------------- secondary function --------------------------
+
+function Recipe:append_implicit_recipes(into)
+
+  -- Utility to remove the duplicated impostor recipe baseline
+  local function add_impostor(name)
+    local recipe = {
+      name = name,
+
+      enabled  = true,
+      hidden   = false,
+      impostor = true,
+
+      ingredients = {},
+      products    = {},
+
+      energy = 1
+    }
+
+    into[name] = recipe
+
+    return recipe
+  end
+
+  for _, proto in pairs(game.entity_prototypes) do
+
+    -- Create impostor recipes for items 'mined' from entities
+    if proto.mineable_properties and proto.resource_category then
+      local recipe = add_impostor('impostor-minable:' .. proto.name)
+
+      recipe.localised_name = get_localised_name(proto)
+      recipe.category = proto.resource_category
+
+      recipe.ingredients = {{ type = 'entity', name = proto.name, amount = 1 }}
+      recipe.products    = proto.mineable_properties.products
+
+      -- Required for crafting time estimates
+      recipe.mining_time     = proto.mineable_properties.mining_time
+      recipe.mining_hardness = proto.mineable_properties.hardness
+
+      if proto.mineable_properties.required_fluid then
+        table.insert(recipe.ingredients, {
+            type   = 'fluid',
+            name   = proto.mineable_properties.required_fluid,
+            amount = proto.mineable_properties.fluid_amount
+        })
+      end
+    end
+
+    -- Create impostor recipes for entities that produce a certain fluid/item unconditionally
+    if proto.fluid then
+      local recipe = add_impostor('impostor-pumped:' .. proto.name)
+
+      recipe.localised_name = get_localised_name(proto)
+      recipe.category = proto.name
+
+      recipe.products = {{ type = 'fluid', name = proto.fluid.name, amount = 1 }}
+    end
+  end
+
+  -- Impostor recipes are added to the parameter table
+  return
+end
 
 function Recipe:create_equals_recipe_list()
   local recipes = game.recipe_prototypes

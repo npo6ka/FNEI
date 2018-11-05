@@ -349,34 +349,9 @@ function RecipeController.get_recipe_list(action_type, type, prot)
     Debug:error("Error in function RecipeController.get_recipe_list: unknown craft type: ", action_type, "")
   end
 
-  -- local entity_list = get_not_convert_entity_list()
-  -- for _,entity in pairs(entity_list) do
-  --   if entity.mineable_properties.products then
-  --     local res = entity.mineable_properties.products
-
-  --     for _,prod in pairs(res) do
-  --       --out(entity.name)
-  --       for v,n in pairs(prod) do
-  --         --out(v, ":", n)
-  --       end
-  --     end
-  --   end
-  -- end
-  
-  -- local cat = {}
-
-  -- for _,ent in pairs(game.entity_prototypes) do
-  --   if ent.resource_category then
-  --     cat[ent.resource_category] = true
-  --   end
-  -- end
-
-  -- for n,v in pairs(cat) do
-  --   out(n,v)
-  -- end
-
   local rec_list = get_filtred_recipe_list(recipe_list)
   rec_list = RecipeController.delete_equals_recipe(rec_list)
+
   return RecipeController.sort_recipe_list(rec_list)
 end
 
