@@ -292,13 +292,13 @@ function RecipeController.open_fluid_recipe_event(event, elem_name)
 end
 
 function RecipeController.open_tech_event(event, elem_name, split_names)
-  if Settings.get_val("open-techs") then
+--  if Settings.get_val("open-techs") then
     if is_attainable_tech(get_tech_list()[split_names[4]]) or Settings.get_val("open-unavailable-techs") then
       TechHook.show_tech(split_names[4])
     end
-  else
-    Player.print({"fnei.info-open-techs", {"fnei.open-techs"}})
-  end
+--  else
+--    Player.print({"fnei.info-open-techs", {"fnei.open-techs"}})
+--  end
 end
 
 function RecipeController.change_page_event()

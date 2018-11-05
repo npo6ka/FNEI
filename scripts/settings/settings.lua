@@ -28,7 +28,7 @@ function Settings.init()
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
   
   settings_list["admin"] =                        { type = "global-checkbox", tab = "admin-settings", def_val = nil, def_event = false, event = Controller.get_cont("settings").check_admin_settings_event }
-  settings_list["open-techs"] =                   { type = "checkbox", tab = "admin-settings", def_val = false }
+--  settings_list["open-techs"] =                   { type = "checkbox", tab = "admin-settings", def_val = false }
   settings_list["open-unavailable-techs"] =       { type = "checkbox", tab = "admin-settings", def_val = false }
 
   settings_list["item-auto-craft"] =              { type = "checkbox", tab = "default-settings", def_val = false }
