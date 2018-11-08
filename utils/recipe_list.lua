@@ -183,4 +183,67 @@ function Recipe:create_enable_recipes(recipe_list)
   return ret_tb
 end
 
+
+
+do
+	-- Create machine recipe support cache
+	if not global.fnei_machine_recipe_cache then
+		global.fnei_machine_recipe_cache = {}
+	end
+
+	local cache = global.fnei_machine_recipe_cache
+
+	function Recipe:check_machine_support(machine, recipe)
+		if not (game.entity_prototypes[machine] and game.recipe_prototypes[recipe]) then
+			return false
+		end
+
+		-- Consult cache
+		if not cache[machine] then
+			cache[machine] = {}
+		else
+			local cached = cache[machine][recipe]
+
+			if cached ~= nil then
+				return cached
+			end
+		end
+
+		-- Check if this recipe is supported by the given machine, by attempting to set it
+		--  on a phantom empty surface we created just for this single purphose
+		local surface = game.surfaces['FNEI_HiddenSurface']
+
+		-- Construct surface
+		if not surface then
+			surface = game.create_surface('FNEI_HiddenSurface', {
+				width  = 64,
+				height = 64
+			})
+
+			for x = -1, 1 do
+				for y = -1, 1 do
+					-- Leave chunks unpopulated
+					surface.set_chunk_generated_status({x, y}, defines.chunk_generated_status.entities)
+				end
+			end
+		end
+
+		-- Spawn target entity, and attempt to assign the given recipe
+		local entity = surface.create_entity({
+			name   = machine,
+			recipe = recipe,
+
+			position = {0, 0}
+		})
+
+		-- Cache results
+		cache[machine][recipe] = entity.get_recipe() ~= nil
+
+		-- Destroy entity, return answer
+		entity.destroy()
+
+		return cache[machine][recipe]
+	end
+end
+
 return Recipe
