@@ -23,23 +23,23 @@ end
 
 function Debug:info(...)
   local arg = {...}
-  self:print("info", self:get_message("[INFO]", 2, unpack(arg)))
+  self:print("info", self:get_message("[INFO]", unpack(arg)))
 end
 
 function Debug:debug(...)
   local arg = {...}
-  self:print("debug", self:get_message("[DEBUG]", 3, unpack(arg)))
+  self:print("debug", self:get_message("[DEBUG]", unpack(arg)))
 end
 
 function Debug:error(...)
   local arg = {...}
-  self:print("error", self:get_message("[ERROR]", 3, unpack(arg)))
+  self:print("error", self:get_message("[ERROR]", unpack(arg)))
 end
 
 function Debug:object_to_string(level, object)
-  function get_tabs(num)
+  local function get_tabs(num)
     local msg = ""
-    for i=0,num do  msg = msg .. "  " end
+    for i = 0, num do  msg = msg .. "  " end
     return msg
   end
 
@@ -69,18 +69,18 @@ function Debug:object_to_string(level, object)
   return message
 end
 
-function Debug:rec_obj_to_string(level, object, ...)
+function Debug:rec_obj_to_string(object, ...)
   arg = {...}
   if #arg > 0 then
-    return self:object_to_string(level, object) .. self:rec_obj_to_string(level, unpack(arg))
+    return self:object_to_string(0, object) .. self:rec_obj_to_string(unpack(arg))
   else
-    return self:object_to_string(level, object)
+    return self:object_to_string(0, object)
   end
 end
 
-function Debug:get_message(tag, level, logClass, ...)
+function Debug:get_message(tag, logClass, ...)
   local arg = {...}
-  local message = self:rec_obj_to_string(nil, unpack(arg))
+  local message = self:rec_obj_to_string(unpack(arg))
 
   message = "[FNEI]" .. tag .. " <" .. logClass .. "> " .. message 
 
