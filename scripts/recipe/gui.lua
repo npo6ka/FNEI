@@ -149,7 +149,12 @@ function RecipeGui.set_recipe_icon(recipe)
 
   if rawget(recipe, 'impostor') then
     local _,pos = string.find(value, "impostor[-]minable:")
-    value = string.sub(value, pos + 1)
+
+    if not pos then 
+      _,pos = string.find(value, "impostor[-]pumped:")
+    end
+
+    value = string.sub(value, (pos or -1) + 1)
     type = "entity"
   end
 

@@ -51,7 +51,11 @@ function HotbarGui.create_hotbar_element_button(prot, type)
       if rawget(recipe, 'impostor') then
         local ps,pos = string.find(prot.recipe_name, "impostor[-]minable:")
 
-        sprite = string.sub(prot.recipe_name, pos + 1)
+        if not pos then 
+          _,pos = string.find(prot.recipe_name, "impostor[-]pumped:")
+        end
+
+        sprite = string.sub(prot.recipe_name, (pos or -1) + 1)
         sprite = "entity/" .. sprite
       end
 
