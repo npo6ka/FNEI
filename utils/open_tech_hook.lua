@@ -10,7 +10,7 @@ function TechHook.open_tech(force, name)
 
   if tech then
     if tech.researched == false then
-      for _,effect in pairs(tech.effects) do
+      for _, effect in pairs(tech.effects) do
         if effect.type == "unlock-recipe" then
           local recipe = force.recipes[effect.recipe]
           if recipe and recipe.enabled == true then
@@ -26,13 +26,13 @@ function TechHook.open_tech(force, name)
 end
 
 function TechHook.reload_tech(force)
-  for _,elem in pairs(tech_buf) do
+  for _, elem in pairs(tech_buf) do
     elem.tech.researched = false
     elem.tech.enabled = elem.enabled
     force.set_saved_technology_progress(elem.tech, elem.progress)
   end
 
-  for _,recipe in pairs(recipes_buf) do
+  for _, recipe in pairs(recipes_buf) do
     recipe.enabled = true
   end
 end

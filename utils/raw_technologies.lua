@@ -39,7 +39,7 @@ end
 ----------------------------- secondary fanction --------------------------------
 
 function RawTech:is_attainable_tech_buf(tech)
-  local tech_name = tech.name
+  local tech_name = tech and tech.name
 
   if tech_name and atech_list[tech_name] == nil then
     local flag = true

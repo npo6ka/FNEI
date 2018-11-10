@@ -293,9 +293,17 @@ end
 
 function RecipeController.open_tech_event(event, elem_name, split_names)
 --  if Settings.get_val("open-techs") then
-    if is_attainable_tech(get_tech_list()[split_names[4]]) or Settings.get_val("open-unavailable-techs") then
-      TechHook.show_tech(split_names[4])
-    end
+  local tech_name = split_names[4]
+  local el_num = 5
+
+  while split_names[el_num] ~= nil do
+    tech_name = tech_name .. "_" .. split_names[el_num]
+    el_num = el_num + 1
+  end 
+
+  if is_attainable_tech(get_tech_list()[tech_name]) or Settings.get_val("open-unavailable-techs") then
+    TechHook.show_tech(tech_name)
+  end
 --  else
 --    Player.print({"fnei.info-open-techs", {"fnei.open-techs"}})
 --  end
