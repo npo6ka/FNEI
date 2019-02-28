@@ -46,7 +46,7 @@ data.raw["gui-style"].default["fnei_hotbar_label"] =
 data.raw["gui-style"].default["fnei_hotbar_label_button"] = 
 {
   type = "button_style",
-  parent = "technology_slot_button",
+  parent = "slot_button",
   height = 30,
   width = 72,
   font = "font-lb",
@@ -73,31 +73,22 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
   width = 78,
     
   clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/down_hotbar_arrow_clicked.png",
-      height = 14,
-      priority = "extra-high-no-scale",
-      width = 72,
-    },
+    filename = "__FNEI__/graphics/down_hotbar_arrow_clicked.png",
+    height = 14,
+    priority = "extra-high-no-scale",
+    width = 72,
   },
   default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/down_hotbar_arrow_default.png",
-      height = 14,
-      priority = "extra-high-no-scale",
-      width = 72,
-    },
+    filename = "__FNEI__/graphics/down_hotbar_arrow_default.png",
+    height = 14,
+    priority = "extra-high-no-scale",
+    width = 72,
   },
   hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/down_hotbar_arrow_hovered.png",
-      height = 14,
-      priority = "extra-high-no-scale",
-      width = 72,
-    },
+    filename = "__FNEI__/graphics/down_hotbar_arrow_hovered.png",
+    height = 14,
+    priority = "extra-high-no-scale",
+    width = 72,
   }
 }
 
@@ -111,30 +102,21 @@ data.raw["gui-style"].default["fnei_hotbar_up_arrow"] =
   width = 78,
     
   clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/up_hotbar_arrow_clicked.png",
-      height = 14,
-      priority = "extra-high-no-scale",
-      width = 72,
-    },
+    filename = "__FNEI__/graphics/up_hotbar_arrow_clicked.png",
+    height = 14,
+    priority = "extra-high-no-scale",
+    width = 72,
   },
   default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/up_hotbar_arrow_default.png",
-      height = 14,
-      priority = "extra-high-no-scale",
-      width = 72,
-    },
+    filename = "__FNEI__/graphics/up_hotbar_arrow_default.png",
+    height = 14,
+    priority = "extra-high-no-scale",
+    width = 72,
   },
   hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/up_hotbar_arrow_hovered.png",
-      height = 14,
-      priority = "extra-high-no-scale",
-      width = 72,
-    },
+    filename = "__FNEI__/graphics/up_hotbar_arrow_hovered.png",
+    height = 14,
+    priority = "extra-high-no-scale",
+    width = 72,
   }
 }

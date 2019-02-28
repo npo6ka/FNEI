@@ -3,7 +3,7 @@ Debug = {}
 Debug.filename="fnei\\fnei.log"
 Debug.limit = 5
 Debug.append = false
-Debug.mode = true
+Debug.mode = false
 
 if Debug.mode then
   Debug.print_tb = {

@@ -287,7 +287,7 @@ function RecipeGui.set_made_in_list(recipe)
         }
 
         -- https://wiki.factorio.com/Mining
-        caption = round(recipe.mining_time / ((cat.mining_power - recipe.mining_hardness) * cat.mining_speed), 3)
+        caption = round(recipe.mining_time / (cat.mining_speed), 3)
       end
 
       if element then

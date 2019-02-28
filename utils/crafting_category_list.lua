@@ -66,7 +66,7 @@ function CraftCategoty:create_crafting_category_list()
 
       -- A building may be used to mine a certain item
       for category, _ in pairs(entity.resource_categories or {}) do
-        add_category_entry(category, { type = "resource-miner", val = item, mining_speed = entity.mining_speed, mining_power = entity.mining_power })
+        add_category_entry(category, { type = "resource-miner", val = item, mining_speed = entity.mining_speed })
       end
 
       -- A building may implicitly produce a fluid, regardless of any action

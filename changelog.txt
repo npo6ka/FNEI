@@ -1,3 +1,7 @@
+Version 0.2.:
+28.02.2019
+- Added compatibility with game version 0.17
+
 Version 0.1.12:
 10.11.2018
 - fix "__FNEI__/scripts/recipe/gui.lua:152: attempt to perform arithmetic on local 'pos' (a nil value)"
@@ -11,7 +15,7 @@ Version 0.1.10:
 06.11.2018
 - implement impostor recipes for mining/pumping (thanks mentlerd)
 - add external interface for locale specific search (thanks mentlerd)
-- disable "open-techs" option
+- delete "open-techs" option
 - fix "detail-chance" information
 - fix "Error when enabling KS_Power oil boiler recipes" issue
 

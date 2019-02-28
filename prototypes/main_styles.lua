@@ -142,8 +142,8 @@ data.raw["gui-style"].default["fnei_main_page_label"] =
 
 data.raw["gui-style"].default["fnei_main_search_field"] =
 {
-  type = "textfield_style",
-  parent = "textfield",
+  type = "textbox_style",
+  parent = "textbox",
   width = 152,
   scalable = false,
 }

@@ -273,7 +273,7 @@ data.raw["gui-style"].default["fnei_recipe_products_scroll_pane"] =
 data.raw["gui-style"].default["fnei_recipe_red_tech_button"] = 
 {
   type = "button_style",
-  parent = "not_available_technology_slot",
+  parent = "not_available_slot_button",
   height = 68,
   width = 68,
   scalable = false,
@@ -282,7 +282,8 @@ data.raw["gui-style"].default["fnei_recipe_red_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_green_tech_button"] = 
 {
   type = "button_style",
-  parent = "researched_technology_slot",
+  --need fixed
+  parent = "not_available_slot_button",
   height = 68,
   width = 68,
   scalable = false,
@@ -291,7 +292,8 @@ data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] = 
 {
   type = "button_style",
-  parent = "available_technology_slot",
+  --need fixed
+  parent = "not_available_slot_button",
   height = 68,
   width = 68,
   scalable = false,
@@ -300,7 +302,8 @@ data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] = 
 {
   type = "button_style",
-  parent = "technology_slot_button",
+  --need fixed
+  parent = "not_available_slot_button",
   height = 68,
   width = 68,
   scalable = false,
@@ -316,31 +319,22 @@ data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
   width = 36,
     
   clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/favorite_clicked.png",
-      height = 64,
-      priority = "extra-high-no-scale",
-      width = 64,
-    },
+    filename = "__FNEI__/graphics/favorite_clicked.png",
+    height = 64,
+    priority = "extra-high-no-scale",
+    width = 64,
   },
   default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/favorite.png",
-      height = 64,
-      priority = "extra-high-no-scale",
-      width = 64,
-    },
+    filename = "__FNEI__/graphics/favorite.png",
+    height = 64,
+    priority = "extra-high-no-scale",
+    width = 64,
   },
   hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/favorite_hovered.png",
-      height = 64,
-      priority = "extra-high-no-scale",
-      width = 64,
-    },
+    filename = "__FNEI__/graphics/favorite_hovered.png",
+    height = 64,
+    priority = "extra-high-no-scale",
+    width = 64,
   }
 }
 
@@ -354,30 +348,21 @@ data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] =
   width = 36,
     
   clicked_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/favorite_clicked.png",
-      height = 64,
-      priority = "extra-high-no-scale",
-      width = 64,
-    },
+    filename = "__FNEI__/graphics/favorite_clicked.png",
+    height = 64,
+    priority = "extra-high-no-scale",
+    width = 64,
   },
   default_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/favorite_selected.png",
-      height = 64,
-      priority = "extra-high-no-scale",
-      width = 64,
-    },
+    filename = "__FNEI__/graphics/favorite_selected.png",
+    height = 64,
+    priority = "extra-high-no-scale",
+    width = 64,
   },
   hovered_graphical_set = {
-    type = "monolith",
-    monolith_image = {
-      filename = "__FNEI__/graphics/favorite_hovered.png",
-      height = 64,
-      priority = "extra-high-no-scale",
-      width = 64,
-    },
+    filename = "__FNEI__/graphics/favorite_hovered.png",
+    height = 64,
+    priority = "extra-high-no-scale",
+    width = 64,
   }
 }
