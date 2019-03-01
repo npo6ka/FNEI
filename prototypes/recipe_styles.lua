@@ -4,7 +4,7 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
 {
     type = "label_style",
     parent = "label",
-    align = "center",
+    horizontal_align = "center",
     vertical_align = "center",
     font = "font-mb",
     height = 36,
@@ -34,7 +34,7 @@ data.raw["gui-style"].default["fnei_recipe_madein_label"] =
 {
     type = "label_style",
     parent = "label",
-    align = "center",
+    horizontal_align = "center",
     height = 36,
     width = 190,
     scalable = false,
@@ -44,7 +44,7 @@ data.raw["gui-style"].default["fnei_recipe_technologies_label"] =
 {
     type = "label_style",
     parent = "label",
-    align = "center",
+    horizontal_align = "center",
     height = 68,
     width = 190,
     scalable = false,
@@ -54,7 +54,7 @@ data.raw["gui-style"].default["fnei_recipe_element_label"] =
 {
     type = "label_style",
     parent = "label",
-    align = "center",
+    horizontal_align = "center",
     height = 32,
     top_padding = 0,
     scalable = false,
@@ -64,7 +64,7 @@ data.raw["gui-style"].default["fnei_recipe_type_label"] =
 {
     type = "label_style",
     parent = "label",
-    align = "right",
+    horizontal_align = "right",
     height = 36,
     width = 182,
     scalable = false,
@@ -74,7 +74,7 @@ data.raw["gui-style"].default["fnei_recipe_paging_label"] =
 {
     type = "label_style",
     parent = "label",
-    align = "left",
+    horizontal_align = "left",
     height = 36,
     width = 190,
     scalable = false,
@@ -85,8 +85,8 @@ data.raw["gui-style"].default["fnei_recipe_craft_time_for_building_label"] =
     type = "label_style",
     parent = "label",
     top_padding = 0,
-    height = 18,
-    width = 36,
+    height = 20,
+    minimal_width = 36,
     scalable = false,
 }
 
@@ -174,6 +174,7 @@ data.raw["gui-style"].default["fnei_recipe_ingr_frame"] =
 {
   type = "frame_style",
   parent = "fnei_default_frame",
+  width = 252,
   left_padding = 3,
   scalable = false,
 }
@@ -182,6 +183,7 @@ data.raw["gui-style"].default["fnei_recipe_res_frame"] =
 {
   type = "frame_style",
   parent = "fnei_default_frame",
+  width = 252,
   left_padding = 3,
   scalable = false,
 }
@@ -273,7 +275,7 @@ data.raw["gui-style"].default["fnei_recipe_products_scroll_pane"] =
 data.raw["gui-style"].default["fnei_recipe_red_tech_button"] = 
 {
   type = "button_style",
-  parent = "not_available_slot_button",
+  parent = "red_slot_button",
   height = 68,
   width = 68,
   scalable = false,
@@ -282,8 +284,7 @@ data.raw["gui-style"].default["fnei_recipe_red_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_green_tech_button"] = 
 {
   type = "button_style",
-  --need fixed
-  parent = "not_available_slot_button",
+  parent = "green_slot_button",
   height = 68,
   width = 68,
   scalable = false,
@@ -292,21 +293,83 @@ data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] = 
 {
   type = "button_style",
-  --need fixed
-  parent = "not_available_slot_button",
+  parent = "slot_button",
+
+  clicked_graphical_set = {
+    border = 1,
+    filename = "__core__/graphics/gui.png",
+    position = {
+      185,
+      72
+    },
+    scale = 1,
+    size = 36
+  },
+  default_graphical_set = {
+    border = 1,
+    filename = "__core__/graphics/gui.png",
+    position = {
+      111,
+      72
+    },
+    scale = 1,
+    size = 36
+  },
+  hovered_graphical_set = {
+    border = 1,
+    filename = "__core__/graphics/gui.png",
+    position = {
+      148,
+      72
+    },
+    scale = 1,
+    size = 36
+  },
+  
   height = 68,
   width = 68,
-  scalable = false,
+  scalable = false
 }
 
 data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] = 
 {
   type = "button_style",
-  --need fixed
-  parent = "not_available_slot_button",
+  parent = "slot_button",
+
+  clicked_graphical_set = {
+    border = 1,
+    filename = "__core__/graphics/gui.png",
+    position = {
+      185,
+      0
+    },
+    scale = 1,
+    size = 36
+  },
+  default_graphical_set = {
+    border = 1,
+    filename = "__core__/graphics/gui.png",
+    position = {
+      111,
+      0
+    },
+    scale = 1,
+    size = 36
+  },
+  hovered_graphical_set = {
+    border = 1,
+    filename = "__core__/graphics/gui.png",
+    position = {
+      148,
+      0
+    },
+    scale = 1,
+    size = 36
+  },
+  
   height = 68,
   width = 68,
-  scalable = false,
+  scalable = false
 }
 
 data.raw["gui-style"].default["fnei_recipe_favorive_button"] = 

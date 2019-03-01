@@ -37,7 +37,7 @@ data.raw["gui-style"].default["fnei_hotbar_label"] =
     left_padding = 2,
     width = 72,
     height = 22,
-    align = "center",
+    horizontal_align = "center",
     scalable = false,
 }
 
@@ -47,7 +47,7 @@ data.raw["gui-style"].default["fnei_hotbar_label_button"] =
 {
   type = "button_style",
   parent = "slot_button",
-  height = 30,
+  height = 36,
   width = 72,
   font = "font-lb",
   scalable = false,

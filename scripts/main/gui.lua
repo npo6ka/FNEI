@@ -23,7 +23,7 @@ function MainGui.init_template()
           { type = "frame", name = "header-frame", style = "fnei_main_content-frame", direction = "horizontal", children = {
             { type = "table", name = "header-table", style = "fnei_main_header-table", column_count = 4, children = {
               { type = "label", name = "header-label", style = "fnei_main_header-label", caption = {"fnei.FNEI"} },
-              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = MainGui.settings_key_event },
+              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = MainGui.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}
           }},

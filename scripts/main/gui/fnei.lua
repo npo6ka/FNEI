@@ -12,7 +12,7 @@ function FneiMainGui.init_template(contr)
     { type = "frame", name = "content-frame", style = "fnei_main_content-frame", direction = "vertical", children = {
       { type = "label", name = "description-label", style = "fnei_main_tab-description-label", caption = {"fnei.fnei-tab-description"} },
       { type = "flow", name = "search-flow", style = "fnei_main_content_flow", direction = "horizontal", children = {
-        { type = "label", name = "header-label", style = "fnei_main_default_search_label", caption = {"", {"gui-browse-mods.search"}, " :"} },
+        { type = "label", name = "header-label", style = "fnei_main_default_search_label", caption = {"", {"gui.search"}, " :"} },
         { type = "textfield", name = search_field_name, style = "fnei_main_search_field", event = contr.search_event },
       }},
       { type = "flow", name = "paging-flow", style = "fnei_main_content_flow", direction = "horizontal", children = {

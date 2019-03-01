@@ -23,7 +23,7 @@ function RecipeGui.init_template()
                 { type = "sprite-button", name = "favorite-key", tooltip = {"gui.favorite-button"}, event = cont.favorite_key_event },
               }},
               { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
-              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.options"}, event = cont.settings_key_event },
+              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = cont.settings_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}
           }},
@@ -301,7 +301,7 @@ function RecipeGui.set_made_in_list(recipe)
             vertical_align = "top", 
             align = "center", 
             want_ellipsis = true, 
-            caption = caption, 
+            caption = caption,
             tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption} 
           }
         end
@@ -324,10 +324,21 @@ function RecipeGui.set_techs( recipe )
 
   clear_gui(gui_flow)
 
-  if tech_list and #tech_list > 0 then
+  local new_tech_list = {}
+  if Settings.get_val("open-unavailable-techs") then
+    new_tech_list = tech_list
+  else
+    for _, tech in pairs(tech_list) do
+      if is_attainable_tech(tech) then
+        table.insert(new_tech_list, tech)
+      end
+    end
+  end
+
+  if new_tech_list and #new_tech_list > 0 then
     local techs = {}
 
-    for _, tech in pairs(tech_list) do
+    for _, tech in pairs(new_tech_list) do
       table.insert(techs, {
         type = "sprite-button",
         name = "tech_".. tech.name,

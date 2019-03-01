@@ -19,7 +19,7 @@ function SettingsGui.init_template()
 
           { type = "frame", name = "header-frame", style = "fnei_settings_header-frame", direction = "horizontal", children = {
             { type = "table", name = "header-table", style = "fnei_settings_header-table", column_count = 3, children = {
-              { type = "label", name = "header-label", style = "fnei_settings_header-label", caption = {"gui-menu.options"} },
+              { type = "label", name = "header-label", style = "fnei_settings_header-label", caption = {"gui-menu.settings"} },
               { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = Controller.back_key_event },
               { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
             }}

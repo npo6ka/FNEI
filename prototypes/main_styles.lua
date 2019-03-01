@@ -101,7 +101,7 @@ data.raw["gui-style"].default["fnei_main_header-label"] =
   type = "label_style",
   font = "font-lb",
   width = 380,
-  align = "center",
+  horizontal_align = "center",
   scalable = false,
 }
 
@@ -116,7 +116,7 @@ data.raw["gui-style"].default["fnei_main_tab-description-label"] =
 {
   type = "label_style",
   width = 454,
-  align = "center",
+  horizontal_align = "center",
   scalable = false,
 }
 
@@ -125,7 +125,7 @@ data.raw["gui-style"].default["fnei_main_default_search_label"] =
   type = "label_style",
   width = 300,
   top_padding = 3,
-  align = "right",
+  horizontal_align = "right",
   scalable = false,
 }
 
@@ -134,7 +134,7 @@ data.raw["gui-style"].default["fnei_main_page_label"] =
   type = "label_style",
   width = 396,
   top_padding = 3,
-  align = "center",
+  horizontal_align = "center",
   scalable = false,
 }
 

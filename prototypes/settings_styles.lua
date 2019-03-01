@@ -377,7 +377,7 @@ data.raw["gui-style"].default["fnei_settings_header-label"] =
   type = "label_style",
   font = "font-lb",
   width = 432,
-  align = "center",
+  horizontal_align = "center",
   scalable = false,
 }
 
@@ -396,7 +396,7 @@ data.raw["gui-style"].default["fnei_settings_craft-category-label"] =
 {
   type = "label_style",
   width = 506,
-  align = "center",
+  horizontal_align = "center",
   scalable = false,
 }
 
