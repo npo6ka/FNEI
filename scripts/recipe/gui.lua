@@ -20,7 +20,7 @@ function RecipeGui.init_template()
               { type = "flow", name = "header-icon", style = "fnei_default_horizontal_flow" },
               { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", want_ellipsis = true, caption = "recipe_name" },
               { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = { 
-                { type = "sprite-button", name = "favorite-key", tooltip = {"gui.favorite-button"}, event = cont.favorite_key_event },
+                { type = "sprite-button", name = "favorite-key", tooltip = {"fnei.favorite-button"}, event = cont.favorite_key_event },
               }},
               { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
               { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = cont.settings_key_event },
@@ -116,7 +116,7 @@ function RecipeGui.draw_favorite_state(state)
       type = "sprite-button", 
       name = "favorite-key", 
       style = style, 
-      tooltip = {"gui.favorite-button"}, 
+      tooltip = {"fnei.favorite-button"}, 
     }})
   end
 end
