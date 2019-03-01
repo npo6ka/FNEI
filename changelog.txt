@@ -1,4 +1,8 @@
-Version 0.2.:
+Version 0.2.1:
+28.02.2019
+- Fixes for 0.17
+
+Version 0.2.0:
 28.02.2019
 - Added compatibility with game version 0.17
 
