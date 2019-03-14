@@ -94,7 +94,6 @@ function Recipe:append_implicit_recipes(into)
 
       -- Required for crafting time estimates
       recipe.mining_time     = proto.mineable_properties.mining_time
-      recipe.mining_hardness = proto.mineable_properties.hardness
 
       if proto.mineable_properties.required_fluid then
         table.insert(recipe.ingredients, {

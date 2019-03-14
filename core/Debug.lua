@@ -14,7 +14,7 @@ if Debug.mode then
   }
 else
   Debug.print_tb = {
-  --         chat   log    file  
+  --         chat   log    file
     info =  {false, false, false},
     error = {false, true,  true },
     debug = {false, false, false},

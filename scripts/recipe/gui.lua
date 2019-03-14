@@ -113,10 +113,10 @@ function RecipeGui.draw_favorite_state(state)
 
     clear_gui(favorite_button)
     Gui.add_gui_template(favorite_button, {{ 
-      type = "sprite-button", 
-      name = "favorite-key", 
-      style = style, 
-      tooltip = {"fnei.favorite-button"}, 
+      type = "sprite-button",
+      name = "favorite-key",
+      style = style,
+      tooltip = {"fnei.favorite-button"},
     }})
   end
 end
@@ -238,7 +238,7 @@ function RecipeGui.set_made_in_list(recipe)
         local player = Player.get()
 
         if caption and player and player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1 ~= 0 then
-          caption = round(recipe.energy / (player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1), 3)
+          caption = round(recipe.energy / ((player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)), 3)
         end
 
         element = { type = "sprite-button",
