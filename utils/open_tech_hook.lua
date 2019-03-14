@@ -47,14 +47,21 @@ function TechHook.show_tech(name)
       local cur_progress = force.research_progress
       local tech = force.current_research
 
+      force.current_research = nil
+      force.set_saved_technology_progress(tech, cur_progress)
+
+      local techs = {}
+      while force.current_research ~= nil do
+        table.insert(techs, force.current_research)
+        force.current_research = nil
+      end
+
       global.fnei.cur_tech = {
         force = force,
         tech = tech,
         time = 0,
+        queue = techs
       }
-
-      force.current_research = nil
-      force.set_saved_technology_progress(tech, cur_progress)
     end
 
     TechHook.open_tech(force, name)
@@ -77,7 +84,11 @@ function TechHook.return_prev_tech()
   if cur_tech.time > 2 then
     if cur_tech.force.current_research == nil then
       cur_tech.force.current_research = cur_tech.tech.name
-    end
+
+      for _, tech in pairs(cur_tech.queue) do
+        cur_tech.force.current_research = tech.name
+      end
+    end  
     
     global.fnei.cur_tech = nil
   else
