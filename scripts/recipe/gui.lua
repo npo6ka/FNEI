@@ -175,7 +175,7 @@ function RecipeGui.set_ingredients(list, dif_prot)
   for _,ingr in pairs(list) do
     table.insert(template, { type = "flow", name = ingr.name .. "-flow", style = "fnei_recipe_list_elements_flow", direction = "horizontal", children = {
       { type = "choose-elem-button", name = ingr.type .. "_" .. ingr.name, style = "fnei_default_button", elem_type = ingr.type, elem_value = ingr.name, locked = true },
-      { type = "label", name = ingr.name .. "-label", style = "fnei_recipe_element_label", vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(ingr) }
+      { type = "label", name = ingr.name .. "-label", style = "fnei_recipe_element_label", single_line = true, vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(ingr) }
     }})
   end
 
@@ -201,7 +201,7 @@ function RecipeGui.set_products(list, dif_prot)
   for _,res in pairs(list) do
     table.insert(template, { type = "flow", name = res.name .. "-flow", style = "fnei_recipe_list_elements_flow", direction = "horizontal", children = {
       { type = "choose-elem-button", name = res.type .. "_" .. res.name, style = "fnei_default_button", elem_type = res.type, elem_value = res.name, locked = true },
-      { type = "label",  name = res.name .. "-label", style = "fnei_recipe_element_label", vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(res) }
+      { type = "label",  name = res.name .. "-label", style = "fnei_recipe_element_label", single_line = true, vertical_align = "center", align = "left", caption = RecipeGui.get_element_caption(res) }
     }})
   end
 

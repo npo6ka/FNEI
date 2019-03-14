@@ -267,6 +267,7 @@ data.raw["gui-style"].default["fnei_recipe_products_scroll_pane"] =
   maximal_width = 240,
   minimal_width = 240,
   maximal_height = 330,
+  vertical_align = "center",
   scalable = false,
 }
 
