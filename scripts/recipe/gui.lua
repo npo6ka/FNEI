@@ -285,7 +285,6 @@ function RecipeGui.set_made_in_list(recipe)
           elem_value = cat.val.name,
           locked = true
         }
-
         -- https://wiki.factorio.com/Mining
         caption = round(recipe.mining_time / (cat.mining_speed), 3)
       end

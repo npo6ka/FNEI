@@ -88,7 +88,7 @@ function TechHook.return_prev_tech()
       for _, tech in pairs(cur_tech.queue) do
         cur_tech.force.current_research = tech.name
       end
-    end  
+    end
     
     global.fnei.cur_tech = nil
   else
