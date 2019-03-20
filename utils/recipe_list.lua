@@ -90,7 +90,7 @@ function Recipe:append_implicit_recipes(into)
       recipe.category = "mine" .. proto.resource_category
 
       recipe.ingredients = {{ type = 'entity', name = proto.name, amount = 1 }}
-      recipe.products    = proto.mineable_properties.products
+      recipe.products    = proto.mineable_properties.products or {}
 
       -- Required for crafting time estimates
       recipe.mining_time     = proto.mineable_properties.mining_time
