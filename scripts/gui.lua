@@ -42,6 +42,11 @@ function Gui.close_old_fnei_gui()
   gui_iterate(Player.get().gui.left)
   gui_iterate(Player.get().gui.top)
   gui_iterate(Player.get().gui.center)
+
+  local left_gui = Player.get().gui.left
+  if left_gui["fnei_left_flow"] then
+   left_gui["fnei_left_flow"].destroy()
+  end
 end
 
 function Gui.refresh_fnei_gui()
@@ -87,13 +92,12 @@ function Gui.get_pos()
 end
 
 function Gui.get_left_gui()
-    local left_gui = Player.get().gui.left
+    local left_gui = mod_gui.get_frame_flow(Player.get())
+    -- local left_gui = Player.get().gui.left
 
     if not left_gui["fnei_left_flow"] then
       left_gui.add({ type = "flow", name = "fnei_left_flow", direction = "horizontal" })
     end
-
-    left_gui = left_gui["fnei_left_flow"] or left_gui
 
     return left_gui["fnei_left_flow"] or left_gui
 end

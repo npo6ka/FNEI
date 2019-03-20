@@ -3,6 +3,7 @@ if not global.fnei then global.fnei = {} end
 
 -------------- include Class libs ----------------
 require "core/Class"
+
 -------------- include Debug libs ----------------
 require "core/Debug"
 function out(...)
@@ -10,7 +11,10 @@ function out(...)
   Debug:info("debug.info", unpack(arg))
 end
 
--------------- include DefaultLibs ---------------
+-------------- include other libs ---------------
+require("mod-gui")
+
+-------------- include Default FNEI Libs ---------------
 require "utils/data_wrapper"
 require "utils/utils"
 require "scripts/player"
