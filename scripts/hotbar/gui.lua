@@ -57,20 +57,28 @@ function HotbarGui.create_hotbar_element_button(prot, type)
 
         sprite = string.sub(prot.recipe_name, (pos or -1) + 1)
         sprite = "entity/" .. sprite
+
+        return { 
+          type = "sprite-button",
+          name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+          style = "fnei_hotbar_block_button",
+          tooltip = tooltip,
+          sprite = sprite
+        }
       end
 
       return { 
-        -- type = "choose-elem-button",
-        -- name = type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-        -- style = "fnei_default_button",
-        -- elem_type = "recipe",
-        -- elem_value = prot.recipe_name,
-        -- locked = true
-        type = "sprite-button",
+        type = "choose-elem-button",
         name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-        style = "fnei_hotbar_block_button",
-        tooltip = tooltip,
-        sprite = sprite
+        style = "fnei_default_button",
+        elem_type = "recipe",
+        elem_value = prot.recipe_name,
+        locked = true
+        -- type = "sprite-button",
+        -- name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+        -- style = "fnei_hotbar_block_button",
+        -- tooltip = tooltip,
+        -- sprite = sprite
       }
     end
   end
