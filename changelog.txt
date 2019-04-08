@@ -1,3 +1,16 @@
+Version 0.2.3:
+20.03.2019
+- fix Recipe look up error(<FNCustomEvents> FNEI/scripts/recipe/controller.lua:430: bad argument #1 to 'pairs' (table expected, got nil))
+- move left-gui to mod-gui
+- replase hotbar sprite-button to recipe-button
+
+Version 0.2.2:
+17.03.2019
+- fix error LuaRecipe doesn't contain key mining_time."
+- fix research queue bags
+- fix don't showing long names
+- fix handcraft speed
+
 Version 0.2.1:
 28.02.2019
 - Fixes for 0.17
