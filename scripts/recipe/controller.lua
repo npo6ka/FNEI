@@ -292,21 +292,19 @@ function RecipeController.open_fluid_recipe_event(event, elem_name)
 end
 
 function RecipeController.open_tech_event(event, elem_name, split_names)
---  if Settings.get_val("open-techs") then
   local tech_name = split_names[4]
   local el_num = 5
 
+  -- if tech contains '_' in name, need add this part here
   while split_names[el_num] ~= nil do
     tech_name = tech_name .. "_" .. split_names[el_num]
     el_num = el_num + 1
   end 
 
   if is_attainable_tech(get_tech_list()[tech_name]) or Settings.get_val("open-unavailable-techs") then
-    TechHook.show_tech(tech_name)
+    TechHook.save_cur_fnei_state()
+    Player.get().open_technology_gui(tech_name)
   end
---  else
---    Player.print({"fnei.info-open-techs", {"fnei.open-techs"}})
---  end
 end
 
 function RecipeController.change_page_event()

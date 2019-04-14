@@ -53,7 +53,6 @@ function Events.gui_key(event)
 end
 
 function Events.on_tick(event)
-  TechHook.on_tick(event)
   hard_load()
 end
 
