@@ -1,183 +1,234 @@
-Version 0.2.3:
-20.03.2019
-- fix Recipe look up error(<FNCustomEvents> FNEI/scripts/recipe/controller.lua:430: bad argument #1 to 'pairs' (table expected, got nil))
-- move left-gui to mod-gui
-- replase hotbar sprite-button to recipe-button
-
-Version 0.2.2:
-17.03.2019
-- fix error LuaRecipe doesn't contain key mining_time."
-- fix research queue bags
-- fix don't showing long names
-- fix handcraft speed
-
-Version 0.2.1:
-28.02.2019
-- Fixes for 0.17
-
-Version 0.2.0:
-28.02.2019
-- Added compatibility with game version 0.17
-
-Version 0.1.12:
-10.11.2018
-- fix "__FNEI__/scripts/recipe/gui.lua:152: attempt to perform arithmetic on local 'pos' (a nil value)"
-- fix "__FNEI__/utils/raw_technologies.lua:42: attempt to index local 'tech' (a nil value)"
-
-Version 0.1.11:
-06.11.2018
-- Test changelog information
-
-Version 0.1.10:
-06.11.2018
-- implement impostor recipes for mining/pumping (thanks mentlerd)
-- add external interface for locale specific search (thanks mentlerd)
-- delete "open-techs" option
-- fix "detail-chance" information
-- fix "Error when enabling KS_Power oil boiler recipes" issue
-
-Version 0.1.9:
-15.09.2018
-- add Japanese locale (thanks shelaf)
-- fix Unknown sprite error
-- fix Crash On Looking For Usage Of Certain Items
-- add pcall(save call) for default event
-- settings "show hidden recipes" defauilt is true
-
-Version 0.1.8:
-06.07.2018
-- fix Russian locale (thanks dima74)
-- add hotbar for FNEI
-- fix long time opening tech tree thought fnei gui
-
-Version 0.1.6:
-19.05.2018
-- add Russian locale
-- add display temperature of fluids, if available
-- fix "Backspace doesn't work in inserter capacity override input"
-- fix Recipe from Py`s mods not showing up
-- fix the height of "crafting time" labels in the recipe gui
-- fix the main button label
-- fix showing recipe problem in the god mod
-
-Version 0.1.5:
-09.03.2018
-- fix error FNEI/utils/data_wrapper.lua:70: bad argument #1 to 'pairs' (table expected, got nil)
-- add FNEI hotkey icon (optional)
-
-Version 0.1.4:
-06.03.2018
-- fix a slow and unstable search
-- fix crash when need to display several identical prototypes
-
-Version 0.1.3:
-04.03.2018
-- fixed the error of displaying two identical technologies inside the mod
-- fixed the display of the label of the crafting time when they are disabled
-
-Version 0.1.2:
-04.03.2018
-- fixed desync for crafting categories 
-- fixed UI scale problem
-
-Version 0.1.1:
-03.03.2018
-- fix "Error while running event FNEI::on_gui_click (ID 1) _FNEI _/unsort/recipe_gui.lua:219:attempt to compare number with nil"
-
-Version 0.1.0:
-02.03.2018
-- global refactoring update
-
-Version 0.0.17:
-08.01.2018
-- fixed crash: Missing gui style "red_slot_button_style" for hidden items https://github.com/npo6ka/FNEI/issues/12
-
-Version 0.0.16:
-16.12.2017
-- added support for 16 versions
-
-Version 0.0.13:
-23.10.2017
-- fix desync problem
-- fix MP bags in gui
-- fix the disappearance of some unlocked recipes when viewing the technology tree
-- remove second FNEI key
-- fix description in option gui
-
-Version 0.0.11:
-10.09.17
-- restyling icon in gui
-- add option "Show hidden items"
-- add option "Show unattainable recipes"
-- add option "Show recipes in the following buildings"
-- small fix option gui
-- add exit and option icon to the main window
-
-Version 0.0.10:
-25.08.17
-- fix the chance of retrieving the item in the recipe
-- add option Detailed information about the chances of obtaining an item
-- add option close FNEI when pressing E
-- add more ru locale
-- fix bug related with a space in the search
-
-Version 0.0.9:
-03.08.17
-- fix chash when upgrading from an older version of the mod
-- fix tech reset bug
-
-Version 0.0.8:
-03.08.17
-- Make static recipe gui
-- Added option gui
-- Fix label description in recipe gui
-- In the game, it is not possible to open the required technologies by calling 1 function, but I found a way to do this.
-This can work unstably, but I think that this is a very useful function. I put it in a separate category of settings because this function opens some of the achievement.
-
-Version 0.0.7:
-24.07.17
-- Global recipe gui changes
-- Added russion locale file
-- Disable hidden recipe
-
-Version 0.0.6:
-27.06.17
-- fix problem with recipes having a percentage output
-- Center alignment for item names
-- Added a restriction on the list of ingredients and products for small screen resolutions
-
-Version 0.0.5:
-24.06.17
-- Localisation of the recipe name in recipe gui
-- Localisation of the item name in recipe gui
-- Static gui width of the recipe
-- Fixed the error of the main window after loading saved game
-- Fixed the error of the recipe window after loading saved game
-
-Version 0.0.4:
-21.06.17
-- fix crash when missing item flag when populating GUI
-
-Version 0.0.3:
-19.06.17
-- Resize tech icon in recipe gui
-- Red light for disabled items
-- Red light for disabled recipes
-- Added sorting of unexamined recipes and refactoring gui
-- Clear the right-click search box
-- More loyal search
-
-Version 0.0.2:
-09.06.17
-- Add back button on recipe panel
-- Relocate panel to player.gui.left
-- Move paging from bottom to near top to avoid issues when panel resizes
-- Ignore disposal or repackaging recipes
-- Add locale file
-- Removed the ability to add 2 identical recipes in a row
-- Add recursive paging
-- Add save previous recipe page
-
-Version 0.0.1:
-07.06.17
-First version
+---------------------------------------------------------------------------------------------------
+Version: 0.2.5
+Date: 2019-05-25
+  Bugfixes:
+    - Fix Lagspikes related to hotbar gui
+    - Fix GUI shows scroll box where it should not be when
+    - Fix made in list error related to exceed amount of fluidboxes
+  Changes:
+    - Add german translation
+---------------------------------------------------------------------------------------------------
+Version: 0.2.4
+Date: 2019-04-14
+  Bugfixes:
+    - Fixed bug with opening technology tree
+---------------------------------------------------------------------------------------------------
+Version: 0.2.3
+Date: 2019-03-20
+  Bugfixes:
+    - Fix Recipe look up error(<FNCustomEvents> FNEI/scripts/recipe/controller.lua:430: bad argument #1 to 'pairs' (table expected, got nil))
+  Changes:
+    - Move left-gui to mod-gui
+    - Replase hotbar sprite-button to recipe-button
+---------------------------------------------------------------------------------------------------
+Version: 0.2.2
+Date: 2019-03-17
+  Bugfixes:
+    - Fix error LuaRecipe doesn't contain key mining_time."
+    - Fix research queue bags
+    - Fix don't showing long names
+    - Fix handcraft speed
+---------------------------------------------------------------------------------------------------
+Version: 0.2.1
+Date: 2019-02-28
+  Changes:
+    - Added support for 0.17
+---------------------------------------------------------------------------------------------------
+Version: 0.1.12
+Date: 2018-11-10
+  Bugfixes:
+    - Fix "__FNEI__/scripts/recipe/gui.lua:152: attempt to perform arithmetic on local 'pos' (a nil value)"
+    - Fix "__FNEI__/utils/raw_technologies.lua:42: attempt to index local 'tech' (a nil value)"
+---------------------------------------------------------------------------------------------------
+Version: 0.1.11
+Date: 2018-11-06
+  Changes:
+    - Test changelog information
+---------------------------------------------------------------------------------------------------
+Version: 0.1.10
+Date: 2018-11-06
+  Bugfixes:
+    - fix "detail-chance" information
+    - fix "Error when enabling KS_Power oil boiler recipes" issue
+  Changes:
+    - implement impostor recipes for mining/pumping (thanks mentlerd)
+    - add external interface for locale specific search (thanks mentlerd)
+    - delete "open-techs" option
+---------------------------------------------------------------------------------------------------
+Version: 0.1.9
+Date: 2018-09-15
+  Bugfixes:
+    - fix Unknown sprite error
+    - fix Crash On Looking For Usage Of Certain Items
+  Changes:
+    - add pcall(save call) for default event
+    - settings "show hidden recipes" defauilt is true
+    - add Japanese locale (thanks shelaf)
+---------------------------------------------------------------------------------------------------
+Version: 0.1.8
+Date: 2018-07-06
+  Bugfixes:
+    - fix Russian locale (thanks dima74)
+    - fix long time opening tech tree thought fnei gui
+  Changes:
+    - add hotbar for FNEI
+---------------------------------------------------------------------------------------------------
+Version: 0.1.6
+Date: 2018-05-19
+  Bugfixes:
+    - fix "Backspace doesn't work in inserter capacity override input"
+    - fix Recipe from Py`s mods not showing up
+    - fix the height of "crafting time" labels in the recipe gui
+    - fix the main button label
+    - fix showing recipe problem in the god mod
+  Changes:
+    - add Russian locale
+    - add display temperature of fluids, if available
+---------------------------------------------------------------------------------------------------
+Version: 0.1.5
+Date: 2018-03-09
+  Bugfixes:
+    - fix error FNEI/utils/data_wrapper.lua:70: bad argument #1 to 'pairs' (table expected, got nil)
+  Changes:
+    - add FNEI hotkey icon (optional)
+---------------------------------------------------------------------------------------------------
+Version: 0.1.4
+Date: 2018-03-06
+  Bugfixes:
+    - fix a slow and unstable search
+    - fix crash when need to display several identical prototypes
+---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2018-03-04
+  Bugfixes:
+    - fixed the error of displaying two identical technologies inside the mod
+    - fixed the display of the label of the crafting time when they are disabled
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2018-03-04
+  Bugfixes:
+    - fixed desync for crafting categories 
+    - fixed UI scale problem
+---------------------------------------------------------------------------------------------------
+Version: 0.1.1
+Date: 2018-03-03
+  Bugfixes:
+    - fix "Error while running event FNEI::on_gui_click (ID 1) _FNEI _/unsort/recipe_gui.lua:219:attempt to compare number with nil"
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2018-03-03
+  Changes:
+    - global refactoring update
+---------------------------------------------------------------------------------------------------
+Version: 0.0.17
+Date: 2018-01-08
+  Bugfixes:
+    - fixed crash: Missing gui style "red_slot_button_style" for hidden items https://github.com/npo6ka/FNEI/issues/12
+---------------------------------------------------------------------------------------------------
+Version: 0.0.16
+Date: 2017-12-16
+  Changes:
+    - added support for 0.16
+---------------------------------------------------------------------------------------------------
+Version: 0.0.13
+Date: 2017-10-23
+  Bugfixes:
+    - fix desync problem
+    - fix MP bags in gui
+    - fix the disappearance of some unlocked recipes when viewing the technology tree
+    - fix description in option gui
+  Changes:
+    - remove second FNEI key
+---------------------------------------------------------------------------------------------------
+Version: 0.0.11
+Date: 2017-09-10
+  Bugfixes:
+    - small fix option gui
+  Changes:
+    - restyling icon in gui
+    - add option "Show hidden items"
+    - add option "Show unattainable recipes"
+    - add option "Show recipes in the following buildings"
+    - add exit and option icon to the main window
+---------------------------------------------------------------------------------------------------
+Version: 0.0.10
+Date: 2017-08-25
+  Bugfixes:
+    - fix the chance of retrieving the item in the recipe
+    - fix bug related with a space in the search
+  Changes:
+    - add option Detailed information about the chances of obtaining an item
+    - add option close FNEI when pressing E
+    - add more ru locale
+---------------------------------------------------------------------------------------------------
+Version: 0.0.9
+Date: 2017-08-23
+  Bugfixes:
+    - fix chash when upgrading from an older version of the mod
+    - fix tech reset bug
+---------------------------------------------------------------------------------------------------
+Version: 0.0.8
+Date: 2017-08-17
+  Bugfixes:
+    - Fix label description in recipe gui
+  Changes: 
+    - Make static recipe gui
+    - Added option gui
+    - In the game, it is not possible to open the required technologies by calling 1 function, but I found a way to do this. This can work unstably, but I think that this is a very useful function. I put it in a separate category of settings because this function opens some of the achievement.
+---------------------------------------------------------------------------------------------------
+Version: 0.0.7
+Date: 2017-07-24
+  Changes:
+    - Global recipe gui changes
+    - Added russion locale file
+    - Disable hidden recipe
+---------------------------------------------------------------------------------------------------
+Version: 0.0.6
+Date: 2017-06-17
+  Bugfixes:
+    - fix problem with recipes having a percentage output
+  Changes:
+    - Center alignment for item names
+    - Added a restriction on the list of ingredients and products for small screen resolutions
+---------------------------------------------------------------------------------------------------
+Version: 0.0.5
+Date: 2017-06-24
+  Bugfixes:
+    - Fixed the error of the main window after loading saved game
+    - Fixed the error of the recipe window after loading saved game
+  Changes:
+    - Localisation of the recipe name in recipe gui
+    - Localisation of the item name in recipe gui
+    - Static gui width of the recipe
+---------------------------------------------------------------------------------------------------
+Version: 0.0.4
+Date: 2017-06-21
+  Bugfixes:
+    - fix crash when missing item flag when populating GUI
+---------------------------------------------------------------------------------------------------
+Version: 0.0.3
+Date: 2017-06-19
+  Changes:
+    - Resize tech icon in recipe gui
+    - Red light for disabled items
+    - Red light for disabled recipes
+    - Added sorting of unexamined recipes and refactoring gui
+    - Clear the right-click search box
+    - More loyal search
+---------------------------------------------------------------------------------------------------
+Version: 0.0.2
+Date: 2017-06-09
+  Changes:
+    - Add back button on recipe panel
+    - Relocate panel to player.gui.left
+    - Move paging from bottom to near top to avoid issues when panel resizes
+    - Ignore disposal or repackaging recipes
+    - Add locale file
+    - Removed the ability to add 2 identical recipes in a row
+    - Add recursive paging
+    - Add save previous recipe page
+---------------------------------------------------------------------------------------------------
+Version: 0.0.1
+Date: 2017-06-07
+  Changes:
+    - First version
