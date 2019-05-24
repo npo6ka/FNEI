@@ -37,50 +37,48 @@ end
 
 function HotbarGui.create_hotbar_element_button(prot, type)
   if prot and prot.recipe_name then
-    local recipe = get_all_recipes()[prot.recipe_name]
-    local tooltip = ""
-    local sprite = "recipe/" .. prot.recipe_name
 
-    if recipe then
+    if string.match(prot.recipe_name, 'impostor') then
+      local ps,pos = string.find(prot.recipe_name, "impostor[-]minable:")
+
+      if not pos then 
+        _,pos = string.find(prot.recipe_name, "impostor[-]pumped:")
+      end
+
+      local entity_name = string.sub(prot.recipe_name, (pos or -1) + 1) or ""
+
+      local tooltip
+
       if type == "favorite" then
-        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name, "\n", {"fnei.alt-to-remove"} }
+        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", game.entity_prototypes[entity_name].localised_name, "\n", {"fnei.alt-to-remove"} }
       else
-        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", recipe.localised_name }
+        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", game.entity_prototypes[entity_name].localised_name }
       end
 
-      if rawget(recipe, 'impostor') then
-        local ps,pos = string.find(prot.recipe_name, "impostor[-]minable:")
+      sprite = "entity/" .. entity_name
 
-        if not pos then 
-          _,pos = string.find(prot.recipe_name, "impostor[-]pumped:")
-        end
-
-        sprite = string.sub(prot.recipe_name, (pos or -1) + 1)
-        sprite = "entity/" .. sprite
-
-        return { 
-          type = "sprite-button",
-          name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-          style = "fnei_hotbar_block_button",
-          tooltip = tooltip,
-          sprite = sprite
-        }
-      end
-
-      return { 
-        type = "choose-elem-button",
+      return {
+        type = "sprite-button",
         name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-        style = "fnei_default_button",
-        elem_type = "recipe",
-        elem_value = prot.recipe_name,
-        locked = true
-        -- type = "sprite-button",
-        -- name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
-        -- style = "fnei_hotbar_block_button",
-        -- tooltip = tooltip,
-        -- sprite = sprite
+        style = "fnei_hotbar_block_button",
+        tooltip = tooltip,
+        sprite = sprite
       }
     end
+
+    return { 
+      type = "choose-elem-button",
+      name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+      style = "fnei_default_button",
+      elem_type = "recipe",
+      elem_value = prot.recipe_name,
+      locked = true
+      -- type = "sprite-button",
+      -- name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+      -- style = "fnei_hotbar_block_button",
+      -- tooltip = tooltip,
+      -- sprite = sprite
+    }
   end
 
   if type == "favorite" then
@@ -110,13 +108,12 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
       for j = 1, last_line_cnt do
         for i = 1, columns_number do
           local cur_indx = (j - 1) * columns_number + i
-          local last_prot = last_arr:get(cur_indx)
-          
-          table.insert(last_frame, HotbarGui.create_hotbar_element_button(last_prot, "last-usage"))
+
+          table.insert(last_frame, HotbarGui.create_hotbar_element_button(last_arr[cur_indx], "last-usage"))
         end
       end
 
-      table.insert(template, 
+      table.insert(template,
       { 
         type = "frame", name = "hotbar_last_frame", style = "fnei_hotbar_frame", direction = "vertical", children = {
           { type = "table", name = "hoticon-table", style = "fnei_hotbar_zero_spacing_table", column_count = 1, children = {
@@ -134,9 +131,8 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
       for j = 1, fav_line_cnt do
         for i = 1, columns_number do
           local cur_indx = (j - 1) * columns_number + i
-          local fav_prot = fav_arr:get(cur_indx)
-          
-          table.insert(fav_frame, HotbarGui.create_hotbar_element_button(fav_prot, "favorite"))
+        
+          table.insert(fav_frame, HotbarGui.create_hotbar_element_button(fav_arr[cur_indx], "favorite"))
         end
       end
 

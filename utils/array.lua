@@ -9,8 +9,8 @@ function Array:new( array_name )
 
   function obj:get_array( )
     local gl = Player.get_global()
-    if not gl["array_" .. self.name] then gl["array_" .. self.name] = {} end
-    return gl["array_" .. self.name]
+    if not gl["a" .. self.name] then gl["a" .. self.name] = {} end
+    return gl["a" .. self.name]
   end
 
   function obj:size( )
@@ -49,7 +49,7 @@ function Array:new( array_name )
   end
 
   function obj:clear( )
-    Player.get_global()["array_" .. self.name] = {}
+    Player.get_global()["a" .. self.name] = {}
   end
 
   function obj:remove( pos )
@@ -113,8 +113,7 @@ function Array:new( array_name )
 
   function obj:get( pos )
     if pos and obj:size() >= pos then
-      local array = obj:get_array()
-      return array[pos]
+      return obj:get_array()[pos]
     end
   end
 

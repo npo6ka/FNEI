@@ -40,7 +40,7 @@ function HotbarController.open()
     Controller.set_cur_con_name("hotbar")
 
     local ret_gui = HotbarGui.open_window()
-    HotbarGui.draw_hotbar_bar_extension(HotbarController.get_last_usage_list(), favorite)
+    HotbarGui.draw_hotbar_bar_extension(HotbarController.get_last_usage_list(), favorite:get_array())
     
     Controller.remove_last_con_name()
 
@@ -122,7 +122,7 @@ function HotbarController.get_last_usage_list()
     end
   end
 
-  return last_tmp
+  return last_tmp:get_array()
 end
 
 function HotbarController.remove_same_recipe_without_first(in_array)
