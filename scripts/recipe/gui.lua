@@ -249,14 +249,24 @@ function RecipeGui.set_made_in_list(recipe)
                   }
       elseif cat.type == "building" and cat.ingredient_count and Settings.get_val("show-recipes", "buildings", cat.val.name) then
         local ing_cnt = 0
+        local in_fluidbox_cnt = 0
+        local out_fluidbox_cnt = 0
 
         for _,prot in pairs(recipe.ingredients) do
           if prot.type == "item" then
             ing_cnt = ing_cnt + 1
+          elseif prot.type == "fluid" then
+            in_fluidbox_cnt = in_fluidbox_cnt + 1
           end
         end
 
-        if cat.ingredient_count >= ing_cnt then
+        for _,prot in pairs(recipe.products) do
+          if prot.type == "fluid" then
+            out_fluidbox_cnt = out_fluidbox_cnt + 1
+          end
+        end
+
+        if cat.ingredient_count >= ing_cnt and in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
           local entity = item_list[cat.val.name].place_result
 
           if caption and entity and entity.crafting_speed ~= nil then

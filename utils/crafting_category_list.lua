@@ -59,9 +59,25 @@ function CraftCategoty:create_crafting_category_list()
     local entity = item.place_result
 
     if entity then
+      local in_fluidbox = 0
+      local out_fluidbox = 0
+
+      if entity.fluidbox_prototypes then
+        for _,fb in pairs(entity.fluidbox_prototypes) do
+          if fb.production_type == "input" then
+            in_fluidbox = in_fluidbox + 1
+          elseif fb.production_type == "output" then
+            out_fluidbox = out_fluidbox + 1
+          elseif fb.production_type == "input-output" then
+            in_fluidbox = in_fluidbox + 1
+            out_fluidbox = out_fluidbox + 1
+          end
+        end
+      end
+
       -- A building might be able to craft items in a category
       for category, _ in pairs(entity.crafting_categories or {}) do
-        add_category_entry(category, { type = "building", val = item, ingredient_count = entity.ingredient_count })
+        add_category_entry(category, { type = "building", val = item, ingredient_count = entity.ingredient_count, ifbox = in_fluidbox, ofbox = out_fluidbox })
       end
 
       -- A building may be used to mine a certain item
