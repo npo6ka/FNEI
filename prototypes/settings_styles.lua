@@ -24,7 +24,6 @@ data.raw["gui-style"].default["fnei_settings_genetal-flow"] =
   type = "horizontal_flow_style",
   minimal_width = 536,
   maximal_width = 536,
-  minimal_height = 710,
   maximal_height = 710,
   scalable = false,
 }

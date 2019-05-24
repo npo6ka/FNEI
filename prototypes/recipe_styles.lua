@@ -97,7 +97,6 @@ data.raw["gui-style"].default["fnei_recipe_flow"] =
   type = "horizontal_flow_style",
   minimal_width = 526,
   maximal_width = 526,
-  minimal_height = 710,
   maximal_height = 710,
   scalable = false,
 }
