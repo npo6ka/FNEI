@@ -24,6 +24,7 @@ require "utils/list"
 require "utils/array"
 require "utils/open_tech_hook"
 require "scripts/events"
+require "scripts/remote"
 
 require "scripts/controller"
 
@@ -33,3 +34,4 @@ require "scripts/settings/settings"
 
 Settings.init()
 Events:init()
+Remote:init()
