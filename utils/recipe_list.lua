@@ -4,8 +4,6 @@ local Recipe = {
   classname = "FNRecipe"
 }
 
-local aRecipe
-
 function Recipe:get_recipe_list()
   Debug:debug(Recipe.classname, "get_recipe_list( )")
 
@@ -23,11 +21,7 @@ end
 function Recipe:get_aRecipe_list()
   Debug:debug(Recipe.classname, "get_aRecipe_list( )")
 
-  if not aRecipe then
-    aRecipe = self:create_attainable_recipes()
-  end
-
-  return aRecipe
+  return self:create_attainable_recipes()
 end
 
 --return a list of technologies that can open this recipe_name or {}
