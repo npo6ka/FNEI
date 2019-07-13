@@ -237,7 +237,6 @@ function Gui.add_label(parent, gui_elem)
   local gui = parent.add(gui_elem)
 
   gui.style.single_line = gui_elem.single_line or false
-  if gui_elem.want_ellipsis ~= nil then gui.style.want_ellipsis = gui_elem.want_ellipsis end
   if gui_elem.vertical_align ~= nil then gui.style.vertical_align = gui_elem.vertical_align end
   if gui_elem.align ~= nil then gui.style.horizontal_align = gui_elem.align end
 
