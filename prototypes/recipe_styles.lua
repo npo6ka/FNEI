@@ -9,7 +9,6 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     font = "font-mb",
     height = 36,
     width = 311,
-    want_ellipsis = true,
     font_color = { r=0, g=0.9, b=0 },
     scalable = false,
 }

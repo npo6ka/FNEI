@@ -18,7 +18,7 @@ function RecipeGui.init_template()
           { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
             { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 6, children = {
               { type = "flow", name = "header-icon", style = "fnei_default_horizontal_flow" },
-              { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", want_ellipsis = true, caption = "recipe_name" },
+              { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", caption = "recipe_name" },
               { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = { 
                 { type = "sprite-button", name = "favorite-key", tooltip = {"fnei.favorite-button"}, event = cont.favorite_key_event },
               }},
@@ -309,7 +309,6 @@ function RecipeGui.set_made_in_list(recipe)
             style = "fnei_recipe_craft_time_for_building_label", 
             vertical_align = "top", 
             align = "center", 
-            want_ellipsis = true, 
             caption = caption,
             tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption} 
           }
