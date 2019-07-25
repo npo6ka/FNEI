@@ -24,7 +24,7 @@ Date: 2019-03-20
 Version: 0.2.2
 Date: 2019-03-17
   Bugfixes:
-    - Fix error LuaRecipe doesn't contain key mining_time."
+    - Fix error LuaRecipe doesn't contain key mining_time.
     - Fix research queue bags
     - Fix don't showing long names
     - Fix handcraft speed

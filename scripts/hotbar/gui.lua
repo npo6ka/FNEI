@@ -103,7 +103,7 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
   if Settings.get_val("show-extended-hotbar") then
     if last_line_cnt > 0 then
       local last_frame = {}
-      local last_label = { type = "label", name = "last-usage-button", style = "fnei_hotbar_label", want_ellipsis = true, single_line = true, caption = {"fnei.last_button"} }
+      local last_label = { type = "label", name = "last-usage-button", style = "fnei_hotbar_label", single_line = true, caption = {"fnei.last_button"} }
     
       for j = 1, last_line_cnt do
         for i = 1, columns_number do
@@ -126,7 +126,7 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
 
     if fav_line_cnt > 0 then
       local fav_frame = {}
-      local fav_label = { type = "label", name = "favorite-button", style = "fnei_hotbar_label", want_ellipsis = true, single_line = true, caption = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}} }
+      local fav_label = { type = "label", name = "favorite-button", style = "fnei_hotbar_label", single_line = true, caption = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}} }
 
       for j = 1, fav_line_cnt do
         for i = 1, columns_number do
