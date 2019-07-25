@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.2.6
+Date: 2019-07-25
+  Bugfixes:
+    - Remove want_ellipsis options
+  Changes:
+    - Add basic remote interface
+---------------------------------------------------------------------------------------------------
 Version: 0.2.5
 Date: 2019-05-25
   Bugfixes:
@@ -171,7 +178,7 @@ Version: 0.0.8
 Date: 2017-08-17
   Bugfixes:
     - Fix label description in recipe gui
-  Changes: 
+  Changes:
     - Make static recipe gui
     - Added option gui
     - In the game, it is not possible to open the required technologies by calling 1 function, but I found a way to do this. This can work unstably, but I think that this is a very useful function. I put it in a separate category of settings because this function opens some of the achievement.
