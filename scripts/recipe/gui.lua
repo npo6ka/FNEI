@@ -417,37 +417,54 @@ function RecipeGui.get_element_caption(element)
     prot = game.entity_prototypes[element.name]
   end
 
-  local ret_val
+  local loc_str = nil
+  local prob = element.probability
+  local amnt = element.amount
 
-  if element.amount then
-    ret_val = {"fnei.recipe-amnt", element.amount, get_localised_name(prot) }
+-- get amoutn for product
+
+  if amnt ~= nil then
+      loc_str = element.amount
   else
     local min = element.amount_min or 0
     local max = element.amount_max or 0
-    local prob = element.probability or 0
 
-    if not Settings.get_val("detail-chance") then
-      ret_val = {"fnei.recipe-amnt", round((min + max) / 2 * prob, 3), get_localised_name(prot)}
+    if not Settings.get_val("detail-chance") and prob ~= nil then
+      loc_str = round((min + max) / 2 * prob, 3)
     else
-      if min ~= max then
-        ret_val = {"fnei.recipe-amnt-range", min, max}
+      if min == max then
+          loc_str = max
       else
-        ret_val = max
-      end
-
-      if prob == 1 then
-        ret_val = {"fnei.recipe-amnt", ret_val, get_localised_name(prot)}
-      else
-        ret_val = {"fnei.recipe-amnt-prob", {"fnei.recipe-amnt", ret_val, round(prob * 100, 3)}, get_localised_name(prot)}
+        loc_str = {"", "[" ..  min .. " - " .. max .. "]"}
       end
     end
   end
 
-  if element.type == "fluid" and element.temperature and Settings.get_val("show-temperature-of-fluids") then
-    ret_val = {"", ret_val, " (" .. element.temperature .. "°)"}
+-- if not single output then add " × "
+
+  if loc_str ~= 1 or prob == nil or prob == 1 then
+    loc_str = {"", loc_str, " × "}
+  else
+    loc_str = ""
   end
 
-  return ret_val
+-- add probability for product if exists
+
+  if prob ~= nil and prob ~= 1 then
+    loc_str = {"", loc_str, "" .. round(prob * 100, 3) .. "% "}
+  end
+
+-- add localised name
+
+  loc_str = {"", loc_str, get_localised_name(prot)}
+
+-- add temperature for fluid
+
+  if element.type == "fluid" and element.temperature and Settings.get_val("show-temperature-of-fluids") then
+    loc_str = {"", loc_str, " (" .. element.temperature .. "°)"}
+  end
+
+  return loc_str
 end
 
 function RecipeGui.draw_paging(page)
