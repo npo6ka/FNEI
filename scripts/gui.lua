@@ -10,12 +10,15 @@ function Gui.get_prefix()
 end
 
 function Gui.create_gui_name(contr_name, gui_name)
-  if type(contr_name) == "string" and type(gui_name) == "string" then
-    return mod_prefix .. '_' .. contr_name .. '_' .. gui_name
-  else
-     Debug:error("FNGui", "Error in function Gui.create_gui_name: type ~= string: ", contr_name, gui_name)
-    return nil
+  if type(gui_name) == "string" then
+    if type(contr_name) == "string" then
+      return mod_prefix .. '_' .. contr_name .. '_' .. gui_name
+    else
+      Debug:error(Gui.classname, "Error in function Gui.create_gui_name: contr_name is nil (", contr_name, ")")
+    end
   end
+
+  return nil
 end
 
 --check old fnei gui and close them
@@ -73,7 +76,7 @@ function Gui.set_style_field(parent, gui_name, args)
       style[name] = val
     end
   else
-    Debug:error("FNGui", "Gui.set_style_field: gui not found parent:", (parent or {}).name, gui_name)
+    Debug:error(Gui.classname, "Gui.set_style_field: gui not found parent:", (parent or {}).name, gui_name)
   end
 end
 
@@ -87,7 +90,7 @@ function Gui.get_pos()
   elseif pos == 3 then
     return Player.get().gui.center
   else
-    Debug:error("utils: get_gui: invalid direction: ", pos)
+    Debug:error(Gui.classname, "utils: get_gui: invalid direction: ", pos)
   end
 end
 
@@ -117,11 +120,11 @@ function Gui.get_gui_proc(parent, name)
         return g
       end
       result = Gui.get_gui_proc(g, name)
-      if result then 
-        return result 
+      if result then
+        return result
       end
     else
-      Debug:error("not valid element: ", g.name)
+      Debug:error(Gui.classname, "not valid element: ", g.name)
     end
   end
   return result
@@ -145,11 +148,13 @@ function Gui.init_function()
   gui_function["textfield"] = Gui.add_textfield
   gui_function["scroll-pane"] = Gui.add_scroll_pane
   gui_function["choose-elem-button"] = Gui.add_choose_button
+  gui_function["tabbed-pane"] = Gui.add_tabbed_pane
+  gui_function["tab"] = Gui.add_tab
 end
 
 function Gui.add_gui_template(parent, gui_temp)
   if parent == nil then
-    Debug:error("Error in function Gui.add_template: parent == nil: gui_temp =", gui_temp)
+    Debug:error(Gui.classname, "Error in function Gui.add_template: parent == nil: gui_temp =", gui_temp)
     return
   end
   if gui_temp then
@@ -157,7 +162,7 @@ function Gui.add_gui_template(parent, gui_temp)
     for _,gui_templ in pairs(gui_temp) do
       local gui_elem = {}
       for type, gui_field in pairs(gui_templ) do
-        if type ~= "children" and  type ~= "event" then
+        if type ~= "children" and type ~= "event" then
           gui_elem[type] = gui_field
         end
       end
@@ -166,13 +171,14 @@ function Gui.add_gui_template(parent, gui_temp)
         gui = gui_function[gui_templ.type](parent, gui_elem)
 
         if gui == nil then
-          Debug:error("Error in function Gui.add_template: error created gui: ", gui_templ.type, "name:", gui_templ.name)
+          Debug:error(Gui.classname, "Error in function Gui.add_template: error created gui: ", gui_templ.type, "name:", gui_templ.name)
+            out(gui_temp)
         end
       else
-        Debug:error("Error in function Gui.add_template: unknow gui_type: ", gui_temp.type)
+        Debug:error(Gui.classname, "Error in function Gui.add_template: unknow gui_type: ", gui_templ.type)
       end
 
-      Gui.add_gui_template(gui, gui_templ.children)    
+      Gui.add_gui_template(gui, gui_templ.children)
     end
     return gui
   end
@@ -182,7 +188,7 @@ function Gui.set_def_fields(parent, gui_elem)
   local cont_name = Controller.get_cur_con_name()
   local gui_name = Gui.create_gui_name(cont_name, gui_elem.name)
 
-  if parent[gui_name] then
+  if gui_name and parent[gui_name] then
     local cnt = 1
     while parent[gui_name .. cnt] ~= nil do
       cnt = cnt + 1
@@ -198,6 +204,43 @@ function Gui.set_def_fields(parent, gui_elem)
   end
   
   return gui_elem
+end
+
+function Gui.add_tab(parent, gui_elem)
+  return parent.add(Gui.set_def_fields(parent, gui_elem))
+end
+
+function Gui.add_tabbed_pane(parent, gui_elem)
+  local tabs = gui_elem.tabs
+  gui_elem.tabs = nil
+
+  Gui.set_def_fields(parent, gui_elem)
+  local pane = parent.add(gui_elem)
+
+  for _,tab in pairs(tabs) do
+    local tab_elm = tab[1]
+    local content = tab[2]
+
+    if tab_elm == nil or tab_elm.type ~= "tab" then
+      Debug:error(Gui.classname, "Error in function Gui.add_tabbed_pane: the first element in \"tabbed_pane\" does not have a \"tab\" type: ", tab_elm and tab_elm.type)
+      return pane
+    end
+
+    if content == nil then
+      Debug:error(Gui.classname, "Error in function Gui.add_tabbed_pane: content is nil")
+      return pane
+    end
+
+    if tab[3] ~= nil then
+      Debug:error(Gui.classname, "Error in function Gui.add_tabbed_pane: unnecessary elements in the tab after content:", tab[1].caption)
+    end
+
+    tab_elm = Gui.add_gui_template(pane, {tab_elm})
+    content = Gui.add_gui_template(pane, {content})
+    pane.add_tab(tab_elm, content)
+  end
+
+  return pane
 end
 
 function Gui.add_sprite_button(parent, gui_elem)
@@ -280,10 +323,10 @@ function Gui.set_choose_but_val(button, val)
     elseif button.elem_type == "entity" then
       button.elem_value = check_val(val, game.entity_prototypes, "entity")
     else 
-      Debug:error("Gui.set_choose_but_val: unknown choose-button type")
+      Debug:error(Gui.classname, "Gui.set_choose_but_val: unknown choose-button type")
     end
   else
-    Debug:error("Gui.set_choose_but_val: gui_elem == nil")
+    Debug:error(Gui.classname, "Gui.set_choose_but_val: gui_elem == nil")
   end
 end
 

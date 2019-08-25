@@ -65,7 +65,7 @@ function Events.on_gui_closed(event)
 end
 
 function Events.on_player_left_game(event)
-  out("left", event)
+
 end
 
 function Events.on_event_invoke(event)
