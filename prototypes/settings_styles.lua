@@ -323,7 +323,7 @@ data.raw["gui-style"].default["fnei_settings_up_arrow"] =
 
   default_graphical_set = {
     border = 1,
-    filename = "__core__/graphics/switch-quickbar.png",
+    filename = "__FNEI__/graphics/switch-quickbar.png",
     height = 12,
     priority = "extra-high-no-scale",
     width = 24,
@@ -332,7 +332,7 @@ data.raw["gui-style"].default["fnei_settings_up_arrow"] =
   },
   hovered_graphical_set = {
     border = 1,
-    filename = "__core__/graphics/switch-quickbar.png",
+    filename = "__FNEI__/graphics/switch-quickbar.png",
     height = 12,
     priority = "extra-high-no-scale",
     width = 24,
@@ -351,7 +351,7 @@ data.raw["gui-style"].default["fnei_settings_down_arrow"] =
 
   default_graphical_set = {
     border = 1,
-    filename = "__core__/graphics/switch-quickbar.png",
+    filename = "__FNEI__/graphics/switch-quickbar.png",
     height = 12,
     priority = "extra-high-no-scale",
     width = 24,
@@ -360,7 +360,7 @@ data.raw["gui-style"].default["fnei_settings_down_arrow"] =
   },
   hovered_graphical_set = {
     border = 1,
-    filename = "__core__/graphics/switch-quickbar.png",
+    filename = "__FNEI__/graphics/switch-quickbar.png",
     height = 12,
     priority = "extra-high-no-scale",
     width = 24,
