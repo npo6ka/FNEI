@@ -10,7 +10,7 @@ data:extend({
     type = "custom-input",
     name = "pressed-fnei-gui-key",
     key_sequence = "CONTROL + E",
-    consuming = "script-only"
+    consuming = "none"
   }
 })
 
@@ -19,6 +19,6 @@ data:extend({
     type = "custom-input",
     name = "pressed-fnei-back-key",
     key_sequence = "BACKSPACE",
-    consuming = "script-only"
+    consuming = "none"
   }
 })
