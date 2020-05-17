@@ -308,7 +308,7 @@ function Gui.set_choose_but_val(button, val)
     if val and list[val] then
       return val
     else
-      Debug:info(Gui.classname, "Gui.set_choose_but_val: ", debug_text, val, "not found")
+      Debug:debug(Gui.classname, "Gui.set_choose_but_val: ", debug_text, val, "not found")
       return nil
     end
   end
