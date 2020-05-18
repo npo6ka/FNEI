@@ -14,29 +14,29 @@ local tab_flow_name = "main-tabs"
 
 function MainGui.init_template()
   main_gui_template = {
-    { type = "flow", name = "main-flow", style = "fnei_main_general-flow", children = {
-      { type = "frame", name = "main-frame", style = "fnei_main_frame", children = {
-        { type = "table", name = "main-table", style = "fnei_main_table", column_count = 1, children = {
+    { type = "frame", name = "main-frame", style = "fnei_main_frame", children = {
+      { type = "table", name = "main-table", style = "fnei_main_table", column_count = 1, children = {
 
-  ------------------ header ------------------
+------------------ header ------------------
 
-          { type = "frame", name = "header-frame", style = "fnei_main_content-frame", direction = "horizontal", children = {
-            { type = "table", name = "header-table", style = "fnei_main_header-table", column_count = 4, children = {
-              { type = "label", name = "header-label", style = "fnei_main_header-label", caption = {"fnei.FNEI"} },
-              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = MainGui.settings_key_event },
-              { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
-            }}
-          }},
+        { type = "frame", name = "header-frame", style = "fnei_main_content-frame", direction = "horizontal", children = {
+          { type = "table", name = "header-table", style = "fnei_main_header-table", column_count = 5, children = {
+            { type = "label", name = "header-label", style = "fnei_main_header-label", caption = {"fnei.FNEI"} },
+            { type = "empty-widget", name = "widget-sprite" , style = "fnei_main_header-sprite-widget", caption = {"fnei.FNEI"} },
+            { type = "empty-widget", name = "drag-widget", style = "fnei_main_header-drag-widget", caption = {"fnei.FNEI"}, drag_target = true},
+            { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = MainGui.settings_key_event },
+            { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
+          }}
+        }},
 
-  ------------------ tabs ------------------
+------------------ tabs ------------------
 
-          { type = "flow", name = tab_flow_name },
+        { type = "flow", name = tab_flow_name },
 
-  ------------------ content -------------------
+------------------ content -------------------
 
-          { type = "flow", name = content_flow_name },
+        { type = "flow", name = content_flow_name },
 
-        }}
       }}
     }}
   }
@@ -73,7 +73,10 @@ end
 
 function MainGui.close_window()
   if MainGui.is_gui_open() then
-    Gui.get_gui(Gui.get_pos(), main_gui_template[1].name).destroy()
+    local gui = Gui.get_gui(Gui.get_pos(), main_gui_template[1].name)
+    local loc = gui.location
+    gui.destroy()
+    return loc
   end
 end
 
@@ -81,9 +84,11 @@ function MainGui.draw_tabs(tabs)
   tabs:draw_tabs()
 end
 
-function MainGui.open_window()
-  MainGui.close_window()
-  return Gui.add_gui_template(Gui.get_pos(), main_gui_template)
+function MainGui.open_window(loc)
+  loc = MainGui.close_window() or loc
+  gui = Gui.add_gui_template(Gui.get_pos(), main_gui_template)
+  gui.location = loc
+  return gui
 end
 
 function MainGui.draw_search_tab(cur_tab)

@@ -1,14 +1,6 @@
 
 -------------------------flow_style--------------------------
 
-data.raw["gui-style"].default["fnei_main_general-flow"] =
-{
-  type = "horizontal_flow_style",
-  width = 526,
-  maximal_height = 710,
-  scalable = false,
-}
-
 data.raw["gui-style"].default["fnei_main_content_flow"] =
 {
   type = "horizontal_flow_style",
@@ -100,7 +92,8 @@ data.raw["gui-style"].default["fnei_main_header-label"] =
 {
   type = "label_style",
   font = "font-lb",
-  width = 380,
+  font_color = {r = 255, g = 230, b = 192},
+  width = 50,
   horizontal_align = "center",
   scalable = false,
 }
@@ -201,5 +194,25 @@ data.raw["gui-style"].default["fnei_main_default_button"] =
   width = 130,
   top_padding = 0,
   font = "font-mb",
+  scalable = false,
+}
+
+------------------------empty_widget_style-------------------------
+
+data.raw["gui-style"].default["fnei_main_header-drag-widget"] =
+{
+  type = "empty_widget_style",
+  height = 36,
+  width = 380,
+  left_margin = -380,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_main_header-sprite-widget"] =
+{
+  type = "empty_widget_style",
+  parent = "draggable_space",
+  height = 36,
+  width = 310,
   scalable = false,
 }

@@ -9,71 +9,71 @@ function RecipeGui.init_template()
   local cont = Controller.get_cont(RecipeGui.name)
 
   recipe_gui_template = {
-    { type = "flow", name = "main-flow", style = "fnei_recipe_flow", children = {
-      { type = "frame", name = "main-frame", style = "fnei_recipe_main_frame", children = {
-        { type = "table", name = "main-table", style = "fnei_recipe_main_table", column_count = 1, children = {
+    { type = "frame", name = "main-frame", style = "fnei_recipe_main_frame", children = {
+      { type = "table", name = "main-table", style = "fnei_recipe_main_table", column_count = 1, children = {
 
 ------------------ header ------------------
 
-          { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
-            { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 6, children = {
-              { type = "flow", name = "header-icon", style = "fnei_default_horizontal_flow" },
-              { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", caption = "recipe_name" },
-              { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = { 
-                { type = "sprite-button", name = "favorite-key", tooltip = {"fnei.favorite-button"}, event = cont.favorite_key_event },
-              }},
-              { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
-              { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = cont.settings_key_event },
-              { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
-            }}
-          }},
+        { type = "frame", name = "header-frame", style = "fnei_recipe_header_frame", direction = "horizontal", children = {
+          { type = "table", name = "header-table", style = "fnei_recipe_header_table", column_count = 8, children = {
+            { type = "flow", name = "header-icon", style = "fnei_default_horizontal_flow" },
+            { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", caption = "recipe_name" },
+            --{ type = "empty-widget", name = "" , style = "fnei_main_header-sprite-widget", caption = {"fnei.FNEI"} },
+            { type = "empty-widget", name = "drag-widget", style = "fnei_recipe_header-drag-widget", drag_target = true},
+            { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = { 
+              { type = "sprite-button", name = "favorite-key", tooltip = {"fnei.favorite-button"}, event = cont.favorite_key_event },
+            }},
+            { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
+            { type = "sprite-button", name = "settings-key", style = "fnei_settings_button_style", tooltip = {"gui-menu.settings"}, event = cont.settings_key_event },
+            { type = "sprite-button", name = "exit-key", style = "fnei_exit_button_style", tooltip = {"gui.exit"}, event = Controller.main_key_event },
+          }}
+        }},
 
 ------------------ paging ------------------
 
-          { type = "frame", name = "paging-frame", style = "fnei_recipe_paging_frame", children = {
-            { type = "table", name = "paging-table", style = "fnei_recipe_paging_table", column_count = 5, children = {
-              { type = "flow", name = "left-arrow-flow", style = "fnei_recipe_arrow_flow" },
-              { type = "label", name = "type-label", style = "fnei_recipe_type_label", vertical_align = "center", align = "right", caption = "" },
-              { type = "flow", name = "prot-icon", style = "fnei_recipe_header_icon_flow" },
-              { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", vertical_align = "center", align = "left", caption = "" },
-              { type = "flow", name = "right-arrow-flow", style = "fnei_recipe_arrow_flow" },
-            }},
+        { type = "frame", name = "paging-frame", style = "fnei_recipe_paging_frame", children = {
+          { type = "table", name = "paging-table", style = "fnei_recipe_paging_table", column_count = 5, children = {
+            { type = "flow", name = "left-arrow-flow", style = "fnei_recipe_arrow_flow" },
+            { type = "label", name = "type-label", style = "fnei_recipe_type_label", vertical_align = "center", align = "right", caption = "" },
+            { type = "flow", name = "prot-icon", style = "fnei_recipe_header_icon_flow" },
+            { type = "label", name = "paging-label", style = "fnei_recipe_paging_label", vertical_align = "center", align = "left", caption = "" },
+            { type = "flow", name = "right-arrow-flow", style = "fnei_recipe_arrow_flow" },
           }},
+        }},
 
 ------------------ content ------------------
-        
-          { type = "table", name = "prod-table", style = "fnei_recipe_products_table", column_count = 2, children = {
-            { type = "frame", name = "ingr-frame", style = "fnei_recipe_ingr_frame", children = {
-              { type = "label", name = "ingr-label", style = "fnei_default_label", caption = {"fnei.ingredients"} },
-            }},
-            { type = "frame", name = "res-frame", style = "fnei_recipe_res_frame", children = {
-              { type = "label", name = "res-label", style = "fnei_default_label", caption = {"fnei.results"} },
-            }},
-            { type = "frame", name = "list-ingr-frame", style = "fnei_recipe_list_ingr_frame", children = {
-              { type = "scroll-pane", name = "ingr-scroll", style = "fnei_recipe_products_scroll_pane", direction = "vertical", children = {
-                { type = "table", name = "list-ingr", style = "fnei_recipe_list_elements_table", column_count = 1 }
-              }}
-            }},
-            { type = "frame", name = "list-res-frame", style = "fnei_recipe_list_res_frame", children = {
-              { type = "scroll-pane", name = "res-scroll", style = "fnei_recipe_products_scroll_pane", direction = "vertical", children = {
-                { type = "table", name = "list-res", style = "fnei_recipe_list_elements_table", column_count = 1 }
-              }}
-            }},
+      
+        { type = "table", name = "prod-table", style = "fnei_recipe_products_table", column_count = 2, children = {
+          { type = "frame", name = "ingr-frame", style = "fnei_recipe_ingr_frame", children = {
+            { type = "label", name = "ingr-label", style = "fnei_default_label", caption = {"fnei.ingredients"} },
           }},
+          { type = "frame", name = "res-frame", style = "fnei_recipe_res_frame", children = {
+            { type = "label", name = "res-label", style = "fnei_default_label", caption = {"fnei.results"} },
+          }},
+          { type = "frame", name = "list-ingr-frame", style = "fnei_recipe_list_ingr_frame", children = {
+            { type = "scroll-pane", name = "ingr-scroll", style = "fnei_recipe_products_scroll_pane", direction = "vertical", children = {
+              { type = "table", name = "list-ingr", style = "fnei_recipe_list_elements_table", column_count = 1 }
+            }}
+          }},
+          { type = "frame", name = "list-res-frame", style = "fnei_recipe_list_res_frame", children = {
+            { type = "scroll-pane", name = "res-scroll", style = "fnei_recipe_products_scroll_pane", direction = "vertical", children = {
+              { type = "table", name = "list-res", style = "fnei_recipe_list_elements_table", column_count = 1 }
+            }}
+          }},
+        }},
 
 ------------------- madein --------------------
 
-          { type = "frame", name = "madein-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
-            { type = "label", name = "madein-lable", style = "fnei_recipe_madein_label", caption = {"fnei.made-in"} },
-            { type = "table", name = "madein-table", style = "fnei_recipe_made_in_table", column_count = 7 }
-          }},
+        { type = "frame", name = "madein-frame", style = "fnei_recipe_paging_frame", direction = "horizontal", children = {
+          { type = "label", name = "madein-lable", style = "fnei_recipe_madein_label", caption = {"fnei.made-in"} },
+          { type = "table", name = "madein-table", style = "fnei_recipe_made_in_table", column_count = 7 }
+        }},
 
 ------------------- techs --------------------
 
-          { type = "flow", name = "tech-flow", style = "fnei_default_horizontal_flow" },
+        { type = "flow", name = "tech-flow", style = "fnei_default_horizontal_flow" },
 
-        }}  
-      }}
+      }}  
     }}
   }
 end
@@ -93,15 +93,19 @@ function RecipeGui.is_gui_open()
   end
 end
 
-function RecipeGui.open_window()
-  RecipeGui.close_window()
-
-  return Gui.add_gui_template(Gui.get_pos(), recipe_gui_template)
+function RecipeGui.open_window(loc)
+  loc = RecipeGui.close_window() or loc
+  local gui = Gui.add_gui_template(Gui.get_pos(), recipe_gui_template)
+  gui.location = loc
+  return gui
 end
 
 function RecipeGui.close_window()
   if RecipeGui.is_gui_open() then
-    Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name).destroy()
+    local gui = Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name)
+    local loc = gui.location 
+    gui.destroy()
+    return loc
   end
 end
 

@@ -12,7 +12,7 @@ function out(...)
 end
 
 -------------- include other libs ---------------
-require("mod-gui")
+require "mod-gui"
 
 -------------- include Default FNEI Libs ---------------
 require "utils/data_wrapper"

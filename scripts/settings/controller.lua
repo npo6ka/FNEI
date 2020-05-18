@@ -7,13 +7,13 @@ local tabs = "sett-tabs"
 
 function SettingsController.exit()
   out("settings exit")
-  SettingsGui.close_window()
+  Player.get_global()["gui_loc"] = SettingsGui.close_window()
 end
 
 function SettingsController.open()
   out("settings open")
 
-  local ret_gui = SettingsGui.open_window()
+  local ret_gui = SettingsGui.open_window(Player.get_global()["gui_loc"])
   SettingsGui.draw_tabs(tabs)
   SettingsController.draw_settings()
 
@@ -64,15 +64,6 @@ end
 
 function SettingsController.is_gui_open()
   return SettingsGui.is_gui_open()
-end
-
-function SettingsController.new_gui_location(event, sett_name)
-  if not event.button then
-    local index = event.element.selected_index
-    Controller.close_event()
-    Settings.set_val(sett_name, index)
-    Controller.open_event("settings")
-  end
 end
 
 function SettingsController.check_admin_settings_event(event, sett_name)

@@ -19,15 +19,6 @@ data.raw["gui-style"].default["fnei_settings_wrong_numeric-text-field"] =
 
 -------------------------flow_style--------------------------
 
-data.raw["gui-style"].default["fnei_settings_genetal-flow"] =
-{
-  type = "horizontal_flow_style",
-  minimal_width = 536,
-  maximal_width = 536,
-  maximal_height = 710,
-  scalable = false,
-}
-
 data.raw["gui-style"].default["fnei_settings_tab-flow"] =
 {
   type = "horizontal_flow_style",
@@ -375,7 +366,8 @@ data.raw["gui-style"].default["fnei_settings_header-label"] =
 {
   type = "label_style",
   font = "font-lb",
-  width = 432,
+  font_color = {r = 255, g = 230, b = 192},
+  width = 70,
   horizontal_align = "center",
   scalable = false,
 }
@@ -404,5 +396,25 @@ data.raw["gui-style"].default["fnei_settings_warning-text"] =
   type = "label_style",
   width = 100,
   font_color = { b = 0, g = 0.2, r = 1 },
+  scalable = false,
+}
+
+------------------------empty_widget_style-------------------------
+
+data.raw["gui-style"].default["fnei_settings_header-drag-widget"] =
+{
+  type = "empty_widget_style",
+  height = 36,
+  width = 440,
+  left_margin = -440,
+  scalable = false,
+}
+
+data.raw["gui-style"].default["fnei_settings_header-sprite-widget"] =
+{
+  type = "empty_widget_style",
+  parent = "draggable_space",
+  height = 36,
+  width = 344,
   scalable = false,
 }
