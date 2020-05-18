@@ -17,14 +17,13 @@ end
 
 function RecipeController.exit()
   out("Recipe exit")
-  RecipeGui.close_window()
+  Player.get_global()["gui_loc"] = RecipeGui.close_window()
 end
 
 function RecipeController.open()
   out("Recipe open")
 
-  local gui = RecipeGui.open_window()
-
+  local gui = RecipeGui.open_window(Player.get_global()["gui_loc"])
   RecipeController.open_new_recipes()
 
   return gui

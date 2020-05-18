@@ -5,14 +5,14 @@ if not global.fnei then global.fnei = {} end
 require "core/Class"
 
 -------------- include Debug libs ----------------
-require "core/Debug"
+Debug = require "core/Debug"
 function out(...)
   local arg = {...}
-  Debug:info("debug.info", unpack(arg))
+  Debug:debug("debug.info", unpack(arg))
 end
 
 -------------- include other libs ---------------
-require("mod-gui")
+require "mod-gui"
 
 -------------- include Default FNEI Libs ---------------
 require "utils/data_wrapper"

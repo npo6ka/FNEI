@@ -12,7 +12,6 @@ function Settings.init()
   settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-disable-recipes"] =         { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-items"] =            { type = "checkbox", tab = "main-settings", def_val = false }
-  settings_list["position"] =                     { type = "drop-down", tab = "main-settings", def_val = 1, items = {{"fnei.left"}, {"fnei.top"}, {"fnei.center"}}, def_event = false, event = Controller.get_cont("settings").new_gui_location }
   settings_list["fnei-line-count"] =              { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 5, max_val = 12 }
   settings_list["detail-chance"] =                { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["focus-search"] =                 { type = "checkbox", tab = "main-settings", def_val = false }

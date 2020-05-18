@@ -91,15 +91,6 @@ data.raw["gui-style"].default["fnei_recipe_craft_time_for_building_label"] =
 
 -------------------------flow_style--------------------------
 
-data.raw["gui-style"].default["fnei_recipe_flow"] =
-{
-  type = "horizontal_flow_style",
-  minimal_width = 526,
-  maximal_width = 526,
-  maximal_height = 710,
-  scalable = false,
-}
-
 data.raw["gui-style"].default["fnei_recipe_favorite_flow"] =
 {
   type = "horizontal_flow_style",
@@ -428,3 +419,23 @@ data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] =
     width = 64,
   }
 }
+
+------------------------empty_widget_style-------------------------
+
+data.raw["gui-style"].default["fnei_recipe_header-drag-widget"] =
+{
+  type = "empty_widget_style",
+  height = 36,
+  width = 315,
+  left_margin = -315,
+  scalable = false,
+}
+
+-- data.raw["gui-style"].default["fnei_recipe_header-sprite-widget"] =
+-- {
+--   type = "empty_widget_style",
+--   parent = "draggable_space",
+--   height = 36,
+--   width = 310,
+--   scalable = false,
+-- }

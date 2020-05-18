@@ -23,13 +23,13 @@ end
 
 function MainController.exit()
   out("Main exit")
-  MainGui.close_window()
+  Player.get_global()["gui_loc"] = MainGui.close_window()
 end
 
 function MainController.open()
   out("Main open")
 
-  local gui = MainGui.open_window()
+  local gui = MainGui.open_window(Player.get_global()["gui_loc"] or {x = 82, y = 70})
   MainGui.draw_tabs(tabs)
   MainController.draw_tab()
 

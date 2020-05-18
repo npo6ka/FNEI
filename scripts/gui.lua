@@ -45,10 +45,10 @@ function Gui.close_old_fnei_gui()
   gui_iterate(Player.get().gui.left)
   gui_iterate(Player.get().gui.top)
   gui_iterate(Player.get().gui.center)
-
-  local left_gui = Player.get().gui.left
-  if left_gui["fnei_left_flow"] then
-   left_gui["fnei_left_flow"].destroy()
+  
+  local modgui = mod_gui.get_frame_flow(Player.get())
+  if modgui["fnei_left_flow"] then
+    modgui["fnei_left_flow"].destroy()
   end
 end
 
@@ -81,28 +81,17 @@ function Gui.set_style_field(parent, gui_name, args)
 end
 
 function Gui.get_pos()
-  local pos = Settings.get_val("position")
-
-  if pos == 1 then
-    return Gui.get_left_gui()
-  elseif pos == 2 then
-    return Player.get().gui.top
-  elseif pos == 3 then
-    return Player.get().gui.center
-  else
-    Debug:error(Gui.classname, "utils: get_gui: invalid direction: ", pos)
-  end
+  return Player.get().gui.screen
 end
 
 function Gui.get_left_gui()
-    local left_gui = mod_gui.get_frame_flow(Player.get())
-    -- local left_gui = Player.get().gui.left
+  local left_gui = Player.get().gui.left
 
-    if not left_gui["fnei_left_flow"] then
-      left_gui.add({ type = "flow", name = "fnei_left_flow", direction = "horizontal" })
-    end
+  if not left_gui["fnei_left_flow"] then
+    left_gui.add({ type = "flow", name = "fnei_left_flow", direction = "horizontal" })
+  end
 
-    return left_gui["fnei_left_flow"] or left_gui
+  return left_gui["fnei_left_flow"] or left_gui
 end
 
 function Gui.get_gui(parent, gui_name)
@@ -144,6 +133,7 @@ function Gui.init_function()
   gui_function["drop-down"] = Gui.add_drop_down
   gui_function["checkbox"] = Gui.add_checkbox
   gui_function["button"] = Gui.add_button
+  gui_function["empty-widget"] = Gui.add_widget
   gui_function["label"] = Gui.add_label
   gui_function["textfield"] = Gui.add_textfield
   gui_function["scroll-pane"] = Gui.add_scroll_pane
@@ -271,6 +261,33 @@ function Gui.add_button(parent, gui_elem)
   return parent.add(Gui.set_def_fields(parent, gui_elem))
 end
 
+function Gui.add_widget(parent, gui_elem)
+  Gui.set_def_fields(parent, gui_elem)
+
+  local drag_elem
+
+  if gui_elem.drag_target then
+    drag_elem = gui_elem.drag_target
+    gui_elem.drag_target = nil
+  end
+
+  local gui = parent.add(gui_elem)
+
+  if drag_elem then
+    target = parent
+
+    while target.parent and target.parent.parent do
+      target = target.parent
+    end
+    
+    if target.type == "frame" then
+      gui.drag_target = target
+    end
+  end
+
+  return gui
+end
+
 function Gui.add_label(parent, gui_elem)
   Gui.set_def_fields(parent, gui_elem)
 
@@ -308,7 +325,7 @@ function Gui.set_choose_but_val(button, val)
     if val and list[val] then
       return val
     else
-      Debug:info(Gui.classname, "Gui.set_choose_but_val: ", debug_text, val, "not found")
+      Debug:debug(Gui.classname, "Gui.set_choose_but_val: ", debug_text, val, "not found")
       return nil
     end
   end
