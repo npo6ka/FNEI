@@ -265,7 +265,7 @@ data.raw["gui-style"].default["fnei_recipe_products_scroll_pane"] =
 data.raw["gui-style"].default["fnei_recipe_red_tech_button"] = 
 {
   type = "button_style",
-  parent = "red_slot_button",
+  parent = "red_slot",
   height = 68,
   width = 68,
   scalable = false,
@@ -274,7 +274,7 @@ data.raw["gui-style"].default["fnei_recipe_red_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_green_tech_button"] = 
 {
   type = "button_style",
-  parent = "green_slot_button",
+  parent = "green_slot",
   height = 68,
   width = 68,
   scalable = false,
@@ -283,7 +283,7 @@ data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
 
   clicked_graphical_set = {
     border = 1,
@@ -324,7 +324,7 @@ data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
 
   clicked_graphical_set = {
     border = 1,
@@ -365,7 +365,7 @@ data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] =
 data.raw["gui-style"].default["fnei_recipe_favorive_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   scalable = false,
   height = 36,
@@ -394,7 +394,7 @@ data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
 data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   scalable = false,
   height = 36,

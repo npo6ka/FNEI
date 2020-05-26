@@ -164,7 +164,7 @@ data.raw["gui-style"].default["fnei_main_selected-tab"] =
 data.raw["gui-style"].default["fnei_main_red_slot_button"] = 
 {
   type = "button_style",
-  parent = "red_slot_button",
+  parent = "red_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -172,7 +172,7 @@ data.raw["gui-style"].default["fnei_main_red_slot_button"] =
 
 data.raw["gui-style"].default["fnei_main_grey_slot_button"] = {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -181,7 +181,7 @@ data.raw["gui-style"].default["fnei_main_grey_slot_button"] = {
 data.raw["gui-style"].default["fnei_main_default_search_slot_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 48,
   width = 48,
   scalable = false,
