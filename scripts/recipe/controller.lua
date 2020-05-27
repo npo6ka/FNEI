@@ -122,8 +122,10 @@ function RecipeController.draw_favorite_button()
     recipe = RecipeController.get_recipe_stucture(elem.type, elem.name, elem.action_type, elem.page.name)
   end
 
-  local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe) 
-  RecipeGui.draw_favorite_state(state)
+  if RecipeController.is_gui_open() then
+    local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe) 
+    RecipeGui.draw_favorite_state(state)
+  end
 end
 
 ----------------------------------- recipe list  ---------------------------------------

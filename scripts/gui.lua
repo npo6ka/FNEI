@@ -95,7 +95,7 @@ function Gui.get_left_gui()
 end
 
 function Gui.get_gui(parent, gui_name)
-  local cont_name = Controller.get_cur_con_name()
+  local cont_name = Controller.get_cur_con_name() or ""
   local full_name = Gui.create_gui_name(cont_name, gui_name)
   return Gui.get_gui_proc(parent, full_name)
 end

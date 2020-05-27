@@ -73,7 +73,9 @@ end
 
 function Debug:error(...)
   msg = get_message("[ERROR]", ...)
-  print_to_console(msg)
+  if __DebugAdapter then
+    print_to_console(msg)
+  end
   print_to_log(msg)
 end
 
