@@ -1,4 +1,18 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.3.3
+Date: 2020-05-28
+  Bugfixes:
+    - Fix "Parent style not found: fnei_recipe_green_tech_button."
+  Changes:
+    - Sprite optimizations (drd_avel)
+---------------------------------------------------------------------------------------------------
+Version: 0.3.2
+Date: 2020-05-19
+  Bugfixes:
+    - Increase performance: refactoring debug lib
+  Changes:
+    - Added draggable gui for FNEI
+---------------------------------------------------------------------------------------------------
 Version: 0.3.1
 Date: 2020-01-23
   Bugfixes:
