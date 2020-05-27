@@ -137,14 +137,14 @@ data.raw["gui-style"].default["fnei_default_label"] =
 data.raw["gui-style"].default["fnei_default_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -171,7 +171,7 @@ data.raw["gui-style"].default["fnei_settings_button_style"] =
 data.raw["gui-style"].default["fnei_exit_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -198,7 +198,7 @@ data.raw["gui-style"].default["fnei_exit_button_style"] =
 data.raw["gui-style"].default["fnei_back_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -225,7 +225,7 @@ data.raw["gui-style"].default["fnei_back_button_style"] =
 data.raw["gui-style"].default["fnei_left_arrow_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 28,
   width = 28,
   scalable = false,
@@ -252,7 +252,7 @@ data.raw["gui-style"].default["fnei_left_arrow_button_style"] =
 data.raw["gui-style"].default["fnei_right_arrow_button_style"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 28,
   width = 28,
   scalable = false,
@@ -279,7 +279,7 @@ data.raw["gui-style"].default["fnei_right_arrow_button_style"] =
 data.raw["gui-style"].default["fnei_default_empty-tab"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   scalable = false,
     
@@ -306,7 +306,7 @@ data.raw["gui-style"].default["fnei_default_empty-tab"] =
 data.raw["gui-style"].default["fnei_default_selected-tab"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   scalable = false,
     

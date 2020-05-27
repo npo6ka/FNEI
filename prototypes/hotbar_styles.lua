@@ -46,7 +46,7 @@ data.raw["gui-style"].default["fnei_hotbar_label"] =
 data.raw["gui-style"].default["fnei_hotbar_label_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 72,
   font = "font-lb",
@@ -56,7 +56,7 @@ data.raw["gui-style"].default["fnei_hotbar_label_button"] =
 data.raw["gui-style"].default["fnei_hotbar_block_button"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   height = 36,
   width = 36,
@@ -66,7 +66,7 @@ data.raw["gui-style"].default["fnei_hotbar_block_button"] =
 data.raw["gui-style"].default["fnei_hotbar_down_arrow"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   scalable = false,
   height = 14,
@@ -95,7 +95,7 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
 data.raw["gui-style"].default["fnei_hotbar_up_arrow"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   font = "font-mb",
   scalable = false,
   height = 14,

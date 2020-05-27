@@ -119,7 +119,7 @@ data.raw["gui-style"].default["fnei_settings_selected-tab"] =
 data.raw["gui-style"].default["fnei_settings_enabled-building"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -156,7 +156,7 @@ data.raw["gui-style"].default["fnei_settings_enabled-building"] =
 data.raw["gui-style"].default["fnei_settings_disabled-building"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -193,7 +193,7 @@ data.raw["gui-style"].default["fnei_settings_disabled-building"] =
 data.raw["gui-style"].default["fnei_settings_hidden-building"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 36,
   scalable = false,
@@ -230,7 +230,7 @@ data.raw["gui-style"].default["fnei_settings_hidden-building"] =
 data.raw["gui-style"].default["fnei_settings_enable-category"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 108,
   font = "font-mb",
@@ -269,7 +269,7 @@ data.raw["gui-style"].default["fnei_settings_enable-category"] =
 data.raw["gui-style"].default["fnei_settings_disable-category"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 36,
   width = 108,
   font = "font-mb",
@@ -335,7 +335,7 @@ data.raw["gui-style"].default["fnei_settings_up_arrow"] =
 data.raw["gui-style"].default["fnei_settings_down_arrow"] = 
 {
   type = "button_style",
-  parent = "slot_button",
+  parent = "compact_slot",
   height = 12,
   width = 24,
   scalable = false,
