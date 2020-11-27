@@ -12,10 +12,10 @@ data:extend({
   {
     type = "sprite",
     name = "fnei_hand_icon",
-    filename = "__core__/graphics/hand.png",
+    filename = "__core__/graphics/icons/mip/slot-item-in-hand-black.png",
     priority = "extra-high-no-scale",
-    width = 32,
-    height = 32,
+    width = 64,
+    height = 64,
     scale = 1,
   },
   {
