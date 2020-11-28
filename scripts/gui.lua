@@ -4,6 +4,7 @@ Gui = {
 
 local mod_prefix = "fnei"
 local CustomEvent = require "scripts/custom_events"
+local mod_gui = require("mod-gui")
 
 function Gui.get_prefix()
   return mod_prefix
