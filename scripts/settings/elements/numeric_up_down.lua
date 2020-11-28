@@ -34,7 +34,7 @@ function NumericUpDown.set_val_in_gui(sett_name, val)
   local gui = Gui.get_gui(Gui.get_pos(), sett_name .. textfield_name)
   
   if gui then
-    gui.text = val
+    gui.text = tostring(val)
   end
 end
 
@@ -62,7 +62,7 @@ function NumericUpDown.add_content_func(parent, sett)
   Gui.add_gui_template(parent, gui_template)
 
   local gui = Gui.get_gui(Gui.get_pos(), sett.name .. textfield_name)
-  gui.text = Settings.get_val(sett.name)
+  gui.text = tostring(Settings.get_val(sett.name))
 end
 
 function NumericUpDown.text_chenge_event(event, sett_name)

@@ -5,6 +5,7 @@ Date: 2020-11-28
     - Update to 1.1
   Bugfixes:
     - Fix mod-gui problems
+    - Fix numeric-up-down problems
 ---------------------------------------------------------------------------------------------------
 Version: 0.3.4
 Date: 2020-05-28
