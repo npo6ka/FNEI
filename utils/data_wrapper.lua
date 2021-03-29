@@ -46,10 +46,6 @@ function get_technologies_for_recipe(recipe_name)
   return Recipe:get_technologies_for_recipe(recipe_name)
 end
 
-function is_attainable_tech(tech)
-  return RawTech:is_attainable_tech(tech)
-end
-
 ------------------ Entity -----------------
 
 function get_entity_list()
@@ -71,13 +67,7 @@ function get_all_recipes()
 end
 
 function get_recipe_list()
-  local rec_list = {}
-
-  if Settings.get_val("use-only-attainable-recipes") then
-    rec_list = Recipe:get_aRecipe_list()
-  else
-    rec_list = Recipe:get_recipe_list()
-  end
+  local rec_list = Recipe:get_recipe_list()
 
   if not Settings.get_val("show-hidden-recipes") then
     rec_list = Recipe:get_vRecipe_list(rec_list)

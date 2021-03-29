@@ -8,10 +8,10 @@ local element_list = {}
 
 function Settings.init()
   settings_list["need-show"] =                    { type = "checkbox", tab = "main-settings", def_val = true }
-  settings_list["use-only-attainable-recipes"] =  { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-disable-recipes"] =         { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-items"] =            { type = "checkbox", tab = "main-settings", def_val = false }
+  settings_list["show-disable-techs"] =           { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["fnei-line-count"] =              { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 5, max_val = 12 }
   settings_list["detail-chance"] =                { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["focus-search"] =                 { type = "checkbox", tab = "main-settings", def_val = false }
@@ -23,12 +23,7 @@ function Settings.init()
   settings_list["hotbar-last-line-num"] =         { type = "numeric-up-down", tab = "main-settings", def_val = 3, min_val = 0, max_val = 20, event = Controller.get_cont("hotbar").change_hotbar_visibility }
   settings_list["hotbar-fav-line-num"] =          { type = "numeric-up-down", tab = "main-settings", def_val = 5, min_val = 0, max_val = 20, event = Controller.get_cont("hotbar").change_hotbar_visibility }
 
-
   settings_list["show-recipes"] =                 { type = "crafting-buildings", tab = "crafting-category", def_val = true }
-  
-  settings_list["admin"] =                        { type = "global-checkbox", tab = "admin-settings", def_val = nil, def_event = false, event = Controller.get_cont("settings").check_admin_settings_event }
---  settings_list["open-techs"] =                   { type = "checkbox", tab = "admin-settings", def_val = false }
-  settings_list["open-unavailable-techs"] =       { type = "checkbox", tab = "admin-settings", def_val = false }
 
   settings_list["item-auto-craft"] =              { type = "checkbox", tab = "default-settings", def_val = false }
   settings_list["item-auto-usage"] =              { type = "checkbox", tab = "default-settings", def_val = false }

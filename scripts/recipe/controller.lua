@@ -53,7 +53,7 @@ end
 
 ----------------------------------- gui ---------------------------------------
 
-function RecipeController.open_new_recipes()  
+function RecipeController.open_new_recipes()
   RecipeController.set_page_list()
 
   if pages:amount_page() == 0 then
@@ -300,12 +300,10 @@ function RecipeController.open_tech_event(event, elem_name, split_names)
   while split_names[el_num] ~= nil do
     tech_name = tech_name .. "_" .. split_names[el_num]
     el_num = el_num + 1
-  end 
-
-  if is_attainable_tech(get_tech_list()[tech_name]) or Settings.get_val("open-unavailable-techs") then
-    TechHook.save_cur_fnei_state()
-    Player.get().open_technology_gui(tech_name)
   end
+
+  TechHook.save_cur_fnei_state()
+  Player.get().open_technology_gui(tech_name)
 end
 
 function RecipeController.change_page_event()

@@ -337,11 +337,11 @@ function RecipeGui.set_techs( recipe )
   clear_gui(gui_flow)
 
   local new_tech_list = {}
-  if Settings.get_val("open-unavailable-techs") then
+  if Settings.get_val("show-disable-techs") then
     new_tech_list = tech_list
   else
     for _, tech in pairs(tech_list) do
-      if is_attainable_tech(tech) then
+      if tech.enabled then
         table.insert(new_tech_list, tech)
       end
     end
@@ -372,7 +372,7 @@ function RecipeGui.set_techs( recipe )
 end
 
 function RecipeGui.get_tech_style( tech )
-  if not is_attainable_tech(tech) then
+  if not tech.enabled then
     return "fnei_recipe_grey_tech_button"
   elseif tech.researched then
     return "fnei_recipe_green_tech_button"

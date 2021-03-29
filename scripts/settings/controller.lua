@@ -24,17 +24,8 @@ function SettingsController.draw_settings()
   local cur_tab = tabs:get_cur_tab()
   local settings = Settings.get_sett_list()
   local sett_list = {}
-
-  if cur_tab == "admin-settings" then
-    if not Settings.get_val("admin") then
-      table.insert(sett_list, settings["admin"])
-    else
-      sett_list = SettingsController.set_settings_for_tab(settings, cur_tab)
-    end
-  else
-    sett_list = SettingsController.set_settings_for_tab(settings, cur_tab)
-  end
-
+  
+  sett_list = SettingsController.set_settings_for_tab(settings, cur_tab)
   SettingsGui.add_option_list(sett_list)
 end
 
@@ -64,24 +55,6 @@ end
 
 function SettingsController.is_gui_open()
   return SettingsGui.is_gui_open()
-end
-
-function SettingsController.check_admin_settings_event(event, sett_name)
-  if not Player.isAdmin() then
-    Player.print({"fnei.non-admin-permission"})
-    SettingsController.draw_settings(tabs:get_cur_tab())
-    return
-  end
-
-  if Settings.get_val("admin") == nil then
-    Player.print({"fnei.admin-option-warning"})
-    Settings.set_val("admin", false)
-    event.element.state = false
-    return
-  end
-
-  Settings.set_val("admin", event.element.state)
-  SettingsController.draw_settings(tabs:get_cur_tab())
 end
 
 function SettingsController.set_new_tab_event(event, gui_name)

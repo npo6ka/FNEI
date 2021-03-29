@@ -4,8 +4,6 @@ local Recipe = {
   classname = "FNRecipe"
 }
 
-local aRecipe
-
 function Recipe:get_recipe_list()
   Debug:debug(Recipe.classname, "get_recipe_list( )")
 
@@ -18,16 +16,6 @@ function Recipe:get_recipe_list()
 
   Recipe:append_implicit_recipes(recipes)
   return recipes
-end
-
-function Recipe:get_aRecipe_list()
-  Debug:debug(Recipe.classname, "get_aRecipe_list( )")
-
-  if not aRecipe then
-    aRecipe = self:create_attainable_recipes()
-  end
-
-  return aRecipe
 end
 
 --return a list of technologies that can open this recipe_name or {}
@@ -203,30 +191,6 @@ function Recipe:compare_tech_prot(list1, list2)
   end
 
   return true
-end
-
-function Recipe:create_attainable_recipes()
-  local ret_tb = {}
-  local recipe_list = Recipe:get_recipe_list()
-  local rec_dep = RawTech:get_recipe_list_in_tech_dependencies()
-  local a_tech = RawTech:get_aTech_list()
-
-  for _,recipe in pairs(recipe_list) do
-    if recipe.enabled then
-      ret_tb[recipe.name] = recipe
-    else
-      local dep = rec_dep[recipe.name] or {}
-
-      for _,tech in pairs(dep) do
-        if a_tech[tech.name] then
-          ret_tb[recipe.name] = recipe
-          break
-        end
-      end
-    end
-  end
-
-  return ret_tb
 end
 
 function Recipe:create_visible_recipes(recipe_list)
