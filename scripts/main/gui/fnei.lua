@@ -70,18 +70,25 @@ function FneiMainGui.draw_item_list(data_list)
 
   local contr = Controller.get_cont("main").get_cur_contr_tab()
   local items = get_full_item_list()
+  local fluids = get_full_fluid_list()
 
   for _,prot in pairs(data_list) do
+    local style = "fnei_main_grey_slot_button"
+
     if string.match(prot, "item%_") then
       local item_name = string.sub(prot, 6)
-      local style = "fnei_main_grey_slot_button"
       if items and items[item_name] and items[item_name].has_flag("hidden") then
         style = "fnei_main_red_slot_button"
       end
       
       Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "item", style = style, elem_value = item_name, locked = true })
     elseif string.match(prot, "fluid%_") then
-      Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "fluid", style = "fnei_main_grey_slot_button", elem_value = string.sub(prot, 7), locked = true })
+      local fluid_name = string.sub(prot, 7)
+      if fluids and fluids[fluid_name] and fluids[fluid_name].hidden then
+        style = "fnei_main_red_slot_button"
+      end
+
+      Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "fluid", style = style, elem_value = fluid_name, locked = true })
     end
   end
 end
