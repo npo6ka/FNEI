@@ -41,7 +41,7 @@ function Item:create_visible_fluids(fluid_list)
 
   for _,fluid in pairs(fluid_list) do
     if not fluid.hidden then
-      ret_tb[fluid.name] = item
+      ret_tb[fluid.name] = fluid
     end
   end
 
