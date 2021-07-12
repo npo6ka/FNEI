@@ -32,8 +32,16 @@ end
 
 ------------------ Fluid ------------------
 
+function get_full_fluid_list()
+  return Item:get_fluid_list()
+end
+
 function get_fluid_list()
-  return game.fluid_prototypes
+  if Settings.get_val("show-hidden-items") then
+    return Item:get_fluid_list()
+  else
+    return Item:get_vFluid_list(Item:get_fluid_list())
+  end
 end
 
 ------------------ Tech -------------------

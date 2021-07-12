@@ -416,7 +416,7 @@ function RecipeGui.get_element_caption(element)
   if element.type == "item" then
     prot = get_full_item_list()[element.name]
   elseif element.type == "fluid" then
-    prot = get_fluid_list()[element.name]
+    prot = get_full_fluid_list()[element.name]
   elseif element.type == 'entity' then
     prot = game.entity_prototypes[element.name]
   end
