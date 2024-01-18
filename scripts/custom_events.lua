@@ -20,7 +20,7 @@ function CustomEvents.add_custom_event(gui_name, gui_type, event_name, func)
     end
     event_list[gui_name][gui_type][event_name] = {}
   end
-  if type(func) == "function" then 
+  if type(func) == "function" then
     table.insert(event_list[gui_name][gui_type][event_name], func)
   elseif type(func) == "table" then
     for _,fun in pairs(func) do
@@ -37,15 +37,15 @@ function CustomEvents.del_custom_event(gui_name, gui_type, event_name)
   end
   if CustomEvents.event_exists(gui_name, gui_type, event_name) then
     event_list[gui_name][gui_type][event_name] = nil
-  else 
+  else
     out("Error CustomEvents.del_custom_event: Event not found")
   end
 end
 
 function CustomEvents.event_exists(gui_name, gui_type, event_name)
   Debug:debug(CustomEvents.classname, "CustomEvents.event_exists(", gui_name, gui_type, event_name, ")")
-  if event_list[gui_name] and 
-     event_list[gui_name][gui_type] and 
+  if event_list[gui_name] and
+     event_list[gui_name][gui_type] and
      event_list[gui_name][gui_type][event_name] then
     return true
   end

@@ -143,8 +143,8 @@ local tech_dep
 
 function Recipe:compare(recipe, s_recipe)
   if recipe.energy == s_recipe.energy and recipe.category == s_recipe.category then
-    if Recipe:compare_recipe_prot(recipe.ingredients, s_recipe.ingredients) and 
-       Recipe:compare_recipe_prot(recipe.products, s_recipe.products) 
+    if Recipe:compare_recipe_prot(recipe.ingredients, s_recipe.ingredients) and
+       Recipe:compare_recipe_prot(recipe.products, s_recipe.products)
     then
       if not tech_dep then
         tech_dep = RawTech:create_tech_dependencies(game.technology_prototypes)

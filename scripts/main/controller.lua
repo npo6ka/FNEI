@@ -13,7 +13,7 @@ gui_tabs_cont["fnei-search"] = require "scripts/main/controllers/fnei"
 function MainController.init_events()
   local tab_list = {}
 
-  for tb_name,_ in pairs(gui_tabs_cont) do 
+  for tb_name,_ in pairs(gui_tabs_cont) do
     table.insert(tab_list, tb_name)
   end
 

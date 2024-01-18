@@ -24,7 +24,7 @@ function SettingsController.draw_settings()
   local cur_tab = tabs:get_cur_tab()
   local settings = Settings.get_sett_list()
   local sett_list = {}
-  
+
   sett_list = SettingsController.set_settings_for_tab(settings, cur_tab)
   SettingsGui.add_option_list(sett_list)
 end

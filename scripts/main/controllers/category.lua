@@ -9,7 +9,7 @@ function CategoryMainController.init_event(gui_name, content_gui)
 end
 
 function CategoryMainController.draw_content()
-  
+
 end
 
 return CategoryMainController

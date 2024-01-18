@@ -25,11 +25,11 @@ function List:new( list_name )
   function obj:contains_elem( elem )
     local list = obj:get_list()
 
-    if elem == nil then 
+    if elem == nil then
       return nil
     end
 
-    if type(elem) ~= "table" then 
+    if type(elem) ~= "table" then
       for i,j in pairs(list) do
         if j == elem then
           return true
@@ -39,7 +39,7 @@ function List:new( list_name )
       for i,j in pairs(list) do
         if type(j) == "table" and #j == #elem then
           local flag = true
-          
+
           for ind,val in pairs(j) do
             if elem[ind] ~= val then
               flag = false

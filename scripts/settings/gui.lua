@@ -70,9 +70,9 @@ function SettingsGui.close_window()
   if SettingsGui.is_gui_open() then
     local gui = Gui.get_gui(Gui.get_pos(), settings_gui_template[1].name)
     local loc = gui.location
-    
+
     gui.destroy()
-    
+
     return loc
   end
 end

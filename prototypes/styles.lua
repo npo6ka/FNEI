@@ -134,14 +134,14 @@ data.raw["gui-style"].default["fnei_default_label"] =
 
 ------------------------button_style-------------------------
 
-data.raw["gui-style"].default["fnei_default_button"] = 
+data.raw["gui-style"].default["fnei_default_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_settings_button_style"] = 
+data.raw["gui-style"].default["fnei_settings_button_style"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -168,7 +168,7 @@ data.raw["gui-style"].default["fnei_settings_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_exit_button_style"] = 
+data.raw["gui-style"].default["fnei_exit_button_style"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -195,7 +195,7 @@ data.raw["gui-style"].default["fnei_exit_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_back_button_style"] = 
+data.raw["gui-style"].default["fnei_back_button_style"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -222,7 +222,7 @@ data.raw["gui-style"].default["fnei_back_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_left_arrow_button_style"] = 
+data.raw["gui-style"].default["fnei_left_arrow_button_style"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -249,7 +249,7 @@ data.raw["gui-style"].default["fnei_left_arrow_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_right_arrow_button_style"] = 
+data.raw["gui-style"].default["fnei_right_arrow_button_style"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -276,13 +276,13 @@ data.raw["gui-style"].default["fnei_right_arrow_button_style"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_default_empty-tab"] = 
+data.raw["gui-style"].default["fnei_default_empty-tab"] =
 {
   type = "button_style",
   parent = "compact_slot",
   font = "font-mb",
   scalable = false,
-    
+
   clicked_graphical_set = {
     filename = "__FNEI__/graphics/selected_tab.png",
     height = 36,
@@ -303,13 +303,13 @@ data.raw["gui-style"].default["fnei_default_empty-tab"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_default_selected-tab"] = 
+data.raw["gui-style"].default["fnei_default_selected-tab"] =
 {
   type = "button_style",
   parent = "compact_slot",
   font = "font-mb",
   scalable = false,
-    
+
   clicked_graphical_set = {
     filename = "__FNEI__/graphics/selected_tab.png",
     height = 36,

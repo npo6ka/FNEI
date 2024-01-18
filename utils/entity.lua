@@ -1,4 +1,4 @@
-if not Item then Item = require "utils/items" end 
+if not Item then Item = require "utils/items" end
 
 local Entity = {
   classname = "FNEntity"

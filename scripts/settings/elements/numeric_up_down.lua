@@ -32,7 +32,7 @@ end
 
 function NumericUpDown.set_val_in_gui(sett_name, val)
   local gui = Gui.get_gui(Gui.get_pos(), sett_name .. textfield_name)
-  
+
   if gui then
     gui.text = tostring(val)
   end
@@ -43,7 +43,7 @@ function NumericUpDown.add_label_func(parent, sett)
 end
 
 function NumericUpDown.get_template(sett)
-  return 
+  return
   {
     { type = "flow", name = sett.name .. "_flow", style = nil, children = {
       { type = "textfield", name = sett.name .. textfield_name, style = "fnei_settings_numeric-text-field", event = NumericUpDown.text_chenge_event },

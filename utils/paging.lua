@@ -30,8 +30,8 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
     local max_page = self:amount_page()
     if max_page < 1 then max_page = 1 end
     local gl_page = obj:get_page_global()
-    
-    if val < 1 then 
+
+    if val < 1 then
       gl_page.cur_page = max_page
     elseif val > max_page then
       gl_page.cur_page = 1

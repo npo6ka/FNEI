@@ -123,7 +123,7 @@ function RecipeController.draw_favorite_button()
   end
 
   if RecipeController.is_gui_open() then
-    local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe) 
+    local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe)
     RecipeGui.draw_favorite_state(state)
   end
 end
@@ -369,7 +369,7 @@ function RecipeController.delete_equals_recipe(list)
           end
         end
 
-        if flag then 
+        if flag then
           ret_tb[name] = recipe
         end
       else

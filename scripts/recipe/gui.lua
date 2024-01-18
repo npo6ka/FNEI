@@ -20,7 +20,7 @@ function RecipeGui.init_template()
             { type = "label", name = "header-label", style = "fnei_recipe_title_label", align = "center", vertical_align = "center", caption = "recipe_name" },
             --{ type = "empty-widget", name = "" , style = "fnei_main_header-sprite-widget", caption = {"fnei.FNEI"} },
             { type = "empty-widget", name = "drag-widget", style = "fnei_recipe_header-drag-widget", drag_target = true},
-            { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = { 
+            { type = "flow", name = "favorite-flow", style = "fnei_recipe_favorite_flow", children = {
               { type = "sprite-button", name = "favorite-key", tooltip = {"fnei.favorite-button"}, event = cont.favorite_key_event },
             }},
             { type = "sprite-button", name = "back-key", style = "fnei_back_button_style", tooltip = {"gui.cancel"}, event = cont.back_key_event },
@@ -73,7 +73,7 @@ function RecipeGui.init_template()
 
         { type = "flow", name = "tech-flow", style = "fnei_default_horizontal_flow" },
 
-      }}  
+      }}
     }}
   }
 end
@@ -308,13 +308,13 @@ function RecipeGui.set_made_in_list(recipe)
 
         if caption then
           label = {
-            type = "label", 
+            type = "label",
             name = cat.val.name .. "-label",
             style = "fnei_recipe_craft_time_for_building_label",
             vertical_align = "top",
             align = "center",
             caption = caption,
-            tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption} 
+            tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption}
           }
         end
 

@@ -98,7 +98,7 @@ data.raw["gui-style"].default["fnei_settings_craft-cat-scroll"] =
 
 ------------------------button_style-------------------------
 
-data.raw["gui-style"].default["fnei_settings_empty-tab"] = 
+data.raw["gui-style"].default["fnei_settings_empty-tab"] =
 {
   type = "button_style",
   parent = "fnei_default_empty-tab",
@@ -107,7 +107,7 @@ data.raw["gui-style"].default["fnei_settings_empty-tab"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_settings_selected-tab"] = 
+data.raw["gui-style"].default["fnei_settings_selected-tab"] =
 {
   type = "button_style",
   parent = "fnei_default_selected-tab",
@@ -116,7 +116,7 @@ data.raw["gui-style"].default["fnei_settings_selected-tab"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_settings_enabled-building"] = 
+data.raw["gui-style"].default["fnei_settings_enabled-building"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -153,7 +153,7 @@ data.raw["gui-style"].default["fnei_settings_enabled-building"] =
   },
 }
 
-data.raw["gui-style"].default["fnei_settings_disabled-building"] = 
+data.raw["gui-style"].default["fnei_settings_disabled-building"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -190,7 +190,7 @@ data.raw["gui-style"].default["fnei_settings_disabled-building"] =
   },
 }
 
-data.raw["gui-style"].default["fnei_settings_hidden-building"] = 
+data.raw["gui-style"].default["fnei_settings_hidden-building"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -227,7 +227,7 @@ data.raw["gui-style"].default["fnei_settings_hidden-building"] =
   },
 }
 
-data.raw["gui-style"].default["fnei_settings_enable-category"] = 
+data.raw["gui-style"].default["fnei_settings_enable-category"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -266,7 +266,7 @@ data.raw["gui-style"].default["fnei_settings_enable-category"] =
   },
 }
 
-data.raw["gui-style"].default["fnei_settings_disable-category"] = 
+data.raw["gui-style"].default["fnei_settings_disable-category"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -304,7 +304,7 @@ data.raw["gui-style"].default["fnei_settings_disable-category"] =
   },
 }
 
-data.raw["gui-style"].default["fnei_settings_up_arrow"] = 
+data.raw["gui-style"].default["fnei_settings_up_arrow"] =
 {
   type = "button_style",
   parent = "button",
@@ -332,7 +332,7 @@ data.raw["gui-style"].default["fnei_settings_up_arrow"] =
   },
 }
 
-data.raw["gui-style"].default["fnei_settings_down_arrow"] = 
+data.raw["gui-style"].default["fnei_settings_down_arrow"] =
 {
   type = "button_style",
   parent = "compact_slot",

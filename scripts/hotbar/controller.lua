@@ -29,7 +29,7 @@ function HotbarController.exit()
   Controller.set_cur_con_name("hotbar")
 
   HotbarGui.close_window()
-  
+
   Controller.remove_last_con_name()
 end
 
@@ -41,11 +41,11 @@ function HotbarController.open()
 
     local ret_gui = HotbarGui.open_window()
     HotbarGui.draw_hotbar_bar_extension(HotbarController.get_last_usage_list(), favorite:get_array())
-    
+
     Controller.remove_last_con_name()
 
     return ret_gui
-  else 
+  else
     HotbarController.exit()
   end
 end
@@ -202,13 +202,13 @@ function HotbarController.last_recipe_click_event(event, arg, args)
 end
 
 function HotbarController.favorite_empty_button_click_event(event)
-  if Controller.get_cur_con() == nil then 
+  if Controller.get_cur_con() == nil then
     Controller.open_event("main")
   end
 end
 
 function HotbarController.last_empty_button_click_event(event)
-  if Controller.get_cur_con() == nil then 
+  if Controller.get_cur_con() == nil then
     Controller.open_event("main")
   end
 end

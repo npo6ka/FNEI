@@ -21,7 +21,7 @@ end
 
 function CategoryMainGui.draw_template(parent)
   Gui.add_gui_template(parent, category_search_tab)
-  
+
 end
 
 function CategoryMainGui.event(event, name)
