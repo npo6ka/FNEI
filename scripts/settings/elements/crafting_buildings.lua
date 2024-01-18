@@ -52,41 +52,41 @@ function CraftingBuildingsSett.add_content_func(parent, sett)
   for cat, items in pairs(craft_tb) do
     local flow_childer = {}
 
-    table.insert(flow_childer, 
-    { 
-      type = "sprite-button", 
-      name = sett.name .. "_" .. cat_text .. "_" .. cat .. "_but", 
+    table.insert(flow_childer,
+    {
+      type = "sprite-button",
+      name = sett.name .. "\t" .. cat_text .. "\t" .. cat .. "\tbut",
       style = CraftingBuildingsSett.get_category_style(cat),
       tooltip = {"", cat, "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
-      caption = CraftingBuildingsSett.split_cat(cat) 
+      caption = CraftingBuildingsSett.split_cat(cat)
     })
 
     for _, item in pairs(items) do
       if item.type == "building" then
-        table.insert(flow_childer, 
-        { 
-          type = "choose-elem-button", 
-          name = sett.name .. "_" .. cat .. "_" .. item.val.name, 
-          elem_type = "item", 
-          elem_value = item.val.name, 
+        table.insert(flow_childer,
+        {
+          type = "choose-elem-button",
+          name = sett.name .. "\t" .. cat .. "\t" .. item.val.name,
+          elem_type = "item",
+          elem_value = item.val.name,
           locked = true,
           style = CraftingBuildingsSett.get_building_style(cat, item.val.name),
           tooltip = {"", Gui.get_local_name(item.val), "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
         })
       elseif item.type == "player" then
-        table.insert(flow_childer, 
-        { 
-          type = "sprite-button", 
-          name = sett.name .. "_" .. cat .. "_" .. item.val.name,  
+        table.insert(flow_childer,
+        {
+          type = "sprite-button",
+          name = sett.name .. "\t" .. cat .. "\t" .. item.val.name,
           style = CraftingBuildingsSett.get_building_style(cat, item.val.name),
           tooltip = {"", {"fnei.handcraft"}, "\n", {"fnei.left-eneble-click"}, "\n", {"fnei.right-disable-click"}},
           sprite = "fnei_hand_icon",
         })
       elseif item.type == "resource-miner" then
-        table.insert(flow_childer, 
-        { 
+        table.insert(flow_childer,
+        {
           type = "choose-elem-button",
-          name = sett.name .. "_" .. cat .. "_" .. item.val.name,
+          name = sett.name .. "\t" .. cat .. "\t" .. item.val.name,
           elem_type = "item",
           elem_value = item.val.name,
           locked = true,
@@ -114,7 +114,7 @@ end
 function CraftingBuildingsSett.parse_name(name)
   local ret_tb = {}
 
-  for k in string.gmatch(name, "[^_]+") do
+  for k in string.gmatch(name, "[^\t]+") do
     table.insert(ret_tb, k)
   end
 
