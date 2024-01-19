@@ -42,18 +42,28 @@ function CraftCategoty:create_crafting_category_list()
   end
 
   local character = Player.get().character
-  local item_list = Item:get_item_list()
 
   -- Add character 'by hand' recipes
-  if character and character.prototype.crafting_categories then
-    local by_hand = { type = "player", val = { name = "handcraft" } }
+  if character then
+    if character.prototype.crafting_categories then
+      local by_hand = { type = "player", val = { name = "handcraft" } }
 
-    add_category_entry('handcraft', by_hand)
+      add_category_entry('handcraft', by_hand)
 
-    for category, _ in pairs(character.prototype.crafting_categories) do
-      add_category_entry(category, by_hand)
+      for category, _ in pairs(character.prototype.crafting_categories) do
+        add_category_entry(category, by_hand)
+      end
+    end
+    if character.prototype.resource_categories then
+      local by_hand = { type = "player", val = { name = "handmine", mining_speed = character.prototype.mining_speed } }
+
+      for category, _ in pairs(character.prototype.resource_categories) do
+        add_category_entry("mine " .. category, by_hand)
+      end
     end
   end
+
+  local item_list = Item:get_item_list()
 
   for _, item in pairs(item_list) do
     local entity = item.place_result
@@ -82,12 +92,12 @@ function CraftCategoty:create_crafting_category_list()
 
       -- A building may be used to mine a certain item
       for category, _ in pairs(entity.resource_categories or {}) do
-        add_category_entry("mine" .. category, { type = "resource-miner", val = item, mining_speed = entity.mining_speed })
+        add_category_entry("mine " .. category, { type = "resource-miner", val = item, mining_speed = entity.mining_speed, ifbox = in_fluidbox, ofbox = out_fluidbox })
       end
 
       -- A building may implicitly produce a fluid, regardless of any action
       if entity.fluid then
-        add_category_entry("pump" .. entity.name, { type = 'building', val = item, ingredient_count = math.huge })
+        add_category_entry("pump " .. entity.name, { type = 'building', val = item, ingredient_count = math.huge, ifbox = in_fluidbox, ofbox = out_fluidbox })
       end
     end
   end

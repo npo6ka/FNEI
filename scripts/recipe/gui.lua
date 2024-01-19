@@ -237,38 +237,47 @@ function RecipeGui.set_made_in_list(recipe)
       local caption = Settings.get_val("show-craft-time-label")
       local element
 
+      local ing_cnt = 0
+      local in_fluidbox_cnt = 0
+      local out_fluidbox_cnt = 0
+
+      for _,prot in pairs(recipe.ingredients) do
+        if prot.type == "item" then
+          ing_cnt = ing_cnt + 1
+        elseif prot.type == "fluid" then
+          in_fluidbox_cnt = in_fluidbox_cnt + 1
+        end
+      end
+
+      for _,prot in pairs(recipe.products) do
+        if prot.type == "fluid" then
+          out_fluidbox_cnt = out_fluidbox_cnt + 1
+        end
+      end
+
       if cat.type == "player" and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        local player = Player.get()
+        if in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
+          local player = Player.get()
+          local tooltip = {"", {"fnei.handcraft"}}
 
-        if caption and player and player.character_crafting_speed_modifier + player.force.manual_crafting_speed_modifier + 1 ~= 0 then
-          caption = round(recipe.energy / ((player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)), 3)
+          if caption and player and cat.val.name == "handcraft" and (player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1) ~= 0 then
+            caption = round(recipe.energy / ((player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)), 3)
+          end
+
+          if caption and player and cat.val.name == "handmine" and (player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) ~= 0 then
+            caption = round(recipe.mining_time / ((player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) * cat.val.mining_speed), 3)
+            tooltip = {"", {"fnei.handmining"}}
+          end
+
+          element = {
+            type = "sprite-button",
+            name = cat.val.name,
+            style = "fnei_default_button",
+            tooltip = tooltip,
+            sprite = "fnei_hand_icon"
+          }
         end
-
-        element = { type = "sprite-button",
-                    name = cat.val.name,
-                    style = "fnei_default_button",
-                    tooltip = {"", {"fnei.handcraft"}},
-                    sprite = "fnei_hand_icon"
-                  }
       elseif cat.type == "building" and cat.ingredient_count and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        local ing_cnt = 0
-        local in_fluidbox_cnt = 0
-        local out_fluidbox_cnt = 0
-
-        for _,prot in pairs(recipe.ingredients) do
-          if prot.type == "item" then
-            ing_cnt = ing_cnt + 1
-          elseif prot.type == "fluid" then
-            in_fluidbox_cnt = in_fluidbox_cnt + 1
-          end
-        end
-
-        for _,prot in pairs(recipe.products) do
-          if prot.type == "fluid" then
-            out_fluidbox_cnt = out_fluidbox_cnt + 1
-          end
-        end
-
         if cat.ingredient_count >= ing_cnt and in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
           local entity = item_list[cat.val.name].place_result
 
@@ -290,16 +299,18 @@ function RecipeGui.set_made_in_list(recipe)
           }
         end
       elseif cat.type == 'resource-miner' and cat.mining_speed and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        element = {
-          type = "choose-elem-button",
-          name = "item\t" .. cat.val.name,
-          style = "fnei_default_button",
-          elem_type = "item",
-          elem_value = cat.val.name,
-          locked = true
-        }
-        -- https://wiki.factorio.com/Mining
-        caption = round(recipe.mining_time / (cat.mining_speed), 3)
+        if in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
+          element = {
+            type = "choose-elem-button",
+            name = "item\t" .. cat.val.name,
+            style = "fnei_default_button",
+            elem_type = "item",
+            elem_value = cat.val.name,
+            locked = true
+          }
+          -- https://wiki.factorio.com/Mining
+          caption = round(recipe.mining_time / (cat.mining_speed), 3)
+        end
       end
 
       if element then
