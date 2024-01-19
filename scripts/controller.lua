@@ -81,7 +81,7 @@ function Controller.close_event()
   end
 end
 
-function Controller.open_event(cont_name, args)
+function Controller.open_event(cont_name)
   local controller = Controller.get_cont(cont_name)
 
   if controller and controller.can_open_gui() then
@@ -99,16 +99,16 @@ function Controller.open_event(cont_name, args)
       queue.remove()
     end
 
-    Controller.open_gui_event(cont_name, args)
+    Controller.open_gui_event(cont_name)
   end
 end
 
-function Controller.open_gui_event(cont_name, args)
+function Controller.open_gui_event(cont_name)
   local controller = Controller.get_cont(cont_name)
 
   if controller then
     queue:add(cont_name)
-    local gui = controller.open(args)
+    local gui = controller.open()
     Controller.set_opened_gui(gui)
   else
     Debug:error("Error in function Controller.open_event: cont_name ", cont_name, "not found")

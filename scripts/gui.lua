@@ -77,6 +77,27 @@ function Gui.get_pos()
   return Player.get().gui.screen
 end
 
+function Gui.get_location()
+  cur_loc = Player.get_global()["gui_loc"]
+
+  res = Player.get().display_resolution
+  if cur_loc == nil or cur_loc.x >= res.width or cur_loc.y >= res.height then
+    cur_loc = {x = 82, y = 70}
+  end
+
+  return cur_loc
+end
+
+function Gui.set_location(loc)
+  if Player.get_global()["gui_loc"] ~= loc then
+    res = Player.get().display_resolution
+    if loc == nil or loc.x >= res.width or loc.y >= res.height then
+      loc = {x = 82, y = 70}
+    end
+    Player.get_global()["gui_loc"] = loc
+  end
+end
+
 function Gui.get_left_gui()
   local left_gui = Player.get().gui.left
 

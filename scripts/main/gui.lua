@@ -74,9 +74,8 @@ end
 function MainGui.close_window()
   if MainGui.is_gui_open() then
     local gui = Gui.get_gui(Gui.get_pos(), main_gui_template[1].name)
-    local loc = gui.location
+    Gui.set_location(gui.location)
     gui.destroy()
-    return loc
   end
 end
 
@@ -84,10 +83,10 @@ function MainGui.draw_tabs(tabs)
   tabs:draw_tabs()
 end
 
-function MainGui.open_window(loc)
-  loc = MainGui.close_window() or loc
+function MainGui.open_window()
+  MainGui.close_window()
   gui = Gui.add_gui_template(Gui.get_pos(), main_gui_template)
-  gui.location = loc
+  gui.location = Gui.get_location()
   return gui
 end
 

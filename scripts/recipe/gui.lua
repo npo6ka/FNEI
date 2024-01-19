@@ -93,19 +93,18 @@ function RecipeGui.is_gui_open()
   end
 end
 
-function RecipeGui.open_window(loc)
-  loc = RecipeGui.close_window() or loc
+function RecipeGui.open_window()
+  RecipeGui.close_window()
   local gui = Gui.add_gui_template(Gui.get_pos(), recipe_gui_template)
-  gui.location = loc
+  gui.location = Gui.get_location()
   return gui
 end
 
 function RecipeGui.close_window()
   if RecipeGui.is_gui_open() then
     local gui = Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name)
-    local loc = gui.location
+    Gui.set_location(gui.location)
     gui.destroy()
-    return loc
   end
 end
 

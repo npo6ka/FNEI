@@ -54,11 +54,11 @@ function SettingsGui.is_gui_open()
   end
 end
 
-function SettingsGui.open_window(loc)
-  loc = SettingsGui.close_window() or loc
+function SettingsGui.open_window()
+  SettingsGui.close_window()
 
   local gui = Gui.add_gui_template(Gui.get_pos(), settings_gui_template)
-  gui.location = loc
+  gui.location = Gui.get_location()
   return gui
 end
 
@@ -69,11 +69,8 @@ end
 function SettingsGui.close_window()
   if SettingsGui.is_gui_open() then
     local gui = Gui.get_gui(Gui.get_pos(), settings_gui_template[1].name)
-    local loc = gui.location
-
+    Gui.set_location(gui.location)
     gui.destroy()
-
-    return loc
   end
 end
 
