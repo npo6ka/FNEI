@@ -82,9 +82,9 @@ function HotbarGui.create_hotbar_element_button(prot, type)
   end
 
   if type == "favorite" then
-    return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}}, sprite = "fnei_favorite_icon" }
-  else
-    return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.last_button"}, sprite = "fnei_last_usage_icon" }
+    return { type = "sprite-button", name = type .. "\tempty", style = "fnei_hotbar_block_button", tooltip = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}}, sprite = "fnei_favorite_icon" }
+  else -- type == "last-usage"
+    return { type = "sprite-button", name = type .. "\tempty", style = "fnei_hotbar_block_button", tooltip = {"fnei.last_button"}, sprite = "fnei_last_usage_icon" }
   end
 end
 
