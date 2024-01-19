@@ -26,19 +26,9 @@ end
 function Gui.close_old_fnei_gui()
   local function gui_iterate(parent)
     for _, gui_name in pairs(parent.children_names) do
-      if string.match(gui_name or "", "fnei") and parent[gui_name].valid then
-        if gui_name == "fnei_left_flow" then
-          for _,sec_gui in pairs(parent[gui_name].children_name or {}) do
-            if sec_gui ~= "fnei_hotbar_flow" then
-              parent[gui_name].destroy()
-            end
-          end
-        else
-          if gui_name == "fnei_hotbar_flow" then
-            Controller.get_cont("hotbar").open()
-          end
-          parent[gui_name].destroy()
-        end
+      if string.match(gui_name or "", "fnei_") and parent[gui_name].valid then
+        out("Destroy gui: " .. gui_name)
+        parent[gui_name].destroy()
       end
     end
   end
@@ -46,6 +36,7 @@ function Gui.close_old_fnei_gui()
   gui_iterate(Player.get().gui.left)
   gui_iterate(Player.get().gui.top)
   gui_iterate(Player.get().gui.center)
+  gui_iterate(Player.get().gui.screen)
 
   local modgui = mod_gui.get_frame_flow(Player.get())
   if modgui["fnei_left_flow"] then
@@ -65,6 +56,7 @@ function Gui.refresh_fnei_gui()
   gui_iterate(Player.get().gui.left)
   gui_iterate(Player.get().gui.top)
   gui_iterate(Player.get().gui.center)
+  gui_iterate(Player.get().gui.screen)
 end
 
 function Gui.set_style_field(parent, gui_name, args)
