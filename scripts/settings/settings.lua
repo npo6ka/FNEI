@@ -8,7 +8,7 @@ local element_list = {}
 
 function Settings.init()
   settings_list["need-show"] =                    { type = "checkbox", tab = "main-settings", def_val = true }
-  settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = true }
+  settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-disable-recipes"] =         { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-items"] =            { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-disable-techs"] =           { type = "checkbox", tab = "main-settings", def_val = false }
