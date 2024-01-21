@@ -43,7 +43,7 @@ data.raw["gui-style"].default["fnei_hotbar_label"] =
 
 ------------------------button_style-------------------------
 
-data.raw["gui-style"].default["fnei_hotbar_label_button"] = 
+data.raw["gui-style"].default["fnei_hotbar_label_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -53,7 +53,7 @@ data.raw["gui-style"].default["fnei_hotbar_label_button"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_hotbar_block_button"] = 
+data.raw["gui-style"].default["fnei_hotbar_block_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -63,7 +63,7 @@ data.raw["gui-style"].default["fnei_hotbar_block_button"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_hotbar_down_arrow"] = 
+data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -71,7 +71,7 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
   scalable = false,
   height = 14,
   width = 78,
-    
+
   clicked_graphical_set = {
     filename = "__FNEI__/graphics/down_hotbar_arrow_clicked.png",
     height = 14,
@@ -92,7 +92,7 @@ data.raw["gui-style"].default["fnei_hotbar_down_arrow"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_hotbar_up_arrow"] = 
+data.raw["gui-style"].default["fnei_hotbar_up_arrow"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -100,7 +100,7 @@ data.raw["gui-style"].default["fnei_hotbar_up_arrow"] =
   scalable = false,
   height = 14,
   width = 78,
-    
+
   clicked_graphical_set = {
     filename = "__FNEI__/graphics/up_hotbar_arrow_clicked.png",
     height = 14,

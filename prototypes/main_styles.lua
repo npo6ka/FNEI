@@ -143,7 +143,7 @@ data.raw["gui-style"].default["fnei_main_search_field"] =
 
 ------------------------button_style-------------------------
 
-data.raw["gui-style"].default["fnei_main_empty-tab"] = 
+data.raw["gui-style"].default["fnei_main_empty-tab"] =
 {
   type = "button_style",
   parent = "fnei_default_empty-tab",
@@ -152,7 +152,7 @@ data.raw["gui-style"].default["fnei_main_empty-tab"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_main_selected-tab"] = 
+data.raw["gui-style"].default["fnei_main_selected-tab"] =
 {
   type = "button_style",
   parent = "fnei_default_selected-tab",
@@ -161,7 +161,7 @@ data.raw["gui-style"].default["fnei_main_selected-tab"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_main_red_slot_button"] = 
+data.raw["gui-style"].default["fnei_main_red_slot_button"] =
 {
   type = "button_style",
   parent = "red_slot",
@@ -178,7 +178,7 @@ data.raw["gui-style"].default["fnei_main_grey_slot_button"] = {
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_main_default_search_slot_button"] = 
+data.raw["gui-style"].default["fnei_main_default_search_slot_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -187,7 +187,7 @@ data.raw["gui-style"].default["fnei_main_default_search_slot_button"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_main_default_button"] = 
+data.raw["gui-style"].default["fnei_main_default_button"] =
 {
   type = "button_style",
   height = 32,

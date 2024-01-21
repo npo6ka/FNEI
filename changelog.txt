@@ -169,7 +169,7 @@ Date: 2018-03-04
 Version: 0.1.2
 Date: 2018-03-04
   Bugfixes:
-    - Fixed desync for crafting categories 
+    - Fixed desync for crafting categories
     - Fixed UI scale problem
 ---------------------------------------------------------------------------------------------------
 Version: 0.1.1

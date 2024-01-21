@@ -7,13 +7,13 @@ local tabs = "sett-tabs"
 
 function SettingsController.exit()
   out("settings exit")
-  Player.get_global()["gui_loc"] = SettingsGui.close_window()
+  SettingsGui.close_window()
 end
 
 function SettingsController.open()
   out("settings open")
 
-  local ret_gui = SettingsGui.open_window(Player.get_global()["gui_loc"])
+  local ret_gui = SettingsGui.open_window()
   SettingsGui.draw_tabs(tabs)
   SettingsController.draw_settings()
 
@@ -24,7 +24,7 @@ function SettingsController.draw_settings()
   local cur_tab = tabs:get_cur_tab()
   local settings = Settings.get_sett_list()
   local sett_list = {}
-  
+
   sett_list = SettingsController.set_settings_for_tab(settings, cur_tab)
   SettingsGui.add_option_list(sett_list)
 end

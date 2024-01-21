@@ -262,7 +262,7 @@ data.raw["gui-style"].default["fnei_recipe_products_scroll_pane"] =
 
 ------------------------button_style-------------------------
 
-data.raw["gui-style"].default["fnei_recipe_red_tech_button"] = 
+data.raw["gui-style"].default["fnei_recipe_red_tech_button"] =
 {
   type = "button_style",
   parent = "red_slot",
@@ -271,7 +271,7 @@ data.raw["gui-style"].default["fnei_recipe_red_tech_button"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_recipe_green_tech_button"] = 
+data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
 {
   type = "button_style",
   parent = "green_slot",
@@ -280,7 +280,7 @@ data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
   scalable = false,
 }
 
-data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] = 
+data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -315,13 +315,13 @@ data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] =
     scale = 1,
     size = 36
   },
-  
+
   height = 68,
   width = 68,
   scalable = false
 }
 
-data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] = 
+data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -356,13 +356,13 @@ data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] =
     scale = 1,
     size = 36
   },
-  
+
   height = 68,
   width = 68,
   scalable = false
 }
 
-data.raw["gui-style"].default["fnei_recipe_favorive_button"] = 
+data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -370,7 +370,7 @@ data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
   scalable = false,
   height = 36,
   width = 36,
-    
+
   clicked_graphical_set = {
     filename = "__FNEI__/graphics/favorite_clicked.png",
     height = 64,
@@ -391,7 +391,7 @@ data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
   }
 }
 
-data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] = 
+data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] =
 {
   type = "button_style",
   parent = "compact_slot",
@@ -399,7 +399,7 @@ data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] =
   scalable = false,
   height = 36,
   width = 36,
-    
+
   clicked_graphical_set = {
     filename = "__FNEI__/graphics/favorite_clicked.png",
     height = 64,

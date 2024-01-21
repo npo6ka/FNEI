@@ -13,7 +13,7 @@ gui_tabs_cont["fnei-search"] = require "scripts/main/controllers/fnei"
 function MainController.init_events()
   local tab_list = {}
 
-  for tb_name,_ in pairs(gui_tabs_cont) do 
+  for tb_name,_ in pairs(gui_tabs_cont) do
     table.insert(tab_list, tb_name)
   end
 
@@ -23,13 +23,13 @@ end
 
 function MainController.exit()
   out("Main exit")
-  Player.get_global()["gui_loc"] = MainGui.close_window()
+  MainGui.close_window()
 end
 
 function MainController.open()
   out("Main open")
 
-  local gui = MainGui.open_window(Player.get_global()["gui_loc"] or {x = 82, y = 70})
+  local gui = MainGui.open_window()
   MainGui.draw_tabs(tabs)
   MainController.draw_tab()
 

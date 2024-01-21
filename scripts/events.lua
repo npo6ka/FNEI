@@ -33,6 +33,7 @@ function Events.on_configuration_changed(event)
   for i, player in pairs(game.players) do
     Player.load({ player_index = i })
     Gui.close_old_fnei_gui()
+    Controller.back_key_event()
     Controller.get_cont("hotbar").on_configuration_change()
   end
 end
@@ -58,7 +59,7 @@ end
 
 function Events.on_gui_closed(event)
   Player.load(event)
-  if event and event.element and string.match(event.element.name, "fnei%_") then
+  if event and event.element and string.match(event.element.name, "fnei%\t") then
     Events.gui_key(event)
   end
   TechHook.on_gui_closed(event)
@@ -75,25 +76,25 @@ function Events.on_event_invoke(event)
 end
 
 function Events.parse_name(event)
-  if event == nil then 
+  if event == nil then
     out("Error: Events.parse_name: event == nil ")
-    return 
+    return
   end
   local element = event.element
-  if element == nil then 
+  if element == nil then
     out("Error: Events.parse_name: element == nil ")
-    return 
+    return
   end
 
   local split_strings = {}
 
-  for num in string.gmatch(element.name or "", "[^_]+") do
+  for num in string.gmatch(element.name or "", "[^\t]+") do
     table.insert(split_strings, num)
   end
 
   if split_strings[1] == Gui.get_prefix() then
     return split_strings[2], element.type, split_strings[3], split_strings
-  end  
+  end
 end
 
 function Events:init()

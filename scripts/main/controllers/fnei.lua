@@ -40,7 +40,7 @@ function FneiMainController.set_page_list()
     local term = translate(item.name, "item") or item.name
 
     if string.find(term:lower(), search_text) then
-      table.insert(page_list, "item_" .. item.name)
+      table.insert(page_list, "item\t" .. item.name)
     end
   end
 
@@ -48,7 +48,7 @@ function FneiMainController.set_page_list()
     local term = translate(fluid.name, "fluid") or fluid.name
 
     if string.find(term:lower(), search_text) then
-      table.insert(page_list, "fluid_" .. fluid.name)
+      table.insert(page_list, "fluid\t" .. fluid.name)
     end
   end
 
@@ -76,7 +76,7 @@ end
 
 function FneiMainController.open_item_recipe_event(event, elem_name)
   if elem_name == "item" then
-    local _,pos =  string.find(event.element.name, "item%_")
+    local _,pos =  string.find(event.element.name, "item\t")
 
     if pos then
       elem_name = string.sub(event.element.name, pos + 1)
@@ -96,7 +96,7 @@ end
 
 function FneiMainController.open_fluid_recipe_event(event, elem_name)
   if elem_name == "fluid" then
-    local _,pos =  string.find(event.element.name, "fluid%_")
+    local _,pos =  string.find(event.element.name, "fluid\t")
 
     if pos then
       elem_name = string.sub(event.element.name, pos + 1)

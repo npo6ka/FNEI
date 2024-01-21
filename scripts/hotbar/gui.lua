@@ -41,7 +41,7 @@ function HotbarGui.create_hotbar_element_button(prot, type)
     if string.match(prot.recipe_name, 'impostor') then
       local ps,pos = string.find(prot.recipe_name, "impostor[-]minable:")
 
-      if not pos then 
+      if not pos then
         _,pos = string.find(prot.recipe_name, "impostor[-]pumped:")
       end
 
@@ -59,22 +59,22 @@ function HotbarGui.create_hotbar_element_button(prot, type)
 
       return {
         type = "sprite-button",
-        name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+        name = "r" .. type .. "\t" .. prot.action_type .. "\t" .. prot.type .. "\t" .. prot.name .. "\t" .. prot.recipe_name,
         style = "fnei_hotbar_block_button",
         tooltip = tooltip,
         sprite = sprite
       }
     end
 
-    return { 
+    return {
       type = "choose-elem-button",
-      name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+      name = "r" .. type .. "\t" .. prot.action_type .. "\t" .. prot.type .. "\t" .. prot.name .. "\t" .. prot.recipe_name,
       style = "fnei_default_button",
       elem_type = "recipe",
       elem_value = prot.recipe_name,
       locked = true
       -- type = "sprite-button",
-      -- name = "r" .. type .. "_" .. prot.action_type .. "_" .. prot.type .. "_" .. prot.name .. "_" .. prot.recipe_name,
+      -- name = "r" .. type .. "\t" .. prot.action_type .. "\t" .. prot.type .. "\t" .. prot.name .. "\t" .. prot.recipe_name,
       -- style = "fnei_hotbar_block_button",
       -- tooltip = tooltip,
       -- sprite = sprite
@@ -82,9 +82,9 @@ function HotbarGui.create_hotbar_element_button(prot, type)
   end
 
   if type == "favorite" then
-    return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}}, sprite = "fnei_favorite_icon" }
-  else
-    return { type = "sprite-button", name = type .. "_empty", style = "fnei_hotbar_block_button", tooltip = {"fnei.last_button"}, sprite = "fnei_last_usage_icon" }
+    return { type = "sprite-button", name = type .. "\tempty", style = "fnei_hotbar_block_button", tooltip = {"", {"fnei.fav_button"}, "\n", {"fnei.alt-to-remove"}}, sprite = "fnei_favorite_icon" }
+  else -- type == "last-usage"
+    return { type = "sprite-button", name = type .. "\tempty", style = "fnei_hotbar_block_button", tooltip = {"fnei.last_button"}, sprite = "fnei_last_usage_icon" }
   end
 end
 
@@ -104,7 +104,7 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
     if last_line_cnt > 0 then
       local last_frame = {}
       local last_label = { type = "label", name = "last-usage-button", style = "fnei_hotbar_label", single_line = true, caption = {"fnei.last_button"} }
-    
+
       for j = 1, last_line_cnt do
         for i = 1, columns_number do
           local cur_indx = (j - 1) * columns_number + i
@@ -114,7 +114,7 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
       end
 
       table.insert(template,
-      { 
+      {
         type = "frame", name = "hotbar_last_frame", style = "fnei_hotbar_frame", direction = "vertical", children = {
           { type = "table", name = "hoticon-table", style = "fnei_hotbar_zero_spacing_table", column_count = 1, children = {
             last_label,
@@ -131,13 +131,13 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
       for j = 1, fav_line_cnt do
         for i = 1, columns_number do
           local cur_indx = (j - 1) * columns_number + i
-        
+
           table.insert(fav_frame, HotbarGui.create_hotbar_element_button(fav_arr[cur_indx], "favorite"))
         end
       end
 
-      table.insert(template, 
-      { 
+      table.insert(template,
+      {
         type = "frame", name = "hotbar_fav_frame", style = "fnei_hotbar_frame", direction = "vertical", children = {
           { type = "table", name = "hoticon-table", style = "fnei_hotbar_zero_spacing_table", column_count = 1, children = {
             fav_label,
@@ -146,7 +146,7 @@ function HotbarGui.draw_hotbar_bar_extension(last_arr, fav_arr)
         }
       })
     end
-    
+
     table.insert(template, { type = "button", name = "hide-button", style = "fnei_hotbar_up_arrow", })
   else
     table.insert(template, { type = "button", name = "hide-button", style = "fnei_hotbar_down_arrow", })
@@ -161,11 +161,11 @@ function HotbarGui.open_window()
   local gui = Gui.get_left_gui()
 
   if not gui[hotbar_flow_name] then
-    gui.add({ type = "flow", name = hotbar_flow_name, style = nil, direction = "vertical" }) 
+    gui.add({ type = "flow", name = hotbar_flow_name, style = nil, direction = "vertical" })
   end
 
   return Gui.add_gui_template(gui[hotbar_flow_name], hotbar_gui_template)
-end 
+end
 
 function HotbarGui.close_window()
   if HotbarGui.is_gui_open() then

@@ -17,13 +17,13 @@ end
 
 function RecipeController.exit()
   out("Recipe exit")
-  Player.get_global()["gui_loc"] = RecipeGui.close_window()
+  RecipeGui.close_window()
 end
 
 function RecipeController.open()
   out("Recipe open")
 
-  local gui = RecipeGui.open_window(Player.get_global()["gui_loc"])
+  local gui = RecipeGui.open_window()
   RecipeController.open_new_recipes()
 
   return gui
@@ -123,7 +123,7 @@ function RecipeController.draw_favorite_button()
   end
 
   if RecipeController.is_gui_open() then
-    local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe) 
+    local state = Controller.get_cont("hotbar").get_favorite_recipe_state(recipe)
     RecipeGui.draw_favorite_state(state)
   end
 end
@@ -241,7 +241,7 @@ function RecipeController.set_cur_page()
 
   if val and val.page then
     local end_val = pages:amount_page()
-    
+
     for i = 1,end_val do
       local recipe = pages:get_list_for_tab(i)
       if recipe and recipe[1] == val.page then
@@ -258,7 +258,7 @@ end
 
 function RecipeController.open_item_recipe_event(event, elem_name)
   if elem_name == "item" then
-    local _,pos = string.find(event.element.name, "item%_")
+    local _,pos = string.find(event.element.name, "item\t")
 
     if pos then
       elem_name = string.sub(event.element.name, pos + 1)
@@ -276,7 +276,7 @@ end
 
 function RecipeController.open_fluid_recipe_event(event, elem_name)
   if elem_name == "fluid" then
-    local _,pos =  string.find(event.element.name, "fluid%_")
+    local _,pos =  string.find(event.element.name, "fluid\t")
 
     if pos then
       elem_name = string.sub(event.element.name, pos + 1)
@@ -294,13 +294,6 @@ end
 
 function RecipeController.open_tech_event(event, elem_name, split_names)
   local tech_name = split_names[4]
-  local el_num = 5
-
-  -- if tech contains '_' in name, need add this part here
-  while split_names[el_num] ~= nil do
-    tech_name = tech_name .. "_" .. split_names[el_num]
-    el_num = el_num + 1
-  end
 
   TechHook.save_cur_fnei_state()
   Player.get().open_technology_gui(tech_name)
@@ -376,7 +369,7 @@ function RecipeController.delete_equals_recipe(list)
           end
         end
 
-        if flag then 
+        if flag then
           ret_tb[name] = recipe
         end
       else

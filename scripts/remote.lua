@@ -15,7 +15,7 @@ end
 --   prot_type: the type-property of the prototype ("item" or "fluid")
 --   prot_name: the name of the prototype for which a list of recipes is shown
 --   cur_page: the name of the recipe prototype out of the list that should be shown
- 
+
 -- A 1-to-1 translation of the internal method of displaying an prototype
 -- Usage example: remote.call("fnei", "show_recipe_for_prot", "craft", "item", "iron-plate")
 function Remote.show_recipe_for_prot(action_type, prot_type, prot_name)
@@ -23,10 +23,10 @@ function Remote.show_recipe_for_prot(action_type, prot_type, prot_name)
     Controller.open_event("recipe")
 end
 
--- This will show the recipes for the given recipe_name. 
+-- This will show the recipes for the given recipe_name.
 -- Since fnei always works with a list of recipes for prototypes, this list is formed as follows.
--- As a prototype for displaying a list of recipes, the first prototype from the list of products of the specified 
--- recipe or from the list of ingredients will be used (if the list of products is empty). 
+-- As a prototype for displaying a list of recipes, the first prototype from the list of products of the specified
+-- recipe or from the list of ingredients will be used (if the list of products is empty).
 -- Optionally, you can specify a prototype for which this reipe list should be displayed.
 
 -- Usage example: remote.call("fnei", "show_recipe", "basic-oil-processing")
@@ -55,7 +55,7 @@ function Remote.show_recipe(recipe_name, prot_name)
             prot = recipe.products[1]
         elseif recipe.ingredients and #recipe.ingredients > 0 then
             prot = recipe.ingredients[1]
-        else 
+        else
             Debug:error(Remote.classname, "FNEI remote error: recipe don't contaains ingridient and products:", recipe_name)
             return
         end
@@ -68,7 +68,7 @@ function Remote.show_recipe(recipe_name, prot_name)
 end
 
 function Remote:init()
-    remote.add_interface("fnei", 
+    remote.add_interface("fnei",
         {
             version = self.version,
             show_recipe_for_prot = self.show_recipe_for_prot,

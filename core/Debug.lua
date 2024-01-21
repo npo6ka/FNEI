@@ -47,7 +47,7 @@ end
 function get_message(tag, logClass, ...)
   local message = rec_obj_to_string(...)
 
-  message = "[FNEI]" .. tag .. " <" .. logClass .. "> " .. message 
+  message = "[FNEI]" .. tag .. " <" .. logClass .. "> " .. message
 
   return message
 end

@@ -36,7 +36,7 @@ end
 
 function FneiMainGui.focus_on_search(parent)
   local cur_tab = Gui.get_gui(Gui.get_pos(), search_field_name)
-  
+
   if cur_tab and cur_tab.valid then
     cur_tab.focus()
   end
@@ -75,14 +75,15 @@ function FneiMainGui.draw_item_list(data_list)
   for _,prot in pairs(data_list) do
     local style = "fnei_main_grey_slot_button"
 
-    if string.match(prot, "item%_") then
+    if string.match(prot, "item\t") then
+
       local item_name = string.sub(prot, 6)
       if items and items[item_name] and items[item_name].has_flag("hidden") then
         style = "fnei_main_red_slot_button"
       end
-      
+
       Gui.add_choose_button(gui_tabel, { type = "choose-elem-button", name = prot, elem_type = "item", style = style, elem_value = item_name, locked = true })
-    elseif string.match(prot, "fluid%_") then
+    elseif string.match(prot, "fluid\t") then
       local fluid_name = string.sub(prot, 7)
       if fluids and fluids[fluid_name] and fluids[fluid_name].hidden then
         style = "fnei_main_red_slot_button"

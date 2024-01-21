@@ -75,7 +75,7 @@ function Recipe:append_implicit_recipes(into)
       local recipe = add_impostor('impostor-minable:' .. proto.name)
 
       recipe.localised_name = get_localised_name(proto)
-      recipe.category = "mine" .. proto.resource_category
+      recipe.category = "mine " .. proto.resource_category
 
       recipe.ingredients = {{ type = 'entity', name = proto.name, amount = 1 }}
       recipe.products    = proto.mineable_properties.products or {}
@@ -97,7 +97,7 @@ function Recipe:append_implicit_recipes(into)
       local recipe = add_impostor('impostor-pumped:' .. proto.name)
 
       recipe.localised_name = get_localised_name(proto)
-      recipe.category = "pump" .. proto.name
+      recipe.category = "pump " .. proto.name
 
       recipe.products = {{ type = 'fluid', name = proto.fluid.name, amount = 1 }}
     end
@@ -143,8 +143,8 @@ local tech_dep
 
 function Recipe:compare(recipe, s_recipe)
   if recipe.energy == s_recipe.energy and recipe.category == s_recipe.category then
-    if Recipe:compare_recipe_prot(recipe.ingredients, s_recipe.ingredients) and 
-       Recipe:compare_recipe_prot(recipe.products, s_recipe.products) 
+    if Recipe:compare_recipe_prot(recipe.ingredients, s_recipe.ingredients) and
+       Recipe:compare_recipe_prot(recipe.products, s_recipe.products)
     then
       if not tech_dep then
         tech_dep = RawTech:create_tech_dependencies(game.technology_prototypes)

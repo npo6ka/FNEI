@@ -57,7 +57,7 @@ function setclass(name, super)
   -- if applied to argument, pass it to the class method new
   setmetatable(class, {
     __index = function(self,key) return self.super[key] end,
-    __call  = function(self,...) 
+    __call  = function(self,...)
       local arg = {...}
       return self.new(self,unpack(arg))
     end

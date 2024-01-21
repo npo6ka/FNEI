@@ -64,7 +64,7 @@ function Array:new( array_name )
     local i = 1
 
     while array[i] ~= nil do
-      i = i + 1 
+      i = i + 1
     end
 
     return i
@@ -74,11 +74,11 @@ function Array:new( array_name )
     local array = obj:get_array()
     local size = obj:size()
 
-    if elem == nil then 
+    if elem == nil then
       return nil
     end
 
-    if type(elem) ~= "table" then 
+    if type(elem) ~= "table" then
       for i,j in pairs(array) do
         if j == elem then
           return i
@@ -88,7 +88,7 @@ function Array:new( array_name )
       for i,j in pairs(array) do
         if type(j) == "table" and #j == #elem then
           local flag = true
-          
+
           for ind,val in pairs(j) do
             if elem[ind] ~= val then
               flag = false

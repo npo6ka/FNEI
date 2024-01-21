@@ -13,7 +13,7 @@ end
 function Gui.create_gui_name(contr_name, gui_name)
   if type(gui_name) == "string" then
     if type(contr_name) == "string" then
-      return mod_prefix .. '_' .. contr_name .. '_' .. gui_name
+      return mod_prefix .. '\t' .. contr_name .. '\t' .. gui_name
     else
       Debug:error(Gui.classname, "Error in function Gui.create_gui_name: contr_name is nil (", contr_name, ")")
     end
@@ -26,19 +26,9 @@ end
 function Gui.close_old_fnei_gui()
   local function gui_iterate(parent)
     for _, gui_name in pairs(parent.children_names) do
-      if string.match(gui_name or "", "fnei") and parent[gui_name].valid then
-        if gui_name == "fnei_left_flow" then
-          for _,sec_gui in pairs(parent[gui_name].children_name or {}) do
-            if sec_gui ~= "fnei_hotbar_flow" then
-              parent[gui_name].destroy()
-            end
-          end
-        else
-          if gui_name == "fnei_hotbar_flow" then
-            Controller.get_cont("hotbar").open()
-          end
-          parent[gui_name].destroy()
-        end
+      if string.match(gui_name or "", "fnei_") and parent[gui_name].valid then
+        out("Destroy gui: " .. gui_name)
+        parent[gui_name].destroy()
       end
     end
   end
@@ -46,7 +36,8 @@ function Gui.close_old_fnei_gui()
   gui_iterate(Player.get().gui.left)
   gui_iterate(Player.get().gui.top)
   gui_iterate(Player.get().gui.center)
-  
+  gui_iterate(Player.get().gui.screen)
+
   local modgui = mod_gui.get_frame_flow(Player.get())
   if modgui["fnei_left_flow"] then
     modgui["fnei_left_flow"].destroy()
@@ -61,10 +52,11 @@ function Gui.refresh_fnei_gui()
       end
     end
   end
-  
+
   gui_iterate(Player.get().gui.left)
   gui_iterate(Player.get().gui.top)
   gui_iterate(Player.get().gui.center)
+  gui_iterate(Player.get().gui.screen)
 end
 
 function Gui.set_style_field(parent, gui_name, args)
@@ -83,6 +75,27 @@ end
 
 function Gui.get_pos()
   return Player.get().gui.screen
+end
+
+function Gui.get_location()
+  cur_loc = Player.get_global()["gui_loc"]
+
+  res = Player.get().display_resolution
+  if cur_loc == nil or cur_loc.x >= res.width or cur_loc.y >= res.height then
+    cur_loc = {x = 82, y = 70}
+  end
+
+  return cur_loc
+end
+
+function Gui.set_location(loc)
+  if Player.get_global()["gui_loc"] ~= loc then
+    res = Player.get().display_resolution
+    if loc == nil or loc.x >= res.width or loc.y >= res.height then
+      loc = {x = 82, y = 70}
+    end
+    Player.get_global()["gui_loc"] = loc
+  end
 end
 
 function Gui.get_left_gui()
@@ -193,7 +206,7 @@ function Gui.set_def_fields(parent, gui_elem)
   if gui_elem.style == "" then
     gui_elem.style = gui_elem.name
   end
-  
+
   return gui_elem
 end
 
@@ -280,7 +293,7 @@ function Gui.add_widget(parent, gui_elem)
     while target.parent and target.parent.parent do
       target = target.parent
     end
-    
+
     if target.type == "frame" then
       gui.drag_target = target
     end
@@ -340,7 +353,7 @@ function Gui.set_choose_but_val(button, val)
       button.elem_value = check_val(val, game.recipe_prototypes, "recipe")
     elseif button.elem_type == "entity" then
       button.elem_value = check_val(val, game.entity_prototypes, "entity")
-    else 
+    else
       Debug:error(Gui.classname, "Gui.set_choose_but_val: unknown choose-button type")
     end
   else
