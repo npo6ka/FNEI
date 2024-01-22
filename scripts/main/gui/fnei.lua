@@ -76,7 +76,6 @@ function FneiMainGui.draw_item_list(data_list)
     local style = "fnei_main_grey_slot_button"
 
     if string.match(prot, "item\t") then
-
       local item_name = string.sub(prot, 6)
       if items and items[item_name] and items[item_name].has_flag("hidden") then
         style = "fnei_main_red_slot_button"

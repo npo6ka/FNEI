@@ -11,6 +11,7 @@ function Settings.init()
   settings_list["show-hidden-recipes"] =          { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-disable-recipes"] =         { type = "checkbox", tab = "main-settings", def_val = true }
   settings_list["show-hidden-items"] =            { type = "checkbox", tab = "main-settings", def_val = false }
+  settings_list["show-hidden-fluids"] =           { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["show-disable-techs"] =           { type = "checkbox", tab = "main-settings", def_val = false }
   settings_list["fnei-line-count"] =              { type = "numeric-up-down", tab = "main-settings", def_val = 10, min_val = 5, max_val = 12 }
   settings_list["detail-chance"] =                { type = "checkbox", tab = "main-settings", def_val = true }

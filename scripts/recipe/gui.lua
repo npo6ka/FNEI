@@ -260,12 +260,18 @@ function RecipeGui.set_made_in_list(recipe)
           local player = Player.get()
           local tooltip = {"", {"fnei.handcraft"}}
 
-          if caption and player and cat.val.name == "handcraft" and (player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1) ~= 0 then
-            caption = round(recipe.energy / ((player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)), 3)
+          if caption and player and cat.val.name == "handcraft" then
+            local crafting_speed = (player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)
+            if crafting_speed ~= 0 then
+              caption = round(recipe.energy / crafting_speed, 3)
+            end
           end
 
-          if caption and player and cat.val.name == "handmine" and (player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) ~= 0 then
-            caption = round(recipe.mining_time / ((player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) * cat.val.mining_speed), 3)
+          if caption and player and cat.val.name == "handmine" then
+            local mining_speed = (player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) * cat.val.mining_speed
+            if mining_speed ~= 0 then
+              caption = round(recipe.mining_time / mining_speed, 3)
+            end
             tooltip = {"", {"fnei.handmining"}}
           end
 
