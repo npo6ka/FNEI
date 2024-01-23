@@ -116,6 +116,12 @@ end
 
 function Gui.get_gui_proc(parent, name)
   if not parent then return end
+
+  -- check only fnei gui
+  if parent.name ~= "screen" and parent.name ~= "left" and string.find(parent.name, "fnei") == nil then
+    return
+  end
+
   local result
   for _,g in pairs(parent.children) do
     if g and g.valid then
