@@ -1,8 +1,21 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.2
-Date: ???
+Date: 2024-01-23
   Changes:
-    - Hidden fluids will not be shown when Show hidden items setting is disabled
+    - Added Ukranium translation (MetenBouldry)
+    - Added Brazilian translation (LUISDASARTIMANHAS)
+    - Added settings for displaying hidden fluids in the fnei gui
+    - Hide hidden fluids by default
+    - Add "Hand extraction" for the mining entities
+    - Default settings for displaying hidden recipes are true.
+    - Changed caption for very low or high number on gui
+  Bugfixes:
+    - Fix fnei gui location off screen
+    - Fix open main fnei gui when click on the empty hotbar button
+    - Fix an issue related with the '_' symbol in the recipe name
+    - Fix incorrectly display mining entities
+    - Fix temperature range for ingredients
+    - Fix GUI lag while Improved Research Queue is installed
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.1
 Date: 2021-03-29
