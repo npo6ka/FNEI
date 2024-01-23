@@ -493,9 +493,25 @@ function RecipeGui.get_element_caption(element)
   end
 
   -- add temperature for fluid
+  local function is_number(value) return "number" == type(value) end
+  -- Excludes lowest/greatest number that can still be represented on a double
+  -- value-(value-1) == 1 and value-(value+1) == -1 excludes numbers that are not huge enough such that n-1 or n+1 overflow
+  local function is_finite(value) return is_number(value) and value-(value-1) == 1 and value-(value+1) == -1 and -math.huge ~= value and math.huge ~= value end
 
-  if element.type == "fluid" and element.temperature and Settings.get_val("show-temperature-of-fluids") then
-    loc_str = {"", loc_str, " (" .. element.temperature .. "°)"}
+  if element.type == "fluid" and Settings.get_val("show-temperature-of-fluids")  then
+    if element.temperature then -- product
+      loc_str = {"", loc_str, " (" .. element.temperature .. "°C)"}
+    elseif element.minimum_temperature and not is_finite(element.maximum_temperature) then -- ingredient
+      loc_str = {"", loc_str, " ( ≥" .. element.minimum_temperature .. "°C)"}
+    elseif element.maximum_temperature and not is_finite(element.minimum_temperature) then -- ingredient
+      loc_str = {"", loc_str, " ( ≤" .. element.maximum_temperature .. "°C)"}
+    elseif element.minimum_temperature and element.maximum_temperature then -- ingredient; must be after each of the single temperature value test
+      if element.minimum_temperature == element.maximum_temperature then
+        loc_str = {"", loc_str, " (" .. element.minimum_temperature .. "°C)"}
+      else
+        loc_str = {"", loc_str, " (" .. element.minimum_temperature .. "°C - " .. element.maximum_temperature .. "°C)"}
+      end
+    end
   end
 
   return loc_str
