@@ -126,7 +126,7 @@ end
 
 function RecipeGui.set_recipe_time(energy)
   local time = Gui.get_gui(Gui.get_pos(), "fnei_time_label")
-  time.caption = energy
+  time.caption = round_to_str(energy, 3)
 end
 
 function RecipeGui.set_recipe_name(recipe)
@@ -263,14 +263,14 @@ function RecipeGui.set_made_in_list(recipe)
           if caption and player and cat.val.name == "handcraft" then
             local crafting_speed = (player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)
             if crafting_speed ~= 0 then
-              caption = round(recipe.energy / crafting_speed, 3)
+              caption = round_to_str(recipe.energy / crafting_speed, 3)
             end
           end
 
           if caption and player and cat.val.name == "handmine" then
             local mining_speed = (player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) * cat.val.mining_speed
             if mining_speed ~= 0 then
-              caption = round(recipe.mining_time / mining_speed, 3)
+              caption = round_to_str(recipe.mining_time / mining_speed, 3)
             end
             tooltip = {"", {"fnei.handmining"}}
           end
@@ -288,11 +288,11 @@ function RecipeGui.set_made_in_list(recipe)
           local entity = item_list[cat.val.name].place_result
 
           if caption and entity and entity.crafting_speed ~= nil then
-            caption = round(recipe.energy / entity.crafting_speed, 3)
+            caption = round_to_str(recipe.energy / entity.crafting_speed, 3)
           end
 
           if caption and entity and entity.pumping_speed then
-            caption = round(recipe.energy / entity.pumping_speed, 3)
+            caption = round_to_str(recipe.energy / entity.pumping_speed, 3)
           end
 
           element = {
@@ -315,7 +315,7 @@ function RecipeGui.set_made_in_list(recipe)
             locked = true
           }
           -- https://wiki.factorio.com/Mining
-          caption = round(recipe.mining_time / (cat.mining_speed), 3)
+          caption = round_to_str(recipe.mining_time / (cat.mining_speed), 3)
         end
       end
 
@@ -444,12 +444,12 @@ function RecipeGui.get_element_caption(element)
 
   if not Settings.get_val("detail-chance") and prob ~= nil then
     if element.amount then
-      loc_str = round(element.amount * prob, 3)
+      loc_str = round_to_str(element.amount * prob, 3)
     else
       local min = element.amount_min or 0
       local max = element.amount_max or 0
 
-      loc_str = round((min + max) / 2 * prob, 3)
+      loc_str = round_to_str((min + max) / 2 * prob, 3)
     end
 
     loc_str = {"", loc_str, " × ", get_localised_name(prot)}
@@ -463,7 +463,7 @@ function RecipeGui.get_element_caption(element)
       local max = element.amount_max or 0
 
       if not Settings.get_val("detail-chance") and prob ~= nil then
-        loc_str = round((min + max) / 2 * prob, 3)
+        loc_str = round_to_str((min + max) / 2 * prob, 3)
       else
         if min == max then
             loc_str = max
@@ -484,7 +484,7 @@ function RecipeGui.get_element_caption(element)
     -- add probability for product if exists
 
     if prob ~= nil and prob ~= 1 then
-      loc_str = {"", loc_str, "" .. round(prob * 100, 3) .. "% "}
+      loc_str = {"", loc_str, "" .. round_to_str(prob * 100, 3) .. "% "}
     end
 
     -- add localised name
