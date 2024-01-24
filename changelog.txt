@@ -2,7 +2,7 @@
 Version: 0.4.2
 Date: 2024-01-23
   Changes:
-    - Added Ukranium translation (MetenBouldry)
+    - Added Ukraine translation (MetenBouldry)
     - Added Brazilian translation (LUISDASARTIMANHAS)
     - Added settings for displaying hidden fluids in the fnei gui
     - Hide hidden fluids by default
