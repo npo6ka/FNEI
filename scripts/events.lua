@@ -35,12 +35,19 @@ function Events.on_configuration_changed(event)
     Gui.close_old_fnei_gui()
     Controller.back_key_event()
     Controller.get_cont("hotbar").on_configuration_change()
+    Translate.reset_translate()
   end
 end
 
 function Events.on_player_created(event)
   Player.load(event)
   Controller.get_cont("hotbar").open()
+  Translate.init_translate()
+end
+
+function Events.on_string_translated(event)
+  Player.load(event)
+  Translate.set_translate_result(event.id, event.result)
 end
 
 function Events.back_key(event)
@@ -108,6 +115,7 @@ function Events:init()
   self.event_load(back_key_name, self.back_key)
   self.event_load(defines.events.on_gui_closed, self.on_gui_closed)
   self.event_load(defines.events.on_player_left_game, self.on_player_left_game)
+  self.event_load(defines.events.on_string_translated, self.on_string_translated)
 
   for _,event in pairs(supported_gui_event) do
     self.event_load(event, self.on_event_invoke)

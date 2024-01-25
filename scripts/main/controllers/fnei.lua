@@ -2,8 +2,6 @@ local FneiMainController = {
   classname = "FNFneiMainController",
 }
 
-local translate = require 'utils/translate'
-
 local pages = "main-pages"
 local cont_gui
 
@@ -31,24 +29,35 @@ end
 
 function FneiMainController.set_page_list()
   local search_text = FneiMainController.get_search_field():gsub(" ", "-"):gsub("%p", "%%%0"):lower()
+  search_text = Translate.tolower(search_text)
   local page_list = {}
 
   local items  = get_item_list()
   local fluids = get_fluid_list()
 
   for _, item in pairs(items) do
-    local term = translate(item.name, "item") or item.name
+    local term = item.name
 
     if string.find(term:lower(), search_text) then
       table.insert(page_list, "item\t" .. item.name)
+    else
+      term = Translate.tolower(Translate.translate(item.name, "item"))
+      if term and string.find(term, search_text) then
+        table.insert(page_list, "item\t" .. item.name)
+      end
     end
   end
 
   for _, fluid in pairs(fluids) do
-    local term = translate(fluid.name, "fluid") or fluid.name
+    local term = fluid.name
 
     if string.find(term:lower(), search_text) then
       table.insert(page_list, "fluid\t" .. fluid.name)
+    else
+      term = Translate.tolower(Translate.translate(fluid.name, "fluid"))
+      if term and string.find(term, search_text) then
+        table.insert(page_list, "fluid\t" .. fluid.name)
+      end
     end
   end
 

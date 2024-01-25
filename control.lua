@@ -23,6 +23,7 @@ require "utils/paging"
 require "utils/list"
 require "utils/array"
 require "utils/open_tech_hook"
+require "utils/translate"
 require "scripts/events"
 require "scripts/remote"
 
