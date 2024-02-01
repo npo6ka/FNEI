@@ -28,38 +28,26 @@ function FneiMainController.redraw_content()
 end
 
 function FneiMainController.set_page_list()
-  local search_text = FneiMainController.get_search_field():gsub(" ", "-"):gsub("%p", "%%%0"):lower()
-  search_text = Translate.tolower(search_text)
+  local search_text = Translate.tolower(FneiMainController.get_search_field():gsub(" ", "-"):gsub("%p", "%%%0"))
   local page_list = {}
 
-  local items  = get_item_list()
-  local fluids = get_fluid_list()
+  function prot_iterate(prots, prot_name)
+    for _, prot in pairs(prots) do
+      local term = prot.name
 
-  for _, item in pairs(items) do
-    local term = item.name
-
-    if string.find(term:lower(), search_text) then
-      table.insert(page_list, "item\t" .. item.name)
-    else
-      term = Translate.tolower(Translate.translate(item.name, "item"))
-      if term and string.find(term, search_text) then
-        table.insert(page_list, "item\t" .. item.name)
+      if string.find(term:lower(), search_text) then
+        table.insert(page_list, prot_name .. "\t" .. prot.name)
+      else
+        term = Translate.translate(prot.name, prot_name)
+        if term and string.find(term, search_text) then
+          table.insert(page_list, prot_name .. "\t" .. prot.name)
+        end
       end
     end
   end
 
-  for _, fluid in pairs(fluids) do
-    local term = fluid.name
-
-    if string.find(term:lower(), search_text) then
-      table.insert(page_list, "fluid\t" .. fluid.name)
-    else
-      term = Translate.tolower(Translate.translate(fluid.name, "fluid"))
-      if term and string.find(term, search_text) then
-        table.insert(page_list, "fluid\t" .. fluid.name)
-      end
-    end
-  end
+  prot_iterate(get_item_list(), "item")
+  prot_iterate(get_fluid_list(), "fluid")
 
   pages.num_per_page = 12 * Settings.get_val("fnei-line-count")
   pages:set_page_list(page_list)

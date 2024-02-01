@@ -1,3 +1,4 @@
+-- https://github.com/artemshein/luv/blob/master/utf8data.lua
 local utf8_uc_lc = {
 	["A"] = "a",
 	["B"] = "b",
