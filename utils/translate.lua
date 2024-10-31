@@ -64,9 +64,11 @@ function Translate.init_translate_prot(prots, registry_prot)
     local ids = Player.get().request_translations(loc_names)
 
     local i = 0
-    for _,prot in pairs(prots) do
-      i = i + 1
-      registry_prot.ids[ids[i]] = prot.name
+    if ids then
+      for _,prot in pairs(prots) do
+        i = i + 1
+        registry_prot.ids[ids[i]] = prot.name
+      end
     end
   end
 end
