@@ -65,10 +65,10 @@ function Settings.set_val(sett_name, val)
   end
 end
 
-function Settings.get_global_sett()
-  local pl_global = Player.get_global()
-  if not pl_global.settings then pl_global.settings = {} end
-  return pl_global.settings
+function Settings.get_storage_sett()
+  local pl_storage = Player.get_storage()
+  if not pl_storage.settings then pl_storage.settings = {} end
+  return pl_storage.settings
 end
 
 function Settings.init_events()

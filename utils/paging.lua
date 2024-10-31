@@ -16,20 +16,20 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
     Events.add_custom_event(gui_name, "sprite-button", obj.page_name .. "-back", obj.page_back_event)
   end
 
-  function obj:get_page_global()
-    local global = Player.get_global()
-    if not global["page-" .. page_name] then global["page-" .. page_name] = {} end
-    return global["page-" .. page_name]
+  function obj:get_page_storage()
+    local storage = Player.get_storage()
+    if not storage["page-" .. page_name] then storage["page-" .. page_name] = {} end
+    return storage["page-" .. page_name]
   end
 
   function obj:get_cur_page()
-    return obj:get_page_global().cur_page or 1
+    return obj:get_page_storage().cur_page or 1
   end
 
   function obj:set_cur_page(val)
     local max_page = self:amount_page()
     if max_page < 1 then max_page = 1 end
-    local gl_page = obj:get_page_global()
+    local gl_page = obj:get_page_storage()
 
     if val < 1 then
       gl_page.cur_page = max_page
@@ -45,7 +45,7 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj:set_page_list(item_list)
-    self:get_page_global().list = item_list
+    self:get_page_storage().list = item_list
 
     --set new cur_page
     local max_tab = self:amount_page()
@@ -56,7 +56,7 @@ function Page:new(page_name, gui_name, num_per_page, forward_func, back_func)
   end
 
   function obj:get_page_list()
-    return self:get_page_global().list or {}
+    return self:get_page_storage().list or {}
   end
 
   function obj:get_list_for_tab(tab_namber)

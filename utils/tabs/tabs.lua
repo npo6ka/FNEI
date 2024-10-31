@@ -20,19 +20,19 @@ function Tabs:new(tab_name, gui_name, tabs_list, en_style, dis_style, func)
     end
   end
 
-  function obj:get_tab_global()
-    local global = Player.get_global()
-    if not global.tabs then global.tabs = {} end
-    return global.tabs
+  function obj:get_tab_storage()
+    local storage = Player.get_storage()
+    if not storage.tabs then storage.tabs = {} end
+    return storage.tabs
   end
 
   function obj:get_cur_tab()
-    return self:get_tab_global()[self.tab_name] or self.tabs[1]
+    return self:get_tab_storage()[self.tab_name] or self.tabs[1]
   end
 
   function obj:set_cur_tab(val)
-    local global = self:get_tab_global()
-    global[self.tab_name] = val
+    local storage = self:get_tab_storage()
+    storage[self.tab_name] = val
     self:draw_tabs()
   end
 

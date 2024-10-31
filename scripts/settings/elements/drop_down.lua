@@ -3,17 +3,17 @@ local DropDownSett = {
 }
 
 function DropDownSett.get_val(setting)
-  local global_set = Settings.get_global_sett()
+  local storage_set = Settings.get_storage_sett()
 
-  if global_set[setting.name] == nil then
-    global_set[setting.name] = setting.def_val
+  if storage_set[setting.name] == nil then
+    storage_set[setting.name] = setting.def_val
   end
 
-  return global_set[setting.name]
+  return storage_set[setting.name]
 end
 
 function DropDownSett.set_val(setting, val)
-  local sets = Settings.get_global_sett()
+  local sets = Settings.get_storage_sett()
   sets[setting.name] = val
 end
 

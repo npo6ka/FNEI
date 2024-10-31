@@ -40,7 +40,7 @@ function Remote.show_recipe(recipe_name, prot_name)
         end
     end
 
-    local recipe = game.recipe_prototypes[recipe_name]
+    local recipe = prototypes.recipe[recipe_name]
 
     if recipe then
         local prot

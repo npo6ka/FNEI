@@ -8,7 +8,7 @@ function Array:new( array_name )
   }
 
   function obj:get_array( )
-    local gl = Player.get_global()
+    local gl = Player.get_storage()
     if not gl["a" .. self.name] then gl["a" .. self.name] = {} end
     return gl["a" .. self.name]
   end
@@ -49,7 +49,7 @@ function Array:new( array_name )
   end
 
   function obj:clear( )
-    Player.get_global()["a" .. self.name] = {}
+    Player.get_storage()["a" .. self.name] = {}
   end
 
   function obj:remove( pos )

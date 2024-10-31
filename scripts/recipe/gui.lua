@@ -86,7 +86,7 @@ end
 
 function RecipeGui.is_gui_open()
   local val = Gui.get_gui(Gui.get_pos(), recipe_gui_template[1].name)
-  if val and next(val) and val.valid then
+  if val and val.valid then
     return true
   else
     return false
@@ -150,15 +150,19 @@ function RecipeGui.set_recipe_icon(recipe)
   local value = recipe.name
   local type = "recipe"
 
-  if rawget(recipe, 'impostor') then
+  if string.match(recipe.name, 'impostor') then
     local _,pos = string.find(value, "impostor[-]minable:")
+    local tmp_type = "entity"
 
     if not pos then
       _,pos = string.find(value, "impostor[-]pumped:")
+      tmp_type = "tile"
     end
 
-    value = string.sub(value, (pos or -1) + 1)
-    type = "entity"
+    if pos then
+      value = string.sub(value, (pos or -1) + 1)
+      type = tmp_type
+    end
   end
 
   clear_gui(icon_flow)
@@ -287,12 +291,12 @@ function RecipeGui.set_made_in_list(recipe)
         if cat.ingredient_count >= ing_cnt and in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
           local entity = item_list[cat.val.name].place_result
 
-          if caption and entity and entity.crafting_speed ~= nil then
-            caption = round_to_str(recipe.energy / entity.crafting_speed, 3)
+          if caption and entity and entity.get_crafting_speed() ~= nil then
+            caption = round_to_str(recipe.energy / entity.get_crafting_speed(), 3)
           end
 
-          if caption and entity and entity.pumping_speed then
-            caption = round_to_str(recipe.energy / entity.pumping_speed, 3)
+          if caption and entity and entity.type == "offshore-pump" and entity.pumping_speed then
+            caption = round_to_str(recipe.energy / (entity.pumping_speed * 60), 3)
           end
 
           element = {
@@ -434,7 +438,7 @@ function RecipeGui.get_element_caption(element)
   elseif element.type == "fluid" then
     prot = get_full_fluid_list()[element.name]
   elseif element.type == 'entity' then
-    prot = game.entity_prototypes[element.name]
+    prot = prototypes.entity[element.name]
   end
 
   local loc_str = nil

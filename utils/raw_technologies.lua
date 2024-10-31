@@ -24,7 +24,7 @@ function RawTech:create_tech_dependencies(tech_list)
   local ret_tb = {}
 
   for _,tech in pairs(tech_list) do
-    for _,modifier in pairs(tech.effects) do
+    for _,modifier in pairs(tech.prototype.effects) do
       if modifier.type == "unlock-recipe" then
         if not ret_tb[modifier.recipe] then
           ret_tb[modifier.recipe] = {}

@@ -7,24 +7,24 @@ local buildings = "buildings"
 local categories = "categories"
 
 function CraftingBuildingsSett.get_val(setting, type, val)
-  local global_set = Settings.get_global_sett()
+  local storage_set = Settings.get_storage_sett()
 
-  if not global_set[setting.name] then
-    global_set[setting.name] = {}
-    global_set[setting.name][categories] = {}
-    global_set[setting.name][buildings] = {}
+  if not storage_set[setting.name] then
+    storage_set[setting.name] = {}
+    storage_set[setting.name][categories] = {}
+    storage_set[setting.name][buildings] = {}
   end
 
-  if global_set[setting.name][type] then
-    if global_set[setting.name][type][val] == nil then global_set[setting.name][type][val] = setting.def_val end
-    return global_set[setting.name][type][val]
+  if storage_set[setting.name][type] then
+    if storage_set[setting.name][type][val] == nil then storage_set[setting.name][type][val] = setting.def_val end
+    return storage_set[setting.name][type][val]
   else
     Debug:error("Error in function CraftingBuildingsSett.get_val: unknown type", type, "")
   end
 end
 
 function CraftingBuildingsSett.set_val(setting, val)
-  local gl_sett = Settings.get_global_sett()[setting.name]
+  local gl_sett = Settings.get_storage_sett()[setting.name]
 
   if gl_sett[val.type] then
     if val.button == 2 then

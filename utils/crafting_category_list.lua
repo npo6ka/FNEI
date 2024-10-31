@@ -74,13 +74,15 @@ function CraftCategoty:create_crafting_category_list()
 
       if entity.fluidbox_prototypes then
         for _,fb in pairs(entity.fluidbox_prototypes) do
-          if fb.production_type == "input" then
-            in_fluidbox = in_fluidbox + 1
-          elseif fb.production_type == "output" then
-            out_fluidbox = out_fluidbox + 1
-          elseif fb.production_type == "input-output" then
-            in_fluidbox = in_fluidbox + 1
-            out_fluidbox = out_fluidbox + 1
+          for _,con in pairs(fb.pipe_connections) do
+            if (con.flow_direction == "output") then
+              out_fluidbox = out_fluidbox + 1
+            elseif (con.flow_direction == "input") then
+              in_fluidbox = in_fluidbox + 1
+            elseif (con.flow_direction == "input-output") then
+              in_fluidbox = in_fluidbox + 1
+              out_fluidbox = out_fluidbox + 1
+            end
           end
         end
       end
@@ -96,8 +98,8 @@ function CraftCategoty:create_crafting_category_list()
       end
 
       -- A building may implicitly produce a fluid, regardless of any action
-      if entity.fluid then
-        add_category_entry("pump " .. entity.name, { type = 'building', val = item, ingredient_count = math.huge, ifbox = in_fluidbox, ofbox = out_fluidbox })
+      if entity.type == "offshore-pump" then
+        add_category_entry("offshore-pump", { type = 'building', val = item, ingredient_count = math.huge, ifbox = in_fluidbox, ofbox = out_fluidbox })
       end
     end
   end

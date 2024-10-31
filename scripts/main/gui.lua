@@ -64,7 +64,7 @@ end
 
 function MainGui.is_gui_open()
   local val = Gui.get_gui(Gui.get_pos(), main_gui_template[1].name)
-  if val and next(val) and val.valid then
+  if val and val.valid then
     return true
   else
     return false

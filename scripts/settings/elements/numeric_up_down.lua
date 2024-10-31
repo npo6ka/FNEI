@@ -8,13 +8,13 @@ local down_but_name = "-down"
 local war_label_name = "-warning"
 
 function NumericUpDown.get_val(setting)
-  local global_set = Settings.get_global_sett()
+  local storage_set = Settings.get_storage_sett()
 
-  if global_set[setting.name] == nil then
-    global_set[setting.name] = setting.def_val
+  if storage_set[setting.name] == nil then
+    storage_set[setting.name] = setting.def_val
   end
 
-  return global_set[setting.name]
+  return storage_set[setting.name]
 end
 
 function NumericUpDown.set_val(setting, val)
@@ -25,7 +25,7 @@ function NumericUpDown.set_val(setting, val)
       val = setting.min_val
     end
 
-    Settings.get_global_sett()[setting.name] = val
+    Settings.get_storage_sett()[setting.name] = val
     NumericUpDown.set_val_in_gui(setting.name, val)
   end
 end

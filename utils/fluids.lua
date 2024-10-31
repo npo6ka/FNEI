@@ -4,7 +4,7 @@ local Fluid = {
 
 function Fluid:get_fluid_list()
   Debug:debug(Fluid.classname, "get_fluid_list( )")
-  return game.fluid_prototypes or {}
+  return prototypes.fluid or {}
 end
 
 function Fluid:get_vFluid_list(fluid_list)

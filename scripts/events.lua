@@ -27,8 +27,8 @@ function Events.del_custom_event(gui_name, gui_type, event_name)
 end
 
 function Events.on_configuration_changed(event)
-  if not global.fnei then global.fnei = {} end
-  if not global.fnei.event_list then global.fnei.event_list = {} end
+  if not storage.fnei then storage.fnei = {} end
+  if not storage.fnei.event_list then storage.fnei.event_list = {} end
 
   for i, player in pairs(game.players) do
     Player.load({ player_index = i })

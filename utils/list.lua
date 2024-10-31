@@ -8,7 +8,7 @@ function List:new( list_name )
   }
 
   function obj:get_list()
-    local gl = Player.get_global()
+    local gl = Player.get_storage()
     if not gl["list_" .. self.name] then gl["list_" .. self.name] = {} end
     return gl["list_" .. self.name]
   end
@@ -19,7 +19,7 @@ function List:new( list_name )
   end
 
   function obj:clear()
-    Player.get_global()["list_" .. self.name] = {}
+    Player.get_storage()["list_" .. self.name] = {}
   end
 
   function obj:contains_elem( elem )

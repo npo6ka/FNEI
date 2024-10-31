@@ -37,11 +37,11 @@ end
 function Recipe:get_equals_recipe_list()
   Debug:debug(Recipe.classname, "get_equals_recipe_list()")
 
-  if not global.fnei.eqRecipe then
-    global.fnei.eqRecipe = self:create_equals_recipe_list()
+  if not storage.fnei.eqRecipe then
+    storage.fnei.eqRecipe = self:create_equals_recipe_list()
   end
 
-  return global.fnei.eqRecipe
+  return storage.fnei.eqRecipe
 end
 
 ----------------------- secondary function --------------------------
@@ -55,7 +55,6 @@ function Recipe:append_implicit_recipes(into)
 
       enabled  = true,
       hidden   = false,
-      impostor = true,
 
       ingredients = {},
       products    = {},
@@ -68,8 +67,7 @@ function Recipe:append_implicit_recipes(into)
     return recipe
   end
 
-  for _, proto in pairs(game.entity_prototypes) do
-
+  for _, proto in pairs(prototypes.entity) do
     -- Create impostor recipes for items 'mined' from entities
     if proto.mineable_properties and proto.resource_category then
       local recipe = add_impostor('impostor-minable:' .. proto.name)
@@ -91,14 +89,17 @@ function Recipe:append_implicit_recipes(into)
         })
       end
     end
+  end
 
-    -- Create impostor recipes for entities that produce a certain fluid/item unconditionally
+  -- Create impostor recipes for fluid 'pumped' from tiles
+  for _, proto in pairs(prototypes.tile) do
     if proto.fluid then
       local recipe = add_impostor('impostor-pumped:' .. proto.name)
 
       recipe.localised_name = get_localised_name(proto)
-      recipe.category = "pump " .. proto.name
+      recipe.category = "offshore-pump"
 
+      recipe.ingredients = {{ type = 'tile', name = proto.name, amount = 1 }}
       recipe.products = {{ type = 'fluid', name = proto.fluid.name, amount = 1 }}
     end
   end
@@ -108,9 +109,9 @@ function Recipe:append_implicit_recipes(into)
 end
 
 function Recipe:create_equals_recipe_list()
-  local recipes = game.recipe_prototypes
+  local recipes = prototypes.recipe
   local ret_buf = {}
-  local raw_tech = game.technology_prototypes
+  local raw_tech = prototypes.technology
 
   for _, tech in pairs(raw_tech) do
     local n_recipes = {}
@@ -147,7 +148,7 @@ function Recipe:compare(recipe, s_recipe)
        Recipe:compare_recipe_prot(recipe.products, s_recipe.products)
     then
       if not tech_dep then
-        tech_dep = RawTech:create_tech_dependencies(game.technology_prototypes)
+        tech_dep = RawTech:create_tech_dependencies(prototypes.technology)
       end
       return Recipe:compare_tech_prot(tech_dep[recipe.name], tech_dep[s_recipe.name])
     end

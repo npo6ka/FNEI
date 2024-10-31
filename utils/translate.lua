@@ -46,8 +46,8 @@ function Translate.init_translate()
       fluids = {}
     }
   end
-  Translate.init_translate_prot(game.item_prototypes, registry[player.name].items)
-  Translate.init_translate_prot(game.fluid_prototypes, registry[player.name].fluids)
+  Translate.init_translate_prot(prototypes.item, registry[player.name].items)
+  Translate.init_translate_prot(prototypes.fluid, registry[player.name].fluids)
 end
 
 function Translate.init_translate_prot(prots, registry_prot)

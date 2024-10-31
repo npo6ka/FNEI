@@ -7,13 +7,13 @@ local GlobalNumericUpDown = {
 local textfield_name = "-textfield"
 
 function GlobalNumericUpDown.get_val(setting)
-  local global_set = global.fnei
+  local storage_set = storage.fnei
 
-  if global_set[setting.name] == nil then
-    global_set[setting.name] = setting.def_val
+  if storage_set[setting.name] == nil then
+    storage_set[setting.name] = setting.def_val
   end
 
-  return global_set[setting.name]
+  return storage_set[setting.name]
 end
 
 function GlobalNumericUpDown.set_val(setting, val)
@@ -24,7 +24,7 @@ function GlobalNumericUpDown.set_val(setting, val)
       val = setting.min_val
     end
 
-    global.fnei[setting.name] = val
+    Settings.get_storage_sett()[setting.name] = val
 
     NumericUpDown.set_val_in_gui(setting.name, val)
   end

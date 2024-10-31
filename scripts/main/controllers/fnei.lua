@@ -64,11 +64,11 @@ function FneiMainController.search_event(event)
 end
 
 function FneiMainController.set_search_field(str)
-  Player.get_global().fnei_search = str
+  Player.get_storage().fnei_search = str
 end
 
 function FneiMainController.get_search_field()
-  return Player.get_global().fnei_search or ""
+  return Player.get_storage().fnei_search or ""
 end
 
 function FneiMainController.open_item_recipe_event(event, elem_name)

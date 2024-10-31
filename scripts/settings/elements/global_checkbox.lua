@@ -3,17 +3,17 @@ local GlobCheckBoxSett = {
 }
 
 function GlobCheckBoxSett.get_val(setting)
-  local global_set = global.fnei
+  local storage_set = storage.fnei
 
-  if global_set[setting.name] == nil then
-    global_set[setting.name] = setting.def_val
+  if storage_set[setting.name] == nil then
+    storage_set[setting.name] = setting.def_val
   end
 
-  return global_set[setting.name]
+  return storage_set[setting.name]
 end
 
 function GlobCheckBoxSett.set_val(setting, val)
-  global.fnei[setting.name] = val
+  storage.fnei[setting.name] = val
 end
 
 function GlobCheckBoxSett.add_label_func(parent, sett)

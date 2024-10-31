@@ -1,5 +1,5 @@
 if not fnei then fnei = {} end
-if not global.fnei then global.fnei = {} end
+if not storage.fnei then storage.fnei = {} end
 
 -------------- include Class libs ----------------
 require "core/Class"

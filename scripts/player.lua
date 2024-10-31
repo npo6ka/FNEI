@@ -30,18 +30,18 @@ function Player.print(val)
   end
 end
 
-function Player.get_global()
-  if not global.fnei[cur_player.name] then global.fnei[cur_player.name] = {} end
-  return global.fnei[cur_player.name]
+function Player.get_storage()
+  if not storage.fnei[cur_player.name] then storage.fnei[cur_player.name] = {} end
+  return storage.fnei[cur_player.name]
 end
 
-function Player.get_fglobal()
+function Player.get_fstorage()
   if cur_player.force then
     local name = cur_player.force.name .. "_force"
-    if not global.fnei[name] then global.fnei[name] = {} end
-    return global.fnei[name]
+    if not storage.fnei[name] then storage.fnei[name] = {} end
+    return storage.fnei[name]
   else
-    Debug:error("Error in function Player.get_fglobal: force not found")
+    Debug:error("Error in function Player.get_fstorage: force not found")
   end
 end
 

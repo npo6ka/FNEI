@@ -4,7 +4,7 @@ local Item = {
 
 function Item:get_item_list()
   Debug:debug(Item.classname, "get_item_list( )")
-  return game.item_prototypes or {}
+  return prototypes.item or {}
 end
 
 function Item:get_vItem_list(item_list)
@@ -18,7 +18,7 @@ function Item:create_visible_items(item_list)
   local ret_tb = {}
 
   for _,item in pairs(item_list) do
-    if not item.has_flag("hidden") then
+    if not item.hidden then
       ret_tb[item.name] = item
     end
   end

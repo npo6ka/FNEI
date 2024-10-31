@@ -15,7 +15,7 @@ end
 
 function DefaultMainController.set_item(event, name)
   if not event.button then
-    Player.get_global().main_choose_button_item = event.element.elem_value
+    Player.get_storage().main_choose_button_item = event.element.elem_value
 
     if Settings.get_val("item-auto-craft") then
       DefaultMainController.open_craft_item(event)
@@ -27,7 +27,7 @@ end
 
 function DefaultMainController.set_fluid(event, name)
   if not event.button then
-    Player.get_global().main_choose_button_fluid = event.element.elem_value
+    Player.get_storage().main_choose_button_fluid = event.element.elem_value
 
     if Settings.get_val("fluid-auto-craft") then
       DefaultMainController.open_craft_fluid(event)
@@ -38,11 +38,11 @@ function DefaultMainController.set_fluid(event, name)
 end
 
 function DefaultMainController.get_item()
-  return Player.get_global().main_choose_button_item
+  return Player.get_storage().main_choose_button_item
 end
 
 function DefaultMainController.get_fluid()
-  return Player.get_global().main_choose_button_fluid
+  return Player.get_storage().main_choose_button_fluid
 end
 
 

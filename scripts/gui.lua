@@ -78,7 +78,7 @@ function Gui.get_pos()
 end
 
 function Gui.get_location()
-  cur_loc = Player.get_global()["gui_loc"]
+  cur_loc = Player.get_storage()["gui_loc"]
 
   res = Player.get().display_resolution
   if cur_loc == nil or cur_loc.x >= res.width or cur_loc.y >= res.height then
@@ -89,12 +89,12 @@ function Gui.get_location()
 end
 
 function Gui.set_location(loc)
-  if Player.get_global()["gui_loc"] ~= loc then
+  if Player.get_storage()["gui_loc"] ~= loc then
     res = Player.get().display_resolution
     if loc == nil or loc.x >= res.width or loc.y >= res.height then
       loc = {x = 82, y = 70}
     end
-    Player.get_global()["gui_loc"] = loc
+    Player.get_storage()["gui_loc"] = loc
   end
 end
 
@@ -352,13 +352,15 @@ function Gui.set_choose_but_val(button, val)
 
   if button then
     if button.elem_type == "item" then
-      button.elem_value = check_val(val, game.item_prototypes, "item")
+      button.elem_value = check_val(val, prototypes.item, "item")
     elseif button.elem_type == "fluid" then
-      button.elem_value = check_val(val, game.fluid_prototypes, "fluid")
+      button.elem_value = check_val(val, prototypes.fluid, "fluid")
     elseif button.elem_type == "recipe" then
-      button.elem_value = check_val(val, game.recipe_prototypes, "recipe")
+      button.elem_value = check_val(val, prototypes.recipe, "recipe")
     elseif button.elem_type == "entity" then
-      button.elem_value = check_val(val, game.entity_prototypes, "entity")
+      button.elem_value = check_val(val, prototypes.entity, "entity")
+    elseif button.elem_type == "tile" then
+      button.elem_value = check_val(val, prototypes.tile, "tile")
     else
       Debug:error(Gui.classname, "Gui.set_choose_but_val: unknown choose-button type")
     end

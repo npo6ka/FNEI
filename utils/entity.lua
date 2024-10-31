@@ -9,7 +9,7 @@ local nConvert_entity
 
 function Entity:get_entity_list()
   Debug:debug(Entity.classname, "get_entity_list( )")
-  return game.entity_prototypes or {}
+  return prototypes.entity or {}
 end
 
 function Entity:get_mineable_entity_list()

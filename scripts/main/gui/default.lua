@@ -13,7 +13,7 @@ function DefaultMainGui.init_template(contr)
           { type = "label", name = "choose-item-label", style = "fnei_main_default_prot_label", caption = {"fnei.choose-item"} },
           { type = "flow", name = "item-flow-content", style = "fnei_main_default_selection_flow", direction = "horizontal", children = {
             { type = "flow", name = "item-choose-elem-flow", style = "fnei_main_default_choose_flow", direction = "horizontal", children = {
-              { type = "choose-elem-button", name = "choose-item", style = "fnei_main_default_search_slot_button", elem_type = "item", elem_value = "wooden-chest", event = contr.set_item }
+              { type = "choose-elem-button", name = "choose-item", style = "fnei_main_default_search_slot_button", elem_type = "item", elem_value = "wooden-chest", event = contr.set_item, locked = false }
             }},
             { type = "table", name = "item-content-tabel", style = "fnei_main_default_content_table", column_count = 2, children = {
               { type = "checkbox", name = "item-checkbox-craft", style = nil, state = false, tooltip = {"fnei.item-auto-craft"}, event = contr.item_craft_checkbox_event},
@@ -27,7 +27,7 @@ function DefaultMainGui.init_template(contr)
           { type = "label", name = "choose-fluid-label", style = "fnei_main_default_prot_label", caption = {"fnei.choose-fluid"} },
           { type = "flow", name = "fluid-flow-content", style = "fnei_main_default_selection_flow", direction = "horizontal", children = {
             { type = "flow", name = "fluid-choose-elem-flow", style = "fnei_main_default_choose_flow", direction = "horizontal", children = {
-              { type = "choose-elem-button", name = "choose-fluid", style = "fnei_main_default_search_slot_button", elem_type = "fluid", elem_value = "water", event = contr.set_fluid }
+              { type = "choose-elem-button", name = "choose-fluid", style = "fnei_main_default_search_slot_button", elem_type = "fluid", elem_value = "water", event = contr.set_fluid, locked = false }
             }},
             { type = "table", name = "fluid-content-tabel", style = "fnei_main_default_content_table", column_count = 2, children = {
               { type = "checkbox", name = "fluid-checkbox-craft", style = nil, state = false, tooltip = {"fnei.fluid-auto-craft"}, event = contr.fluid_craft_checkbox_event},

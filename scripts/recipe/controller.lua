@@ -173,28 +173,28 @@ function RecipeController.get_page_name_for_recipe(action_type, prot_type, prot_
     end
   end
 
-  local global = Player.get_global()
+  local storage = Player.get_storage()
 
-  if not global.recipe_page then global.recipe_page = {} end
+  if not storage.recipe_page then storage.recipe_page = {} end
 
   if action_type and prot_type and prot_name then
     local name = action_type .. prot_type .. prot_name
 
-    return global.recipe_page[name]
+    return storage.recipe_page[name]
   else
     Debug:error("Error in function RecipeController.get_page_name_for_recipe: nil value")
   end
 end
 
 function RecipeController.set_page_name_for_recipe(action_type, prot_type, prot_name, val)
-  local global = Player.get_global()
+  local storage = Player.get_storage()
 
-  if not global.recipe_page then global.recipe_page = {} end
+  if not storage.recipe_page then storage.recipe_page = {} end
 
   if action_type and prot_type and prot_name then
     local name = action_type .. prot_type .. prot_name
 
-    global.recipe_page[name] = val
+    storage.recipe_page[name] = val
   else
     Debug:error("Error in function RecipeController.set_page_name_for_recipe: nil value")
   end

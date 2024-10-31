@@ -28,7 +28,7 @@ end
 function HotbarGui.is_gui_open()
   local val = Gui.get_gui(Gui.get_left_gui(), hotbar_gui_template[1].name)
 
-  if val and next(val) and val.valid then
+  if val and val.valid then
     return true
   else
     return false
@@ -40,29 +40,29 @@ function HotbarGui.create_hotbar_element_button(prot, type)
 
     if string.match(prot.recipe_name, 'impostor') then
       local ps,pos = string.find(prot.recipe_name, "impostor[-]minable:")
+      local prot_type = "entity"
 
       if not pos then
         _,pos = string.find(prot.recipe_name, "impostor[-]pumped:")
+        prot_type = "tile"
       end
 
-      local entity_name = string.sub(prot.recipe_name, (pos or -1) + 1) or ""
+      local prot_name = string.sub(prot.recipe_name, (pos or -1) + 1) or ""
 
       local tooltip
 
       if type == "favorite" then
-        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", game.entity_prototypes[entity_name].localised_name, "\n", {"fnei.alt-to-remove"} }
+        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", prototypes[prot_type][prot_name].localised_name, "\n", {"fnei.alt-to-remove"} }
       else
-        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", game.entity_prototypes[entity_name].localised_name }
+        tooltip = {"", {"fnei.tooltip-recipe"}, ":\n", prototypes[prot_type][prot_name].localised_name }
       end
-
-      sprite = "entity/" .. entity_name
 
       return {
         type = "sprite-button",
         name = "r" .. type .. "\t" .. prot.action_type .. "\t" .. prot.type .. "\t" .. prot.name .. "\t" .. prot.recipe_name,
         style = "fnei_hotbar_block_button",
         tooltip = tooltip,
-        sprite = sprite
+        sprite = prot_type .. "/" .. prot_name
       }
     end
 

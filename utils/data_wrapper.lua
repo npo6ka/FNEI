@@ -6,7 +6,7 @@ Entity = require "utils/entity"
 CraftCategoty = require "utils/crafting_category_list"
 
 function hard_load()
-  if not global.fnei.eqRecipe then
+  if not storage.fnei.eqRecipe then
     Recipe:get_equals_recipe_list()
   end
 end
