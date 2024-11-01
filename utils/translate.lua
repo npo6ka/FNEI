@@ -8,6 +8,7 @@ local registry = nil
 local is_init = false
 
 function Translate.translate(name, type)
+  -- reload translate when reload game
   if is_init == false then
     Translate.reset_translate()
     is_init = true
@@ -75,6 +76,13 @@ end
 
 function Translate.set_translate_result(id, str)
   local player = Player:get()
+
+  -- if registry == nil most likely the translate was not caused by fnei
+  -- or something went wrong. Need skip this translate.
+  if registry == nil or registry[player.name] == nil then
+    return
+  end
+
   local prot_name = registry[player.name].items.ids[id]
 
   if prot_name then
