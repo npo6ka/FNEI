@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.4.6
+Date: ???
+  Bugfixes:
+    - Fixed crash on world creation #79
+    - Show Hidden Recipes setting is once again false by default
+---------------------------------------------------------------------------------------------------
 Version: 0.4.5
 Date: 2024-11-01
   Bugfixes:
