@@ -6,7 +6,6 @@ data.raw["gui-style"].default["fnei_settings_numeric-text-field"] =
   type = "textbox_style",
   parent = "textbox",
   width = 50,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_wrong_numeric-text-field"] =
@@ -14,7 +13,6 @@ data.raw["gui-style"].default["fnei_settings_wrong_numeric-text-field"] =
   type = "textbox_style",
   parent = "invalid_value_textfield",
   width = 50,
-  scalable = false,
 }
 
 -------------------------flow_style--------------------------
@@ -22,13 +20,11 @@ data.raw["gui-style"].default["fnei_settings_wrong_numeric-text-field"] =
 data.raw["gui-style"].default["fnei_settings_tab-flow"] =
 {
   type = "horizontal_flow_style",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_updown-arrow-flow"] =
 {
   type = "vertical_flow_style",
-  scalable = false,
   vertical_spacing = 2,
 }
 
@@ -40,7 +36,6 @@ data.raw["gui-style"].default["fnei_settings_main-frame"] =
   parent = "fnei_default_frame",
   minimal_width = 530,
   maximal_width = 530,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_header-frame"] =
@@ -49,7 +44,6 @@ data.raw["gui-style"].default["fnei_settings_header-frame"] =
   parent = "fnei_default_frame",
   minimal_width = 518,
   maximal_width = 518,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_content-frame"] =
@@ -58,7 +52,6 @@ data.raw["gui-style"].default["fnei_settings_content-frame"] =
   parent = "fnei_default_frame",
   minimal_width = 518,
   maximal_width = 518,
-  scalable = false,
 }
 
 -------------------------table_style--------------------------
@@ -67,7 +60,6 @@ data.raw["gui-style"].default["fnei_settings_main-table"] =
 {
   type = "table_style",
   parent = "fnei_default_table",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_header-table"] =
@@ -75,14 +67,12 @@ data.raw["gui-style"].default["fnei_settings_header-table"] =
   type = "table_style",
   parent = "fnei_default_table",
   horizontal_spacing = 1,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_content-table"] =
 {
   type = "table_style",
   parent = "fnei_default_table",
-  scalable = false,
 }
 
 ----------------------scroll_pane_style-----------------------
@@ -93,7 +83,6 @@ data.raw["gui-style"].default["fnei_settings_craft-cat-scroll"] =
   maximal_width = 506,
   minimal_width = 506,
   maximal_height = 400,
-  scalable = false,
 }
 
 ------------------------button_style-------------------------
@@ -104,7 +93,6 @@ data.raw["gui-style"].default["fnei_settings_empty-tab"] =
   parent = "fnei_default_empty-tab",
   height = 36,
   width = 167,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_selected-tab"] =
@@ -113,7 +101,6 @@ data.raw["gui-style"].default["fnei_settings_selected-tab"] =
   parent = "fnei_default_selected-tab",
   height = 36,
   width = 167,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_enabled-building"] =
@@ -122,7 +109,6 @@ data.raw["gui-style"].default["fnei_settings_enabled-building"] =
   parent = "compact_slot",
   height = 36,
   width = 36,
-  scalable = false,
 
   clicked_graphical_set = {
     border = 1,
@@ -159,7 +145,6 @@ data.raw["gui-style"].default["fnei_settings_disabled-building"] =
   parent = "compact_slot",
   height = 36,
   width = 36,
-  scalable = false,
 
   clicked_graphical_set = {
     border = 1,
@@ -196,7 +181,6 @@ data.raw["gui-style"].default["fnei_settings_hidden-building"] =
   parent = "compact_slot",
   height = 36,
   width = 36,
-  scalable = false,
 
   clicked_graphical_set = {
     border = 1,
@@ -234,7 +218,6 @@ data.raw["gui-style"].default["fnei_settings_enable-category"] =
   height = 36,
   width = 108,
   font = "font-mb",
-  scalable = false,
 
   clicked_graphical_set = {
     border = 1,
@@ -273,7 +256,6 @@ data.raw["gui-style"].default["fnei_settings_disable-category"] =
   height = 36,
   width = 108,
   font = "font-mb",
-  scalable = false,
 
   clicked_graphical_set = {
     border = 1,
@@ -310,7 +292,6 @@ data.raw["gui-style"].default["fnei_settings_up_arrow"] =
   parent = "button",
   height = 12,
   width = 24,
-  scalable = false,
 
   default_graphical_set = {
     border = 1,
@@ -338,7 +319,6 @@ data.raw["gui-style"].default["fnei_settings_down_arrow"] =
   parent = "compact_slot",
   height = 12,
   width = 24,
-  scalable = false,
 
   default_graphical_set = {
     border = 1,
@@ -369,7 +349,6 @@ data.raw["gui-style"].default["fnei_settings_header-label"] =
   font_color = {r = 255, g = 230, b = 192},
   width = 70,
   horizontal_align = "center",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_param-label"] =
@@ -380,7 +359,6 @@ data.raw["gui-style"].default["fnei_settings_param-label"] =
   right_padding = 1,
   top_padding = 1,
   bottom_padding = 1,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_craft-category-label"] =
@@ -388,7 +366,6 @@ data.raw["gui-style"].default["fnei_settings_craft-category-label"] =
   type = "label_style",
   width = 506,
   horizontal_align = "center",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_warning-text"] =
@@ -396,7 +373,6 @@ data.raw["gui-style"].default["fnei_settings_warning-text"] =
   type = "label_style",
   width = 100,
   font_color = { b = 0, g = 0.2, r = 1 },
-  scalable = false,
 }
 
 ------------------------empty_widget_style-------------------------
@@ -407,7 +383,6 @@ data.raw["gui-style"].default["fnei_settings_header-drag-widget"] =
   height = 36,
   width = 440,
   left_margin = -440,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_settings_header-sprite-widget"] =
@@ -416,5 +391,4 @@ data.raw["gui-style"].default["fnei_settings_header-sprite-widget"] =
   parent = "draggable_space",
   height = 36,
   width = 344,
-  scalable = false,
 }
