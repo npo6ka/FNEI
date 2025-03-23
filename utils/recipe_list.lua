@@ -148,7 +148,7 @@ function Recipe:compare(recipe, s_recipe)
        Recipe:compare_recipe_prot(recipe.products, s_recipe.products)
     then
       if not tech_dep then
-        tech_dep = RawTech:create_tech_dependencies(prototypes.technology)
+        tech_dep = RawTech:create_tech_dependencies(RawTech:get_tech_list())
       end
       return Recipe:compare_tech_prot(tech_dep[recipe.name], tech_dep[s_recipe.name])
     end
