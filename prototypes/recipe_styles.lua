@@ -10,7 +10,6 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     height = 36,
     width = 311,
     font_color = { r=0, g=0.9, b=0 },
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_red_title_label"] =
@@ -18,7 +17,6 @@ data.raw["gui-style"].default["fnei_recipe_red_title_label"] =
     type = "label_style",
     parent = "fnei_recipe_title_label",
     font_color = { r=1, g=0.2537254, b=0.25980392 },
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_grey_title_label"] =
@@ -26,7 +24,6 @@ data.raw["gui-style"].default["fnei_recipe_grey_title_label"] =
     type = "label_style",
     parent = "fnei_recipe_title_label",
     font_color = { r=0.5, g=0.5, b=0.5 },
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_madein_label"] =
@@ -36,7 +33,6 @@ data.raw["gui-style"].default["fnei_recipe_madein_label"] =
     horizontal_align = "center",
     height = 36,
     width = 190,
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_technologies_label"] =
@@ -46,7 +42,6 @@ data.raw["gui-style"].default["fnei_recipe_technologies_label"] =
     horizontal_align = "center",
     height = 68,
     width = 190,
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_element_label"] =
@@ -56,7 +51,6 @@ data.raw["gui-style"].default["fnei_recipe_element_label"] =
     horizontal_align = "center",
     height = 32,
     top_padding = 0,
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_type_label"] =
@@ -66,7 +60,6 @@ data.raw["gui-style"].default["fnei_recipe_type_label"] =
     horizontal_align = "right",
     height = 36,
     width = 182,
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_paging_label"] =
@@ -76,7 +69,6 @@ data.raw["gui-style"].default["fnei_recipe_paging_label"] =
     horizontal_align = "left",
     height = 36,
     width = 190,
-    scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_craft_time_for_building_label"] =
@@ -86,7 +78,6 @@ data.raw["gui-style"].default["fnei_recipe_craft_time_for_building_label"] =
     top_padding = 0,
     height = 20,
     minimal_width = 36,
-    scalable = false,
 }
 
 -------------------------flow_style--------------------------
@@ -95,7 +86,6 @@ data.raw["gui-style"].default["fnei_recipe_favorite_flow"] =
 {
   type = "horizontal_flow_style",
   width = 36,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_arrow_flow"] =
@@ -104,14 +94,12 @@ data.raw["gui-style"].default["fnei_recipe_arrow_flow"] =
   top_padding = 0,
   left_padding = 0,
   width = 36,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_header_icon_flow"] =
 {
   type = "horizontal_flow_style",
   width = 36,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_list_elements_flow"] =
@@ -119,14 +107,12 @@ data.raw["gui-style"].default["fnei_recipe_list_elements_flow"] =
   type = "horizontal_flow_style",
   minimal_height = 38,
   maximal_height = 38,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_building_flow"] =
 {
   type = "vertical_flow_style",
   vertical_spacing = 0,
-  scalable = false,
 }
 
 -------------------------frame_style--------------------------
@@ -137,7 +123,6 @@ data.raw["gui-style"].default["fnei_recipe_main_frame"] =
   parent = "fnei_default_frame",
   minimal_width = 520,
   maximal_width = 520,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_header_frame"] =
@@ -146,7 +131,6 @@ data.raw["gui-style"].default["fnei_recipe_header_frame"] =
   parent = "fnei_default_frame",
   minimal_width = 508,
   maximal_width = 508,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_paging_frame"] =
@@ -156,7 +140,6 @@ data.raw["gui-style"].default["fnei_recipe_paging_frame"] =
   left_padding = 7,
   minimal_width = 508,
   maximal_width = 508,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_ingr_frame"] =
@@ -165,7 +148,6 @@ data.raw["gui-style"].default["fnei_recipe_ingr_frame"] =
   parent = "fnei_default_frame",
   width = 252,
   left_padding = 3,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_res_frame"] =
@@ -174,7 +156,6 @@ data.raw["gui-style"].default["fnei_recipe_res_frame"] =
   parent = "fnei_default_frame",
   width = 252,
   left_padding = 3,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_list_ingr_frame"] =
@@ -183,7 +164,6 @@ data.raw["gui-style"].default["fnei_recipe_list_ingr_frame"] =
   parent = "fnei_default_frame",
   left_padding = 3,
   width = 252,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_list_res_frame"] =
@@ -192,7 +172,6 @@ data.raw["gui-style"].default["fnei_recipe_list_res_frame"] =
   parent = "fnei_default_frame",
   left_padding = 3,
   width = 252,
-  scalable = false,
 }
 
 -------------------------table_style--------------------------
@@ -201,7 +180,6 @@ data.raw["gui-style"].default["fnei_recipe_main_table"] =
 {
   type = "table_style",
   parent = "fnei_default_table",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_header_table"] =
@@ -209,7 +187,6 @@ data.raw["gui-style"].default["fnei_recipe_header_table"] =
   type = "table_style",
   parent = "fnei_default_table",
   horizontal_spacing = 1,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_paging_table"] =
@@ -218,14 +195,12 @@ data.raw["gui-style"].default["fnei_recipe_paging_table"] =
   parent = "fnei_default_table",
   top_padding = 0,
   left_padding = 0,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_products_table"] =
 {
   type = "table_style",
   parent = "fnei_default_table",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_list_elements_table"] =
@@ -233,19 +208,16 @@ data.raw["gui-style"].default["fnei_recipe_list_elements_table"] =
   type = "table_style",
   parent = "table",
   vertical_spacing = 2,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_made_in_table"] =
 {
   type = "table_style",
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_tech_table"] =
 {
   type = "table_style",
-  scalable = false,
 }
 
 ----------------------scroll_pane_style-----------------------
@@ -257,7 +229,6 @@ data.raw["gui-style"].default["fnei_recipe_products_scroll_pane"] =
   minimal_width = 240,
   maximal_height = 330,
   vertical_align = "center",
-  scalable = false,
 }
 
 ------------------------button_style-------------------------
@@ -268,7 +239,6 @@ data.raw["gui-style"].default["fnei_recipe_red_tech_button"] =
   parent = "red_slot",
   height = 68,
   width = 68,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
@@ -277,7 +247,6 @@ data.raw["gui-style"].default["fnei_recipe_green_tech_button"] =
   parent = "green_slot",
   height = 68,
   width = 68,
-  scalable = false,
 }
 
 data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] =
@@ -318,7 +287,6 @@ data.raw["gui-style"].default["fnei_recipe_yellow_tech_button"] =
 
   height = 68,
   width = 68,
-  scalable = false
 }
 
 data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] =
@@ -359,7 +327,6 @@ data.raw["gui-style"].default["fnei_recipe_grey_tech_button"] =
 
   height = 68,
   width = 68,
-  scalable = false
 }
 
 data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
@@ -367,7 +334,6 @@ data.raw["gui-style"].default["fnei_recipe_favorive_button"] =
   type = "button_style",
   parent = "compact_slot",
   font = "font-mb",
-  scalable = false,
   height = 36,
   width = 36,
 
@@ -396,7 +362,6 @@ data.raw["gui-style"].default["fnei_recipe_selected_favorive_button"] =
   type = "button_style",
   parent = "compact_slot",
   font = "font-mb",
-  scalable = false,
   height = 36,
   width = 36,
 
@@ -428,7 +393,6 @@ data.raw["gui-style"].default["fnei_recipe_header-drag-widget"] =
   height = 36,
   width = 315,
   left_margin = -315,
-  scalable = false,
 }
 
 -- data.raw["gui-style"].default["fnei_recipe_header-sprite-widget"] =
@@ -437,5 +401,4 @@ data.raw["gui-style"].default["fnei_recipe_header-drag-widget"] =
 --   parent = "draggable_space",
 --   height = 36,
 --   width = 310,
---   scalable = false,
 -- }
