@@ -8,7 +8,7 @@ data.raw["gui-style"].default["fnei_recipe_title_label"] =
     vertical_align = "center",
     font = "font-mb",
     height = 36,
-    width = 311,
+    width = 308,
     font_color = { r=0, g=0.9, b=0 },
 }
 

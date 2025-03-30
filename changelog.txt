@@ -4,6 +4,8 @@ Date: 2025-03-30
   Bugfixes:
     - Fixed crash on world creation #79 (KiwiHawk)
     - Show Hidden Recipes setting is once again false by default (KiwiHawk)
+  Changes:
+    - Fixed alignment of GUI header
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.5
 Date: 2024-11-01

@@ -390,5 +390,5 @@ data.raw["gui-style"].default["fnei_settings_header-sprite-widget"] =
   type = "empty_widget_style",
   parent = "draggable_space",
   height = 36,
-  width = 344,
+  width = 358,
 }
