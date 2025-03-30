@@ -1,9 +1,9 @@
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.6
-Date: ???
+Date: 2025-03-30
   Bugfixes:
-    - Fixed crash on world creation #79
-    - Show Hidden Recipes setting is once again false by default
+    - Fixed crash on world creation #79 (KiwiHawk)
+    - Show Hidden Recipes setting is once again false by default (KiwiHawk)
 ---------------------------------------------------------------------------------------------------
 Version: 0.4.5
 Date: 2024-11-01
