@@ -98,36 +98,45 @@ function get_filtred_recipe_list(recipe_list)
   local craft_cat_list = get_crafting_categories_list()
 
   for rec_name, recipe in pairs(recipe_list) do
-    if Settings.get_val("show-recipes", "categories", recipe.category) then
-      local cat_list = craft_cat_list[recipe.category] or {}
+    if Settings.get_val("show-recipes", "categories", recipe.categories) then
+      local cat_list = {}
 
-      for _, cat in pairs(cat_list) do
-        local add_flag = false
+      for _, cat in ipairs(recipe.categories) do
+        if craft_cat_list[cat] ~= nil then
+          table.insert(cat_list, craft_cat_list[cat])
+        end
+      end
+      
+      for _, undercat in ipairs(cat_list) do
+        for _, cat in pairs(undercat) do
+          local add_flag = false
 
-        if cat.type == "player" then
-          add_flag = true
-        elseif cat.type == "resource-miner" then
-          add_flag = true
-        elseif cat.ingredient_count then
-          local ing_cnt = 0
+          if cat.type == "player" then
+            add_flag = true
+          elseif cat.type == "resource-miner" then
+            add_flag = true
+          elseif cat.ingredient_count then
+            local ing_cnt = 0
 
-          for _,prot in pairs(recipe.ingredients) do
-            if prot.type == "item" then
-              ing_cnt = ing_cnt + 1
+            for _,prot in pairs(recipe.ingredients) do
+              if prot.type == "item" then
+                ing_cnt = ing_cnt + 1
+              end
+            end
+
+            if cat.ingredient_count >= ing_cnt then
+              add_flag = true
             end
           end
 
-          if cat.ingredient_count >= ing_cnt then
-            add_flag = true
-          end
-        end
-
-        if add_flag then
-          if cat.val and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-            ret_list[rec_name] = recipe
+          if add_flag then
+            if cat.val and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+              ret_list[rec_name] = recipe
+            end
           end
         end
       end
+
     end
   end
 

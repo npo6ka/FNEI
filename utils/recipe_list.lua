@@ -142,8 +142,31 @@ end
 
 local tech_dep
 
+
+local function arrays_have_same_strings(arr1, arr2)
+    if #arr1 ~= #arr2 then
+        return false
+    end
+
+    local counts = {}
+
+    for _, str in ipairs(arr1) do
+        counts[str] = (counts[str] or 0) + 1
+    end
+
+    for _, str in ipairs(arr2) do
+        if not counts[str] or counts[str] == 0 then
+            return false 
+        end
+        counts[str] = counts[str] - 1
+    end
+
+    return true
+end
+
+
 function Recipe:compare(recipe, s_recipe)
-  if recipe.energy == s_recipe.energy and recipe.category == s_recipe.category then
+  if recipe.energy == s_recipe.energy and arrays_have_same_strings(recipe.categories, s_recipe.categories) then
     if Recipe:compare_recipe_prot(recipe.ingredients, s_recipe.ingredients) and
        Recipe:compare_recipe_prot(recipe.products, s_recipe.products)
     then
