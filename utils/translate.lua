@@ -4,96 +4,156 @@ Translate = {
 
 require "utils/utf8_tolower"
 
-local registry = nil
-local is_init = false
+local registry = {}
+local queues = {}
+local TRANSLATE_BATCH_SIZE = 50
+
+local function get_player_registry(player)
+  if registry[player.name] == nil then
+    registry[player.name] = {
+      items = { names = {}, ids = {} },
+      fluids = { names = {}, ids = {} }
+    }
+  end
+
+  return registry[player.name]
+end
+
+local function sorted_prototypes(prots)
+  local prot_list = {}
+
+  for _, prot in pairs(prots) do
+    table.insert(prot_list, prot)
+  end
+
+  table.sort(prot_list, function(a, b)
+    return a.name < b.name
+  end)
+
+  return prot_list
+end
+
+local function queue_prot_translations(player_index, prots, prot_type)
+  local prot_list = sorted_prototypes(prots)
+  local queue = queues[player_index]
+
+  for i = 1, #prot_list, TRANSLATE_BATCH_SIZE do
+    local batch = {
+      prot_type = prot_type,
+      loc_names = {},
+      prot_names = {}
+    }
+
+    for j = i, math.min(i + TRANSLATE_BATCH_SIZE - 1, #prot_list) do
+      table.insert(batch.loc_names, prot_list[j].localised_name)
+      table.insert(batch.prot_names, prot_list[j].name)
+    end
+
+    table.insert(queue.batches, batch)
+  end
+end
 
 function Translate.translate(name, type)
-  -- reload translate when reload game
-  if is_init == false then
-    Translate.reset_translate()
-    is_init = true
+  local player = Player:get()
+  local player_registry = registry[player.name]
+
+  if type == "item" and player_registry then
+    return player_registry.items.names[name]
+  elseif type == "fluid" and player_registry then
+    return player_registry.fluids.names[name]
   end
 
-  local player = Player:get()
-  if type == "item" and registry and registry[player.name] then
-    return registry[player.name].items.names[name]
-  elseif type == "fluid" and registry and registry[player.name] then
-    return registry[player.name].fluids.names[name]
-  else
-    return nil
-  end
+  return nil
 end
 
 function Translate.tolower(str)
   return tolower(str)
 end
 
-function Translate.reset_translate()
-  if registry ~= nil then
-    registry[Player:get().name] = nil
+function Translate.clear_player(player_index)
+  local player = game.players[player_index]
+
+  if player and player.valid then
+    registry[player.name] = nil
   end
 
+  queues[player_index] = nil
+end
+
+function Translate.reset_translate()
+  local player = Player:get()
+
+  registry[player.name] = nil
+  queues[player.index] = nil
   Translate.init_translate()
+end
+
+function Translate.ensure_translate_init()
+  local player = Player:get()
+
+  if queues[player.index] == nil then
+    Translate.init_translate()
+  end
 end
 
 function Translate.init_translate()
   local player = Player:get()
-  if registry == nil then
-    registry = {}
-  end
-  if registry[player.name] == nil then
-    registry[player.name] = {
-      items = {},
-      fluids = {}
-    }
-  end
-  Translate.init_translate_prot(prototypes.item, registry[player.name].items)
-  Translate.init_translate_prot(prototypes.fluid, registry[player.name].fluids)
+
+  get_player_registry(player)
+
+  queues[player.index] = {
+    batches = {},
+    batch_index = 1
+  }
+
+  queue_prot_translations(player.index, prototypes.item, "item")
+  queue_prot_translations(player.index, prototypes.fluid, "fluid")
 end
 
-function Translate.init_translate_prot(prots, registry_prot)
-  if registry_prot.names == nil and registry_prot.ids == nil then
-    registry_prot.names = {}
-    registry_prot.ids = {}
+function Translate.process_queues()
+  for player_index, queue in pairs(queues) do
+    if queue.batch_index <= #queue.batches then
+      local player = game.players[player_index]
 
-    local loc_names = {}
+      if player and player.valid and player.connected then
+        local batch = queue.batches[queue.batch_index]
+        local player_registry = get_player_registry(player)
+        local registry_prot = batch.prot_type == "item" and player_registry.items or player_registry.fluids
+        local ids = player.request_translations(batch.loc_names)
 
-    for _,prot in pairs(prots) do
-      table.insert(loc_names, prot.localised_name)
-    end
+        if ids then
+          for i, prot_name in ipairs(batch.prot_names) do
+            registry_prot.ids[ids[i]] = prot_name
+          end
+        end
 
-    local ids = Player.get().request_translations(loc_names)
-
-    local i = 0
-    if ids then
-      for _,prot in pairs(prots) do
-        i = i + 1
-        registry_prot.ids[ids[i]] = prot.name
+        queue.batch_index = queue.batch_index + 1
       end
+    else
+      queues[player_index] = nil
     end
   end
 end
 
 function Translate.set_translate_result(id, str)
   local player = Player:get()
+  local player_registry = registry[player.name]
 
-  -- if registry == nil most likely the translate was not caused by fnei
-  -- or something went wrong. Need skip this translate.
-  if registry == nil or registry[player.name] == nil then
+  if player_registry == nil then
     return
   end
 
-  local prot_name = registry[player.name].items.ids[id]
+  local prot_name = player_registry.items.ids[id]
 
   if prot_name then
-    registry[player.name].items.names[prot_name] = Translate.tolower(str)
-    registry[player.name].items.ids[id] = nil
+    player_registry.items.names[prot_name] = Translate.tolower(str)
+    player_registry.items.ids[id] = nil
   else
-    prot_name = registry[player.name].fluids.ids[id]
+    prot_name = player_registry.fluids.ids[id]
 
     if prot_name then
-      registry[player.name].fluids.names[prot_name] = Translate.tolower(str)
-      registry[player.name].fluids.ids[id] = nil
+      player_registry.fluids.names[prot_name] = Translate.tolower(str)
+      player_registry.fluids.ids[id] = nil
     end
   end
 end

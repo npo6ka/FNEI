@@ -4,6 +4,9 @@ Date: 2026-07-12
   Changes:
     - Update mod for Factorio version 2.1
     - Adapt recipe category handling to the new categories API (czeinel)
+  Bugfixes:
+    - Fix multiplayer disconnects when using FNEI search with large modpacks
+    - Batch translation requests instead of sending them all at once
 ---------------------------------------------------------------------------------------------------
 Date: 2025-03-30
   Bugfixes:

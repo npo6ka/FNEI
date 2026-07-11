@@ -42,7 +42,6 @@ end
 function Events.on_player_created(event)
   Player.load(event)
   Controller.get_cont("hotbar").open()
-  Translate.init_translate()
 end
 
 function Events.on_string_translated(event)
@@ -62,6 +61,7 @@ end
 
 function Events.on_tick(event)
   hard_load()
+  Translate.process_queues()
 end
 
 function Events.on_gui_closed(event)
@@ -73,7 +73,7 @@ function Events.on_gui_closed(event)
 end
 
 function Events.on_player_left_game(event)
-
+  Translate.clear_player(event.player_index)
 end
 
 function Events.on_event_invoke(event)

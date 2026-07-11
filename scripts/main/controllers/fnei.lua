@@ -14,6 +14,7 @@ function FneiMainController.init_event(gui_name, content_gui)
 end
 
 function FneiMainController.draw_content()
+  Translate.ensure_translate_init()
   cont_gui.set_search_field(FneiMainController.get_search_field())
   FneiMainController.redraw_content()
 end
