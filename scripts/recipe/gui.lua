@@ -231,119 +231,131 @@ function RecipeGui.set_made_in_list(recipe)
   local gui_tabel = Gui.get_gui(Gui.get_pos(), "madein-table")
   local craft_cat_list = get_crafting_categories_list()
   local item_list = get_full_item_list()
+  local added_buildings = {}
 
   clear_gui(gui_tabel)
 
-  if recipe and Settings.get_val("show-recipes", "categories", recipe.category) then
-    local cat_list = craft_cat_list[recipe.category]
+  if not recipe then
+    return
+  end
 
-    for _, cat in pairs(cat_list) do
-      local caption = Settings.get_val("show-craft-time-label")
-      local element
+  for _, recipe_category in ipairs(get_recipe_categories(recipe)) do
+    if Settings.get_val("show-recipes", "categories", recipe_category) then
+      local cat_list = craft_cat_list[recipe_category] or {}
 
-      local ing_cnt = 0
-      local in_fluidbox_cnt = 0
-      local out_fluidbox_cnt = 0
+      for _, cat in pairs(cat_list) do
+        if not added_buildings[cat.val.name] then
+          local caption = Settings.get_val("show-craft-time-label")
+          local element
 
-      for _,prot in pairs(recipe.ingredients) do
-        if prot.type == "item" then
-          ing_cnt = ing_cnt + 1
-        elseif prot.type == "fluid" then
-          in_fluidbox_cnt = in_fluidbox_cnt + 1
-        end
-      end
+          local ing_cnt = 0
+          local in_fluidbox_cnt = 0
+          local out_fluidbox_cnt = 0
 
-      for _,prot in pairs(recipe.products) do
-        if prot.type == "fluid" then
-          out_fluidbox_cnt = out_fluidbox_cnt + 1
-        end
-      end
-
-      if cat.type == "player" and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        if in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
-          local player = Player.get()
-          local tooltip = {"", {"fnei.handcraft"}}
-
-          if caption and player and cat.val.name == "handcraft" then
-            local crafting_speed = (player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)
-            if crafting_speed ~= 0 then
-              caption = round_to_str(recipe.energy / crafting_speed, 3)
+          for _,prot in pairs(recipe.ingredients) do
+            if prot.type == "item" then
+              ing_cnt = ing_cnt + 1
+            elseif prot.type == "fluid" then
+              in_fluidbox_cnt = in_fluidbox_cnt + 1
             end
           end
 
-          if caption and player and cat.val.name == "handmine" then
-            local mining_speed = (player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) * cat.val.mining_speed
-            if mining_speed ~= 0 then
-              caption = round_to_str(recipe.mining_time / mining_speed, 3)
+          for _,prot in pairs(recipe.products) do
+            if prot.type == "fluid" then
+              out_fluidbox_cnt = out_fluidbox_cnt + 1
             end
-            tooltip = {"", {"fnei.handmining"}}
           end
 
-          element = {
-            type = "sprite-button",
-            name = cat.val.name,
-            style = "fnei_default_button",
-            tooltip = tooltip,
-            sprite = "fnei_hand_icon"
-          }
-        end
-      elseif cat.type == "building" and cat.ingredient_count and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        if cat.ingredient_count >= ing_cnt and in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
-          local entity = item_list[cat.val.name].place_result
+          if cat.type == "player" and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+            if in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
+              local player = Player.get()
+              local tooltip = {"", {"fnei.handcraft"}}
 
-          if caption and entity and entity.get_crafting_speed() ~= nil then
-            caption = round_to_str(recipe.energy / entity.get_crafting_speed(), 3)
+              if caption and player and cat.val.name == "handcraft" then
+                local crafting_speed = (player.character_crafting_speed_modifier + 1) * (player.force.manual_crafting_speed_modifier + 1)
+                if crafting_speed ~= 0 then
+                  caption = round_to_str(recipe.energy / crafting_speed, 3)
+                end
+              end
+
+              if caption and player and cat.val.name == "handmine" then
+                local mining_speed = (player.character_mining_speed_modifier + 1) * (player.force.manual_mining_speed_modifier + 1) * cat.val.mining_speed
+                if mining_speed ~= 0 then
+                  caption = round_to_str(recipe.mining_time / mining_speed, 3)
+                end
+                tooltip = {"", {"fnei.handmining"}}
+              end
+
+              element = {
+                type = "sprite-button",
+                name = cat.val.name,
+                style = "fnei_default_button",
+                tooltip = tooltip,
+                sprite = "fnei_hand_icon"
+              }
+            end
+          elseif cat.type == "building" and cat.ingredient_count and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+            if cat.ingredient_count >= ing_cnt and in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
+              local entity = item_list[cat.val.name].place_result
+              local pumping_speed = entity and entity.get_pumping_speed and entity.get_pumping_speed()
+
+              if caption and entity and entity.get_crafting_speed() ~= nil then
+                caption = round_to_str(recipe.energy / entity.get_crafting_speed(), 3)
+              end
+
+              if caption and entity and entity.type == "offshore-pump" and pumping_speed then
+                caption = round_to_str(recipe.energy / (pumping_speed * 60), 3)
+              end
+
+              element = {
+                type = "choose-elem-button",
+                name = "item\t" .. cat.val.name,
+                style = "fnei_default_button",
+                elem_type = "item",
+                elem_value = cat.val.name,
+                locked = true
+              }
+            end
+          elseif cat.type == 'resource-miner' and cat.mining_speed and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+            if in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
+              element = {
+                type = "choose-elem-button",
+                name = "item\t" .. cat.val.name,
+                style = "fnei_default_button",
+                elem_type = "item",
+                elem_value = cat.val.name,
+                locked = true
+              }
+              -- https://wiki.factorio.com/Mining
+              caption = round_to_str(recipe.mining_time / (cat.mining_speed), 3)
+            end
           end
 
-          if caption and entity and entity.type == "offshore-pump" and entity.pumping_speed then
-            caption = round_to_str(recipe.energy / (entity.pumping_speed * 60), 3)
+          if element then
+            local label
+
+            if caption then
+              label = {
+                type = "label",
+                name = cat.val.name .. "-label",
+                style = "fnei_recipe_craft_time_for_building_label",
+                vertical_align = "top",
+                align = "center",
+                caption = caption,
+                tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption}
+              }
+            end
+
+            Gui.add_gui_template(gui_tabel, {
+              { type = "flow", name = cat.val.name .. "-flow", style = "fnei_recipe_building_flow", direction = "vertical", children = {
+                element,
+                label
+              }}
+            })
+
+            added_buildings[cat.val.name] = true
           end
-
-          element = {
-            type = "choose-elem-button",
-            name = "item\t" .. cat.val.name,
-            style = "fnei_default_button",
-            elem_type = "item",
-            elem_value = cat.val.name,
-            locked = true
-          }
         end
-      elseif cat.type == 'resource-miner' and cat.mining_speed and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-        if in_fluidbox_cnt <= (cat.ifbox or 0) and out_fluidbox_cnt <= (cat.ofbox or 0) then
-          element = {
-            type = "choose-elem-button",
-            name = "item\t" .. cat.val.name,
-            style = "fnei_default_button",
-            elem_type = "item",
-            elem_value = cat.val.name,
-            locked = true
-          }
-          -- https://wiki.factorio.com/Mining
-          caption = round_to_str(recipe.mining_time / (cat.mining_speed), 3)
-        end
-      end
-
-      if element then
-        local label
-
-        if caption then
-          label = {
-            type = "label",
-            name = cat.val.name .. "-label",
-            style = "fnei_recipe_craft_time_for_building_label",
-            vertical_align = "top",
-            align = "center",
-            caption = caption,
-            tooltip = {"", {"fnei.craft-time-in-building"}, ": ", caption}
-          }
-        end
-
-        Gui.add_gui_template(gui_tabel, {
-          { type = "flow", name = cat.val.name .. "-flow", style = "fnei_recipe_building_flow", direction = "vertical", children = {
-            element,
-            label
-          }}
-        })
       end
     end
   end

@@ -98,35 +98,42 @@ function get_filtred_recipe_list(recipe_list)
   local craft_cat_list = get_crafting_categories_list()
 
   for rec_name, recipe in pairs(recipe_list) do
-    if Settings.get_val("show-recipes", "categories", recipe.category) then
-      local cat_list = craft_cat_list[recipe.category] or {}
+    for _, recipe_category in ipairs(get_recipe_categories(recipe)) do
+      if Settings.get_val("show-recipes", "categories", recipe_category) then
+        local cat_list = craft_cat_list[recipe_category] or {}
 
-      for _, cat in pairs(cat_list) do
-        local add_flag = false
+        for _, cat in pairs(cat_list) do
+          local add_flag = false
 
-        if cat.type == "player" then
-          add_flag = true
-        elseif cat.type == "resource-miner" then
-          add_flag = true
-        elseif cat.ingredient_count then
-          local ing_cnt = 0
+          if cat.type == "player" then
+            add_flag = true
+          elseif cat.type == "resource-miner" then
+            add_flag = true
+          elseif cat.ingredient_count then
+            local ing_cnt = 0
 
-          for _,prot in pairs(recipe.ingredients) do
-            if prot.type == "item" then
-              ing_cnt = ing_cnt + 1
+            for _,prot in pairs(recipe.ingredients) do
+              if prot.type == "item" then
+                ing_cnt = ing_cnt + 1
+              end
+            end
+
+            if cat.ingredient_count >= ing_cnt then
+              add_flag = true
             end
           end
 
-          if cat.ingredient_count >= ing_cnt then
-            add_flag = true
+          if add_flag then
+            if cat.val and Settings.get_val("show-recipes", "buildings", cat.val.name) then
+              ret_list[rec_name] = recipe
+              break
+            end
           end
         end
+      end
 
-        if add_flag then
-          if cat.val and Settings.get_val("show-recipes", "buildings", cat.val.name) then
-            ret_list[rec_name] = recipe
-          end
-        end
+      if ret_list[rec_name] then
+        break
       end
     end
   end

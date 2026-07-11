@@ -1,5 +1,10 @@
 ---------------------------------------------------------------------------------------------------
-Version: 0.4.6
+Version: 0.4.7
+Date: 2026-07-12
+  Changes:
+    - Update mod for Factorio version 2.1
+    - Adapt recipe category handling to the new categories API (czeinel)
+---------------------------------------------------------------------------------------------------
 Date: 2025-03-30
   Bugfixes:
     - Fixed crash on world creation #79 (KiwiHawk)
