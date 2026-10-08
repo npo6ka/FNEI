@@ -29,6 +29,8 @@ end
 function Events.on_configuration_changed(event)
   if not storage.fnei then storage.fnei = {} end
   if not storage.fnei.event_list then storage.fnei.event_list = {} end
+  -- The list of equal recipes is built from the prototypes once (hard_load); after the mods change it is stale
+  storage.fnei.eqRecipe = nil
 
   for i, player in pairs(game.players) do
     Player.load({ player_index = i })
