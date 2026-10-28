@@ -6,7 +6,9 @@ local dep_tech
 
 function RawTech:get_tech_list()
   Debug:debug(RawTech.classname, "get_tech_list( )")
-  return Player.get().force.technologies or {}
+  local p = Player.get()
+  local f = p and p.force or game.forces.player
+  return f and f.technologies or {}
 end
 
 function RawTech:get_recipe_list_in_tech_dependencies()
