@@ -4,11 +4,26 @@ Translate = {
 
 require "utils/utf8_tolower"
 
-local registry = {}
-local queues = {}
 local TRANSLATE_BATCH_SIZE = 50
 
+-- Translation state lives in storage, not in file-level locals. A client that
+-- joins a multiplayer game loads storage from the host's save but starts with
+-- fresh locals, so state kept in locals makes the host and the client request
+-- different translations and desync.
+local function get_state()
+  if storage.fnei_translate == nil then
+    storage.fnei_translate = {
+      registry = {},
+      queues = {}
+    }
+  end
+
+  return storage.fnei_translate
+end
+
 local function get_player_registry(player)
+  local registry = get_state().registry
+
   if registry[player.name] == nil then
     registry[player.name] = {
       items = { names = {}, ids = {} },
@@ -35,7 +50,7 @@ end
 
 local function queue_prot_translations(player_index, prots, prot_type)
   local prot_list = sorted_prototypes(prots)
-  local queue = queues[player_index]
+  local queue = get_state().queues[player_index]
 
   for i = 1, #prot_list, TRANSLATE_BATCH_SIZE do
     local batch = {
@@ -55,7 +70,7 @@ end
 
 function Translate.translate(name, type)
   local player = Player:get()
-  local player_registry = registry[player.name]
+  local player_registry = get_state().registry[player.name]
 
   if type == "item" and player_registry then
     return player_registry.items.names[name]
@@ -71,27 +86,29 @@ function Translate.tolower(str)
 end
 
 function Translate.clear_player(player_index)
+  local state = get_state()
   local player = game.players[player_index]
 
   if player and player.valid then
-    registry[player.name] = nil
+    state.registry[player.name] = nil
   end
 
-  queues[player_index] = nil
+  state.queues[player_index] = nil
 end
 
 function Translate.reset_translate()
+  local state = get_state()
   local player = Player:get()
 
-  registry[player.name] = nil
-  queues[player.index] = nil
+  state.registry[player.name] = nil
+  state.queues[player.index] = nil
   Translate.init_translate()
 end
 
 function Translate.ensure_translate_init()
   local player = Player:get()
 
-  if queues[player.index] == nil then
+  if get_state().queues[player.index] == nil then
     Translate.init_translate()
   end
 end
@@ -101,7 +118,7 @@ function Translate.init_translate()
 
   get_player_registry(player)
 
-  queues[player.index] = {
+  get_state().queues[player.index] = {
     batches = {},
     batch_index = 1
   }
@@ -111,6 +128,8 @@ function Translate.init_translate()
 end
 
 function Translate.process_queues()
+  local queues = get_state().queues
+
   for player_index, queue in pairs(queues) do
     if queue.batch_index <= #queue.batches then
       local player = game.players[player_index]
@@ -137,7 +156,7 @@ end
 
 function Translate.set_translate_result(id, str)
   local player = Player:get()
-  local player_registry = registry[player.name]
+  local player_registry = get_state().registry[player.name]
 
   if player_registry == nil then
     return
